@@ -108,6 +108,10 @@ const MobileNavIcon = ({ menuOpen, setMenuOpen }) => {
 		background: white;
 		z-index: 5;
 		height: 80px;
+
+		@media ${breakpoint.lg} {
+			display: none;
+		}
 	`;
 
 	return (

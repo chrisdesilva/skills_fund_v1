@@ -78,7 +78,7 @@ const MobileNavMenu = ({ menuOpen }) => {
 				</ListItem>
 
 				<ListItem>
-					<Link className="btn text-black z-10 w-32" to="/schools/apply">
+					<Link className="btn text-black z-10 w-32 bg-white" to="/schools/apply">
 						Apply Now
 					</Link>
 				</ListItem>
