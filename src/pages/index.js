@@ -27,6 +27,7 @@ export default () => {
 			@media ${breakpoint.md} {
 				width: 33%;
 				flex-direction: row;
+				justify-content: center;
 			}
 		}
 
