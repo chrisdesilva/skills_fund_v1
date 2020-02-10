@@ -26,7 +26,6 @@ export default () => {
 
 			@media ${breakpoint.md} {
 				width: 33%;
-				justify-content: space-around;
 				flex-direction: row;
 			}
 		}
@@ -71,10 +70,10 @@ export default () => {
 				<h1>Fund Your Future</h1>
 				<h2>We offer loans to bootcamps that can transform your career.</h2>
 				<div className="btnContainer">
-					<Link className="btn btn--submit mb-2 md:mb-0" to="/apply">
+					<Link className="btn btn--submit mb-2 md:mb-0 md:mr-1" to="/apply">
 						Apply Now
 					</Link>
-					<Link className="btn btn--compare" to="/students">
+					<Link className="btn btn--compare md:ml-1" to="/students">
 						Compare Schools
 					</Link>
 				</div>
