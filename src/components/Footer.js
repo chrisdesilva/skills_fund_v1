@@ -96,7 +96,7 @@ const Footer = () => {
 			</FooterSection>
 			<FooterSection>
 				<section>
-					<h3>Resources</h3>
+					<h3 className="mb-2">Resources</h3>
 					<ul>
 						<li>
 							<Link className="hoverLink" to="/schools">
@@ -126,7 +126,7 @@ const Footer = () => {
 					</ul>
 				</section>
 				<section>
-					<h3>Company</h3>
+					<h3 className="mb-2">Company</h3>
 					<ul>
 						<li>
 							<Link className="hoverLink" to="/about">

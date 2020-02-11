@@ -6,6 +6,7 @@
 body {
 	font-family: 'forma-djr-micro', sans-serif;
 	margin: 0;
+	overflow-x: hidden;
 }
 
 h1,

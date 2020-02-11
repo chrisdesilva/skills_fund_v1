@@ -1,8 +1,9 @@
 import React from 'react';
 import styled from 'styled-components';
-import tw from 'tailwind.macro';
+import { ThemeProvider } from 'styled-components';
 import Header from './Header';
 import Footer from './Footer';
+import { theme } from '../utils/theme';
 
 const PageContainer = styled.div`
 	display: flex;
@@ -17,12 +18,14 @@ const ChildContainer = styled.div`
 
 const Layout = ({ children }) => {
 	return (
-		<PageContainer>
-			<Header />
-			<ChildContainer>{children}</ChildContainer>
+		<ThemeProvider theme={theme}>
+			<PageContainer>
+				<Header />
+				<ChildContainer>{children}</ChildContainer>
 
-			<Footer />
-		</PageContainer>
+				<Footer />
+			</PageContainer>
+		</ThemeProvider>
 	);
 };
 

@@ -16,7 +16,7 @@ export const StyledHeader = styled.header`
 		z-index: 10;
 		padding: 0 .5rem;
 		background: white;
-		font-size: ${({ border }) => (border ? '.9rem' : '.89rem')};
+		font-size: .9rem;
 		transition: border 300ms, box-shadow 300ms, font-size 300ms;
 		border-bottom: ${({ border }) => (border ? '2px solid purple' : '2px solid transparent')};
 		box-shadow: ${({ border }) =>
@@ -91,6 +91,9 @@ const DesktopNavMenu = () => {
         &:hover + ${DropDownContent} {
             display: block;
         }
+		img {
+			width: 100%;
+		}
     `;
 
 	const DropDownMain = styled.a`

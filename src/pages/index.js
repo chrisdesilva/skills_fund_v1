@@ -108,7 +108,7 @@ export default () => {
 			<Reviews>
 				<h2>We keep it simple, and our students agree.</h2>
 				<p>Real Students. Real Reviews.</p>
-				<img src="https://via.placeholder.com/800x200.png?text=Reviews+carousel" />
+				<img src="https://via.placeholder.com/400x200.png?text=Reviews+carousel" />
 			</Reviews>
 		</Layout>
 	);
