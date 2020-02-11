@@ -71,6 +71,13 @@ export const MenuLinks = styled.header`
   width: 100%;
   transform: ${({ menuOpen }) =>
     menuOpen ? "translateX(0)" : "translateX(100%)"};
+
+  ul {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+  }
 `
 
 export const MenuIconContainer = styled.div`
@@ -84,6 +91,20 @@ export const MenuLogo = styled.div`
   width: 6rem;
   z-index: 11;
   margin-left: 1rem;
+`
+
+export const ListItem = styled.li`
+  margin-bottom: 2rem;
+  list-style-type: none;
+  a {
+    font-size: 1.25rem;
+    font-weight: bold;
+    text-decoration: none;
+    color: white;
+  }
+  .btn {
+    color: black;
+  }
 `
 
 const MenuApplyButton = styled(props => <Link {...props} />)`
@@ -141,9 +162,46 @@ const MobileNavMenu = ({ menuOpen, setMenuOpen }) => {
       </MenuIconContainer>
       <MenuLinks menuOpen={menuOpen}>
         <ul>
-          <li>
-            <Link to="students">Our Partner Schools</Link>
-          </li>
+          <ListItem>
+            <Link to="/schools">Our Partner Schools</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/our-process">How It Works</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/about">Our Team</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/resources">Student Journey</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/frequently-asked-questions">FAQ</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/reviews">Reviews</Link>
+          </ListItem>
+
+          <ListItem>
+            <a href="https://my.skills.fund">Check Loan Status</a>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/repay">Repay My Loan</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link
+              className="btn text-black z-10 w-32 bg-white"
+              to="/schools/apply"
+            >
+              Apply Now
+            </Link>
+          </ListItem>
         </ul>
       </MenuLinks>
     </MenuBar>
