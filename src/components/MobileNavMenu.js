@@ -38,7 +38,7 @@ export const MenuIcon = styled.button`
     background: ${({ menuOpen }) => (menuOpen ? "white" : "black")};
     transition: all 300ms;
     border-radius: 10px;
-    transform-origin: 2px;
+    transform-origin: 1px;
 
     :first-child {
       transform: ${({ menuOpen }) =>
