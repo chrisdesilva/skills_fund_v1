@@ -62,6 +62,8 @@ export const MenuLinks = styled.header`
   justify-content: center;
   align-items: center;
   background: url(${background});
+  background-size: cover;
+  background-repeat: no-repeat;
   position: absolute;
   z-index: 5;
   top: 0;
