@@ -1,23 +1,25 @@
-import PropTypes from 'prop-types';
-import React, { Fragment, useState } from 'react';
+import PropTypes from "prop-types"
+import React, { Fragment, useState } from "react"
 
-import DesktopNavMenu from './DesktopNavMenu';
+import MobileNavMenu from "./MobileNavMenu"
+import DesktopNavMenu from "./DesktopNavMenu"
 
 const Header = () => {
-	const [ menuOpen, setMenuOpen ] = useState(false);
-	return (
-		<Fragment>
-			<DesktopNavMenu />
-		</Fragment>
-	);
-};
+  const [menuOpen, setMenuOpen] = useState(false)
+  return (
+    <Fragment>
+      <MobileNavMenu menuOpen={menuOpen} setMenuOpen={setMenuOpen} />
+      <DesktopNavMenu />
+    </Fragment>
+  )
+}
 
 Header.propTypes = {
-	siteTitle: PropTypes.string
-};
+  siteTitle: PropTypes.string,
+}
 
 Header.defaultProps = {
-	siteTitle: ``
-};
+  siteTitle: ``,
+}
 
-export default Header;
+export default Header
