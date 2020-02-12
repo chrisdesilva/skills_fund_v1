@@ -5,6 +5,93 @@ import styled from "styled-components"
 import background from "../images/mobile_bg.png"
 import { breakpoint } from "../utils/breakpoints"
 
+const MobileNavMenu = ({ menuOpen, setMenuOpen }) => {
+  const data = useStaticQuery(graphql`
+    query {
+      skflogo: file(relativePath: { eq: "skillsFund_logo.png" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+      skflogoWhite: file(relativePath: { eq: "skf_logo_white.png" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
+    }
+  `)
+
+  return (
+    <MenuBar>
+      <MenuLogo onClick={() => setMenuOpen(!menuOpen)}>
+        <Img
+          alt="Skills Fund logo"
+          fluid={
+            menuOpen
+              ? data.skflogoWhite.childImageSharp.fluid
+              : data.skflogo.childImageSharp.fluid
+          }
+        />
+      </MenuLogo>
+      <MenuIconContainer>
+        <MenuApplyButton to="/apply">Apply Now</MenuApplyButton>
+        <MenuIcon menuOpen={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
+          <div />
+          <div />
+          <div />
+        </MenuIcon>
+      </MenuIconContainer>
+      <MenuLinks menuOpen={menuOpen}>
+        <ul>
+          <ListItem>
+            <Link to="/students">Our Partner Schools</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/our-process">How It Works</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/about">Our Team</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/resources">Student Journey</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/frequently-asked-questions">FAQ</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/reviews">Reviews</Link>
+          </ListItem>
+
+          <ListItem>
+            <a href="https://my.skills.fund">Check Loan Status</a>
+          </ListItem>
+
+          <ListItem>
+            <Link to="/repay">Repay My Loan</Link>
+          </ListItem>
+
+          <ListItem>
+            <Link className="btn text-black z-10 w-32 bg-white" to="/apply">
+              Apply Now
+            </Link>
+          </ListItem>
+        </ul>
+      </MenuLinks>
+    </MenuBar>
+  )
+}
+
+export default MobileNavMenu
+
 export const MenuBar = styled.header`
   @media ${breakpoint.lg} {
     display: none;
@@ -109,7 +196,7 @@ export const ListItem = styled.li`
   }
 `
 
-const MenuApplyButton = styled(props => <Link {...props} />)`
+export const MenuApplyButton = styled(props => <Link {...props} />)`
   width: 8rem;
   background: ${props => props.theme.secondary};
   color: white;
@@ -121,93 +208,3 @@ const MenuApplyButton = styled(props => <Link {...props} />)`
   align-items: center;
   margin-right: 0.5rem;
 `
-
-const MobileNavMenu = ({ menuOpen, setMenuOpen }) => {
-  const data = useStaticQuery(graphql`
-    query {
-      skflogo: file(relativePath: { eq: "skillsFund_logo.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-      skflogoWhite: file(relativePath: { eq: "skf_logo_white.png" }) {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid
-          }
-        }
-      }
-    }
-  `)
-
-  return (
-    <MenuBar>
-      <MenuLogo onClick={() => setMenuOpen(!menuOpen)}>
-        <Img
-          alt="Skills Fund logo"
-          fluid={
-            menuOpen
-              ? data.skflogoWhite.childImageSharp.fluid
-              : data.skflogo.childImageSharp.fluid
-          }
-        />
-      </MenuLogo>
-      <MenuIconContainer>
-        <MenuApplyButton to="/apply">Apply Now</MenuApplyButton>
-        <MenuIcon menuOpen={menuOpen} onClick={() => setMenuOpen(!menuOpen)}>
-          <div />
-          <div />
-          <div />
-        </MenuIcon>
-      </MenuIconContainer>
-      <MenuLinks menuOpen={menuOpen}>
-        <ul>
-          <ListItem>
-            <Link to="/schools">Our Partner Schools</Link>
-          </ListItem>
-
-          <ListItem>
-            <Link to="/our-process">How It Works</Link>
-          </ListItem>
-
-          <ListItem>
-            <Link to="/about">Our Team</Link>
-          </ListItem>
-
-          <ListItem>
-            <Link to="/resources">Student Journey</Link>
-          </ListItem>
-
-          <ListItem>
-            <Link to="/frequently-asked-questions">FAQ</Link>
-          </ListItem>
-
-          <ListItem>
-            <Link to="/reviews">Reviews</Link>
-          </ListItem>
-
-          <ListItem>
-            <a href="https://my.skills.fund">Check Loan Status</a>
-          </ListItem>
-
-          <ListItem>
-            <Link to="/repay">Repay My Loan</Link>
-          </ListItem>
-
-          <ListItem>
-            <Link
-              className="btn text-black z-10 w-32 bg-white"
-              to="/schools/apply"
-            >
-              Apply Now
-            </Link>
-          </ListItem>
-        </ul>
-      </MenuLinks>
-    </MenuBar>
-  )
-}
-
-export default MobileNavMenu
