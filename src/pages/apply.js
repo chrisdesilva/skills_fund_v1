@@ -204,7 +204,8 @@ const Apply = () => {
           </SelectContainer>
           <p>
             Max tuition:{" "}
-            {formatter.format(loanInformation.aprAndType[0].maxTuition)}
+            {loanInformation &&
+              formatter.format(loanInformation.aprAndType[0].maxTuition)}
           </p>
         </CalculatorCard>
       </CalculatorContainer>
