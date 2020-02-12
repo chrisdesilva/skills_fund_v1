@@ -197,7 +197,6 @@ export const FooterSection = styled.section`
     align-items: center;
 
     a {
-      color: black;
       width: 13rem;
     }
   }
