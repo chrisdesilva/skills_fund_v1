@@ -1,0 +1,59 @@
+{
+  "slug": "techelevator",
+  "logo": "../images/techelevator_logo.png",
+  "paymentTable": [
+    {
+      "data": [
+        {
+          "col": "$6,000",
+          "max": "$19,495",
+          "program": "Arlington, VA",
+          "tuition": "$13,495"
+        }
+      ],
+      "show": false,
+      "headers": ["Program", "Tuition", "Cost of Living", "Max Total"]
+    }
+  ],
+  "basicInfo": {
+    "locations": ["oh", "mi", "pa"],
+    "schoolurl": "https://www.techelevator.com/",
+    "APRRange36": "11.16",
+    "APRRange60": "12.51",
+    "schoolname": "Tech Elevator",
+    "programTypes": ["fullStack"],
+    "hubspotFormID": "e9abd424-bcb0-4011-9026-f58b7d41882c",
+    "interestRate36": 8.99,
+    "interestRate60": 10.99,
+    "selectAProgram": "program_name",
+    "applicationsLive": true,
+    "nextCohortStartDate": "January 1, 2020",
+    "disabledLoanAppFormID": "69140c47-bb03-4a1b-b674-cc136fdea23d"
+  },
+  "features": {
+    "products": ["Interest Only"],
+    "costOfLiving": true,
+    "multiPrograms": false,
+    "multiLoanLengths": true
+  },
+  "loanInfo": [
+    {
+      "name": "Coding Bootcamp",
+      "hubspotValue": "Coding Bootcamp",
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SFTE17A",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": 12.51,
+          "maxTuition": 15500,
+          "maxCOL": 4000
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 5,
+      "defaultAmount": 10000
+    }
+  ]
+}

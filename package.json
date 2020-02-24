@@ -17,6 +17,7 @@
 	"dependencies": {
 		"babel-plugin-styled-components": "^1.10.7",
 		"dotenv": "^8.2.0",
+		"framer-motion": "^1.8.4",
 		"gatsby": "^2.19.7",
 		"gatsby-image": "^2.2.40",
 		"gatsby-plugin-manifest": "^2.2.41",
@@ -26,8 +27,8 @@
 		"gatsby-plugin-sitemap": "^2.2.27",
 		"gatsby-plugin-styled-components": "^3.1.19",
 		"gatsby-remark-images-contentful": "^2.1.31",
-		"gatsby-source-contentful": "^2.1.85",
 		"gatsby-source-filesystem": "^2.1.48",
+		"gatsby-transformer-json": "^2.2.26",
 		"gatsby-transformer-sharp": "^2.3.14",
 		"postcss-import": "^12.0.1",
 		"postcss-preset-env": "^6.7.0",

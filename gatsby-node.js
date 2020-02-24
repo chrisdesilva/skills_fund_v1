@@ -10,13 +10,11 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
   }
 }
 
-exports.createPages = ({ graphql, actions }) => {
-  const { createPage } = actions
-  // we use the provided allContentfulBlogPost query to fetch the data from Contentful
-  return graphql(
+exports.createPages = async ({ graphql, actions: { createPage } }) => {
+  const results = await graphql(
     `
       {
-        allContentfulSchool {
+        allSchoolsJson {
           edges {
             node {
               slug
@@ -26,24 +24,19 @@ exports.createPages = ({ graphql, actions }) => {
       }
     `
   )
-    .then(result => {
-      if (result.errors) {
-        console.log("Error retrieving contentful data", result.errors)
-      }
-      // Resolve the paths to our template
-      const partnerPageTemplate = path.resolve("./src/templates/PartnerPage.js")
-      // Then for each result we create a page.
-      result.data.allContentfulSchool.edges.forEach(edge => {
-        createPage({
-          path: `/students/${edge.node.slug}/`,
-          component: slash(partnerPageTemplate),
-          context: {
-            slug: edge.node.slug,
-          },
-        })
-      })
+  if (results.errors) {
+    console.log("Error retrieving data", results.errors)
+    return
+  }
+  const partnerPageTemplate = path.resolve("./src/templates/PartnerPage.js")
+  // Then for each result we create a page.
+  results.data.allSchoolsJson.edges.forEach(edge => {
+    createPage({
+      path: `/students/${edge.node.slug}/`,
+      component: slash(partnerPageTemplate),
+      context: {
+        slug: edge.node.slug,
+      },
     })
-    .catch(error => {
-      console.log("Error retrieving contentful data", error)
-    })
+  })
 }

@@ -1,0 +1,155 @@
+{
+  "slug": "devmountain",
+  "logo": "../images/devmountain_logo.png",
+  "paymentTable": [
+    {
+      "data": [
+        {
+          "col": "$3,000",
+          "max": "$13,450",
+          "program": "iOS Development Immersive",
+          "tuition": "$10,450"
+        },
+        {
+          "col": "--",
+          "max": "$7,050",
+          "program": "Software Quality Assurance",
+          "tuition": "$7,050"
+        },
+        {
+          "col": "$3,000",
+          "max": "$10,450",
+          "program": "UX Design",
+          "tuition": "$13,450"
+        },
+        {
+          "col": "--",
+          "max": "$4,300",
+          "program": "UX Design After Hours",
+          "tuition": "$4,300"
+        },
+        {
+          "col": "$3,000",
+          "max": "$14,450",
+          "program": "Web Development Immersive",
+          "tuition": "$11,450"
+        }
+      ],
+      "show": true,
+      "headers": ["Program", "Tuition", "Cost of Living", "Max Total"]
+    }
+  ],
+  "basicInfo": {
+    "locations": ["ut", "az", "tx"],
+    "schoolurl": "https://devmountain.com/",
+    "APRRange36": "11.16-11.69",
+    "APRRange60": "12.51-12.71",
+    "schoolname": "DevMountain",
+    "programTypes": ["fullStack", "mobile", "uxui"],
+    "hubspotFormID": "fd391850-d431-42a3-8176-447ef29c1255",
+    "interestRate36": 8.99,
+    "interestRate60": 10.99,
+    "selectAProgram": "select_a_devmountain_program",
+    "applicationsLive": true,
+    "nextCohortStartDate": "January 1, 2020",
+    "disabledLoanAppFormID": "69140c47-bb03-4a1b-b674-cc136fdea23d"
+  },
+  "features": {
+    "products": ["Interest Only", "Immediate Repayment"],
+    "costOfLiving": true,
+    "multiPrograms": true,
+    "multiLoanLengths": true
+  },
+  "loanInfo": [
+    {
+      "name": "Web Development Immersive",
+      "hubspotValue": "Web Development Immersive",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKDMWD17",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": 12.51,
+          "maxCOL": 3000,
+          "maxTuition": 11450
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 5
+    },
+    {
+      "name": "UX Design Immersive",
+      "hubspotValue": "UX Design Immersive",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKDMUX17",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": 12.51,
+          "maxCOL": 3000,
+          "maxTuition": 10450
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "UX Design After-Hours",
+      "hubspotValue": "UX Design After-Hours",
+      "defaultAmount": 4300,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKDMUXAH19",
+      "aprAndType": [
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": 12.71,
+          "maxCOL": 0,
+          "maxTuition": 4300
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "iOS Development Immersive",
+      "hubspotValue": "iOS Development Immersive",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKDMIOS17",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": 12.51,
+          "maxCOL": 3000,
+          "maxTuition": 10450
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 5
+    },
+    {
+      "name": "Software QA Immersive",
+      "hubspotValue": "Software QA Immersive",
+      "defaultAmount": 7050,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKDMQA19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.34,
+          "apr60": 12.58,
+          "maxCOL": 0,
+          "maxTuition": 7050
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 3
+    }
+  ]
+}

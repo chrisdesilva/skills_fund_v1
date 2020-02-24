@@ -1,0 +1,207 @@
+{
+  "slug": "codingdojo",
+  "logo": "../images/codingdojo_logo.png",
+  "paymentTable": [
+    {
+      "data": [
+        {
+          "col": "$4,500",
+          "max": "$17,995",
+          "program": "Arlington, VA",
+          "tuition": "$13,495"
+        },
+        {
+          "col": "$4,500",
+          "max": "$19,495",
+          "program": "Silicon Valley, CA",
+          "tuition": "$14,995"
+        },
+        {
+          "col": "$4,500",
+          "max": "$16,495",
+          "program": "Los Angeles, CA",
+          "tuition": "$11,995"
+        },
+        {
+          "col": "$4,500",
+          "max": "$16,495",
+          "program": "Orange County, CA",
+          "tuition": "$11,995"
+        },
+        {
+          "col": "$4,500",
+          "max": "$18,495",
+          "program": "Seattle, WA",
+          "tuition": "$13,995"
+        },
+        {
+          "col": "$4,500",
+          "max": "$18,495",
+          "program": "Berkeley (East Bay), CA",
+          "tuition": "$13,995"
+        },
+        {
+          "col": "$4,500",
+          "max": "$15,995",
+          "program": "Dallas, TX",
+          "tuition": "$11,495"
+        },
+        {
+          "col": "$4,500",
+          "max": "$14,995",
+          "program": "Tulsa, OK",
+          "tuition": "$10,495"
+        },
+        {
+          "col": "$4,500",
+          "max": "$17,495",
+          "program": "Chicago, IL",
+          "tuition": "$12,995"
+        }
+      ],
+      "show": true,
+      "headers": ["Program", "Tuition", "Cost of Living", "Max Total"]
+    }
+  ],
+  "basicInfo": {
+    "locations": ["ca", "ok", "tx", "va", "il", "online"],
+    "schoolurl": "https://codingdojo.com",
+    "APRRange36": "11.08-11.16",
+    "APRRange60": "12.48-12.51",
+    "schoolname": "Coding Dojo",
+    "programTypes": ["fullStack", "dataScience"],
+    "hubspotFormID": "211a4031-fd14-4b99-ba59-315044fecc3d",
+    "interestRate36": 8.99,
+    "interestRate60": 10.99,
+    "selectAProgram": "select_a_codingdojo_program",
+    "applicationsLive": true,
+    "nextCohortStartDate": "January 1, 2020",
+    "disabledLoanAppFormID": "69140c47-bb03-4a1b-b674-cc136fdea23d"
+  },
+  "features": {
+    "products": ["Interest Only"],
+    "costOfLiving": true,
+    "multiPrograms": true,
+    "multiLoanLengths": true
+  },
+  "loanInfo": [
+    {
+      "name": "Onsite Bootcamp",
+      "hubspotValue": "Onsite Bootcamp",
+      "defaultAmount": 10000,
+      "metros": [
+        {
+          "location": "Arlington, VA",
+          "maxTuition": 13495,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Berkeley (East Bay), CA",
+          "maxTuition": 13995,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Chicago, IL",
+          "maxTuition": 12995,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Dallas, TX",
+          "maxTuition": 11495,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Los Angeles",
+          "maxTuition": 11995,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Orange County, CA",
+          "maxTuition": 11995,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Seattle, WA",
+          "maxTuition": 13995,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Silicon Valley, CA",
+          "maxTuition": 14995,
+          "maxCOL": 4500
+        },
+        {
+          "location": "Tulsa, OK",
+          "maxTuition": 10495,
+          "maxCOL": 4500
+        }
+      ],
+      "segment": "https://my.skills.fund/application?lenderCode=SKCD17",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": 12.51,
+          "maxTuition": 13495,
+          "maxCOL": 4500
+        }
+      ],
+      "multiMetros": true,
+      "nonPaymentPeriod": 5
+    },
+    {
+      "name": "Online Full-Time",
+      "hubspotValue": "Online Full-Time",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKDOJOO19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": 12.51,
+          "maxTuition": 14995,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 5
+    },
+    {
+      "name": "Online Part-Time",
+      "hubspotValue": "Online Part-Time",
+      "defaultAmount": 9995,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKDOJON18",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.08,
+          "apr60": 12.48,
+          "maxTuition": 9995,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "Data Science",
+      "hubspotValue": "Data Science",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKCDDS19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": 12.51,
+          "maxTuition": 14995,
+          "maxCOL": 4500
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 5
+    }
+  ]
+}
