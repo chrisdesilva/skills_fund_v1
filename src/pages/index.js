@@ -6,64 +6,6 @@ import SEO from "../components/SEO"
 import { breakpoint } from "../utils/breakpoints"
 
 export default () => {
-  const Header = styled.header`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    height: 60vh;
-    margin-top: -60px;
-    padding: 2rem;
-
-    h1,
-    h2 {
-      margin-bottom: 1.5rem;
-    }
-
-    .btnContainer {
-      display: flex;
-      flex-direction: column;
-
-      @media ${breakpoint.lg} {
-        width: 33%;
-        flex-direction: row;
-        justify-content: center;
-      }
-    }
-
-    .btn--compare {
-      color: black;
-      text-align: center;
-      background: #e3e3e3;
-    }
-  `
-
-  const LeadContent = styled.article`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background-color: #f7f7f7;
-  `
-
-  const Process = styled.section`
-    display: flex;
-    padding: 2rem;
-    div {
-      display: flex;
-      flex-direction: column;
-      padding: 2rem;
-    }
-  `
-
-  const Reviews = styled.article`
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 2rem;
-    background-color: #e7e7e7;
-  `
-
   return (
     <Layout>
       <SEO title="Home" />
@@ -122,3 +64,61 @@ export default () => {
     </Layout>
   )
 }
+
+const Header = styled.header`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  height: 60vh;
+  margin-top: -60px;
+  padding: 2rem;
+
+  h1,
+  h2 {
+    margin-bottom: 1.5rem;
+  }
+
+  .btnContainer {
+    display: flex;
+    flex-direction: column;
+
+    @media ${breakpoint.lg} {
+      width: 33%;
+      flex-direction: row;
+      justify-content: center;
+    }
+  }
+
+  .btn--compare {
+    color: black;
+    text-align: center;
+    background: #e3e3e3;
+  }
+`
+
+const LeadContent = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #f7f7f7;
+`
+
+const Process = styled.section`
+  display: flex;
+  padding: 2rem;
+  div {
+    display: flex;
+    flex-direction: column;
+    padding: 2rem;
+  }
+`
+
+const Reviews = styled.article`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 2rem;
+  background-color: #e7e7e7;
+`

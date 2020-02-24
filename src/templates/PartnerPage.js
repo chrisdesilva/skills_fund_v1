@@ -1,6 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
+import Layout from "../components/Layout"
 
 export const query = graphql`
   query($slug: String!) {
@@ -22,14 +23,14 @@ export const query = graphql`
 const PartnerPage = ({ data }) => {
   const school = data.schoolsJson
   return (
-    <div className="h-full ">
+    <Layout>
       <h1>{school.basicInfo.schoolname}</h1>
       <Image
         className="w-64"
         fluid={school.logo.childImageSharp.fluid}
         alt="school logo"
       />
-    </div>
+    </Layout>
   )
 }
 

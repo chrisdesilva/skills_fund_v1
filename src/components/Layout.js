@@ -17,7 +17,7 @@ const ChildContainer = styled.div`
   margin-top: 48px;
 
   @media ${breakpoint.lg} {
-    margin-top: 58px;
+    margin-top: 60px;
   }
 `
 
