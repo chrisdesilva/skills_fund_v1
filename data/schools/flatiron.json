@@ -1,0 +1,441 @@
+{
+  "slug": "flatiron",
+  "logo": "../images/flatiron_logo.png",
+  "paymentTable": [
+    {
+      "data": [],
+      "show": false,
+      "headers": ["Program", "Tuition", "Cost of Living", "Max Total"]
+    }
+  ],
+  "basicInfo": {
+    "locations": [
+      "Online",
+      "Atlanta, GA",
+      "Austin, TX",
+      "Chicago, IL",
+      "Denver, CO",
+      "Houston, TX",
+      "New York, NY",
+      "San Francisco, CA",
+      "Seattle, WA",
+      "Washington, D.C."
+    ],
+    "schoolurl": "https://flatironschool.com",
+    "APRRange36": "10.71-11.69",
+    "APRRange60": "12.48-12.51",
+    "tuitionRange": "$9,100 - $24,500",
+    "schoolname": "Flatiron",
+    "programTypes": ["fullStack", "dataScience", "uxDesign", "security"],
+    "hubspotFormID": "71630a3e-58b6-4bb6-87aa-f4be8746f99c",
+    "interestRate36": 8.99,
+    "interestRate60": 10.99,
+    "selectAProgram": "select_a_flatiron_online_program",
+    "applicationsLive": true,
+    "nextCohortStartDate": "January 1, 2020",
+    "disabledLoanAppFormID": "69140c47-bb03-4a1b-b674-cc136fdea23d"
+  },
+  "features": {
+    "products": ["Interest Only", "Immediate Repayment"],
+    "costOfLiving": false,
+    "multiPrograms": true,
+    "multiLoanLengths": false
+  },
+  "loanInfo": [
+    {
+      "name": "Data Science Full-Time Online",
+      "hubspotValue": "Online Full-Time Data Science",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFTFDSO18",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.01,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 7
+    },
+    {
+      "name": "Data Science Part-Time Online",
+      "hubspotValue": "Online Part-Time Data Science",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFTPDSO18",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 10.71,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 12
+    },
+    {
+      "name": "Data Science Self-Paced Online",
+      "hubspotValue": "Online Self-Paced Data Science",
+      "queryParams": "",
+      "defaultAmount": 9100,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFTSDSO18",
+      "aprAndType": [
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 9100,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 0
+    },
+    {
+      "name": "Software Engineering Full-Time Online",
+      "hubspotValue": "Online Full-Time Software Engineering",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SFTDDS",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.01,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 7
+    },
+    {
+      "name": "Software Engineering Part-Time Online",
+      "hubspotValue": "Online Part-Time Software Engineering",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFLSEPT",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 10.71,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 12
+    },
+    {
+      "name": "Software Engineering Self-Paced Online",
+      "hubspotValue": "Online Self-Paced Software Engineering",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFLSESP",
+      "aprAndType": [
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 15995,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 0
+    },
+    {
+      "name": "UX/UI Design Full-Time Online",
+      "hubspotValue": "Online UX/UI Design Full-Time",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFLUXFT19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.01,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 8
+    },
+    {
+      "name": "UX/UI Design Part-Time Online",
+      "hubspotValue": "Online UX/UI Design Part-Time",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFLUXPT19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 10.71,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 14
+    },
+    {
+      "name": "Cybersecurity Analytics Full-Time Online",
+      "hubspotValue": "Cybersecurity Analytics Online Full-Time",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFLCAOFT19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.01,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "Cybersecurity Analytics Part-Time Online",
+      "hubspotValue": "Cybersecurity Analytics Online Part-Time",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFLCAOPT19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 10.71,
+          "apr60": null,
+          "maxTuition": 14500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 10
+    },
+    {
+      "name": "Data Science Immersive On-Campus",
+      "hubspotValue": "Data Science Immersive Program",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [
+        {
+          "location": "Atlanta, GA",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Chicago, IL",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Denver, CO",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Houston, TX",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "New York, NY",
+          "maxTuition": 23500,
+          "maxCOL": 0
+        },
+        {
+          "location": "San Francisco, CA",
+          "maxTuition": 23500,
+          "maxCOL": 0
+        },
+        {
+          "location": "Seattle, WA",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Washington, D.C.",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        }
+      ],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFIDS18",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 22000,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": true,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "Software Engineering Immersive On-Campus",
+      "hubspotValue": "Software Engineering Immersive Program",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [
+        {
+          "location": "Atlanta, GA",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Austin, TX",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Chicago, IL",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Denver, CO",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Houston, TX",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "New York, NY",
+          "maxTuition": 23500,
+          "maxCOL": 0
+        },
+        {
+          "location": "San Francisco, CA",
+          "maxTuition": 23500,
+          "maxCOL": 0
+        },
+        {
+          "location": "Seattle, WA",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Washington, D.C.",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        }
+      ],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFIWD18",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 22000,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": true,
+      "nonPaymentPeriod": 5
+    },
+    {
+      "name": "UX/UI Design Immersive On-Campus",
+      "hubspotValue": "UX/UI Design Immersive Program",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [
+        {
+          "location": "Austin, TX",
+          "maxTuition": 22000,
+          "maxCOL": 0
+        },
+        {
+          "location": "Chicago, IL",
+          "maxTuition": 22300,
+          "maxCOL": 0
+        },
+        {
+          "location": "Denver, CO",
+          "maxTuition": 22300,
+          "maxCOL": 0
+        },
+        {
+          "location": "New York, NY",
+          "maxTuition": 23500,
+          "maxCOL": 0
+        },
+        {
+          "location": "San Francisco, CA",
+          "maxTuition": 23500,
+          "maxCOL": 0
+        },
+        {
+          "location": "Seattle, WA",
+          "maxTuition": 22500,
+          "maxCOL": 0
+        }
+      ],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFLUX19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 22000,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "Cybersecurity Analytics On-Campus",
+      "hubspotValue": "Cybersecurity Analytics",
+      "queryParams": "",
+      "defaultAmount": 10000,
+      "metros": [
+        {
+          "location": "New York, NY",
+          "maxTuition": 24500,
+          "maxCOL": 0
+        },
+        {
+          "location": "Washington, D.C.",
+          "maxTuition": 22500,
+          "maxCOL": 0
+        }
+      ],
+      "segment": "https://my.skills.fund/application?lenderCode=SKFICA19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 24500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 5
+    }
+  ]
+}

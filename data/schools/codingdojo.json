@@ -64,10 +64,22 @@
     }
   ],
   "basicInfo": {
-    "locations": ["ca", "ok", "tx", "va", "il", "online"],
+    "locations": [
+      "Silicon Valley, CA",
+      "Los Angeles, CA",
+      "Orange County, CA",
+      "Berkeley, CA",
+      "Seattle, WA",
+      "Tulsa, OK",
+      "Dallas, TX",
+      "Arlington, VA",
+      "Chicago, IL",
+      "Online"
+    ],
     "schoolurl": "https://codingdojo.com",
     "APRRange36": "11.08-11.16",
     "APRRange60": "12.48-12.51",
+    "tuitionRange": "$9,995 - $14,995",
     "schoolname": "Coding Dojo",
     "programTypes": ["fullStack", "dataScience"],
     "hubspotFormID": "211a4031-fd14-4b99-ba59-315044fecc3d",

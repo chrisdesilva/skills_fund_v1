@@ -16,10 +16,18 @@
     }
   ],
   "basicInfo": {
-    "locations": ["oh", "mi", "pa"],
+    "locations": [
+      "Cincinnati, OH",
+      "Columbus, OH",
+      "Cleveland, OH",
+      "Detroit, MI",
+      "Philadelphia, PA",
+      "Pittsburgh, PA"
+    ],
     "schoolurl": "https://www.techelevator.com/",
     "APRRange36": "11.16",
     "APRRange60": "12.51",
+    "tuitionRange": "$15,500",
     "schoolname": "Tech Elevator",
     "programTypes": ["fullStack"],
     "hubspotFormID": "e9abd424-bcb0-4011-9026-f58b7d41882c",

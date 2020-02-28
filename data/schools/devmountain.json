@@ -40,10 +40,11 @@
     }
   ],
   "basicInfo": {
-    "locations": ["ut", "az", "tx"],
+    "locations": ["Lehi, UT", "Phoenix, AX", "Dallas, TX"],
     "schoolurl": "https://devmountain.com/",
     "APRRange36": "11.16-11.69",
     "APRRange60": "12.51-12.71",
+    "tuitionRange": "$4,300 - $11,450",
     "schoolname": "DevMountain",
     "programTypes": ["fullStack", "mobile", "uxui"],
     "hubspotFormID": "fd391850-d431-42a3-8176-447ef29c1255",

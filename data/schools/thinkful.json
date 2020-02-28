@@ -1,0 +1,373 @@
+{
+  "slug": "thinkful",
+  "logo": "../images/thinkful_logo.png",
+  "paymentTable": [
+    {
+      "data": [],
+      "show": false,
+      "headers": ["Program", "Tuition", "Cost of Living", "Max Total"]
+    }
+  ],
+  "basicInfo": {
+    "locations": ["Online"],
+    "schoolurl": "https://thinkful.com",
+    "APRRange36": "10.87-11.69",
+    "APRRange60": "12.48-12.51",
+    "tuitionRange": "$5,500 - $20,000",
+    "schoolname": "Thinkful",
+    "programTypes": ["fullStack", "dataScience", "uxDesign", "marketing"],
+    "hubspotFormID": "1c127ac4-ca09-48d7-b8a6-73dcb0ad30ee",
+    "interestRate36": 8.99,
+    "interestRate60": 10.99,
+    "selectAProgram": "select_thinkful_program",
+    "applicationsLive": true,
+    "nextCohortStartDate": "January 1, 2020",
+    "disabledLoanAppFormID": "69140c47-bb03-4a1b-b674-cc136fdea23d"
+  },
+  "features": {
+    "products": ["Interest Only", "Immediate Repayment"],
+    "costOfLiving": false,
+    "multiPrograms": true,
+    "multiLoanLengths": false
+  },
+  "loanInfo": [
+    {
+      "name": "Data Analytics",
+      "hubspotValue": "Data Analytics",
+      "queryParams": "?program=da",
+      "defaultAmount": 8970,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHDAT19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 8970,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 8970,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 10
+    },
+    {
+      "name": "Data Analytics Immersion",
+      "hubspotValue": "Data Analytics Immersion",
+      "queryParams": "?program=daimm",
+      "defaultAmount": 13600,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHDATIM19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.08,
+          "apr60": null,
+          "maxTuition": 13600,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 13600,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "Data Analytics Nights & Weekends",
+      "hubspotValue": "Data Analytics Nights & Weekends",
+      "queryParams": "?program=danw",
+      "defaultAmount": 12600,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHDANW19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 10.87,
+          "apr60": null,
+          "maxTuition": 12600,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 12600,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 9
+    },
+    {
+      "name": "Data Science Flex",
+      "hubspotValue": "Data Science Flex",
+      "queryParams": "?program=ds",
+      "defaultAmount": 8970,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SFTDDS",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 8970,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 8970,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 10
+    },
+    {
+      "name": "Data Science Immersion",
+      "hubspotValue": "Data Science Immersion",
+      "queryParams": "?program=dsimm",
+      "defaultAmount": 20000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHKIMM19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.08,
+          "apr60": null,
+          "maxTuition": 20000,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 20000,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 7
+    },
+    {
+      "name": "Data Science Nights & Weekends",
+      "hubspotValue": "Data Science Nights & Weekends",
+      "queryParams": "?program=dsnw",
+      "defaultAmount": 12600,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHDSNW19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 10.87,
+          "apr60": null,
+          "maxTuition": 12600,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 12600,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 9
+    },
+    {
+      "name": "Digital Marketing Flex",
+      "hubspotValue": "Digital Marketing Flex",
+      "queryParams": "?program=dm",
+      "defaultAmount": 5500,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHDMFPT19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 5500,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 5500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 5
+    },
+    {
+      "name": "Engineering Flex",
+      "hubspotValue": "Engineering Flex",
+      "queryParams": "?program=eng",
+      "defaultAmount": 10000,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SFTF",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 10000,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 10000,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 10
+    },
+    {
+      "name": "Engineering Immersion",
+      "hubspotValue": "Engineering Immersion",
+      "queryParams": "?program=engimm",
+      "defaultAmount": 17600,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SFTFIO",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.08,
+          "apr60": null,
+          "maxTuition": 17600,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 17600,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 6
+    },
+    {
+      "name": "Engineering Nights & Weekends",
+      "hubspotValue": "Engineering Nights & Weekends",
+      "queryParams": "?program=engnw",
+      "defaultAmount": 13825,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHKENW18",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 10.87,
+          "apr60": null,
+          "maxTuition": 13825,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 13825,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 9
+    },
+    {
+      "name": "Product Management Flex",
+      "hubspotValue": "Product Management Flex",
+      "queryParams": "?program=pm",
+      "defaultAmount": 9600,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHPMF19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.16,
+          "apr60": null,
+          "maxTuition": 9600,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 9600,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 7
+    },
+    {
+      "name": "UX/UI Design Flex",
+      "hubspotValue": "UX/UI Design Flex",
+      "queryParams": "?program=uxui",
+      "defaultAmount": 9540,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHFPD19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.08,
+          "apr60": null,
+          "maxTuition": 9540,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 9540,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 10
+    },
+    {
+      "name": "UX/UI Design Immersion",
+      "hubspotValue": "UX/UI Design Immersion",
+      "queryParams": "?program=uxuiimm",
+      "defaultAmount": 13500,
+      "metros": [],
+      "segment": "https://my.skills.fund/application?lenderCode=SKTHUXD19",
+      "aprAndType": [
+        {
+          "type": "Interest Only",
+          "apr36": 11.08,
+          "apr60": null,
+          "maxTuition": 13500,
+          "maxCOL": 0
+        },
+        {
+          "type": "Immediate Repayment",
+          "apr36": 11.69,
+          "apr60": null,
+          "maxTuition": 13500,
+          "maxCOL": 0
+        }
+      ],
+      "multiMetros": false,
+      "nonPaymentPeriod": 7
+    }
+  ]
+}
