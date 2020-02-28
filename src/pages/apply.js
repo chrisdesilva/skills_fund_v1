@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react"
+import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
-import styled, { css } from "styled-components"
+import styled from "styled-components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 import ApplicationCalculator from "../components/ApplicationCalculator"
@@ -8,7 +8,7 @@ import ApplicationCalculator from "../components/ApplicationCalculator"
 const Apply = () => {
   const data = useStaticQuery(graphql`
     query {
-      schools: allSchoolsJson(sort: { fields: loanInfo___name, order: DESC }) {
+      schools: allSchoolsJson(sort: { fields: slug, order: ASC }) {
         edges {
           node {
             slug
@@ -100,7 +100,12 @@ const Apply = () => {
         <ApplyCard>
           <h1>Loan Application</h1>
           <label htmlFor="school">Select your school</label>
-          <select id="school" defaultValue={"default"} onChange={selectSchool}>
+          <select
+            id="school"
+            defaultValue={"default"}
+            onChange={selectSchool}
+            onBlur={selectSchool}
+          >
             <option disabled value="default">
               ---
             </option>
@@ -116,6 +121,7 @@ const Apply = () => {
               id="program"
               defaultValue={"default"}
               onChange={selectProgram}
+              onBlur={selectProgram}
             >
               <option disabled value="default">
                 ---

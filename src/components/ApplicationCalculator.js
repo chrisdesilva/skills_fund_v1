@@ -86,6 +86,7 @@ const ApplicationCalculator = ({
             id="program"
             defaultValue={"default"}
             onChange={selectProgramLoan}
+            onBlur={selectProgramLoan}
           >
             <option disabled value="default">
               ---
@@ -105,6 +106,7 @@ const ApplicationCalculator = ({
               id="program"
               defaultValue={"default"}
               onChange={selectProgramLocation}
+              onBlur={selectProgramLocation}
             >
               <option disabled value="default">
                 ---
@@ -124,6 +126,7 @@ const ApplicationCalculator = ({
             <input
               className="loanCalculator__input"
               onChange={handleSliderAmt}
+              onBlur={handleSliderAmt}
               // onTouchEnd={calculateMonthlyPayment}
               // onMouseUp={calculateMonthlyPayment}
               type="range"

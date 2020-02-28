@@ -1,14 +1,13 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
 import styled from "styled-components"
-import { breakpoint } from "../utils/breakpoints"
 import Layout from "../components/Layout"
 
 const Students = () => {
   const data = useStaticQuery(graphql`
     query {
-      allSchoolsJson {
+      allSchoolsJson(sort: { fields: slug, order: ASC }) {
         edges {
           node {
             slug
