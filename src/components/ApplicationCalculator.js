@@ -1,38 +1,11 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 
-const ApplicationCalculator = ({
-  schoolList,
-  schoolIndex,
-  setSchoolName,
-  showProgram,
-  schoolName,
-  programIndex,
-  setProgramIndex,
-}) => {
-  const selectProgramLoan = e => {
-    setProgramIndex(e.target.value)
-  }
-
-  const selectProgramLocation = e => {
-    setMetroIndex(e.target.value)
-  }
-
-  const handleSliderAmt = e => {
-    setLoanValue(e.target.value)
-  }
-
-  const [loanInformation, setLoanInformation] = useState("")
-  const [metroIndex, setMetroIndex] = useState(0)
-  const [loanValue, setLoanValue] = useState(
-    schoolList[schoolIndex]["node"]["loanInfo"][0]["defaultAmount"]
-  )
-  const [tuitionMax, setTuitionMax] = useState(
-    schoolList[schoolIndex]["node"]["loanInfo"][0]["maxTuition"]
-  )
-  const [costOfLivingMax, setCostOfLivingMax] = useState(
-    schoolList[schoolIndex]["node"]["loanInfo"][0]["maxCOL"]
-  )
+const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
+  const [program, setProgram] = useState("")
+  const [loanValue, setLoanValue] = useState("")
+  const [maxTuition, setMaxTuition] = useState("")
+  const [maxCOL, setMaxCOL] = useState("")
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -40,88 +13,84 @@ const ApplicationCalculator = ({
     minimumFractionDigits: 0, // even dollar amounts without cents
   })
 
-  useEffect(() => {
-    setProgramIndex(0)
-    console.log(programIndex)
-  }, [schoolIndex])
+  const handleSliderAmt = e => {
+    setLoanValue(e.target.value)
+  }
+
+  const selectProgramLoan = e => {
+    const selectedProgram = school.loanInfo.filter(
+      program => program.name === e.target.value
+    )
+    setProgram(selectedProgram)
+  }
+
+  const selectMetro = e => {
+    let maxArray = e.target.value.split(",")
+    setMaxTuition(maxArray[0])
+    setMaxCOL(maxArray[1])
+  }
 
   useEffect(() => {
-    // reset the program index any time the user changes schools in the loan app section
-    setLoanInformation(schoolList[schoolIndex]["node"]["loanInfo"][0])
-    setTuitionMax(
-      schoolList[schoolIndex]["node"]["loanInfo"][0]["aprAndType"][0][
-        "maxTuition"
-      ]
-    )
-    setCostOfLivingMax(
-      schoolList[schoolIndex]["node"]["loanInfo"][0]["aprAndType"][0]["maxCOL"]
-    )
-    setSchoolName(schoolList[schoolIndex]["node"]["basicInfo"]["schoolname"])
-  }, [schoolIndex])
+    if (program[0]) {
+      setLoanValue(program[0]["defaultAmount"])
+      setMaxTuition(program[0]["aprAndType"][0]["info"]["maxTuition"])
+      setMaxCOL(program[0]["aprAndType"][0]["info"]["maxCOL"])
+    }
+  }, [program])
 
   useEffect(() => {
-    // update the loan information any time a user changes programs
-    setLoanInformation(
-      schoolList[schoolIndex]["node"]["loanInfo"][programIndex]
-    )
-    setTuitionMax(
-      schoolList[schoolIndex]["node"]["loanInfo"][programIndex][
-        "aprAndType"
-      ][0]["maxTuition"]
-    )
-    setCostOfLivingMax(
-      schoolList[schoolIndex]["node"]["loanInfo"][programIndex][
-        "aprAndType"
-      ][0]["maxCOL"]
-    )
-  }, [programIndex])
+    setLoanValue("")
+    setMaxTuition("")
+    setMaxCOL("")
+    setProgram("")
+  }, [school])
 
   return (
     <CalculatorContainer showProgram={showProgram}>
-      <CalculatorCard showProgram={showProgram}>
-        <h2>Loan Calculator{showProgram && <span> for {schoolName}</span>}</h2>
-        <SelectContainer showProgram={showProgram}>
-          <label htmlFor="program">Select your program</label>
-          <select
-            id="program"
-            defaultValue={"default"}
-            onChange={selectProgramLoan}
-            onBlur={selectProgramLoan}
-          >
-            <option disabled value="default">
-              ---
-            </option>
-            {schoolList[schoolIndex]["node"]["loanInfo"].map((program, i) => (
-              <option key={program.segment} value={i}>
-                {program.name}
-              </option>
-            ))}
-          </select>
-        </SelectContainer>
-        {schoolList[schoolIndex]["node"]["loanInfo"][programIndex]["metros"]
-          .length > 0 && (
+      {school["loanInfo"] && (
+        <CalculatorCard showProgram={showProgram}>
+          <h2>
+            Loan Calculator{showProgram && <span> for {schoolName}</span>}
+          </h2>
           <SelectContainer showProgram={showProgram}>
-            <label htmlFor="program">Select your location</label>
+            <label htmlFor="program">Select your program</label>
             <select
               id="program"
               defaultValue={"default"}
-              onChange={selectProgramLocation}
-              onBlur={selectProgramLocation}
+              onChange={selectProgramLoan}
+              onBlur={selectProgramLoan}
+              onClick={selectProgramLoan}
             >
               <option disabled value="default">
                 ---
               </option>
-              {schoolList[schoolIndex]["node"]["loanInfo"][programIndex][
-                "metros"
-              ].map((program, i) => (
-                <option key={i} value={i}>
-                  {program.location}
+              {school["loanInfo"].map(program => (
+                <option key={program.segment} value={program.name}>
+                  {program.name}
                 </option>
               ))}
             </select>
           </SelectContainer>
-        )}
-        {loanInformation && (
+          {program[0] && program[0]["metros"].length > 0 && (
+            <SelectContainer showProgram={showProgram}>
+              <label htmlFor="program">Select your location</label>
+              <select
+                id="program"
+                defaultValue={"default"}
+                onChange={selectMetro}
+                onBlur={selectMetro}
+              >
+                <option disabled value="default">
+                  ---
+                </option>
+                {program[0]["metros"].map((program, i) => (
+                  <option key={i} value={program.max}>
+                    {program.location}
+                  </option>
+                ))}
+              </select>
+            </SelectContainer>
+          )}
           <div className="loanCalculator__slider">
             <input
               className="loanCalculator__input"
@@ -132,7 +101,7 @@ const ApplicationCalculator = ({
               type="range"
               min="2000"
               step="5"
-              max={loanInformation["aprAndType"][0]["maxTuition"]}
+              max={maxTuition}
               value={loanValue}
             />
             <div className="loanCalculator__labels">
@@ -144,11 +113,11 @@ const ApplicationCalculator = ({
                   {formatter.format(loanValue)}
                 </span>
               </p>
-              <p>{formatter.format(tuitionMax)}</p>
+              <p>{formatter.format(maxTuition)}</p>
             </div>
           </div>
-        )}
-      </CalculatorCard>
+        </CalculatorCard>
+      )}
     </CalculatorContainer>
   )
 }

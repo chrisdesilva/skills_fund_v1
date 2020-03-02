@@ -40,18 +40,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHDAT19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 8970,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 8970,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 8970,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 8970,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -66,18 +70,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHDATIM19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.08,
-          "apr60": null,
-          "maxTuition": 13600,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.08,
+            "apr60": null,
+            "maxTuition": 13600,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 13600,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 13600,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -92,18 +100,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHDANW19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 10.87,
-          "apr60": null,
-          "maxTuition": 12600,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 10.87,
+            "apr60": null,
+            "maxTuition": 12600,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 12600,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 12600,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -118,18 +130,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SFTDDS",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 8970,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 8970,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 8970,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 8970,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -144,18 +160,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHKIMM19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.08,
-          "apr60": null,
-          "maxTuition": 20000,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.08,
+            "apr60": null,
+            "maxTuition": 20000,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 20000,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 20000,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -170,18 +190,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHDSNW19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 10.87,
-          "apr60": null,
-          "maxTuition": 12600,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 10.87,
+            "apr60": null,
+            "maxTuition": 12600,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 12600,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 12600,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -196,18 +220,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHDMFPT19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 5500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 5500,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 5500,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 5500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -222,18 +250,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SFTF",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 10000,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 10000,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 10000,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 10000,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -248,18 +280,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SFTFIO",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.08,
-          "apr60": null,
-          "maxTuition": 17600,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.08,
+            "apr60": null,
+            "maxTuition": 17600,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 17600,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 17600,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -274,18 +310,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHKENW18",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 10.87,
-          "apr60": null,
-          "maxTuition": 13825,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 10.87,
+            "apr60": null,
+            "maxTuition": 13825,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 13825,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 13825,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -300,18 +340,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHPMF19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 9600,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 9600,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 9600,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 9600,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -326,18 +370,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHFPD19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.08,
-          "apr60": null,
-          "maxTuition": 9540,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.08,
+            "apr60": null,
+            "maxTuition": 9540,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 9540,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 9540,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -352,18 +400,22 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKTHUXD19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.08,
-          "apr60": null,
-          "maxTuition": 13500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.08,
+            "apr60": null,
+            "maxTuition": 13500,
+            "maxCOL": 0
+          }
         },
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 13500,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 13500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,

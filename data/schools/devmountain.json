@@ -70,11 +70,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKDMWD17",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": 12.51,
-          "maxCOL": 3000,
-          "maxTuition": 11450
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": 12.51,
+            "maxCOL": 3000,
+            "maxTuition": 11450
+          }
         }
       ],
       "multiMetros": false,
@@ -88,11 +90,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKDMUX17",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": 12.51,
-          "maxCOL": 3000,
-          "maxTuition": 10450
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": 12.51,
+            "maxCOL": 3000,
+            "maxTuition": 10450
+          }
         }
       ],
       "multiMetros": false,
@@ -106,11 +110,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKDMUXAH19",
       "aprAndType": [
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": 12.71,
-          "maxCOL": 0,
-          "maxTuition": 4300
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": 12.71,
+            "maxCOL": 0,
+            "maxTuition": 4300
+          }
         }
       ],
       "multiMetros": false,
@@ -124,11 +130,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKDMIOS17",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": 12.51,
-          "maxCOL": 3000,
-          "maxTuition": 10450
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": 12.51,
+            "maxCOL": 3000,
+            "maxTuition": 10450
+          }
         }
       ],
       "multiMetros": false,
@@ -142,11 +150,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKDMQA19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.34,
-          "apr60": 12.58,
-          "maxCOL": 0,
-          "maxTuition": 7050
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.34,
+            "apr60": 12.58,
+            "maxCOL": 0,
+            "maxTuition": 7050
+          }
         }
       ],
       "multiMetros": false,

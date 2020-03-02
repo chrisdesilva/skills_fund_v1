@@ -51,11 +51,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFTFDSO18",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.01,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.01,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -70,11 +72,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFTPDSO18",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 10.71,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 10.71,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -89,11 +93,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFTSDSO18",
       "aprAndType": [
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 9100,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 9100,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -108,11 +114,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SFTDDS",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.01,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.01,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -127,11 +135,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFLSEPT",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 10.71,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 10.71,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -146,11 +156,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFLSESP",
       "aprAndType": [
         {
-          "type": "Immediate Repayment",
-          "apr36": 11.69,
-          "apr60": null,
-          "maxTuition": 15995,
-          "maxCOL": 0
+          "info": {
+            "type": "Immediate Repayment",
+            "apr36": 11.69,
+            "apr60": null,
+            "maxTuition": 15995,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -165,11 +177,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFLUXFT19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.01,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.01,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -184,11 +198,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFLUXPT19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 10.71,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 10.71,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -203,11 +219,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFLCAOFT19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.01,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.01,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -222,11 +240,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKFLCAOPT19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 10.71,
-          "apr60": null,
-          "maxTuition": 14500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 10.71,
+            "apr60": null,
+            "maxTuition": 14500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -240,53 +260,47 @@
       "metros": [
         {
           "location": "Atlanta, GA",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Chicago, IL",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Denver, CO",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Houston, TX",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "New York, NY",
-          "maxTuition": 23500,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "San Francisco, CA",
-          "maxTuition": 23500,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Seattle, WA",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Washington, D.C.",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         }
       ],
       "segment": "https://my.skills.fund/application?lenderCode=SKFIDS18",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 22000,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": true,
@@ -300,58 +314,51 @@
       "metros": [
         {
           "location": "Atlanta, GA",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Austin, TX",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Chicago, IL",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Denver, CO",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Houston, TX",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "New York, NY",
-          "maxTuition": 23500,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "San Francisco, CA",
-          "maxTuition": 23500,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Seattle, WA",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Washington, D.C.",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         }
       ],
       "segment": "https://my.skills.fund/application?lenderCode=SKFIWD18",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 22000,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": true,
@@ -365,43 +372,39 @@
       "metros": [
         {
           "location": "Austin, TX",
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "max": [22000, 0]
         },
         {
           "location": "Chicago, IL",
-          "maxTuition": 22300,
-          "maxCOL": 0
+          "max": [22300, 0]
         },
         {
           "location": "Denver, CO",
-          "maxTuition": 22300,
-          "maxCOL": 0
+          "max": [22300, 0]
         },
         {
           "location": "New York, NY",
-          "maxTuition": 23500,
-          "maxCOL": 0
+          "max": [23500, 0]
         },
         {
           "location": "San Francisco, CA",
-          "maxTuition": 23500,
-          "maxCOL": 0
+          "max": [23500, 0]
         },
         {
           "location": "Seattle, WA",
-          "maxTuition": 22500,
-          "maxCOL": 0
+          "max": [22500, 0]
         }
       ],
       "segment": "https://my.skills.fund/application?lenderCode=SKFLUX19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 22000,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 22000,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -415,23 +418,23 @@
       "metros": [
         {
           "location": "New York, NY",
-          "maxTuition": 24500,
-          "maxCOL": 0
+          "max": [24500, 0]
         },
         {
           "location": "Washington, D.C.",
-          "maxTuition": 22500,
-          "maxCOL": 0
+          "max": [22500, 0]
         }
       ],
       "segment": "https://my.skills.fund/application?lenderCode=SKFICA19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": null,
-          "maxTuition": 24500,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": null,
+            "maxTuition": 24500,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,

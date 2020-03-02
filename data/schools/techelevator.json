@@ -52,11 +52,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SFTE17A",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": 12.51,
-          "maxTuition": 15500,
-          "maxCOL": 4000
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": 12.51,
+            "maxTuition": 15500,
+            "maxCOL": 4000
+          }
         }
       ],
       "multiMetros": false,
