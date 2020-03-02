@@ -10,18 +10,16 @@ const Students = () => {
       allSchoolsJson(sort: { fields: slug, order: ASC }) {
         edges {
           node {
-            slug
             logo {
               childImageSharp {
-                fluid(grayscale: true) {
-                  ...GatsbyImageSharpFluid
+                fluid {
+                  srcSet
                 }
               }
             }
             basicInfo {
               APRRange36
               APRRange60
-              tuitionRange
               applicationsLive
               disabledLoanAppFormID
               hubspotFormID
@@ -33,6 +31,7 @@ const Students = () => {
               schoolname
               schoolurl
               selectAProgram
+              tuitionRange
             }
             paymentTable {
               data {
@@ -52,24 +51,28 @@ const Students = () => {
             }
             loanInfo {
               aprAndType {
-                apr36
-                apr60
-                maxCOL
-                maxTuition
-                type
+                info {
+                  apr36
+                  apr60
+                  maxCOL
+                  maxTuition
+                  type
+                }
               }
               defaultAmount
               hubspotValue
               metros {
                 location
-                maxCOL
-                maxTuition
+                max
               }
               multiMetros
               name
               nonPaymentPeriod
               segment
+              queryParams
             }
+            id
+            slug
           }
         }
       }

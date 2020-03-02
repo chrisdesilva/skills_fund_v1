@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 import Layout from "../components/Layout"
@@ -11,48 +11,69 @@ const Apply = () => {
       schools: allSchoolsJson(sort: { fields: slug, order: ASC }) {
         edges {
           node {
-            slug
+            logo {
+              childImageSharp {
+                fluid {
+                  srcSet
+                }
+              }
+            }
             basicInfo {
-              locations
-              schoolurl
               APRRange36
               APRRange60
-              schoolname
-              programTypes
+              applicationsLive
+              disabledLoanAppFormID
               hubspotFormID
               interestRate36
               interestRate60
-              selectAProgram
-              applicationsLive
+              locations
               nextCohortStartDate
-              disabledLoanAppFormID
+              programTypes
+              schoolname
+              schoolurl
+              selectAProgram
+              tuitionRange
+            }
+            paymentTable {
+              data {
+                program
+                col
+                max
+                tuition
+              }
+              headers
+              show
             }
             features {
-              products
               costOfLiving
-              multiPrograms
               multiLoanLengths
+              multiPrograms
+              products
             }
             loanInfo {
-              name
+              aprAndType {
+                info {
+                  apr36
+                  apr60
+                  maxCOL
+                  maxTuition
+                  type
+                }
+              }
               defaultAmount
               hubspotValue
               metros {
-                maxCOL
                 location
-                maxTuition
-              }
-              segment
-              aprAndType {
-                type
-                apr36
-                apr60
-                maxCOL
-                maxTuition
+                max
               }
               multiMetros
+              name
               nonPaymentPeriod
+              segment
+              queryParams
             }
+            id
+            slug
           }
         }
       }
@@ -60,8 +81,7 @@ const Apply = () => {
   `)
 
   const schoolList = data.schools.edges
-  const [schoolIndex, setSchoolIndex] = useState(0)
-  const [programIndex, setProgramIndex] = useState(0)
+  const [school, setSchool] = useState("")
   const [schoolName, setSchoolName] = useState("")
   const [showProgram, setShowProgram] = useState(false)
   const [showForm, setShowForm] = useState(false)
@@ -72,8 +92,10 @@ const Apply = () => {
 
   const selectSchool = e => {
     setShowProgram(true)
-    setSchoolIndex(e.target.value)
-    setProgramIndex(0)
+    const selectedSchool = schoolList.filter(
+      school => school.node.slug === e.target.value
+    )
+    setSchool(selectedSchool[0]["node"])
   }
 
   const selectProgram = e => {
@@ -93,6 +115,13 @@ const Apply = () => {
     window.open(loanUrl)
   }
 
+  useEffect(() => {
+    if (school["loanInfo"]) {
+      setLoanUrl(school["loanInfo"][0]["segment"])
+      setSchoolName(school["basicInfo"]["schoolname"])
+    }
+  }, [school])
+
   return (
     <Layout>
       <SEO title="Apply" />
@@ -109,8 +138,11 @@ const Apply = () => {
             <option disabled value="default">
               ---
             </option>
-            {schoolList.map((school, i) => (
-              <option key={school["node"]["basicInfo"]["schoolname"]} value={i}>
+            {schoolList.map(school => (
+              <option
+                key={school["node"]["basicInfo"]["schoolname"]}
+                value={school["node"]["slug"]}
+              >
                 {school["node"]["basicInfo"]["schoolname"]}
               </option>
             ))}
@@ -126,11 +158,12 @@ const Apply = () => {
               <option disabled value="default">
                 ---
               </option>
-              {schoolList[schoolIndex]["node"]["loanInfo"].map(program => (
-                <option key={program.segment} value={program.segment}>
-                  {program.name}
-                </option>
-              ))}
+              {school["loanInfo"] &&
+                school["loanInfo"].map(program => (
+                  <option key={program.segment} value={program.segment}>
+                    {program.name}
+                  </option>
+                ))}
             </select>
           </SelectContainer>
           <Form ready={submitReady} showForm={showForm} onSubmit={handleSubmit}>
@@ -155,13 +188,10 @@ const Apply = () => {
         </ApplyCard>
       </ApplyContainer>
       <ApplicationCalculator
-        schoolList={schoolList}
-        schoolIndex={schoolIndex}
+        school={school}
         setSchoolName={setSchoolName}
         showProgram={showProgram}
         schoolName={schoolName}
-        programIndex={programIndex}
-        setProgramIndex={setProgramIndex}
       />
     </Layout>
   )
@@ -203,7 +233,6 @@ const Form = styled.form`
   margin-top: 1rem;
   transition: opacity 300ms;
   opacity: ${({ showForm }) => (showForm ? "1" : "0")};
-  z-index: 10;
 
   input[type="submit"] {
     width: 33%;

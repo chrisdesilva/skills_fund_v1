@@ -104,58 +104,51 @@
       "metros": [
         {
           "location": "Arlington, VA",
-          "maxTuition": 13495,
-          "maxCOL": 4500
+          "max": [13495, 4500]
         },
         {
           "location": "Berkeley (East Bay), CA",
-          "maxTuition": 13995,
-          "maxCOL": 4500
+          "max": [13995, 4500]
         },
         {
           "location": "Chicago, IL",
-          "maxTuition": 12995,
-          "maxCOL": 4500
+          "max": [12995, 4500]
         },
         {
           "location": "Dallas, TX",
-          "maxTuition": 11495,
-          "maxCOL": 4500
+          "max": [11495, 4500]
         },
         {
           "location": "Los Angeles",
-          "maxTuition": 11995,
-          "maxCOL": 4500
+          "max": [11995, 4500]
         },
         {
           "location": "Orange County, CA",
-          "maxTuition": 11995,
-          "maxCOL": 4500
+          "max": [11995, 4500]
         },
         {
           "location": "Seattle, WA",
-          "maxTuition": 13995,
-          "maxCOL": 4500
+          "max": [13995, 4500]
         },
         {
           "location": "Silicon Valley, CA",
-          "maxTuition": 14995,
-          "maxCOL": 4500
+          "max": [14995, 4500]
         },
         {
           "location": "Tulsa, OK",
-          "maxTuition": 10495,
-          "maxCOL": 4500
+          "max": [10495, 4500]
         }
       ],
       "segment": "https://my.skills.fund/application?lenderCode=SKCD17",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": 12.51,
-          "maxTuition": 13495,
-          "maxCOL": 4500
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": 12.51,
+            "maxTuition": 13495,
+            "maxCOL": 4500
+          }
         }
       ],
       "multiMetros": true,
@@ -169,11 +162,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKDOJOO19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": 12.51,
-          "maxTuition": 14995,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": 12.51,
+            "maxTuition": 14995,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -187,11 +182,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKDOJON18",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.08,
-          "apr60": 12.48,
-          "maxTuition": 9995,
-          "maxCOL": 0
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.08,
+            "apr60": 12.48,
+            "maxTuition": 9995,
+            "maxCOL": 0
+          }
         }
       ],
       "multiMetros": false,
@@ -205,11 +202,13 @@
       "segment": "https://my.skills.fund/application?lenderCode=SKCDDS19",
       "aprAndType": [
         {
-          "type": "Interest Only",
-          "apr36": 11.16,
-          "apr60": 12.51,
-          "maxTuition": 14995,
-          "maxCOL": 4500
+          "info": {
+            "type": "Interest Only",
+            "apr36": 11.16,
+            "apr60": 12.51,
+            "maxTuition": 14995,
+            "maxCOL": 4500
+          }
         }
       ],
       "multiMetros": false,
