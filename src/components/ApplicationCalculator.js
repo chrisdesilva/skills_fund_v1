@@ -1,5 +1,10 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+import {
+  calculateInterestPayment,
+  calculateMonthlyPayment,
+  calculateTotalPayment,
+} from "../utils/calculator"
 
 const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
   const [program, setProgram] = useState("")
@@ -8,6 +13,13 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
   const loanValue = tuitionValue + colValue
   const [maxTuition, setMaxTuition] = useState("")
   const [maxCOL, setMaxCOL] = useState("")
+  const [metros, setMetros] = useState("")
+  const [interestPayments, setInterestPayments] = useState("")
+  const [monthlyPayments, setMonthlyPayments] = useState("")
+  const [totalPayments, setTotalPayments] = useState("")
+  const [loanType, setLoanType] = useState("")
+  const [nonPaymentPeriod, setNonPaymentPeriod] = useState("")
+  const [showSliders, toggleSliders] = useState(false)
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -28,22 +40,34 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
       program => program.name === e.target.value
     )
     setProgram(selectedProgram)
+    toggleSliders(true)
+  }
+
+  const selectLoanType = e => {
+    setLoanType(e.target.value)
   }
 
   const selectMetro = e => {
-    let maxArray = e.target.value.split(",")
-    setMaxTuition(maxArray[0])
-    setMaxCOL(maxArray[1])
+    const parsedObj = JSON.parse(e.target.value)
+    setMaxTuition(parsedObj.max[0])
+    setMaxCOL(parsedObj.max[1])
   }
 
   useEffect(() => {
     if (program[0]) {
       setTuitionValue(program[0]["defaultAmount"])
-      setCOLValue(0)
+
+      setMetros(program[0]["metros"])
+
       setMaxTuition(program[0]["aprAndType"][0]["info"]["maxTuition"])
+
+      setCOLValue(0)
+
       setMaxCOL(program[0]["aprAndType"][0]["info"]["maxCOL"])
+      setLoanType(program[0]["aprAndType"][0]["info"]["type"])
+      setNonPaymentPeriod(program[0]["nonPaymentPeriod"])
     }
-  }, [program])
+  }, [program, metros])
 
   useEffect(() => {
     setTuitionValue("")
@@ -51,6 +75,8 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
     setMaxTuition("")
     setMaxCOL("")
     setProgram("")
+    toggleSliders(false)
+    program[0] && setLoanType(program[0]["aprAndType"][0]["info"]["type"])
   }, [school])
 
   useEffect(() => {
@@ -58,6 +84,20 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
       setTuitionValue(Number(maxTuition))
     }
   }, [maxTuition])
+
+  useEffect(() => {
+    if (program[0]) {
+      calculateInterestPayment(loanValue, setInterestPayments)
+      calculateMonthlyPayment(loanValue, 10000, setMonthlyPayments)
+      calculateTotalPayment(
+        loanType,
+        nonPaymentPeriod,
+        interestPayments,
+        monthlyPayments,
+        setTotalPayments
+      )
+    }
+  }, [school, program, loanValue])
 
   return (
     <CalculatorContainer showProgram={showProgram}>
@@ -85,6 +125,27 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
               ))}
             </select>
           </SelectContainer>
+          {program[0] && program[0]["aprAndType"].length > 1 && (
+            <SelectContainer showProgram={showProgram}>
+              <label htmlFor="loanType">Select your loan type</label>
+              <select
+                id="loanType"
+                defaultValue={"default"}
+                onChange={selectLoanType}
+                onBlur={selectLoanType}
+                onClick={selectLoanType}
+              >
+                <option disabled value="default">
+                  ---
+                </option>
+                {school["features"]["products"].map(loanType => (
+                  <option key={loanType} value={loanType}>
+                    {loanType}
+                  </option>
+                ))}
+              </select>
+            </SelectContainer>
+          )}
           {program[0] && program[0]["metros"].length > 0 && (
             <SelectContainer showProgram={showProgram}>
               <label htmlFor="program">Select your location</label>
@@ -97,42 +158,43 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
                 <option disabled value="default">
                   ---
                 </option>
-                {program[0]["metros"].map((program, i) => (
-                  <option key={i} value={program.max}>
-                    {program.location}
-                  </option>
-                ))}
+                {metros &&
+                  metros.map((metro, i) => (
+                    <option key={i} value={JSON.stringify(metro)}>
+                      {metro.location}
+                    </option>
+                  ))}
               </select>
             </SelectContainer>
           )}
-          <LoanCalculatorSlider>
-            <div>
-              <p id="total">{formatter.format(loanValue)}</p>
-              <p>Total Loan Amount</p>
-            </div>
-            <input
-              onChange={handleTuitionSlider}
-              onBlur={handleTuitionSlider}
-              // onTouchEnd={calculateMonthlyPayment}
-              // onMouseUp={calculateMonthlyPayment}
-              type="range"
-              min="2000"
-              step="5"
-              max={maxTuition}
-              value={tuitionValue}
-            />
-            {loanValue && (
-              <div className="labels">
-                <p>$2,000</p>
-                <div>
-                  <p>{formatter.format(tuitionValue)}</p>
-                  <p>Tuition Amount</p>
-                </div>
-                <p>{formatter.format(maxTuition)}</p>
+          {showSliders && (
+            <LoanCalculatorSlider>
+              <div>
+                <p id="total">{formatter.format(loanValue)}</p>
+                <p>Total Loan Amount</p>
               </div>
-            )}
-          </LoanCalculatorSlider>
-          {maxCOL > 0 && (
+              <input
+                onChange={handleTuitionSlider}
+                onBlur={handleTuitionSlider}
+                type="range"
+                min="2000"
+                step="5"
+                max={maxTuition}
+                value={tuitionValue}
+              />
+              {loanValue && (
+                <div className="labels">
+                  <p>$2,000</p>
+                  <div>
+                    <p>{formatter.format(tuitionValue)}</p>
+                    <p>Tuition Amount</p>
+                  </div>
+                  <p>{formatter.format(maxTuition)}</p>
+                </div>
+              )}
+            </LoanCalculatorSlider>
+          )}
+          {maxCOL > 0 && showSliders && (
             <LoanCalculatorSlider>
               <input
                 onChange={handleCOLSlider}
@@ -157,6 +219,7 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
               )}
             </LoanCalculatorSlider>
           )}
+          {/* <Payments></Payments> */}
         </CalculatorCard>
       )}
     </CalculatorContainer>
