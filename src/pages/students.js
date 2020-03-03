@@ -12,8 +12,8 @@ const Students = () => {
           node {
             logo {
               childImageSharp {
-                fluid {
-                  srcSet
+                fluid(grayscale: true) {
+                  ...GatsbyImageSharpFluid_noBase64
                 }
               }
             }

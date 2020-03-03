@@ -92,7 +92,7 @@ const MobileNavMenu = ({ menuOpen, setMenuOpen }) => {
 
 export default MobileNavMenu
 
-export const MenuBar = styled.header`
+const MenuBar = styled.header`
   @media ${breakpoint.lg} {
     display: none;
   }
@@ -107,7 +107,7 @@ export const MenuBar = styled.header`
   align-items: center;
 `
 
-export const MenuIcon = styled.button`
+const MenuIcon = styled.button`
   cursor: pointer;
   background: transparent;
   border: none;
@@ -123,7 +123,7 @@ export const MenuIcon = styled.button`
     width: 2rem;
     height: 0.25rem;
     background: ${({ menuOpen }) => (menuOpen ? "white" : "black")};
-    transition: all 300ms;
+    transition: transform 300ms, opacity 300ms;
     border-radius: 10px;
     transform-origin: 1px;
 
@@ -143,7 +143,7 @@ export const MenuIcon = styled.button`
   }
 `
 
-export const MenuLinks = styled.header`
+const MenuLinks = styled.header`
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -166,27 +166,28 @@ export const MenuLinks = styled.header`
     flex-direction: column;
     justify-content: center;
     align-items: center;
+    padding: 0;
   }
 `
 
-export const MenuIconContainer = styled.div`
-  width: 40%;
+const MenuIconContainer = styled.div`
+  width: 50%;
   display: flex;
   justify-content: flex-end;
   align-items: center;
 `
 
-export const MenuLogo = styled.div`
+const MenuLogo = styled.div`
   width: 6rem;
   z-index: 11;
   margin-left: 1rem;
 `
 
-export const ListItem = styled.li`
-  margin-bottom: 2rem;
+const ListItem = styled.li`
+  margin-bottom: 1rem;
   list-style-type: none;
   a {
-    font-size: 1.25rem;
+    font-size: 1rem;
     font-weight: bold;
     text-decoration: none;
     color: white;
@@ -194,9 +195,12 @@ export const ListItem = styled.li`
   .btn {
     color: black;
   }
+  :last-of-type {
+    margin-top: 1rem;
+  }
 `
 
-export const MenuApplyButton = styled(props => <Link {...props} />)`
+const MenuApplyButton = styled(props => <Link {...props} />)`
   width: 8rem;
   background: ${props => props.theme.secondary};
   color: white;

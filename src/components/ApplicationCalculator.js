@@ -3,7 +3,9 @@ import styled from "styled-components"
 
 const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
   const [program, setProgram] = useState("")
-  const [loanValue, setLoanValue] = useState("")
+  const [tuitionValue, setTuitionValue] = useState("")
+  const [colValue, setCOLValue] = useState("")
+  const loanValue = tuitionValue + colValue
   const [maxTuition, setMaxTuition] = useState("")
   const [maxCOL, setMaxCOL] = useState("")
 
@@ -13,8 +15,12 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
     minimumFractionDigits: 0, // even dollar amounts without cents
   })
 
-  const handleSliderAmt = e => {
-    setLoanValue(e.target.value)
+  const handleTuitionSlider = e => {
+    setTuitionValue(Number(e.target.value))
+  }
+
+  const handleCOLSlider = e => {
+    setCOLValue(Number(e.target.value))
   }
 
   const selectProgramLoan = e => {
@@ -32,18 +38,26 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
 
   useEffect(() => {
     if (program[0]) {
-      setLoanValue(program[0]["defaultAmount"])
+      setTuitionValue(program[0]["defaultAmount"])
+      setCOLValue(0)
       setMaxTuition(program[0]["aprAndType"][0]["info"]["maxTuition"])
       setMaxCOL(program[0]["aprAndType"][0]["info"]["maxCOL"])
     }
   }, [program])
 
   useEffect(() => {
-    setLoanValue("")
+    setTuitionValue("")
+    setCOLValue(0)
     setMaxTuition("")
     setMaxCOL("")
     setProgram("")
   }, [school])
+
+  useEffect(() => {
+    if (tuitionValue > maxTuition) {
+      setTuitionValue(Number(maxTuition))
+    }
+  }, [maxTuition])
 
   return (
     <CalculatorContainer showProgram={showProgram}>
@@ -91,31 +105,58 @@ const ApplicationCalculator = ({ school, showProgram, schoolName }) => {
               </select>
             </SelectContainer>
           )}
-          <div className="loanCalculator__slider">
+          <LoanCalculatorSlider>
+            <div>
+              <p id="total">{formatter.format(loanValue)}</p>
+              <p>Total Loan Amount</p>
+            </div>
             <input
-              className="loanCalculator__input"
-              onChange={handleSliderAmt}
-              onBlur={handleSliderAmt}
+              onChange={handleTuitionSlider}
+              onBlur={handleTuitionSlider}
               // onTouchEnd={calculateMonthlyPayment}
               // onMouseUp={calculateMonthlyPayment}
               type="range"
               min="2000"
               step="5"
               max={maxTuition}
-              value={loanValue}
+              value={tuitionValue}
             />
-            <div className="loanCalculator__labels">
-              <p>$2,000</p>
-              <p>
-                Loan Amount
-                <br />
-                <span className="loanCalculator__amount">
-                  {formatter.format(loanValue)}
-                </span>
-              </p>
-              <p>{formatter.format(maxTuition)}</p>
-            </div>
-          </div>
+            {loanValue && (
+              <div className="labels">
+                <p>$2,000</p>
+                <div>
+                  <p>{formatter.format(tuitionValue)}</p>
+                  <p>Tuition Amount</p>
+                </div>
+                <p>{formatter.format(maxTuition)}</p>
+              </div>
+            )}
+          </LoanCalculatorSlider>
+          {maxCOL > 0 && (
+            <LoanCalculatorSlider>
+              <input
+                onChange={handleCOLSlider}
+                onBlur={handleCOLSlider}
+                // onTouchEnd={calculateMonthlyPayment}
+                // onMouseUp={calculateMonthlyPayment}
+                type="range"
+                min="0"
+                step="5"
+                max={maxCOL}
+                value={colValue}
+              />
+              {loanValue && (
+                <div className="labels">
+                  <p>$0</p>
+                  <div>
+                    <p>{formatter.format(colValue)}</p>
+                    <p>Cost of Living Amount</p>
+                  </div>
+                  <p>{formatter.format(maxCOL)}</p>
+                </div>
+              )}
+            </LoanCalculatorSlider>
+          )}
         </CalculatorCard>
       )}
     </CalculatorContainer>
@@ -163,4 +204,28 @@ const SelectContainer = styled.div`
   opacity: 0;
   transition: opacity 300ms;
   opacity: ${({ showProgram }) => (showProgram ? "1" : "0")};
+`
+
+const LoanCalculatorSlider = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  .labels {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  p {
+    text-align: center;
+    margin-top: 0;
+  }
+
+  #total {
+    font-weight: bold;
+    font-size: 2rem;
+    margin: 1rem 0;
+  }
 `
