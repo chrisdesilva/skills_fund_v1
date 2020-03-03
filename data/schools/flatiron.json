@@ -276,11 +276,11 @@
         },
         {
           "location": "New York, NY",
-          "max": [22000, 0]
+          "max": [23500, 0]
         },
         {
           "location": "San Francisco, CA",
-          "max": [22000, 0]
+          "max": [23500, 0]
         },
         {
           "location": "Seattle, WA",
@@ -334,11 +334,11 @@
         },
         {
           "location": "New York, NY",
-          "max": [22000, 0]
+          "max": [23500, 0]
         },
         {
           "location": "San Francisco, CA",
-          "max": [22000, 0]
+          "max": [23500, 0]
         },
         {
           "location": "Seattle, WA",
