@@ -6,7 +6,6 @@ import { breakpoint } from "../utils/breakpoints"
 import logo from "../images/skillsFund_logo.png"
 
 const DesktopNavMenu = () => {
-  // const [nav, toggleNav] = useState(false)
   const [border, setBorder] = useState(false)
   const navRef = useRef()
 
