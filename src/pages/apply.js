@@ -84,6 +84,8 @@ const Apply = () => {
   const [school, setSchool] = useState("")
   const [schoolName, setSchoolName] = useState("")
   const [showProgram, setShowProgram] = useState(false)
+  const [showCalculator, setShowCalculator] = useState(false)
+  const [showCalculatorText, setShowCalculatorText] = useState(false)
   const [showForm, setShowForm] = useState(false)
   const [loanUrl, setLoanUrl] = useState(false)
   const [email, setEmail] = useState("")
@@ -92,6 +94,7 @@ const Apply = () => {
 
   const selectSchool = e => {
     setShowProgram(true)
+    setShowCalculatorText(true)
     const selectedSchool = schoolList.filter(
       school => school.node.slug === e.target.value
     )
@@ -126,7 +129,7 @@ const Apply = () => {
     <Layout>
       <SEO title="Apply" />
       <ApplyContainer>
-        <ApplyCard>
+        <ApplyCard showCalculatorText={showCalculatorText}>
           <h1>Loan Application</h1>
           <label htmlFor="school">Select your school</label>
           <select
@@ -185,12 +188,18 @@ const Apply = () => {
           <ThankYou thankYou={showThankYou}>
             Thanks for applying! Your application has opened in a new window.
           </ThankYou>
+          <p className="calculator uppercase text-xs">
+            Curious what you'll pay?
+          </p>
+          <p className="calculator" onClick={() => setShowCalculator(true)}>
+            Easily calculate your payments.
+          </p>
         </ApplyCard>
       </ApplyContainer>
       <ApplicationCalculator
         school={school}
         setSchoolName={setSchoolName}
-        showProgram={showProgram}
+        showCalculator={showCalculator}
         schoolName={schoolName}
       />
     </Layout>
@@ -205,6 +214,7 @@ const ApplyContainer = styled.section`
   align-items: center;
   background: ${props => props.theme.primaryDark};
   padding: 2rem 0;
+  height: 50vh;
 `
 
 const ApplyCard = styled.div`
@@ -219,6 +229,35 @@ const ApplyCard = styled.div`
   h1 {
     margin-bottom: 1rem;
     text-align: center;
+  }
+
+  .calculator {
+    transition: opacity 300ms;
+    opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
+    text-align: center;
+    margin: 0.25rem 0;
+
+    :not(.uppercase) {
+      position: relative;
+      cursor: pointer;
+
+      :after {
+        position: absolute;
+        bottom: -25%;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 60%;
+        content: ".";
+        color: transparent;
+        background: black;
+        height: 1px;
+        transition: width 300ms;
+      }
+      :hover:after {
+        width: 65%;
+      }
+    }
   }
 `
 
