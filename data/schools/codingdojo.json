@@ -81,7 +81,7 @@
     "APRRange60": "12.48-12.51",
     "tuitionRange": "$9,995 - $14,995",
     "schoolname": "Coding Dojo",
-    "programTypes": ["fullStack", "dataScience"],
+    "programTypes": ["fullStack", "dataScience", "technology"],
     "hubspotFormID": "211a4031-fd14-4b99-ba59-315044fecc3d",
     "interestRate36": 8.99,
     "interestRate60": 10.99,

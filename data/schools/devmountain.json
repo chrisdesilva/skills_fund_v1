@@ -46,7 +46,7 @@
     "APRRange60": "12.51-12.71",
     "tuitionRange": "$4,300 - $11,450",
     "schoolname": "DevMountain",
-    "programTypes": ["fullStack", "mobile", "uxui"],
+    "programTypes": ["fullStack", "mobile", "uxui", "technology"],
     "hubspotFormID": "fd391850-d431-42a3-8176-447ef29c1255",
     "interestRate36": 8.99,
     "interestRate60": 10.99,

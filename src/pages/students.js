@@ -1,8 +1,10 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
 import styled from "styled-components"
+import { FaTimesCircle } from "react-icons/fa"
 import Layout from "../components/Layout"
+import SEO from "../components/SEO"
 
 const Students = () => {
   const data = useStaticQuery(graphql`
@@ -85,9 +87,9 @@ const Students = () => {
       }
     }
   `)
-  let school = data.allSchoolsJson.edges
-  let allLocations = school // takes all locations from all schools, flattens into single array, then removes duplicates, then sorts alphabetically
-    .flatMap(school => school.node.basicInfo.locations)
+  let allSchools = data.allSchoolsJson.edges.map(school => school.node)
+  let allLocations = allSchools // takes all locations from all schools, flattens into single array, then removes duplicates, then sorts alphabetically
+    .flatMap(school => school.basicInfo.locations)
     .reduce((acc, currVal) => {
       if (acc.indexOf(currVal) === -1) {
         acc.push(currVal)
@@ -95,12 +97,69 @@ const Students = () => {
       return acc
     }, [])
     .sort()
-  let allSchools = school.map(school => school.node)
+  const [filteredSchools, setFilteredSchools] = useState(allSchools)
+  const [activeIndex, setActiveIndex] = useState("")
+  const [textFilter, setTextFilter] = useState("")
+  const [categoryFilter, setCategoryFilter] = useState("")
+  const [locationFilter, setLocationFilter] = useState("")
+  const filterButtons = [
+    {
+      name: "All Schools",
+      value: "",
+    },
+    {
+      name: "Technology",
+      value: "technology",
+    },
+    {
+      name: "Professional Training",
+      value: "professionalTraining",
+    },
+    {
+      name: "Licensure Training",
+      value: "licensureTraining",
+    },
+  ]
 
-  console.log("all schools ", allSchools)
+  const filterSchools = () => {
+    let filteredList = allSchools
+
+    if (textFilter) {
+      filteredList = filteredList.filter(school =>
+        school.basicInfo.schoolname
+          .toLowerCase()
+          .trim()
+          .includes(textFilter.toLowerCase().trim())
+      )
+    }
+    if (categoryFilter) {
+      filteredList = filteredList.filter(school =>
+        school.basicInfo.programTypes.includes(categoryFilter)
+      )
+    }
+    if (locationFilter) {
+      filteredList = filteredList.filter(school =>
+        school.basicInfo.locations.includes(locationFilter)
+      )
+    }
+    setFilteredSchools(filteredList)
+  }
+
+  const resetFilters = () => {
+    setActiveIndex("")
+    setTextFilter("")
+    setCategoryFilter("")
+    setLocationFilter("")
+    setFilteredSchools(allSchools)
+  }
+
+  useEffect(() => {
+    filterSchools()
+  }, [textFilter, categoryFilter, locationFilter])
 
   return (
     <Layout>
+      <SEO title="Students" />
       <Banner>
         <div>
           <h1>Schools worthy of your future</h1>
@@ -110,19 +169,43 @@ const Students = () => {
           </h2>
         </div>
         <div>
-          <Image fluid={data.student.childImageSharp.fluid} alt="" />
+          <Image
+            fluid={data.student.childImageSharp.fluid}
+            alt="Person working on laptop - photo by Brooke Cagle"
+          />
         </div>
       </Banner>
       <FilterContainer>
         <FilterCard>
           <h3>Find your perfect school</h3>
+          <label htmlFor="search">Search by school name</label>
+          <input
+            id="search"
+            placeholder="Enter school name"
+            value={textFilter}
+            onChange={e => setTextFilter(e.target.value)}
+          />
           <FilterRow>
-            <button className="btn">All schools</button>
-            <button className="btn">Technology</button>
-            <button className="btn">Professional training</button>
-            <button className="btn">Licensure training</button>
+            {filterButtons.map((button, i) => (
+              <button
+                key={i}
+                value={button.value}
+                className={activeIndex === i ? "btn active" : "btn inactive"}
+                onClick={e => {
+                  if (activeIndex === i) {
+                    setActiveIndex("")
+                    setCategoryFilter("")
+                  } else {
+                    setActiveIndex(i)
+                    setCategoryFilter(e.target.value)
+                  }
+                }}
+              >
+                {button.name}
+              </button>
+            ))}
           </FilterRow>
-          <FilterRow>
+          <FilterRow locationFilter={locationFilter}>
             <div>
               <label htmlFor="program">PROGRAM</label>
               <select id="program">
@@ -133,12 +216,23 @@ const Students = () => {
               </select>
             </div>
             <div>
-              <label htmlFor="location">LOCATION</label>
-              <select id="location">
+              <label htmlFor="location">
+                LOCATION{" "}
+                <span onClick={() => setLocationFilter("")}>
+                  <FaTimesCircle />
+                </span>
+              </label>
+              <select
+                onChange={e => setLocationFilter(e.target.value)}
+                id="location"
+                value={locationFilter}
+              >
                 <option>Select location</option>
-                <option>Austin, TX</option>
-                <option>Denver, CO</option>
-                <option>San Francisco, CA</option>
+                {allLocations.map(location => (
+                  <option key={location} value={location}>
+                    {location}
+                  </option>
+                ))}
               </select>
             </div>
             <div>
@@ -160,33 +254,35 @@ const Students = () => {
               </select>
             </div>
           </FilterRow>
-          <p className="hoverUnderline">Clear filters</p>
+          <p onClick={resetFilters} className="hoverUnderline">
+            Clear filters
+          </p>
         </FilterCard>
       </FilterContainer>
       <CardContainer>
-        {school.map(school => {
-          const bootcamp = school.node
+        {filteredSchools.map(school => {
           return (
             <Card locationList>
               <CardLogo>
                 <Image
-                  fluid={bootcamp.logo.childImageSharp.fluid}
-                  alt={bootcamp.basicInfo.schoolname}
+                  key={school.logo.childImageSharp.fluid}
+                  fluid={school.logo.childImageSharp.fluid}
+                  alt={school.basicInfo.schoolname}
                 />
               </CardLogo>
               <CardInfo>
                 <Link
                   className="btn text-black bg-white"
-                  to={`students/${bootcamp.slug}`}
+                  to={`students/${school.slug}`}
                 >
-                  {bootcamp.basicInfo.schoolname} Financing Page
+                  {school.basicInfo.schoolname} Financing Page
                 </Link>
                 <div>
                   <CardColumn>
                     <p>Tuition Range</p>
                   </CardColumn>
                   <CardColumn>
-                    <p>{bootcamp.basicInfo.tuitionRange}</p>
+                    <p>{school.basicInfo.tuitionRange}</p>
                   </CardColumn>
                 </div>
                 <div>
@@ -195,7 +291,7 @@ const Students = () => {
                   </CardColumn>
                   <CardColumn>
                     <p>
-                      {bootcamp.features.costOfLiving
+                      {school.features.costOfLiving
                         ? "Available"
                         : "Not Available"}
                     </p>
@@ -257,7 +353,8 @@ const Banner = styled.section`
   }
 
   h1 {
-    font-size: 2rem;
+    font-size: 3rem;
+    margin-bottom: 1rem;
   }
 
   h2 {
@@ -281,12 +378,13 @@ const FilterCard = styled.div`
   border-radius: 5px;
   width: 75%;
   background: white;
-  padding: 2rem;
+  padding: 4rem 2rem;
   box-shadow: 2px 2px 5px gray;
 
   h3 {
-    font-size: 1.25rem;
+    font-size: 2rem;
     text-align: center;
+    margin-bottom: 1rem;
   }
 
   p {
@@ -312,9 +410,15 @@ const FilterCard = styled.div`
     }
   }
 
-  .btn {
+  .inactive {
     border: 1px solid black;
     background: transparent;
+  }
+
+  .active {
+    border: 1px solid transparent;
+    background: black;
+    color: white;
   }
 `
 
@@ -329,6 +433,15 @@ const FilterRow = styled.div`
     :not(:last-of-type) {
       margin-right: 2rem;
     }
+  }
+  span {
+    opacity: ${({ locationFilter }) => (locationFilter ? "1" : "0")};
+    color: red;
+    margin-left: 0.25rem;
+    cursor: pointer;
+  }
+  label {
+    display: flex;
   }
 `
 
