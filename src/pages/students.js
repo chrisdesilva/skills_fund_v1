@@ -260,9 +260,13 @@ const Students = () => {
         </FilterCard>
       </FilterContainer>
       <CardContainer>
-        {filteredSchools.map(school => {
+        {allSchools.map(school => {
           return (
-            <Card locationList>
+            <Card
+              school={school}
+              // locationList={locationList}
+              filteredSchools={filteredSchools}
+            >
               <CardLogo>
                 <Image
                   key={school.logo.childImageSharp.fluid}
@@ -460,6 +464,9 @@ const Card = styled.div`
   border: 2px solid gray;
   border-radius: 5px;
   box-shadow: 2px 2px 10px lightgray;
+  transition: transform 300ms;
+  transform: ${({ filteredSchools, school }) =>
+    filteredSchools.includes(school) ? "scale(1)" : "scale(0)"};
 `
 
 const CardLogo = styled.div`
