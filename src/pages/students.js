@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
-import styled from "styled-components"
+import styled, { css } from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { FaTimesCircle } from "react-icons/fa"
 import Layout from "../components/Layout"
@@ -100,8 +100,9 @@ const Students = () => {
     }, [])
     .sort()
   const [filteredSchools, setFilteredSchools] = useState(allSchools)
+  const [cardIndex, setCardIndex] = useState("")
+  const [cardClass, setCardClass] = useState("")
   const [activeIndex, setActiveIndex] = useState("")
-  const [locationList, setLocationList] = useState(2)
   const [textFilter, setTextFilter] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
   const [locationFilter, setLocationFilter] = useState("")
@@ -264,7 +265,7 @@ const Students = () => {
       </FilterContainer>
       <CardContainer>
         <AnimatePresence>
-          {filteredSchools.map(school => {
+          {filteredSchools.map((school, i) => {
             return (
               <Card
                 positionTransition={spring}
@@ -274,80 +275,130 @@ const Students = () => {
                 whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
-                <CardLogo>
-                  <a
-                    href={school.basicInfo.schoolurl}
-                    target="_blank"
-                    rel="noreferrer noopener"
-                  >
-                    <Image
-                      key={school.logo.childImageSharp.fluid}
-                      fluid={school.logo.childImageSharp.fluid}
-                      alt={school.basicInfo.schoolname}
-                    />
-                  </a>
-                </CardLogo>
-                <CardInfo>
-                  <p className="schoolname">{school.basicInfo.schoolname}</p>
-                  <div>
-                    <CardColumn>
-                      <p>Tuition Range</p>
-                    </CardColumn>
-                    <CardColumn>
-                      <p>{school.basicInfo.tuitionRange}</p>
-                    </CardColumn>
-                  </div>
-                  <div>
-                    <CardColumn>
-                      <p>Cost of Living Financing</p>
-                    </CardColumn>
-                    <CardColumn>
-                      <p>
-                        {school.features.costOfLiving
-                          ? "Available"
-                          : "Not Available"}
+                <CardInner className={cardIndex === i ? "flipped" : ""}>
+                  <CardFront>
+                    <CardLogo>
+                      <a
+                        href={school.basicInfo.schoolurl}
+                        target="_blank"
+                        rel="noreferrer noopener"
+                      >
+                        <Image
+                          key={school.logo.childImageSharp.fluid}
+                          fluid={school.logo.childImageSharp.fluid}
+                          alt={school.basicInfo.schoolname}
+                        />
+                      </a>
+                    </CardLogo>
+                    <CardInfo>
+                      <p className="schoolname">
+                        {school.basicInfo.schoolname}
                       </p>
-                    </CardColumn>
-                  </div>
-                  <div>
-                    <CardColumn>
-                      <p>Locations</p>
-                    </CardColumn>
-                    <CardColumn>
-                      {school.basicInfo.locations
-                        .slice(0, locationList)
-                        .sort()
-                        .map(location => (
+                      <div>
+                        <CardColumn>
+                          <p>Tuition Range</p>
+                        </CardColumn>
+                        <CardColumn>
+                          <p>{school.basicInfo.tuitionRange}</p>
+                        </CardColumn>
+                      </div>
+                      <div>
+                        <CardColumn>
+                          <p>Cost of Living Financing</p>
+                        </CardColumn>
+                        <CardColumn>
+                          <p>
+                            {school.features.costOfLiving
+                              ? "Available"
+                              : "Not Available"}
+                          </p>
+                        </CardColumn>
+                      </div>
+                      <div>
+                        <CardColumn>
+                          <p>Locations</p>
+                        </CardColumn>
+                        <CardColumn>
+                          {school.basicInfo.locations
+                            .slice(0, 2)
+                            .sort()
+                            .map(location => (
+                              <p>{location} </p>
+                            ))}
+                          {school.basicInfo.locations.length > 2 && (
+                            <p
+                              className="cursor-pointer text-purple"
+                              onClick={() => setCardIndex(i)}
+                            >
+                              See More
+                            </p>
+                          )}
+                        </CardColumn>
+                      </div>
+                      <div>
+                        <CardColumn>
+                          <p>Programs</p>
+                        </CardColumn>
+                        <CardColumn>
+                          {school.loanInfo
+                            .slice(0, 2)
+                            .sort()
+                            .map(program => (
+                              <p>{program.name} </p>
+                            ))}
+                          {school.loanInfo.length > 2 && (
+                            <p
+                              className="cursor-pointer text-purple"
+                              onClick={() => setCardIndex(i)}
+                            >
+                              See More
+                            </p>
+                          )}
+                        </CardColumn>
+                      </div>
+                      <div className="click">
+                        <a
+                          className="btn"
+                          href={school.basicInfo.schoolcode}
+                          target="_blank"
+                          rel="noreferrer noopener"
+                        >
+                          Apply For Financing
+                        </a>
+                        <Link
+                          className="hoverUnderline"
+                          to={`students/${school.slug}`}
+                        >
+                          Learn More
+                        </Link>
+                      </div>
+                    </CardInfo>
+                  </CardFront>
+                  <CardBack>
+                    <div className="card-back-info">
+                      <CardColumn>
+                        <p className="font-bold">Locations</p>{" "}
+                        {school.basicInfo.locations.sort().map(location => (
                           <p>{location} </p>
                         ))}
-                      {school.basicInfo.locations.length > 2 && (
-                        <p
-                          className="cursor-pointer text-purple"
-                          onClick={() => {
-                            if (locationList === 2) {
-                              setLocationList(school.basicInfo.locations.length)
-                            } else {
-                              setLocationList(2)
-                            }
-                          }}
-                        >
-                          {locationList === 2 ? "See More" : "See Less"}
-                        </p>
-                      )}
-                    </CardColumn>
-                  </div>
-                </CardInfo>
-                <a
-                  className="btn"
-                  href={school.basicInfo.schoolcode}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Apply For Financing
-                </a>
-                <Link className="hoverUnderline" to={`students/${school.slug}`}>
-                  Learn More
-                </Link>
+                      </CardColumn>
+                      <CardColumn>
+                        <p className="font-bold">Programs</p>{" "}
+                        {school.loanInfo.sort().map(program => (
+                          <p>{program.name} </p>
+                        ))}
+                      </CardColumn>
+                    </div>
+                    <div className="click">
+                      <p
+                        onClick={() => setCardIndex("")}
+                        className="hoverUnderline"
+                      >
+                        Front
+                      </p>
+                    </div>
+                  </CardBack>
+                </CardInner>
               </Card>
             )
           })}
@@ -482,20 +533,85 @@ const spring = {
   stiffness: 250,
 }
 
-const Card = styled(motion.div)`
-  margin: 1rem;
+const CardSide = css`
+  position: absolute;
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  justify-content: space-between;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
   border: 2px solid gray;
   border-radius: 5px;
   box-shadow: 2px 2px 10px lightgray;
-  padding-bottom: 1rem;
-  /* transition: transform 300ms;
-  transform: ${({ filteredSchools, school }) =>
-    filteredSchools.includes(school) ? "scale(1)" : "scale(0)"}; */
 
-    .btn {
+  .click {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    align-items: center;
+    text-align: center;
+  }
+`
+
+const CardFront = styled.div`
+  ${CardSide}
+  font-weight: bold;
+`
+
+const CardBack = styled.div`
+  ${CardSide}
+  transform: rotateY(-180deg);
+
+  div {
+    padding: 0.5rem;
+  }
+
+  p {
+    font-size: 0.75rem;
+    margin: 0 0 0.25rem 0;
+  }
+
+  .hoverUnderline {
+    text-align: center;
+  }
+
+  .card-back-info {
+    display: flex;
+    justify-content: space-evenly;
+  }
+`
+
+const CardInner = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  transition: transform 0.8s;
+  transform-style: preserve-3d;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  &.flipped {
+    transform: rotateY(180deg);
+  }
+`
+
+const Card = styled(motion.div)`
+  margin: 1rem;
+  position: relative;
+  width: 20%;
+  max-width: 20%;
+  min-height: 30rem;
+  perspective: 1000px;
+  background: transparent;
+  -moz-backface-visibility: hidden;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+
+  .btn {
     width: 15rem;
     text-align: center;
     margin: 1rem;
@@ -511,7 +627,7 @@ const Card = styled(motion.div)`
     position: relative;
     cursor: pointer;
     display: inline;
-    font-size: .75rem;
+    font-size: 0.75rem;
 
     :after {
       position: absolute;
@@ -537,28 +653,31 @@ const Card = styled(motion.div)`
 `
 
 const CardLogo = styled.div`
-  height: 92px;
-  width: 150px;
+  display: flex;
+  justify-content: center;
+
+  a {
+    height: 92px;
+    width: 150px;
+  }
 `
 
 const CardInfo = styled.div`
-  height: 75%;
+  height: 80%;
   width: 100%;
-  border-top: 1px solid gray;
   display: flex;
   flex-direction: column;
   padding-top: 1rem;
+  border-top: 2px solid lightgray;
 
   div {
     display: flex;
-    justify-content: space-between;
     padding: 0 0.5rem;
     margin-bottom: 0.5rem;
   }
 
   p {
-    margin-top: 0;
-    margin-bottom: 0.25rem;
+    margin: 0 0 0.25rem 0;
     font-size: 0.8rem;
   }
 
@@ -568,6 +687,10 @@ const CardInfo = styled.div`
     margin-bottom: 1rem;
     font-weight: bold;
   }
+
+  .click {
+    margin-top: auto;
+  }
 `
 
 const CardColumn = styled.div`
@@ -575,4 +698,8 @@ const CardColumn = styled.div`
   flex-direction: column;
   align-items: flex-start;
   width: 50%;
+
+  p {
+    text-align: left;
+  }
 `
