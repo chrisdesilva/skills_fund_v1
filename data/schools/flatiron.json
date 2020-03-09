@@ -27,7 +27,7 @@
     "APRRange60": "12.48-12.51",
     "tuitionRange": "$9,100 - $24,500",
     "schoolname": "Flatiron",
-    "programTypes": ["fullStack", "dataScience", "uxDesign", "security"],
+    "programTypes": ["fullStack", "dataScience", "uxui", "security"],
     "hubspotFormID": "71630a3e-58b6-4bb6-87aa-f4be8746f99c",
     "interestRate36": 8.99,
     "interestRate60": 10.99,

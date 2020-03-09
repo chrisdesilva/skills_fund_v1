@@ -16,7 +16,7 @@
     "APRRange60": "12.48-12.51",
     "tuitionRange": "$5,500 - $20,000",
     "schoolname": "Thinkful",
-    "programTypes": ["fullStack", "dataScience", "uxDesign", "marketing"],
+    "programTypes": ["fullStack", "dataScience", "uxui", "marketing"],
     "hubspotFormID": "1c127ac4-ca09-48d7-b8a6-73dcb0ad30ee",
     "interestRate36": 8.99,
     "interestRate60": 10.99,

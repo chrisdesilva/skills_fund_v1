@@ -3,7 +3,7 @@ import { Link, graphql, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
 import styled, { css } from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
-import { FaTimesCircle } from "react-icons/fa"
+import { FaTimesCircle, FaQuestionCircle } from "react-icons/fa"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
 
@@ -108,12 +108,28 @@ const Students = () => {
   const [locationFilter, setLocationFilter] = useState("")
   const filterButtons = [
     {
-      name: "All Schools",
-      value: "",
+      name: "Web Development",
+      value: "fullStack",
     },
     {
-      name: "Technology",
-      value: "technology",
+      name: "Game Development",
+      value: "gameDev",
+    },
+    {
+      name: "DevOps",
+      value: "devOps",
+    },
+    {
+      name: "UX/UI Design",
+      value: "uxui",
+    },
+    {
+      name: "Data Science",
+      value: "dataScience",
+    },
+    {
+      name: "Cybersecurity",
+      value: "security",
     },
     {
       name: "Professional Training",
@@ -191,26 +207,28 @@ const Students = () => {
           />
           <FilterRow>
             {filterButtons.map((button, i) => (
-              <button
-                key={i}
-                value={button.value}
-                className={activeIndex === i ? "btn active" : "btn inactive"}
-                onClick={e => {
-                  if (activeIndex === i) {
-                    setActiveIndex("")
-                    setCategoryFilter("")
-                  } else {
-                    setActiveIndex(i)
-                    setCategoryFilter(e.target.value)
-                  }
-                }}
-              >
-                {button.name}
-              </button>
+              <div>
+                <button
+                  key={i}
+                  value={button.value}
+                  className={activeIndex === i ? "btn active" : "btn inactive"}
+                  onClick={e => {
+                    if (activeIndex === i) {
+                      setActiveIndex("")
+                      setCategoryFilter("")
+                    } else {
+                      setActiveIndex(i)
+                      setCategoryFilter(e.target.value)
+                    }
+                  }}
+                >
+                  {button.name}
+                </button>
+              </div>
             ))}
           </FilterRow>
           <FilterRow locationFilter={locationFilter}>
-            <div>
+            <div id="programFilter">
               <label htmlFor="program">PROGRAM</label>
               <select id="program">
                 <option>Select program</option>
@@ -232,11 +250,17 @@ const Students = () => {
                 value={locationFilter}
               >
                 <option>Select location</option>
-                {allLocations.map(location => (
-                  <option key={location} value={location}>
-                    {location}
-                  </option>
-                ))}
+                <option key="online" value="Online">
+                  Online
+                </option>
+                {allLocations.map(
+                  location =>
+                    location !== "Online" && (
+                      <option key={location} value={location}>
+                        {location}
+                      </option>
+                    )
+                )}
               </select>
             </div>
             <div>
@@ -272,7 +296,6 @@ const Students = () => {
                 initial={{ scale: 0 }}
                 animate={{ scale: 1 }}
                 exit={{ scale: 0 }}
-                whileHover={{ scale: 1.01 }}
                 transition={{ duration: 0.3, ease: "easeInOut" }}
               >
                 <CardInner className={cardIndex === i ? "flipped" : ""}>
@@ -304,7 +327,17 @@ const Students = () => {
                       </div>
                       <div>
                         <CardColumn>
-                          <p>Cost of Living Financing</p>
+                          <div className="tooltip--parent">
+                            <p className="flex items-center">
+                              Cost of Living Financing{" "}
+                              <FaQuestionCircle className="ml-1 text-xs tooltip--icon" />
+                            </p>
+                            <span className="tooltip--tip">
+                              Schools that offer cost of living financing allow
+                              students to borrow money for living expenses in
+                              addition to the program's tuition.
+                            </span>
+                          </div>
                         </CardColumn>
                         <CardColumn>
                           <p>
@@ -498,9 +531,26 @@ const FilterCard = styled.div`
 `
 
 const FilterRow = styled.div`
+  :first-of-type {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+  }
+
   display: flex;
   margin: 2rem 0 1rem 0;
   justify-content: space-around;
+
+  #programFilter {
+    display: none;
+  }
+
   div {
     display: flex;
     flex-direction: column;
@@ -509,12 +559,14 @@ const FilterRow = styled.div`
       margin-right: 2rem;
     }
   }
+
   span {
     opacity: ${({ locationFilter }) => (locationFilter ? "1" : "0")};
     color: red;
     margin-left: 0.25rem;
     cursor: pointer;
   }
+
   label {
     display: flex;
   }
@@ -670,7 +722,7 @@ const CardInfo = styled.div`
   padding-top: 1rem;
   border-top: 2px solid lightgray;
 
-  div {
+  div:not(.tooltip--parent) {
     display: flex;
     padding: 0 0.5rem;
     margin-bottom: 0.5rem;
@@ -701,5 +753,25 @@ const CardColumn = styled.div`
 
   p {
     text-align: left;
+  }
+
+  .tooltip--parent {
+    position: relative;
+  }
+
+  .tooltip--tip {
+    background-color: #e7e7e7;
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    position: absolute;
+    width: 9rem;
+    transition: opacity 300ms;
+    opacity: 0;
+    top: 1rem;
+    font-weight: normal;
+  }
+
+  .tooltip--parent:hover .tooltip--tip {
+    opacity: 1;
   }
 `
