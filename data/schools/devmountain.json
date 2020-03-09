@@ -42,6 +42,7 @@
   "basicInfo": {
     "locations": ["Lehi, UT", "Phoenix, AX", "Dallas, TX"],
     "schoolurl": "https://devmountain.com/",
+    "schoolcode": "https://my.skills.fund/application?schoolCode=devmountain",
     "APRRange36": "11.16-11.69",
     "APRRange60": "12.51-12.71",
     "tuitionRange": "$4,300 - $11,450",

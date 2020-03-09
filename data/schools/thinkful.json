@@ -11,6 +11,7 @@
   "basicInfo": {
     "locations": ["Online"],
     "schoolurl": "https://thinkful.com",
+    "schoolcode": "https://my.skills.fund/application?schoolCode=thinkful",
     "APRRange36": "10.87-11.69",
     "APRRange60": "12.48-12.51",
     "tuitionRange": "$5,500 - $20,000",
