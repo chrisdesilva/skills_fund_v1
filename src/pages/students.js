@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
 import styled from "styled-components"
+import { motion, AnimatePresence } from "framer-motion"
 import { FaTimesCircle } from "react-icons/fa"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
@@ -30,6 +31,7 @@ const Students = () => {
               locations
               nextCohortStartDate
               programTypes
+              schoolcode
               schoolname
               schoolurl
               selectAProgram
@@ -99,6 +101,7 @@ const Students = () => {
     .sort()
   const [filteredSchools, setFilteredSchools] = useState(allSchools)
   const [activeIndex, setActiveIndex] = useState("")
+  const [locationList, setLocationList] = useState(2)
   const [textFilter, setTextFilter] = useState("")
   const [categoryFilter, setCategoryFilter] = useState("")
   const [locationFilter, setLocationFilter] = useState("")
@@ -260,77 +263,95 @@ const Students = () => {
         </FilterCard>
       </FilterContainer>
       <CardContainer>
-        {allSchools.map(school => {
-          return (
-            <Card
-              school={school}
-              // locationList={locationList}
-              filteredSchools={filteredSchools}
-            >
-              <CardLogo>
-                <Image
-                  key={school.logo.childImageSharp.fluid}
-                  fluid={school.logo.childImageSharp.fluid}
-                  alt={school.basicInfo.schoolname}
-                />
-              </CardLogo>
-              <CardInfo>
-                <Link
-                  className="btn text-black bg-white"
-                  to={`students/${school.slug}`}
-                >
-                  {school.basicInfo.schoolname} Financing Page
-                </Link>
-                <div>
-                  <CardColumn>
-                    <p>Tuition Range</p>
-                  </CardColumn>
-                  <CardColumn>
-                    <p>{school.basicInfo.tuitionRange}</p>
-                  </CardColumn>
-                </div>
-                <div>
-                  <CardColumn>
-                    <p>Cost of Living Financing</p>
-                  </CardColumn>
-                  <CardColumn>
-                    <p>
-                      {school.features.costOfLiving
-                        ? "Available"
-                        : "Not Available"}
-                    </p>
-                  </CardColumn>
-                </div>
-                {/* <div>
-                  <CardColumn>
-                    <p>Locations</p>
-                  </CardColumn>
-                  <CardColumn>
-                    {bootcamp.basicInfo.locations
-                      .slice(0, locationList)
-                      .map(location => (
-                        <p>{location} </p>
-                      ))}
-                    {bootcamp.basicInfo.locations.length > 3 && (
-                      <p
-                        className="cursor-pointer text-purple"
-                        onClick={() => {
-                          if (locationList === 3) {
-                            setLocationList(bootcamp.basicInfo.locations.length)
-                          } else {
-                            setLocationList(3)
-                          }
-                        }}
-                      >
-                        {locationList === 3 ? "See More" : "See Less"}
+        <AnimatePresence>
+          {filteredSchools.map(school => {
+            return (
+              <Card
+                positionTransition={spring}
+                initial={{ scale: 0 }}
+                animate={{ scale: 1 }}
+                exit={{ scale: 0 }}
+                whileHover={{ scale: 1.01 }}
+                transition={{ duration: 0.3, ease: "easeInOut" }}
+              >
+                <CardLogo>
+                  <a
+                    href={school.basicInfo.schoolurl}
+                    target="_blank"
+                    rel="noreferrer noopener"
+                  >
+                    <Image
+                      key={school.logo.childImageSharp.fluid}
+                      fluid={school.logo.childImageSharp.fluid}
+                      alt={school.basicInfo.schoolname}
+                    />
+                  </a>
+                </CardLogo>
+                <CardInfo>
+                  <p className="schoolname">{school.basicInfo.schoolname}</p>
+                  <div>
+                    <CardColumn>
+                      <p>Tuition Range</p>
+                    </CardColumn>
+                    <CardColumn>
+                      <p>{school.basicInfo.tuitionRange}</p>
+                    </CardColumn>
+                  </div>
+                  <div>
+                    <CardColumn>
+                      <p>Cost of Living Financing</p>
+                    </CardColumn>
+                    <CardColumn>
+                      <p>
+                        {school.features.costOfLiving
+                          ? "Available"
+                          : "Not Available"}
                       </p>
-                    )}
-                  </CardColumn>
-                </div> */}
-              </CardInfo>
-            </Card>
-          )
-        })}
+                    </CardColumn>
+                  </div>
+                  <div>
+                    <CardColumn>
+                      <p>Locations</p>
+                    </CardColumn>
+                    <CardColumn>
+                      {school.basicInfo.locations
+                        .slice(0, locationList)
+                        .sort()
+                        .map(location => (
+                          <p>{location} </p>
+                        ))}
+                      {school.basicInfo.locations.length > 2 && (
+                        <p
+                          className="cursor-pointer text-purple"
+                          onClick={() => {
+                            if (locationList === 2) {
+                              setLocationList(school.basicInfo.locations.length)
+                            } else {
+                              setLocationList(2)
+                            }
+                          }}
+                        >
+                          {locationList === 2 ? "See More" : "See Less"}
+                        </p>
+                      )}
+                    </CardColumn>
+                  </div>
+                </CardInfo>
+                <a
+                  className="btn"
+                  href={school.basicInfo.schoolcode}
+                  target="_blank"
+                  rel="noreferrer noopener"
+                >
+                  Apply For Financing
+                </a>
+                <Link className="hoverUnderline" to={`students/${school.slug}`}>
+                  Learn More
+                </Link>
+              </Card>
+            )
+          })}
+        </AnimatePresence>
       </CardContainer>
     </Layout>
   )
@@ -340,7 +361,7 @@ export default Students
 
 const Banner = styled.section`
   display: flex;
-  height: 40vh;
+  height: 30vh;
 
   div {
     display: flex;
@@ -370,7 +391,6 @@ const Banner = styled.section`
 const FilterContainer = styled.section`
   background: linear-gradient(white 55%, #fd6d5d 0);
   width: 100%;
-  min-height: 20rem;
   display: flex;
   justify-content: center;
   align-items: center;
@@ -382,7 +402,7 @@ const FilterCard = styled.div`
   border-radius: 5px;
   width: 75%;
   background: white;
-  padding: 4rem 2rem;
+  padding: 4rem 2rem 2rem 2rem;
   box-shadow: 2px 2px 5px gray;
 
   h3 {
@@ -391,7 +411,7 @@ const FilterCard = styled.div`
     margin-bottom: 1rem;
   }
 
-  p {
+  .hoverUnderline {
     position: relative;
     cursor: pointer;
     display: inline;
@@ -428,7 +448,7 @@ const FilterCard = styled.div`
 
 const FilterRow = styled.div`
   display: flex;
-  margin: 4rem 0;
+  margin: 2rem 0 1rem 0;
   justify-content: space-around;
   div {
     display: flex;
@@ -456,7 +476,13 @@ const CardContainer = styled.div`
   padding: 2rem 0;
 `
 
-const Card = styled.div`
+const spring = {
+  type: "spring",
+  damping: 30,
+  stiffness: 250,
+}
+
+const Card = styled(motion.div)`
   margin: 1rem;
   display: flex;
   flex-direction: column;
@@ -464,9 +490,50 @@ const Card = styled.div`
   border: 2px solid gray;
   border-radius: 5px;
   box-shadow: 2px 2px 10px lightgray;
-  transition: transform 300ms;
+  padding-bottom: 1rem;
+  /* transition: transform 300ms;
   transform: ${({ filteredSchools, school }) =>
-    filteredSchools.includes(school) ? "scale(1)" : "scale(0)"};
+    filteredSchools.includes(school) ? "scale(1)" : "scale(0)"}; */
+
+    .btn {
+    width: 15rem;
+    text-align: center;
+    margin: 1rem;
+    align-self: center;
+    border: 2px solid black;
+
+    :hover {
+      color: white;
+      background: black;
+    }
+  }
+  .hoverUnderline {
+    position: relative;
+    cursor: pointer;
+    display: inline;
+    font-size: .75rem;
+
+    :after {
+      position: absolute;
+      bottom: -25%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 85%;
+      content: ".";
+      color: transparent;
+      background: black;
+      height: 1px;
+      transition: width 300ms;
+    }
+    :hover:after {
+      width: 95%;
+    }
+  }
+  a {
+    text-decoration: none;
+    color: black;
+  }
 `
 
 const CardLogo = styled.div`
@@ -480,19 +547,7 @@ const CardInfo = styled.div`
   border-top: 1px solid gray;
   display: flex;
   flex-direction: column;
-
-  a {
-    width: 15rem;
-    text-align: center;
-    margin: 1rem;
-    align-self: center;
-    border: 2px solid black;
-
-    :hover {
-      color: white;
-      background: black;
-    }
-  }
+  padding-top: 1rem;
 
   div {
     display: flex;
@@ -505,6 +560,13 @@ const CardInfo = styled.div`
     margin-top: 0;
     margin-bottom: 0.25rem;
     font-size: 0.8rem;
+  }
+
+  .schoolname {
+    text-align: center;
+    font-size: 1rem;
+    margin-bottom: 1rem;
+    font-weight: bold;
   }
 `
 
