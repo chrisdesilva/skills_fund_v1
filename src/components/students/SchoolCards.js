@@ -14,12 +14,13 @@ const SchoolCards = ({ filteredSchools }) => {
         {filteredSchools.map((school, i) => {
           return (
             <Card
-              positionTransition={spring}
+              layoutTransition={spring}
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
-              transition={{ duration: 0.3, ease: "easeInOut" }}
+              transition={{ duration: 0.3, ease: "easeIn" }}
               whileHover={{ y: -5 }}
+              className={cardIndex === i ? "flipped" : ""}
             >
               <CardInner className={cardIndex === i ? "flipped" : ""}>
                 <CardFront>
@@ -49,10 +50,8 @@ const SchoolCards = ({ filteredSchools }) => {
                     <div>
                       <CardColumn>
                         <div className="tooltip--parent">
-                          <p className="flex items-center">
-                            Cost of Living Financing{" "}
-                            <FaQuestionCircle className="ml-1 text-xs tooltip--icon" />
-                          </p>
+                          <p>Cost of Living</p>
+                          <FaQuestionCircle className="text-xs" />{" "}
                           <span className="tooltip--tip">
                             Schools that offer cost of living financing allow
                             students to borrow money for living expenses in
@@ -74,17 +73,17 @@ const SchoolCards = ({ filteredSchools }) => {
                       </CardColumn>
                       <CardColumn>
                         {school.basicInfo.locations
-                          .slice(0, 2)
                           .sort()
+                          .slice(0, 2)
                           .map(location => (
                             <p>{location} </p>
                           ))}
                         {school.basicInfo.locations.length > 2 && (
                           <p
-                            className="cursor-pointer text-purple"
+                            className="cursor-pointer"
                             onClick={() => setCardIndex(i)}
                           >
-                            See More
+                            More...
                           </p>
                         )}
                       </CardColumn>
@@ -95,17 +94,17 @@ const SchoolCards = ({ filteredSchools }) => {
                       </CardColumn>
                       <CardColumn>
                         {school.loanInfo
-                          .slice(0, 2)
                           .sort()
+                          .slice(0, 2)
                           .map(program => (
                             <p>{program.name} </p>
                           ))}
                         {school.loanInfo.length > 2 && (
                           <p
-                            className="cursor-pointer text-purple"
+                            className="cursor-pointer"
                             onClick={() => setCardIndex(i)}
                           >
-                            See More
+                            More...
                           </p>
                         )}
                       </CardColumn>
@@ -164,22 +163,25 @@ const SchoolCards = ({ filteredSchools }) => {
 export default SchoolCards
 
 const CardContainer = styled.div`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, 20rem);
+  grid-auto-rows: 1fr;
+  grid-gap: 1rem;
   justify-content: center;
-  padding: 2rem 0;
+  padding: 2rem;
 `
 
 const spring = {
   type: "spring",
-  damping: 30,
-  stiffness: 250,
+  damping: 10,
+  stiffness: 200,
 }
 
 const CardSide = css`
-  position: absolute;
+  /* position: absolute; */
   width: 100%;
-  height: 100%;
+  min-width: 100%;
+  /* height: 100%; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -202,12 +204,15 @@ const CardSide = css`
 const CardFront = styled.div`
   ${CardSide}
   font-weight: bold;
+  background: #fff;
+  z-index: 0;
 `
 
 const CardBack = styled.div`
   ${CardSide}
-  transform: rotateY(-180deg);
+  transform: rotateY(-180deg) translate(100%, 0);
   background: #ffebd9;
+  z-index: 1;
 
   div {
     padding: 0.5rem;
@@ -229,14 +234,10 @@ const CardBack = styled.div`
 `
 
 const CardInner = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
+  flex: 1;
+  display: flex;
   transition: transform 0.8s;
   transform-style: preserve-3d;
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
 
   &.flipped {
     transform: rotateY(180deg);
@@ -244,30 +245,18 @@ const CardInner = styled.div`
 `
 
 const Card = styled(motion.div)`
-  margin: 1rem;
-  position: relative;
-  width: 100%;
-  max-width: 100%;
-  min-height: 30rem;
+  display: flex;
+  flex-direction: column;
+  transition: z-index, transform 800ms;
+  transition-delay: 800ms, 0s;
+  z-index: 0;
+  -webkit-perspective: 1000px;
   perspective: 1000px;
-  background: transparent;
-  -moz-backface-visibility: hidden;
-  -webkit-backface-visibility: hidden;
-  backface-visibility: hidden;
+  transform-style: preserve-3d;
 
-  @media ${breakpoint.md} {
-    width: calc(50% - 2rem);
-    max-width: calc(50% - 2rem);
-  }
-
-  @media ${breakpoint.lg} {
-    width: calc(33% - 2rem);
-    max-width: calc(33% - 2rem);
-  }
-
-  @media ${breakpoint.xl} {
-    width: calc(25% - 2rem);
-    max-width: calc(25% - 2rem);
+  &.flipped {
+    transition-delay: 0s;
+    z-index: 1;
   }
 
   .btn {
@@ -312,13 +301,10 @@ const Card = styled(motion.div)`
 `
 
 const CardLogo = styled.div`
-  display: flex;
-  justify-content: center;
+  margin: auto;
 
-  a {
-    height: 92px;
-    width: 150px;
-  }
+  width: 150px;
+  height: 92px;
 `
 
 const CardInfo = styled.div`
@@ -363,7 +349,11 @@ const CardColumn = styled.div`
   }
 
   .tooltip--parent {
-    position: relative;
+    display: flex;
+    width: 100%;
+    p {
+      margin-right: 0.25rem;
+    }
   }
 
   .tooltip--tip {
@@ -371,10 +361,10 @@ const CardColumn = styled.div`
     padding: 0.5rem;
     font-size: 0.75rem;
     position: absolute;
-    width: 9rem;
+    width: 16rem;
     transition: opacity 300ms;
     opacity: 0;
-    top: 1rem;
+    top: 12.5rem;
     font-weight: normal;
   }
 

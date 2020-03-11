@@ -5,6 +5,7 @@ import Header from "./Header"
 import Footer from "./Footer"
 import { theme } from "../utils/theme"
 import { breakpoint } from "../utils/breakpoints"
+import { GlobalStyle } from "../utils/globals"
 
 const PageContainer = styled.div`
   display: flex;
@@ -25,6 +26,7 @@ const Layout = ({ children }) => {
   return (
     <ThemeProvider theme={theme}>
       <PageContainer>
+        <GlobalStyle />
         <Header />
         <ChildContainer>{children}</ChildContainer>
         <Footer />
