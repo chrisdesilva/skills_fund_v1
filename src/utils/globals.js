@@ -161,5 +161,6 @@ label {
 
 .tooltip--parent:hover .tooltip--tip {
   opacity: 1;
+  z-index: 2;
 }
 `

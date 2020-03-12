@@ -132,6 +132,7 @@ export default Students
 
 const Banner = styled.section`
   display: none;
+  padding: 0 5rem;
 
   @media ${breakpoint.lg} {
     height: 30vh;
@@ -141,17 +142,26 @@ const Banner = styled.section`
   div {
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
-    width: 50%;
-    padding: 1rem;
-    text-align: center;
+    width: 70%;
+
+    @media ${breakpoint.md} {
+      padding: 1rem 3rem 1rem 6rem;
+    }
+
+    @media ${breakpoint.lg} {
+      padding: 1rem 4rem 1rem 8rem;
+    }
+
+    @media ${breakpoint.xl} {
+      padding: 1rem 5rem 1rem 10rem;
+    }
 
     :last-of-type {
       /* margin: -3rem 0; */
       z-index: -5;
       height: 100%;
-      width: 50%;
+      width: 30%;
     }
   }
 
@@ -159,7 +169,13 @@ const Banner = styled.section`
     font-size: 1.5rem;
     margin-bottom: 1rem;
     @media ${breakpoint.md} {
-      font-size: 3rem;
+      font-size: 1.75rem;
+    }
+    @media ${breakpoint.lg} {
+      font-size: 2rem;
+    }
+    @media ${breakpoint.xl} {
+      font-size: 2.5rem;
     }
   }
 
@@ -167,7 +183,7 @@ const Banner = styled.section`
     font-size: 1rem;
     font-weight: normal;
 
-    @media ${breakpoint.md} {
+    @media ${breakpoint.xl} {
       font-size: 1.25rem;
     }
   }

@@ -68,17 +68,23 @@ const SchoolList = ({ filteredSchools }) => {
               )}
             </ListColumn>
             <ListColumn>
-              <h3>Tuition Range</h3>
+              <div className="tooltip--parent">
+                <h3>Tuition Range</h3>
+                <FaQuestionCircle className="text-xs" />{" "}
+                <span className="tooltip--tip">
+                  Range of tuition for programs financed by Skills Fund. You can
+                  borrow from $2,000 in tuition up to the max for your program.
+                </span>
+              </div>
               <p>{school.basicInfo.tuitionRange}</p>
             </ListColumn>
             <ListColumn>
               <div className="tooltip--parent">
-                <h3>Cost of Living</h3>
+                <h3>Living Expenses</h3>
                 <FaQuestionCircle className="text-xs" />{" "}
                 <span className="tooltip--tip">
-                  Schools that offer cost of living financing allow students to
-                  borrow money for living expenses in addition to the program's
-                  tuition.
+                  Schools that offer living expenses financing allow you to
+                  borrow money for living expenses in addition to tuition.
                 </span>
               </div>
               <p>
