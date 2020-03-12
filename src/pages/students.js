@@ -7,6 +7,7 @@ import SEO from "../components/SEO"
 import SchoolCards from "../components/students/SchoolCards"
 import SchoolFilter from "../components/students/SchoolFilter"
 import { breakpoint } from "../utils/breakpoints"
+import SchoolList from "../components/students/SchoolList"
 
 const Students = () => {
   const data = useStaticQuery(graphql`
@@ -92,6 +93,7 @@ const Students = () => {
   `)
   let allSchools = data.allSchoolsJson.edges.map(school => school.node)
   const [filteredSchools, setFilteredSchools] = useState(allSchools)
+  const [activeView, setActiveView] = useState("cards")
 
   return (
     <Layout>
@@ -113,10 +115,15 @@ const Students = () => {
       </Banner>
       <SchoolFilter
         allSchools={allSchools}
-        filteredSchools={filteredSchools}
         setFilteredSchools={setFilteredSchools}
+        activeView={activeView}
+        setActiveView={setActiveView}
       />
-      <SchoolCards filteredSchools={filteredSchools} />
+      {activeView === "cards" ? (
+        <SchoolCards filteredSchools={filteredSchools} />
+      ) : (
+        <SchoolList filteredSchools={filteredSchools} />
+      )}
     </Layout>
   )
 }

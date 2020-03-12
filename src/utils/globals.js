@@ -83,6 +83,30 @@ input {
   color: #9d1996;
 }
 
+.hoverUnderline {
+    position: relative;
+    cursor: pointer;
+    display: inline;
+    font-size: 0.75rem;
+
+    :after {
+      position: absolute;
+      bottom: -25%;
+      left: 0;
+      right: 0;
+      margin: auto;
+      width: 85%;
+      content: ".";
+      color: transparent;
+      background: black;
+      height: 1px;
+      transition: width 300ms;
+    }
+    :hover:after {
+      width: 95%;
+    }
+  }
+
 input {
   width: 100%;
   padding: 0.5rem;
@@ -113,4 +137,29 @@ label {
   font-size: 0.75rem;
 }
 
+
+.tooltip--parent {
+  display: flex;
+  position: relative;
+  width: 100%;
+  p {
+    margin-right: 0.25rem;
+  }
+}
+
+.tooltip--tip {
+  background-color: #e7e7e7;
+  padding: 0.5rem;
+  font-size: 0.75rem;
+  position: absolute;
+  width: 16rem;
+  transition: opacity 300ms;
+  opacity: 0;
+  top: 1.25rem;
+  font-weight: normal;
+}
+
+.tooltip--parent:hover .tooltip--tip {
+  opacity: 1;
+}
 `

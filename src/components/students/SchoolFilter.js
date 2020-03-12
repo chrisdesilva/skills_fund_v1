@@ -1,9 +1,14 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-import { FaTimesCircle } from "react-icons/fa"
+import { FaTimesCircle, FaThLarge, FaThList } from "react-icons/fa"
 import { breakpoint } from "../../utils/breakpoints"
 
-const SchoolFilter = ({ allSchools, setFilteredSchools }) => {
+const SchoolFilter = ({
+  allSchools,
+  setFilteredSchools,
+  activeView,
+  setActiveView,
+}) => {
   let allLocations = allSchools // takes all locations from all schools, flattens into single array, then removes duplicates, then sorts alphabetically
     .flatMap(school => school.basicInfo.locations)
     .reduce((acc, currVal) => {
@@ -238,9 +243,16 @@ const SchoolFilter = ({ allSchools, setFilteredSchools }) => {
               </select>
             </div>
           </FilterRow>
-          <p onClick={resetFilters} className="hoverUnderline">
-            Clear filters
-          </p>
+          <FilterRow activeView={activeView}>
+            <p onClick={resetFilters} className="hoverUnderline">
+              Clear filters
+            </p>
+            <div>
+              <p>View:</p>
+              <FaThLarge id="cards" onClick={() => setActiveView("cards")} />
+              <FaThList id="list" onClick={() => setActiveView("list")} />
+            </div>
+          </FilterRow>
         </Filters>
       </FilterCard>
     </FilterContainer>
@@ -348,6 +360,39 @@ const FilterRow = styled.div`
       display: grid;
       grid-template-columns: repeat(5, 1fr);
       grid-gap: 0.5rem;
+    }
+  }
+
+  :last-of-type {
+    display: none;
+    @media ${breakpoint.xl} {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 0;
+      div {
+        display: flex;
+        width: 10rem;
+        justify-content: space-evenly;
+        align-items: center;
+
+        p {
+          font-size: 0.75rem;
+        }
+
+        svg {
+          font-size: 1.5rem;
+          cursor: pointer;
+          transition: opacity 300ms;
+        }
+
+        #cards {
+          opacity: ${({ activeView }) => (activeView === "cards" ? "1" : ".5")};
+        }
+
+        #list {
+          opacity: ${({ activeView }) => (activeView === "list" ? "1" : ".5")};
+        }
+      }
     }
   }
 
