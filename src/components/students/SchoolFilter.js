@@ -22,7 +22,7 @@ const SchoolFilter = ({ allSchools, setFilteredSchools }) => {
   const [lengthFilter, setLengthFilter] = useState("")
   const filterButtons = [
     {
-      name: "Web Development",
+      name: "Software Development",
       value: "fullStack",
     },
     {
@@ -48,6 +48,10 @@ const SchoolFilter = ({ allSchools, setFilteredSchools }) => {
     {
       name: "Marketing",
       value: "marketing",
+    },
+    {
+      name: "Healthcare",
+      value: "healthcare",
     },
     {
       name: "Professional Training",

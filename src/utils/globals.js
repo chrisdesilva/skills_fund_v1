@@ -68,8 +68,9 @@ input {
 }
 
 .btn--secondary {
-  background-color: #0d606d;
-  color: white;
+  background-color: white;
+  color: black;
+  border: 2px solid black;
 }
 
 .hoverLink {

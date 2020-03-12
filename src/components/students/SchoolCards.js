@@ -10,17 +10,18 @@ const SchoolCards = ({ filteredSchools }) => {
   const [cardIndex, setCardIndex] = useState("")
   return (
     <CardContainer>
-      <AnimatePresence>
+      <AnimatePresence initial={false} exitBeforeEnter>
         {filteredSchools.map((school, i) => {
           return (
             <Card
-              layoutTransition={spring}
+              positionTransition
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
-              transition={{ duration: 0.3, ease: "easeIn" }}
+              transition={{ duration: 0.1, ease: "easeIn" }}
               whileHover={{ y: -5 }}
               className={cardIndex === i ? "flipped" : ""}
+              key={school.id}
             >
               <CardInner className={cardIndex === i ? "flipped" : ""}>
                 <CardFront>
@@ -38,7 +39,14 @@ const SchoolCards = ({ filteredSchools }) => {
                     </a>
                   </CardLogo>
                   <CardInfo>
-                    <p className="schoolname">{school.basicInfo.schoolname}</p>
+                    <div>
+                      <CardColumn>
+                        <p>School</p>
+                      </CardColumn>
+                      <CardColumn>
+                        <p>{school.basicInfo.schoolname}</p>
+                      </CardColumn>
+                    </div>
                     <div>
                       <CardColumn>
                         <p>Tuition Range</p>
@@ -116,7 +124,7 @@ const SchoolCards = ({ filteredSchools }) => {
                         target="_blank"
                         rel="noreferrer noopener"
                       >
-                        Apply For Financing
+                        Apply For Funding
                       </a>
                       <Link
                         className="hoverUnderline"
@@ -204,8 +212,13 @@ const CardSide = css`
 const CardFront = styled.div`
   ${CardSide}
   font-weight: bold;
-  background: #fff;
+  opacity: 0.6;
   z-index: 0;
+  transition: opacity 800ms;
+
+  :hover {
+    opacity: 1;
+  }
 `
 
 const CardBack = styled.div`
@@ -264,11 +277,13 @@ const Card = styled(motion.div)`
     text-align: center;
     margin: 1rem;
     align-self: center;
-    border: 2px solid black;
+    background: black;
+    color: white;
 
     :hover {
-      color: white;
-      background: black;
+      color: black;
+      background: white;
+      border: 2px solid black;
     }
   }
   .hoverUnderline {
@@ -313,7 +328,6 @@ const CardInfo = styled.div`
   display: flex;
   flex-direction: column;
   padding-top: 1rem;
-  border-top: 2px solid lightgray;
 
   div:not(.tooltip--parent) {
     display: flex;
@@ -324,13 +338,6 @@ const CardInfo = styled.div`
   p {
     margin: 0 0 0.25rem 0;
     font-size: 0.8rem;
-  }
-
-  .schoolname {
-    text-align: center;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    font-weight: bold;
   }
 
   .click {
