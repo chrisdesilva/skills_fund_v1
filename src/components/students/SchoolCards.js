@@ -42,7 +42,7 @@ const SchoolCards = ({ filteredSchools }) => {
                         />
                       </a>
                     </CardLogo>
-                    <CardInfo>
+                    <CardInfo className="cardinfo">
                       <div>
                         <CardColumn>
                           <p>School</p>
@@ -53,14 +53,18 @@ const SchoolCards = ({ filteredSchools }) => {
                       </div>
                       <div>
                         <CardColumn>
-                          <div className="tooltip--parent">
-                            <p>Tuition Range</p>
-                            <FaQuestionCircle className="text-xs" />{" "}
-                            <span className="tooltip--tip">
-                              Range of tuition for programs financed by Skills
-                              Fund. You can borrow from $2,000 in tuition up to
-                              the max for your program.
-                            </span>
+                          <div id="tooltip--parent">
+                            <p>
+                              Tuition Range{" "}
+                              <FaQuestionCircle className="text-xs" />
+                            </p>
+                            <div id="tooltip--tip">
+                              <p>
+                                Range of tuition for programs financed by Skills
+                                Fund. You can borrow from $2,000 in tuition up
+                                to the max for your program.
+                              </p>
+                            </div>
                           </div>
                         </CardColumn>
                         <CardColumn>
@@ -69,14 +73,18 @@ const SchoolCards = ({ filteredSchools }) => {
                       </div>
                       <div>
                         <CardColumn>
-                          <div className="tooltip--parent">
-                            <p>Living Expenses</p>
-                            <FaQuestionCircle className="text-xs" />{" "}
-                            <span className="tooltip--tip">
-                              Schools that offer living expenses financing allow
-                              you to borrow money for living expenses in
-                              addition to tuition.
-                            </span>
+                          <div id="tooltip--parent">
+                            <p>
+                              Living Expenses{" "}
+                              <FaQuestionCircle className="text-xs" />
+                            </p>
+                            <div id="tooltip--tip">
+                              <p>
+                                Schools that offer living expenses financing
+                                allow you to borrow money for living expenses in
+                                addition to tuition.
+                              </p>
+                            </div>
                           </div>
                         </CardColumn>
                         <CardColumn>
@@ -100,10 +108,10 @@ const SchoolCards = ({ filteredSchools }) => {
                             ))}
                           {school.basicInfo.locations.length > 2 && (
                             <p
-                              className="cursor-pointer"
+                              className="cursor-pointer hoverUnderline"
                               onClick={() => setCardIndex(i)}
                             >
-                              More...
+                              More
                             </p>
                           )}
                         </CardColumn>
@@ -121,10 +129,10 @@ const SchoolCards = ({ filteredSchools }) => {
                             ))}
                           {school.loanInfo.length > 2 && (
                             <p
-                              className="cursor-pointer"
+                              className="cursor-pointer hoverUnderline"
                               onClick={() => setCardIndex(i)}
                             >
-                              More...
+                              More
                             </p>
                           )}
                         </CardColumn>
@@ -142,12 +150,12 @@ const SchoolCards = ({ filteredSchools }) => {
                           className="hoverUnderline"
                           to={`students/${school.slug}`}
                         >
-                          Learn More
+                          Calculate Payments
                         </Link>
                       </div>
                     </CardInfo>
                   </CardFront>
-                  <CardBack>
+                  <CardBack onClick={() => setCardIndex("")}>
                     <div className="card-back-info">
                       <CardColumn>
                         <p className="font-bold">Locations</p>{" "}
@@ -161,14 +169,6 @@ const SchoolCards = ({ filteredSchools }) => {
                           <p>{program.name} </p>
                         ))}
                       </CardColumn>
-                    </div>
-                    <div className="click">
-                      <p
-                        onClick={() => setCardIndex("")}
-                        className="hoverUnderline"
-                      >
-                        Front
-                      </p>
                     </div>
                   </CardBack>
                 </CardInner>
@@ -225,12 +225,12 @@ const CardSide = css`
 const CardFront = styled.div`
   ${CardSide}
   font-weight: bold;
-  opacity: 0.6;
   z-index: 0;
-  transition: opacity 800ms;
+  transition: border 800ms;
+  border: 2px solid lightgray;
 
   :hover {
-    opacity: 1;
+    border: ${props => `2px solid ${props.theme.secondary}`};
   }
 `
 
@@ -239,6 +239,7 @@ const CardBack = styled.div`
   transform: rotateY(-180deg) translate(100%, 0);
   background: #ffebd9;
   z-index: 1;
+  cursor: pointer;
 
   div {
     padding: 0.5rem;
@@ -308,9 +309,15 @@ const Card = styled(motion.div)`
 
 const CardLogo = styled.div`
   margin: auto;
-
+  background: white;
   width: 150px;
   height: 92px;
+  transition: border 300ms;
+  border-bottom: 2px solid transparent;
+
+  :hover {
+    border-bottom: ${props => `2px solid ${props.theme.secondary}`};
+  }
 `
 
 const CardInfo = styled.div`
@@ -320,7 +327,7 @@ const CardInfo = styled.div`
   flex-direction: column;
   padding-top: 1rem;
 
-  div:not(.tooltip--parent) {
+  div {
     display: flex;
     padding: 0 0.5rem;
     margin-bottom: 0.5rem;
@@ -344,5 +351,6 @@ const CardColumn = styled.div`
 
   p {
     text-align: left;
+    font-weight: normal;
   }
 `

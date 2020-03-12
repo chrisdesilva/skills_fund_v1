@@ -68,24 +68,31 @@ const SchoolList = ({ filteredSchools }) => {
               )}
             </ListColumn>
             <ListColumn>
-              <div className="tooltip--parent">
-                <h3>Tuition Range</h3>
-                <FaQuestionCircle className="text-xs" />{" "}
-                <span className="tooltip--tip">
-                  Range of tuition for programs financed by Skills Fund. You can
-                  borrow from $2,000 in tuition up to the max for your program.
-                </span>
+              <div id="tooltip--parent">
+                <h3>
+                  Tuition Range <FaQuestionCircle className="text-xs" />
+                </h3>
+                <div id="tooltip--tip">
+                  <p>
+                    Range of tuition for programs financed by Skills Fund. You
+                    can borrow from $2,000 in tuition up to the max for your
+                    program.
+                  </p>
+                </div>
               </div>
               <p>{school.basicInfo.tuitionRange}</p>
             </ListColumn>
             <ListColumn>
-              <div className="tooltip--parent">
-                <h3>Living Expenses</h3>
-                <FaQuestionCircle className="text-xs" />{" "}
-                <span className="tooltip--tip">
-                  Schools that offer living expenses financing allow you to
-                  borrow money for living expenses in addition to tuition.
-                </span>
+              <div id="tooltip--parent">
+                <h3>
+                  Living Expenses <FaQuestionCircle className="text-xs" />
+                </h3>
+                <div id="tooltip--tip">
+                  <p>
+                    Schools that offer living expenses financing allow you to
+                    borrow money for living expenses in addition to tuition.
+                  </p>
+                </div>
               </div>
               <p>
                 {school.features.costOfLiving ? "Available" : "Not Available"}

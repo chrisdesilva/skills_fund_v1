@@ -137,30 +137,26 @@ label {
   font-size: 0.75rem;
 }
 
-
-.tooltip--parent {
-  display: flex;
-  position: relative;
-  width: 100%;
-  p {
-    margin-right: 0.25rem;
-  }
-}
-
-.tooltip--tip {
-  background-color: #e7e7e7;
-  padding: 0.5rem;
-  font-size: 0.75rem;
+#tooltip--tip {
+  display: none;
   position: absolute;
-  width: 16rem;
-  transition: opacity 300ms;
-  opacity: 0;
+  width: 15rem;
+  background: #f7f7f7;
   top: 1.25rem;
-  font-weight: normal;
+  z-index: 5;
+  padding: .25rem .5rem;
 }
 
-.tooltip--parent:hover .tooltip--tip {
-  opacity: 1;
-  z-index: 2;
+#tooltip--parent {
+  margin: 0;
+  padding: 0;
+  position: relative;
+  cursor: pointer;
 }
+
+#tooltip--parent:hover #tooltip--tip {
+  display: block;
+
+}
+
 `
