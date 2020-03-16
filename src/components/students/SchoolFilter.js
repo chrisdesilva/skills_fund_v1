@@ -34,6 +34,7 @@ const ListItem = ({
   item,
   active,
   setTextFilter,
+  setCursor,
   setHovered,
   setMatchingPrograms,
 }) => (
@@ -42,6 +43,8 @@ const ListItem = ({
     onClick={() => {
       setTextFilter(item)
       setMatchingPrograms([])
+      setHovered(undefined)
+      setCursor(0)
     }}
     onMouseEnter={() => setHovered(item)}
     onMouseLeave={() => setHovered(undefined)}
@@ -201,13 +204,14 @@ const SchoolFilter = ({
             id="search"
             placeholder="Enter school name"
             type="text"
+            autoComplete="off"
             value={textFilter}
             onChange={e => {
               setTextFilter(e.target.value)
               findMatches(textFilter)
             }}
           />
-          {matchingPrograms.length > 1 && textFilter && (
+          {textFilter && (
             <ul>
               {matchingPrograms.map((program, i) => (
                 <ListItem
@@ -217,6 +221,7 @@ const SchoolFilter = ({
                   setMatchingPrograms={setMatchingPrograms}
                   setTextFilter={setTextFilter}
                   setHovered={setHovered}
+                  setCursor={setCursor}
                 />
               ))}
             </ul>
@@ -329,7 +334,7 @@ const SchoolFilter = ({
           </FilterRow>
           <FilterRow activeView={activeView}>
             <p onClick={resetFilters} className="hoverUnderline">
-              Clear filters
+              Clear All Filters
             </p>
             <div>
               <p>View:</p>
@@ -427,16 +432,19 @@ const FilterCard = styled.div`
 
   .filter--search {
     margin: 0 1rem;
+    position: relative;
 
     #search {
       position: relative;
     }
 
     ul {
-      position: relative;
+      position: absolute;
       padding: 0;
       margin: 0;
       font-size: 0.75rem;
+      width: 100%;
+      top: 3.25rem;
 
       li {
         list-style-type: none;

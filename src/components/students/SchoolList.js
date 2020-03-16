@@ -31,16 +31,8 @@ const SchoolList = ({ filteredSchools }) => {
                 </a>
               </div>
               <div>
-                <a
-                  className="btn"
-                  href={school.basicInfo.schoolcode}
-                  target="_blank"
-                  rel="noreferrer noopener"
-                >
-                  Apply For Funding
-                </a>
                 <Link className="hoverUnderline" to={`students/${school.slug}`}>
-                  Learn More
+                  Calculate Paymehts
                 </Link>
               </div>
             </ListColumn>
@@ -58,12 +50,12 @@ const SchoolList = ({ filteredSchools }) => {
                 ))}
               {school.basicInfo.locations.length > 2 && (
                 <p
-                  className="cursor-pointer"
+                  className="cursor-pointer font-bold"
                   onClick={() =>
                     listIndex === i ? setListIndex("") : setListIndex(i)
                   }
                 >
-                  {listIndex === i ? "Less..." : "More..."}
+                  {listIndex === i ? "Show Less" : "Show More"}
                 </p>
               )}
             </ListColumn>
@@ -111,14 +103,24 @@ const SchoolList = ({ filteredSchools }) => {
                 ))}
               {school.loanInfo.length > 2 && (
                 <p
-                  className="cursor-pointer"
+                  className="cursor-pointer font-bold"
                   onClick={() =>
                     listIndex === i ? setListIndex("") : setListIndex(i)
                   }
                 >
-                  {listIndex === i ? "Less..." : "More..."}
+                  {listIndex === i ? "Show Less" : "Show More"}
                 </p>
               )}
+            </ListColumn>
+            <ListColumn>
+              <a
+                className="btn"
+                href={school.basicInfo.schoolcode}
+                target="_blank"
+                rel="noreferrer noopener"
+              >
+                Apply For Funding
+              </a>
             </ListColumn>
           </ListItem>
         ))}
@@ -202,6 +204,10 @@ const ListColumn = styled.div`
     }
   }
 
+  :last-of-type {
+    justify-content: center;
+  }
+
   .logo {
     width: 150px;
     margin: auto;
@@ -209,12 +215,12 @@ const ListColumn = styled.div`
 
   .hoverUnderline {
     :after {
-      width: 15%;
+      width: 30%;
       transition: width 300ms;
     }
 
     :hover:after {
-      width: 18%;
+      width: 35%;
     }
   }
 `
