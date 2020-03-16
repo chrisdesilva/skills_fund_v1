@@ -1,7 +1,54 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
-import { FaTimesCircle, FaThLarge, FaThList } from "react-icons/fa"
+import { FaThLarge, FaThList } from "react-icons/fa"
 import { breakpoint } from "../../utils/breakpoints"
+
+const useKeyPress = function(targetKey) {
+  const [keyPressed, setKeyPressed] = useState(false)
+
+  const handleDownKey = ({ key }) => {
+    if (key === targetKey) {
+      setKeyPressed(true)
+    }
+  }
+
+  const handleUpKey = ({ key }) => {
+    if (key === targetKey) {
+      setKeyPressed(false)
+    }
+  }
+
+  useEffect(() => {
+    document.addEventListener("keydown", handleDownKey)
+    document.addEventListener("keyup", handleUpKey)
+
+    return () => {
+      document.removeEventListener("keydown", handleDownKey)
+      document.removeEventListener("keyup", handleUpKey)
+    }
+  })
+  return keyPressed
+}
+
+const ListItem = ({
+  item,
+  active,
+  setTextFilter,
+  setHovered,
+  setMatchingPrograms,
+}) => (
+  <li
+    className={`item ${active ? "active" : ""}`}
+    onClick={() => {
+      setTextFilter(item)
+      setMatchingPrograms([])
+    }}
+    onMouseEnter={() => setHovered(item)}
+    onMouseLeave={() => setHovered(undefined)}
+  >
+    {item}
+  </li>
+)
 
 const SchoolFilter = ({
   allSchools,
@@ -18,8 +65,13 @@ const SchoolFilter = ({
       return acc
     }, [])
     .sort()
-  const [activeIndex, setActiveIndex] = useState("")
   const [textFilter, setTextFilter] = useState("")
+  const [matchingPrograms, setMatchingPrograms] = useState([])
+  const downPress = useKeyPress("ArrowDown")
+  const upPress = useKeyPress("ArrowUp")
+  const enterPress = useKeyPress("Enter")
+  const [cursor, setCursor] = useState(0)
+  const [hovered, setHovered] = useState(undefined)
   const [showFilters, setShowFilters] = useState(false)
   const [categoryFilter, setCategoryFilter] = useState("")
   const [locationFilter, setLocationFilter] = useState("")
@@ -93,7 +145,6 @@ const SchoolFilter = ({
   }
 
   const resetFilters = () => {
-    setActiveIndex("")
     setTextFilter("")
     setCategoryFilter("")
     setLocationFilter("")
@@ -102,9 +153,43 @@ const SchoolFilter = ({
     setFilteredSchools(allSchools)
   }
 
+  const findMatches = program => {
+    const matches = allSchools
+      .filter(school => {
+        const regex = new RegExp(program, "gi")
+        return school.basicInfo.schoolname.match(regex)
+      })
+      .map(program => program.basicInfo.schoolname)
+    setMatchingPrograms(matches)
+  }
+
   useEffect(() => {
     filterSchools()
+    findMatches(textFilter)
   }, [textFilter, categoryFilter, locationFilter, scheduleFilter, lengthFilter])
+
+  useEffect(() => {
+    if (matchingPrograms.length && downPress) {
+      setCursor(prevState =>
+        prevState < matchingPrograms.length - 1 ? prevState + 1 : prevState
+      )
+    }
+  }, [downPress])
+  useEffect(() => {
+    if (matchingPrograms.length && upPress) {
+      setCursor(prevState => (prevState > 0 ? prevState - 1 : prevState))
+    }
+  }, [upPress])
+  useEffect(() => {
+    if (matchingPrograms.length && enterPress) {
+      setTextFilter(matchingPrograms[cursor])
+    }
+  }, [cursor, enterPress])
+  useEffect(() => {
+    if (matchingPrograms.length && hovered) {
+      setCursor(matchingPrograms.indexOf(hovered))
+    }
+  }, [hovered])
 
   return (
     <FilterContainer>
@@ -117,8 +202,25 @@ const SchoolFilter = ({
             placeholder="Enter school name"
             type="text"
             value={textFilter}
-            onChange={e => setTextFilter(e.target.value)}
+            onChange={e => {
+              setTextFilter(e.target.value)
+              findMatches(textFilter)
+            }}
           />
+          {matchingPrograms.length > 1 && textFilter && (
+            <ul>
+              {matchingPrograms.map((program, i) => (
+                <ListItem
+                  key={program}
+                  active={i === cursor}
+                  item={program}
+                  setMatchingPrograms={setMatchingPrograms}
+                  setTextFilter={setTextFilter}
+                  setHovered={setHovered}
+                />
+              ))}
+            </ul>
+          )}
         </div>
         <button
           className="btn btn--filters"
@@ -325,6 +427,29 @@ const FilterCard = styled.div`
 
   .filter--search {
     margin: 0 1rem;
+
+    #search {
+      position: relative;
+    }
+
+    ul {
+      position: relative;
+      padding: 0;
+      margin: 0;
+      font-size: 0.75rem;
+
+      li {
+        list-style-type: none;
+        padding: 0.75rem;
+        background: #f7f7f7;
+        border-bottom: 1px solid #d9d9d9;
+        cursor: pointer;
+
+        &.active {
+          background: ${props => props.theme.secondary};
+        }
+      }
+    }
   }
 `
 

@@ -27,7 +27,7 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                   exit={{ scale: 0 }}
                   whileHover={{ y: -5 }}
                   className={cardIndex.includes(i) ? "flipped" : ""}
-                  key={school.schoolurl}
+                  key={school.basicInfo.schoolurl}
                 >
                   <CardInner className={cardIndex.includes(i) ? "flipped" : ""}>
                     <CardFront>
