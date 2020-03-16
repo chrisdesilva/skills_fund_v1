@@ -3,10 +3,11 @@ import styled, { css } from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "gatsby"
 import Image from "gatsby-image"
+import BackgroundImage from "gatsby-background-image"
 import { FaQuestionCircle } from "react-icons/fa"
 
-const SchoolCards = ({ filteredSchools }) => {
-  const [cardIndex, setCardIndex] = useState("")
+const SchoolCards = ({ filteredSchools, skfLogo }) => {
+  const [cardIndex, setCardIndex] = useState([])
   return (
     <AnimatePresence exitBeforeEnter initial={false}>
       <CardContainer
@@ -15,166 +16,198 @@ const SchoolCards = ({ filteredSchools }) => {
         exit={{ opacity: 0 }}
       >
         <AnimatePresence initial={false} exitBeforeEnter>
-          {filteredSchools.map((school, i) => {
-            return (
-              <Card
-                positionTransition
-                initial={{ scale: 0 }}
-                animate={{ scale: 1 }}
-                exit={{ scale: 0 }}
-                transition={{ duration: 0.1, ease: "easeIn" }}
-                whileHover={{ y: -5 }}
-                className={cardIndex === i ? "flipped" : ""}
-                key={school.id}
-              >
-                <CardInner className={cardIndex === i ? "flipped" : ""}>
-                  <CardFront>
-                    <CardLogo>
-                      <a
-                        href={school.basicInfo.schoolurl}
-                        target="_blank"
-                        rel="noreferrer noopener"
-                      >
-                        <Image
-                          key={school.logo.childImageSharp.fluid}
-                          fluid={school.logo.childImageSharp.fluid}
-                          alt={school.basicInfo.schoolname}
-                        />
-                      </a>
-                    </CardLogo>
-                    <CardInfo className="cardinfo">
-                      <div>
-                        <CardColumn>
-                          <p>School</p>
-                        </CardColumn>
-                        <CardColumn>
-                          <p>{school.basicInfo.schoolname}</p>
-                        </CardColumn>
-                      </div>
-                      <div>
-                        <CardColumn>
-                          <div id="tooltip--parent">
-                            <p>
-                              Tuition Range{" "}
-                              <FaQuestionCircle className="text-xs" />
-                            </p>
-                            <div id="tooltip--tip">
-                              <p>
-                                Range of tuition for programs financed by Skills
-                                Fund. You can borrow from $2,000 in tuition up
-                                to the max for your program.
-                              </p>
-                            </div>
-                          </div>
-                        </CardColumn>
-                        <CardColumn>
-                          <p>{school.basicInfo.tuitionRange}</p>
-                        </CardColumn>
-                      </div>
-                      <div>
-                        <CardColumn>
-                          <div id="tooltip--parent">
-                            <p>
-                              Living Expenses{" "}
-                              <FaQuestionCircle className="text-xs" />
-                            </p>
-                            <div id="tooltip--tip">
-                              <p>
-                                Schools that offer living expenses financing
-                                allow you to borrow money for living expenses in
-                                addition to tuition.
-                              </p>
-                            </div>
-                          </div>
-                        </CardColumn>
-                        <CardColumn>
-                          <p>
-                            {school.features.costOfLiving
-                              ? "Available"
-                              : "Not Available"}
-                          </p>
-                        </CardColumn>
-                      </div>
-                      <div>
-                        <CardColumn>
-                          <p>Locations</p>
-                        </CardColumn>
-                        <CardColumn>
-                          {school.basicInfo.locations
-                            .sort()
-                            .slice(0, 2)
-                            .map(location => (
-                              <p>{location} </p>
-                            ))}
-                          {school.basicInfo.locations.length > 2 && (
-                            <p
-                              className="cursor-pointer hoverUnderline"
-                              onClick={() => setCardIndex(i)}
-                            >
-                              More
-                            </p>
-                          )}
-                        </CardColumn>
-                      </div>
-                      <div>
-                        <CardColumn>
-                          <p>Programs</p>
-                        </CardColumn>
-                        <CardColumn>
-                          {school.loanInfo
-                            .sort()
-                            .slice(0, 2)
-                            .map(program => (
-                              <p>{program.name} </p>
-                            ))}
-                          {school.loanInfo.length > 2 && (
-                            <p
-                              className="cursor-pointer hoverUnderline"
-                              onClick={() => setCardIndex(i)}
-                            >
-                              More
-                            </p>
-                          )}
-                        </CardColumn>
-                      </div>
-                      <div className="click">
+          {filteredSchools.length > 0 ? (
+            filteredSchools.map((school, i) => {
+              return (
+                <Card
+                  layoutTransition={spring}
+                  // transition={{ duration: 0.3, type: "tween" }}
+                  initial={{ scale: 0 }}
+                  animate={{ scale: 1 }}
+                  exit={{ scale: 0 }}
+                  whileHover={{ y: -5 }}
+                  className={cardIndex.includes(i) ? "flipped" : ""}
+                  key={school.schoolurl}
+                >
+                  <CardInner className={cardIndex.includes(i) ? "flipped" : ""}>
+                    <CardFront>
+                      <CardLogo>
                         <a
-                          className="btn"
-                          href={school.basicInfo.schoolcode}
+                          href={school.basicInfo.schoolurl}
                           target="_blank"
                           rel="noreferrer noopener"
                         >
-                          Apply For Funding
+                          <Image
+                            key={school.logo.childImageSharp.fluid}
+                            fluid={school.logo.childImageSharp.fluid}
+                            alt={school.basicInfo.schoolname}
+                          />
                         </a>
-                        <Link
-                          className="hoverUnderline"
-                          to={`students/${school.slug}`}
-                        >
-                          Calculate Payments
-                        </Link>
+                      </CardLogo>
+                      <CardInfo className="cardinfo">
+                        <div>
+                          <CardColumn>
+                            <p>School</p>
+                          </CardColumn>
+                          <CardColumn>
+                            <p>{school.basicInfo.schoolname}</p>
+                          </CardColumn>
+                        </div>
+                        <div>
+                          <CardColumn>
+                            <div id="tooltip--parent">
+                              <p>
+                                Tuition Range{" "}
+                                <FaQuestionCircle className="text-xs" />
+                              </p>
+                              <div id="tooltip--tip">
+                                <p>
+                                  Range of tuition for programs financed by
+                                  Skills Fund. You can borrow from $2,000 in
+                                  tuition up to the max for your program.
+                                </p>
+                              </div>
+                            </div>
+                          </CardColumn>
+                          <CardColumn>
+                            <p>{school.basicInfo.tuitionRange}</p>
+                          </CardColumn>
+                        </div>
+                        <div>
+                          <CardColumn>
+                            <div id="tooltip--parent">
+                              <p>
+                                Living Expenses{" "}
+                                <FaQuestionCircle className="text-xs" />
+                              </p>
+                              <div id="tooltip--tip">
+                                <p>
+                                  Schools that offer living expenses financing
+                                  allow you to borrow money for living expenses
+                                  in addition to tuition.
+                                </p>
+                              </div>
+                            </div>
+                          </CardColumn>
+                          <CardColumn>
+                            <p>
+                              {school.features.costOfLiving
+                                ? "Available"
+                                : "Not Available"}
+                            </p>
+                          </CardColumn>
+                        </div>
+                        <div>
+                          <CardColumn>
+                            <p>Locations</p>
+                          </CardColumn>
+                          <CardColumn>
+                            {school.basicInfo.locations
+                              .sort()
+                              .slice(0, 2)
+                              .map(location => (
+                                <p>{location} </p>
+                              ))}
+                            {school.basicInfo.locations.length > 2 && (
+                              <p
+                                className="cursor-pointer hoverUnderline"
+                                onClick={() => setCardIndex([...cardIndex, i])}
+                              >
+                                More
+                              </p>
+                            )}
+                          </CardColumn>
+                        </div>
+                        <div>
+                          <CardColumn>
+                            <p>Programs</p>
+                          </CardColumn>
+                          <CardColumn>
+                            {school.loanInfo
+                              .sort()
+                              .slice(0, 2)
+                              .map(program => (
+                                <p>{program.name} </p>
+                              ))}
+                            {school.loanInfo.length > 2 && (
+                              <p
+                                className="cursor-pointer hoverUnderline"
+                                onClick={() => setCardIndex([...cardIndex, i])}
+                              >
+                                More
+                              </p>
+                            )}
+                          </CardColumn>
+                        </div>
+                        <div className="click">
+                          <a
+                            className="btn"
+                            href={school.basicInfo.schoolcode}
+                            target="_blank"
+                            rel="noreferrer noopener"
+                          >
+                            Apply For Funding
+                          </a>
+                          <Link
+                            className="hoverUnderline"
+                            to={`students/${school.slug}`}
+                          >
+                            Calculate Payments
+                          </Link>
+                        </div>
+                      </CardInfo>
+                    </CardFront>
+                    <CardBack
+                      onClick={() =>
+                        setCardIndex(cardIndex.filter(index => index !== i))
+                      }
+                    >
+                      <div className="card-back--info">
+                        <CardColumn className="card-back--list ">
+                          <h4>Locations</h4>{" "}
+                          {school.basicInfo.locations.sort().map(location => (
+                            <p>{location} </p>
+                          ))}
+                        </CardColumn>
+                        <CardColumn className="card-back--list ">
+                          <h4>Programs</h4>{" "}
+                          {school.loanInfo.sort().map(program => (
+                            <p>{program.name} </p>
+                          ))}
+                        </CardColumn>
                       </div>
-                    </CardInfo>
-                  </CardFront>
-                  <CardBack onClick={() => setCardIndex("")}>
-                    <div className="card-back-info">
-                      <CardColumn>
-                        <p className="font-bold">Locations</p>{" "}
-                        {school.basicInfo.locations.sort().map(location => (
-                          <p>{location} </p>
-                        ))}
-                      </CardColumn>
-                      <CardColumn>
-                        <p className="font-bold">Programs</p>{" "}
-                        {school.loanInfo.sort().map(program => (
-                          <p>{program.name} </p>
-                        ))}
-                      </CardColumn>
-                    </div>
-                  </CardBack>
-                </CardInner>
-              </Card>
-            )
-          })}
+                      <div className="card-back--image">
+                        <Image fluid={school.logo.childImageSharp.fluid} />
+                      </div>
+                    </CardBack>
+                  </CardInner>
+                </Card>
+              )
+            })
+          ) : (
+            <Card
+              layoutTransition={spring}
+              // transition={{ duration: 0.3, type: "tween" }}
+              initial={{ scale: 0 }}
+              animate={{ scale: 1 }}
+              exit={{ scale: 0 }}
+              whileHover={{ y: -5 }}
+              key={"noMatches"}
+            >
+              <CardInner>
+                <CardFront className="noMatches">
+                  <CardLogo className="noMatches">
+                    {" "}
+                    <Image
+                      fluid={skfLogo}
+                      alt="Skills Fund logo - no matching schools"
+                    />
+                  </CardLogo>
+                  <CardInfo className="noMatches">No matching schools</CardInfo>
+                </CardFront>
+              </CardInner>
+            </Card>
+          )}
         </AnimatePresence>
       </CardContainer>
     </AnimatePresence>
@@ -182,6 +215,12 @@ const SchoolCards = ({ filteredSchools }) => {
 }
 
 export default SchoolCards
+
+const spring = {
+  type: "spring",
+  damping: 20,
+  stiffness: 300,
+}
 
 const CardContainer = styled(motion.div)`
   display: grid;
@@ -191,12 +230,6 @@ const CardContainer = styled(motion.div)`
   justify-content: center;
   padding: 2rem;
 `
-
-const spring = {
-  type: "spring",
-  damping: 10,
-  stiffness: 200,
-}
 
 const CardSide = css`
   /* position: absolute; */
@@ -229,8 +262,18 @@ const CardFront = styled.div`
   transition: border 800ms;
   border: 2px solid lightgray;
 
-  :hover {
+  :hover:not(.noMatches) {
     border: ${props => `2px solid ${props.theme.secondary}`};
+  }
+
+  .noMatches {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 5rem;
+    .gatsby-image-wrapper {
+      width: 100%;
+    }
   }
 `
 
@@ -241,20 +284,35 @@ const CardBack = styled.div`
   z-index: 1;
   cursor: pointer;
 
-  div {
-    padding: 0.5rem;
-  }
-
   p {
     font-size: 0.65rem;
     margin: 0 0 0.25rem 0;
+  }
+
+  h4 {
+    font-size: 0.65rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .card-back--list {
+    padding: 0.5rem;
+  }
+
+  .card-back--image {
+    width: 25%;
+    margin: 0 auto;
+
+    .gatsby-image-wrapper {
+      width: 100%;
+      padding: 0;
+    }
   }
 
   .hoverUnderline {
     text-align: center;
   }
 
-  .card-back-info {
+  .card-back--info {
     display: flex;
     justify-content: space-evenly;
   }
@@ -315,7 +373,7 @@ const CardLogo = styled.div`
   transition: border 300ms;
   border-bottom: 2px solid transparent;
 
-  :hover {
+  :hover:not(.noMatches) {
     border-bottom: ${props => `2px solid ${props.theme.secondary}`};
   }
 `

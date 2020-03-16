@@ -25,26 +25,30 @@ const SchoolFilter = ({
   const [locationFilter, setLocationFilter] = useState("")
   const [scheduleFilter, setScheduleFilter] = useState("")
   const [lengthFilter, setLengthFilter] = useState("")
-  const filterButtons = [
+  const programCategories = [
     {
-      name: "Software Development",
+      name: "Web Development",
       value: "fullStack",
+    },
+    {
+      name: "Mobile Development",
+      value: "mobile",
     },
     {
       name: "Game Development",
       value: "gameDev",
     },
     {
-      name: "DevOps",
-      value: "devOps",
+      name: "Data Science",
+      value: "dataScience",
     },
     {
       name: "UX/UI Design",
       value: "uxui",
     },
     {
-      name: "Data Science",
-      value: "dataScience",
+      name: "Project Management",
+      value: "projectManagement",
     },
     {
       name: "Cybersecurity",
@@ -59,12 +63,8 @@ const SchoolFilter = ({
       value: "healthcare",
     },
     {
-      name: "Professional Training",
-      value: "professionalTraining",
-    },
-    {
-      name: "Licensure Training",
-      value: "licensureTraining",
+      name: "Other",
+      value: "other",
     },
   ]
 
@@ -110,14 +110,16 @@ const SchoolFilter = ({
     <FilterContainer>
       <FilterCard>
         <h3>Find your perfect school</h3>
-        <label htmlFor="search">Search by school name</label>
-        <input
-          id="search"
-          placeholder="Enter school name"
-          type="text"
-          value={textFilter}
-          onChange={e => setTextFilter(e.target.value)}
-        />
+        <div className="filter--search">
+          <label htmlFor="search">Search by school name</label>
+          <input
+            id="search"
+            placeholder="Enter school name"
+            type="text"
+            value={textFilter}
+            onChange={e => setTextFilter(e.target.value)}
+          />
+        </div>
         <button
           className="btn btn--filters"
           onClick={() => setShowFilters(!showFilters)}
@@ -125,62 +127,37 @@ const SchoolFilter = ({
           {showFilters ? "Hide Filters" : "Show Filters"}
         </button>
         <Filters showFilters={showFilters}>
-          <FilterRow>
-            {filterButtons.map((button, i) => (
-              <div className="filter--button">
-                <button
-                  key={i}
-                  value={button.value}
-                  className={activeIndex === i ? "btn active" : "btn inactive"}
-                  onClick={e => {
-                    if (activeIndex === i) {
-                      setActiveIndex("")
-                      setCategoryFilter("")
-                    } else {
-                      setActiveIndex(i)
-                      setCategoryFilter(e.target.value)
-                    }
-                  }}
-                >
-                  {button.name}
-                </button>
-              </div>
-            ))}
-          </FilterRow>
-          <FilterRow locationFilter={locationFilter}>
-            <div id="programFilter" className="filter--dropdown">
-              <label htmlFor="program">
-                PROGRAM{" "}
-                <span
-                  className={categoryFilter ? "opacity-100" : "opacity-0"}
-                  onClick={() => setCategoryFilter("")}
-                >
-                  <FaTimesCircle />
-                </span>
-              </label>
+          <FilterRow
+            categoryFilter={categoryFilter}
+            locationFilter={locationFilter}
+            lengthFilter={lengthFilter}
+            lengthFilter={lengthFilter}
+            scheduleFilter={scheduleFilter}
+          >
+            <div className="filter--dropdown">
+              <label htmlFor="program">PROGRAM </label>
               <select
                 onChange={e => setCategoryFilter(e.target.value)}
                 value={categoryFilter}
                 id="program"
               >
                 <option>Select program</option>
-                {filterButtons.map(program => (
+                {programCategories.map(program => (
                   <option key={program.value} value={program.value}>
                     {program.name}
                   </option>
                 ))}
               </select>
+              <p
+                className="hoverUnderline clearFilter"
+                id="categoryFilter"
+                onClick={() => setCategoryFilter("")}
+              >
+                Clear
+              </p>
             </div>
             <div className="filter--dropdown">
-              <label htmlFor="location">
-                LOCATION
-                <span
-                  className={locationFilter ? "opacity-100" : "opacity-0"}
-                  onClick={() => setLocationFilter("")}
-                >
-                  <FaTimesCircle />
-                </span>
-              </label>
+              <label htmlFor="location">LOCATION</label>
               <select
                 onChange={e => setLocationFilter(e.target.value)}
                 id="location"
@@ -199,17 +176,16 @@ const SchoolFilter = ({
                     )
                 )}
               </select>
+              <p
+                className="hoverUnderline clearFilter"
+                id="locationFilter"
+                onClick={() => setLocationFilter("")}
+              >
+                Clear
+              </p>
             </div>
             <div className="filter--dropdown">
-              <label htmlFor="length">
-                LENGTH{" "}
-                <span
-                  className={lengthFilter ? "opacity-100" : "opacity-0"}
-                  onClick={() => setLengthFilter("")}
-                >
-                  <FaTimesCircle />
-                </span>
-              </label>
+              <label htmlFor="length">LENGTH </label>
               <select
                 id="length"
                 onChange={e => setLengthFilter(e.target.value)}
@@ -220,17 +196,16 @@ const SchoolFilter = ({
                 <option>8-12 weeks</option>
                 <option>13+ weeks</option>
               </select>
+              <p
+                className="hoverUnderline clearFilter"
+                id="lengthFilter"
+                onClick={() => setLengthFilter("")}
+              >
+                Clear
+              </p>
             </div>
             <div className="filter--dropdown">
-              <label htmlFor="schedule">
-                SCHEDULE{" "}
-                <span
-                  className={scheduleFilter ? "opacity-100" : "opacity-0"}
-                  onClick={() => setScheduleFilter("")}
-                >
-                  <FaTimesCircle />
-                </span>
-              </label>
+              <label htmlFor="schedule">SCHEDULE </label>
               <select
                 id="schedule"
                 onChange={e => setScheduleFilter(e.target.value)}
@@ -241,6 +216,13 @@ const SchoolFilter = ({
                 <option>Part-time (20-39 hours/week)</option>
                 <option>Self-paced</option>
               </select>
+              <p
+                className="hoverUnderline clearFilter"
+                id="scheduleFilter"
+                onClick={() => setScheduleFilter("")}
+              >
+                Clear
+              </p>
             </div>
           </FilterRow>
           <FilterRow activeView={activeView}>
@@ -268,8 +250,9 @@ const FilterContainer = styled.section`
   justify-content: center;
   align-items: center;
   padding: 1rem 0;
+
   @media ${breakpoint.lg} {
-    padding: 0 2rem 2rem 2rem;
+    padding: 0 0 1rem 0;
   }
 `
 
@@ -282,19 +265,19 @@ const FilterCard = styled.div`
   box-shadow: 2px 2px 5px gray;
 
   h3 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     text-align: center;
     margin-bottom: 1rem;
 
     @media ${breakpoint.md} {
-      font-size: 2rem;
+      font-size: 1.5rem;
     }
   }
 
   .btn--filters {
     width: 8rem;
     padding: 0.25rem 0.5rem;
-    margin-top: 0.5rem;
+    margin: 0.5rem 0 0 1rem;
     background-image: url("data:image/svg+xml;charset=UTF-8,%3Csvg%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20width%3D%2212%22%20height%3D%2212%22%20viewBox%3D%220%200%2012%2012%22%3E%3Ctitle%3Edown-arrow%3C%2Ftitle%3E%3Cg%20fill%3D%22%23000000%22%3E%3Cpath%20d%3D%22M10.293%2C3.293%2C6%2C7.586%2C1.707%2C3.293A1%2C1%2C0%2C0%2C0%2C.293%2C4.707l5%2C5a1%2C1%2C0%2C0%2C0%2C1.414%2C0l5-5a1%2C1%2C0%2C1%2C0-1.414-1.414Z%22%20fill%3D%22%23000000%22%3E%3C%2Fpath%3E%3C%2Fg%3E%3C%2Fsvg%3E");
     background-repeat: no-repeat, repeat;
     background-position: right 0.3em top 55%, 0 0;
@@ -339,6 +322,10 @@ const FilterCard = styled.div`
     background: black;
     color: white;
   }
+
+  .filter--search {
+    margin: 0 1rem;
+  }
 `
 
 const FilterRow = styled.div`
@@ -346,22 +333,6 @@ const FilterRow = styled.div`
   flex-wrap: wrap;
   margin: 2rem 0 1rem 0;
   justify-content: space-around;
-
-  :first-of-type {
-    display: none;
-
-    @media ${breakpoint.lg} {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      grid-gap: 0.5rem;
-    }
-
-    @media ${breakpoint.xl} {
-      display: grid;
-      grid-template-columns: repeat(5, 1fr);
-      grid-gap: 0.5rem;
-    }
-  }
 
   :last-of-type {
     display: none;
@@ -404,24 +375,40 @@ const FilterRow = styled.div`
   .filter--dropdown {
     display: flex;
     flex-direction: column;
-    width: 100%;
+    align-items: flex-start;
     margin: 0 1rem;
+    width: 100%;
 
-    @media ${breakpoint.lg} {
-      width: calc(33% - 2rem);
+    select {
+      margin-bottom: 0;
     }
 
-    &#programFilter {
-      @media ${breakpoint.lg} {
-        display: none;
-      }
+    @media ${breakpoint.lg} {
+      width: calc(25% - 2rem);
     }
   }
 
-  span {
-    color: red;
-    margin-left: 0.25rem;
-    cursor: pointer;
+  .clearFilter {
+    margin: 0.25rem 0.75rem;
+    font-size: 0.6rem;
+    display: inline;
+    transition: opacity 300ms;
+  }
+
+  #categoryFilter {
+    opacity: ${({ categoryFilter }) => (categoryFilter ? "1" : "0")};
+  }
+
+  #locationFilter {
+    opacity: ${({ locationFilter }) => (locationFilter ? "1" : "0")};
+  }
+
+  #lengthFilter {
+    opacity: ${({ lengthFilter }) => (lengthFilter ? "1" : "0")};
+  }
+
+  #scheduleFilter {
+    opacity: ${({ scheduleFilter }) => (scheduleFilter ? "1" : "0")};
   }
 
   label {

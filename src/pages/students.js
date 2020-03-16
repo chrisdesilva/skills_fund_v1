@@ -89,6 +89,13 @@ const Students = () => {
           }
         }
       }
+      skfLogo: file(relativePath: { eq: "skillsFund_logo.png" }) {
+        childImageSharp {
+          fluid {
+            ...GatsbyImageSharpFluid
+          }
+        }
+      }
     }
   `)
   let allSchools = data.allSchoolsJson.edges.map(school => school.node)
@@ -120,9 +127,15 @@ const Students = () => {
         setActiveView={setActiveView}
       />
       {activeView === "cards" ? (
-        <SchoolCards filteredSchools={filteredSchools} />
+        <SchoolCards
+          filteredSchools={filteredSchools}
+          skfLogo={data.skfLogo.childImageSharp.fluid}
+        />
       ) : (
-        <SchoolList filteredSchools={filteredSchools} />
+        <SchoolList
+          filteredSchools={filteredSchools}
+          skfLogo={data.skfLogo.childImageSharp.fluid}
+        />
       )}
     </Layout>
   )
@@ -132,7 +145,7 @@ export default Students
 
 const Banner = styled.section`
   display: none;
-  padding: 0 5rem;
+  padding: 0 7.5rem;
 
   @media ${breakpoint.lg} {
     height: 30vh;
@@ -143,39 +156,66 @@ const Banner = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
-    width: 70%;
 
-    @media ${breakpoint.md} {
+    :first-of-type {
+      width: 45%;
+    }
+
+    :last-of-type {
+      z-index: -5;
+      height: 100%;
+      width: 55%;
+      align-items: flex-end;
+    }
+
+    @media ${breakpoint.xl} {
+      margin: 0 2rem;
+      :first-of-type {
+      width: 50%;
+    }
+
+    :last-of-type {
+      z-index: -5;
+      height: 100%;
+      width: 50%;
+    }
+    }
+
+    /* @media ${breakpoint.md} {
       padding: 1rem 3rem 1rem 6rem;
     }
 
     @media ${breakpoint.lg} {
       padding: 1rem 4rem 1rem 8rem;
-    }
+    } */
 
-    @media ${breakpoint.xl} {
+    /* @media ${breakpoint.xl} {
       padding: 1rem 5rem 1rem 10rem;
     }
 
+    :first-of-type {
+      width: 80%;
+    }
+
     :last-of-type {
-      /* margin: -3rem 0; */
       z-index: -5;
       height: 100%;
-      width: 30%;
-    }
+      width: 20%;
+      margin-right: 1rem;
+    } */
   }
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.25rem;
     margin-bottom: 1rem;
     @media ${breakpoint.md} {
-      font-size: 1.75rem;
+      font-size: 1.5rem;
     }
     @media ${breakpoint.lg} {
-      font-size: 2rem;
+      font-size: 1.75rem;
     }
     @media ${breakpoint.xl} {
-      font-size: 2.5rem;
+      font-size: 2rem;
     }
   }
 

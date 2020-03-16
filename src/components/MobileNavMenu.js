@@ -100,7 +100,8 @@ const MenuBar = styled.header`
   position: fixed;
   width: 100%;
   background: white;
-  border-bottom: ${props => `2px solid ${props.theme.secondary}`};
+  box-shadow: 0 3px 8px -3px rgba(0, 0, 0, 0.1), 0 2px 3px -2px rgba(0, 0, 0, 0.05);
+  /* border-bottom: ${props => `2px solid ${props.theme.secondary}`}; */
   z-index: 2;
   display: flex;
   justify-content: space-between;
