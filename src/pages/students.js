@@ -29,7 +29,7 @@ const Students = () => {
       }
     }
   `)
-  let { edges } = useSchoolData()
+  const { edges } = useSchoolData()
   let allSchools = edges.map(school => school.node)
   const [filteredSchools, setFilteredSchools] = useState(allSchools)
   const [activeView, setActiveView] = useState("cards")

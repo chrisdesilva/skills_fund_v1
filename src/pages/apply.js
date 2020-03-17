@@ -3,84 +3,12 @@ import { graphql, useStaticQuery } from "gatsby"
 import styled from "styled-components"
 import Layout from "../components/Layout"
 import SEO from "../components/SEO"
-import ApplicationCalculator from "../components/ApplicationCalculator"
+import ApplicationCalculator from "../components/apply/ApplicationCalculator"
+import { useSchoolData } from "../hooks/useSchoolData"
 
 const Apply = () => {
-  const data = useStaticQuery(graphql`
-    query {
-      schools: allSchoolsJson(sort: { fields: slug, order: ASC }) {
-        edges {
-          node {
-            logo {
-              childImageSharp {
-                fluid {
-                  srcSet
-                }
-              }
-            }
-            basicInfo {
-              APRRange36
-              APRRange60
-              applicationsLive
-              disabledLoanAppFormID
-              hubspotFormID
-              interestRate36
-              interestRate60
-              locations
-              nextCohortStartDate
-              programTypes
-              schoolname
-              schoolurl
-              selectAProgram
-              tuitionRange
-            }
-            paymentTable {
-              data {
-                program
-                col
-                max
-                tuition
-              }
-              headers
-              show
-            }
-            features {
-              costOfLiving
-              multiLoanLengths
-              multiPrograms
-              products
-            }
-            loanInfo {
-              aprAndType {
-                info {
-                  apr36
-                  apr60
-                  maxCOL
-                  maxTuition
-                  type
-                }
-              }
-              defaultAmount
-              hubspotValue
-              metros {
-                location
-                max
-              }
-              multiMetros
-              name
-              nonPaymentPeriod
-              segment
-              queryParams
-            }
-            id
-            slug
-          }
-        }
-      }
-    }
-  `)
-
-  const schoolList = data.schools.edges
+  const { edges } = useSchoolData()
+  const schoolList = edges
   const [school, setSchool] = useState("")
   const [schoolName, setSchoolName] = useState("")
   const [showProgram, setShowProgram] = useState(false)
@@ -130,7 +58,7 @@ const Apply = () => {
       <SEO title="Apply" />
       <ApplyContainer>
         <ApplyCard showCalculatorText={showCalculatorText}>
-          <h1>Loan Application</h1>
+          <h1>Apply For Funding</h1>
           <label htmlFor="school">Select your school</label>
           <select
             id="school"
@@ -212,13 +140,12 @@ const ApplyContainer = styled.section`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => props.theme.primaryDark};
+  background: #f7f7f7;
   padding: 2rem 0;
   height: 50vh;
 `
 
 const ApplyCard = styled.div`
-  max-width: 20rem;
   padding: 2rem;
   border: 1px solid lightgray;
   border-radius: 5px;

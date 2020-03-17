@@ -4,7 +4,7 @@ import {
   calculateInterestPayment,
   calculateMonthlyPayment,
   calculateTotalPayment,
-} from "../utils/calculator"
+} from "../../utils/calculator"
 
 const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
   const [program, setProgram] = useState("")
