@@ -2,33 +2,7 @@ import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { FaThLarge, FaThList } from "react-icons/fa"
 import { breakpoint } from "../../utils/breakpoints"
-
-const useKeyPress = function(targetKey) {
-  const [keyPressed, setKeyPressed] = useState(false)
-
-  const handleDownKey = ({ key }) => {
-    if (key === targetKey) {
-      setKeyPressed(true)
-    }
-  }
-
-  const handleUpKey = ({ key }) => {
-    if (key === targetKey) {
-      setKeyPressed(false)
-    }
-  }
-
-  useEffect(() => {
-    document.addEventListener("keydown", handleDownKey)
-    document.addEventListener("keyup", handleUpKey)
-
-    return () => {
-      document.removeEventListener("keydown", handleDownKey)
-      document.removeEventListener("keyup", handleUpKey)
-    }
-  })
-  return keyPressed
-}
+import { useKeyPress } from "../../hooks/useKeyPress"
 
 const ListItem = ({
   item,
@@ -445,7 +419,7 @@ const FilterCard = styled.div`
       font-size: 0.75rem;
       width: 100%;
       top: 3.25rem;
-
+      z-index: 5;
       li {
         list-style-type: none;
         padding: 0.75rem;

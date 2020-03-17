@@ -3,7 +3,6 @@ import styled, { css } from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "gatsby"
 import Image from "gatsby-image"
-import BackgroundImage from "gatsby-background-image"
 import { FaQuestionCircle } from "react-icons/fa"
 
 const SchoolCards = ({ filteredSchools, skfLogo }) => {
