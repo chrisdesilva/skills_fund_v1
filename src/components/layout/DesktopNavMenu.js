@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from "react"
 import { Link } from "gatsby"
 import styled from "styled-components"
 import { FaCaretDown } from "react-icons/fa"
-import { breakpoint } from "../utils/breakpoints"
-import logo from "../images/skillsFund_logo.png"
+import { breakpoint } from "../../utils/breakpoints"
+import logo from "../../images/skillsFund_logo.png"
 
 const DesktopNavMenu = () => {
   const [border, setBorder] = useState(false)

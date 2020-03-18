@@ -1,7 +1,7 @@
 import React from "react"
 import { FaTwitter, FaFacebookF } from "react-icons/fa"
 import { Link } from "gatsby"
-import { breakpoint } from "../utils/breakpoints"
+import { breakpoint } from "../../utils/breakpoints"
 import styled from "styled-components"
 
 const Footer = () => {

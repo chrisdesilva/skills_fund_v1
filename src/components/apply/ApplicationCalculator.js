@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
+import { motion, AnimatePresence } from "framer-motion"
 import {
   calculateInterestPayment,
   calculateMonthlyPayment,
@@ -99,198 +100,230 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
         setTotalPayments
       )
     }
-  }, [school, program, loanValue])
+  }, [school, program, loanValue, loanType])
 
   return (
-    <CalculatorContainer showCalculator={showCalculator}>
-      <CalculatorCard showCalculator={showCalculator}>
-        <h2>
-          Loan Calculator{showCalculator && <span> for {schoolName}</span>}
-        </h2>
-        <div showCalculator={showCalculator}>
-          <label htmlFor="program">Select your program</label>
-          <select
-            id="program"
-            defaultValue={"default"}
-            onChange={selectProgramLoan}
-            onBlur={selectProgramLoan}
-            onClick={selectProgramLoan}
-          >
-            <option disabled value="default">
-              ---
-            </option>
-            {school["loanInfo"] &&
-              school["loanInfo"].map(program => (
-                <option key={program.segment} value={program.name}>
-                  {program.name}
+    <AnimatePresence initial={false}>
+      {showCalculator && (
+        <CalculatorContainer
+          initial={{ x: 300, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          exit={{ x: -300, opacity: 0 }}
+          transition={{ duration: 0.5 }}
+        >
+          <CalculatorCard>
+            <h2>
+              Loan Calculator{showCalculator && <span> for {schoolName}</span>}
+            </h2>
+            <div>
+              <label htmlFor="program">Select your program</label>
+              <select
+                id="program"
+                defaultValue={"default"}
+                onChange={selectProgramLoan}
+                onBlur={selectProgramLoan}
+              >
+                <option disabled value="default">
+                  ---
                 </option>
-              ))}
-          </select>
-        </div>
-        {program[0] && program[0]["aprAndType"].length > 1 && (
-          <div>
-            <label htmlFor="loanType">Select your loan type</label>
-            <select
-              id="loanType"
-              defaultValue={"default"}
-              onChange={selectLoanType}
-              onBlur={selectLoanType}
-              onClick={selectLoanType}
-            >
-              <option disabled value="default">
-                ---
-              </option>
-              {school["features"]["products"].map(loanType => (
-                <option key={loanType} value={loanType}>
-                  {loanType}
-                </option>
-              ))}
-            </select>
-          </div>
-        )}
-        {program[0] && program[0]["metros"].length > 0 && (
-          <div>
-            <label htmlFor="program">Select your location</label>
-            <select
-              id="program"
-              defaultValue={"default"}
-              onChange={selectMetro}
-              onBlur={selectMetro}
-            >
-              <option disabled value="default">
-                ---
-              </option>
-              {metros &&
-                metros.map((metro, i) => (
-                  <option key={i} value={JSON.stringify(metro)}>
-                    {metro.location}
-                  </option>
-                ))}
-            </select>
-          </div>
-        )}
-        <LoanCalculatorSlider showSliders={showSliders}>
-          <div>
-            <p id="total">{formatter.format(loanValue)}</p>
-            <p>Total Loan Amount</p>
-          </div>
-          <input
-            onChange={handleTuitionSlider}
-            onBlur={handleTuitionSlider}
-            type="range"
-            min="2000"
-            step="5"
-            max={maxTuition}
-            value={tuitionValue}
-          />
-          {loanValue && (
-            <div className="labels">
-              <p>$2,000</p>
-              <div>
-                <p>{formatter.format(tuitionValue)}</p>
-                <p>Tuition Amount</p>
-              </div>
-              <p>{formatter.format(maxTuition)}</p>
+                {school["loanInfo"] &&
+                  school["loanInfo"].map(program => (
+                    <option key={program.segment} value={program.name}>
+                      {program.name}
+                    </option>
+                  ))}
+              </select>
             </div>
-          )}
-        </LoanCalculatorSlider>
-        {maxCOL > 0 && (
-          <LoanCalculatorSlider showSliders={showSliders}>
-            <input
-              onChange={handleCOLSlider}
-              onBlur={handleCOLSlider}
-              // onTouchEnd={calculateMonthlyPayment}
-              // onMouseUp={calculateMonthlyPayment}
-              type="range"
-              min="0"
-              step="5"
-              max={maxCOL}
-              value={colValue}
-            />
-            {loanValue && (
-              <div className="labels">
-                <p>$0</p>
-                <div>
-                  <p>{formatter.format(colValue)}</p>
-                  <p>Cost of Living Amount</p>
-                </div>
-                <p>{formatter.format(maxCOL)}</p>
+            {program[0] && program[0]["aprAndType"].length > 1 && (
+              <div>
+                <label htmlFor="loanType">Select your loan type</label>
+                <select
+                  id="loanType"
+                  value={loanType}
+                  onChange={selectLoanType}
+                  onBlur={selectLoanType}
+                >
+                  <option disabled>---</option>
+                  {school["features"]["products"].map(loanType => (
+                    <option key={loanType} value={loanType}>
+                      {loanType}
+                    </option>
+                  ))}
+                </select>
               </div>
             )}
-          </LoanCalculatorSlider>
-        )}
-        <Payments showSliders={showSliders}>
-          <PaymentCard>
-            <h3>Interest Only Loan</h3>
-            <h4>36 Month Option</h4>
-            <p className="mb-0 mt-4">
-              {formatterCents.format(interestPayments.payment36)}
-            </p>
-            <p className="mb-0 mt-1">Payments during your program</p>
-            <p className="mb-0 mt-4">
-              {formatterCents.format(monthlyPayments.payment36)}
-            </p>
-            <p className="mb-0 mt-1">Payments after you graduate</p>
-            <p className="mb-0 mt-4">
-              {formatterCents.format(totalPayments.payment36)}
-            </p>
-            <p className="mb-0 mt-1">Total cost of loan</p>
-          </PaymentCard>
-          <PaymentCard>
-            <h3>Interest Only Loan</h3>
-            <h4>60 Month Option</h4>
-            <p className="mb-0 mt-4">
-              {formatterCents.format(interestPayments.payment60)}
-            </p>
-            <p className="mb-0 mt-1">Payments during your program</p>
-            <p className="mb-0 mt-4">
-              {formatterCents.format(monthlyPayments.payment60)}
-            </p>
-            <p className="mb-0 mt-1">Payments after you graduate</p>
-            <p className="mb-0 mt-4">
-              {formatterCents.format(totalPayments.payment60)}
-            </p>
-            <p className="mb-0 mt-1">Total cost of loan</p>
-          </PaymentCard>
-        </Payments>
-      </CalculatorCard>
-    </CalculatorContainer>
+            {program[0] && program[0]["metros"].length > 0 && (
+              <div>
+                <label htmlFor="program">Select your location</label>
+                <select
+                  id="program"
+                  defaultValue={"default"}
+                  onChange={selectMetro}
+                  onBlur={selectMetro}
+                >
+                  <option disabled value="default">
+                    ---
+                  </option>
+                  {metros &&
+                    metros.map((metro, i) => (
+                      <option key={i} value={JSON.stringify(metro)}>
+                        {metro.location}
+                      </option>
+                    ))}
+                </select>
+              </div>
+            )}
+            <LoanCalculatorSlider showSliders={showSliders}>
+              <div>
+                <p id="total">{formatter.format(loanValue)}</p>
+                <p>Total Loan Amount</p>
+              </div>
+              <input
+                onChange={handleTuitionSlider}
+                onBlur={handleTuitionSlider}
+                type="range"
+                min="2000"
+                step="5"
+                max={maxTuition}
+                value={tuitionValue}
+              />
+              {loanValue && (
+                <div className="labels">
+                  <p>$2,000</p>
+                  <div>
+                    <p>{formatter.format(tuitionValue)}</p>
+                    <p>Tuition Amount</p>
+                  </div>
+                  <p>{formatter.format(maxTuition)}</p>
+                </div>
+              )}
+            </LoanCalculatorSlider>
+            {maxCOL > 0 && (
+              <LoanCalculatorSlider showSliders={showSliders}>
+                <input
+                  onChange={handleCOLSlider}
+                  onBlur={handleCOLSlider}
+                  // onTouchEnd={calculateMonthlyPayment}
+                  // onMouseUp={calculateMonthlyPayment}
+                  type="range"
+                  min="0"
+                  step="5"
+                  max={maxCOL}
+                  value={colValue}
+                />
+                {loanValue && (
+                  <div className="labels">
+                    <p>$0</p>
+                    <div>
+                      <p>{formatter.format(colValue)}</p>
+                      <p>Cost of Living Amount</p>
+                    </div>
+                    <p>{formatter.format(maxCOL)}</p>
+                  </div>
+                )}
+              </LoanCalculatorSlider>
+            )}
+            <Payments showSliders={showSliders}>
+              <PaymentCard>
+                <h3>{loanType}</h3>
+                <h4>36 Month Option</h4>
+                {program[0] && (
+                  <p className="text-xs">
+                    {program[0]["aprAndType"][0]["info"]["apr36"]}% APR
+                  </p>
+                )}
+                {loanType === "Interest Only" && (
+                  <>
+                    <p className="mb-0 mt-4">
+                      {formatterCents.format(interestPayments.payment36)}
+                    </p>
+                    <p className="mb-0 mt-1">Monthly Payments in School</p>
+                  </>
+                )}
+                <p className="mb-0 mt-4">
+                  {formatterCents.format(monthlyPayments.payment36)}
+                </p>
+                <p className="mb-0 mt-1">
+                  Monthly Payments
+                  {loanType === "Interest Only" && " After Graduation"}
+                </p>
+                <p className="mb-0 mt-4">
+                  {formatterCents.format(totalPayments.payment36)}
+                </p>
+                <p className="mb-0 mt-1">Total cost of loan</p>
+              </PaymentCard>
+              {school["features"]["multiLoanLengths"] && (
+                <PaymentCard>
+                  <h3>{loanType}</h3>
+                  <h4>60 Month Option</h4>
+                  {program[0] && (
+                    <p className="text-xs">
+                      {program[0]["aprAndType"][0]["info"]["apr60"]}% APR
+                    </p>
+                  )}
+                  {loanType === "Interest Only" && (
+                    <>
+                      <p className="mb-0 mt-4">
+                        {formatterCents.format(interestPayments.payment60)}
+                      </p>
+                      <p className="mb-0 mt-1">Monthly Payments in School</p>
+                    </>
+                  )}
+                  <p className="mb-0 mt-4">
+                    {formatterCents.format(monthlyPayments.payment60)}
+                  </p>
+                  <p className="mb-0 mt-1">
+                    Monthly Payments
+                    {loanType === "Interest Only" && " After Graduation"}
+                  </p>
+                  <p className="mb-0 mt-4">
+                    {formatterCents.format(totalPayments.payment60)}
+                  </p>
+                  <p className="mb-0 mt-1">Total cost of loan</p>
+                </PaymentCard>
+              )}
+            </Payments>
+          </CalculatorCard>
+        </CalculatorContainer>
+      )}
+    </AnimatePresence>
   )
 }
 
 export default ApplicationCalculator
 
-const CalculatorContainer = styled.section`
+const CalculatorContainer = styled(motion.section)`
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: background 300ms;
-  background: ${props =>
-    props.showCalculator ? "white" : props.theme.primaryDark};
-  padding: 2rem 0;
   overflow: hidden;
+  margin-top: 4rem;
   select {
     width: 20rem;
   }
 `
 
 const CalculatorCard = styled.div`
-  transition: opacity 500ms, transform 500ms, height 500ms;
-  opacity: ${({ showCalculator }) => (showCalculator ? "1" : "0")};
-  transform: ${({ showCalculator }) =>
-    showCalculator ? "translateY(0)" : "translateY(-5%)"};
-  width: 40rem;
+  width: 100%;
   padding: 2rem;
-  border: 1px solid lightgray;
-  border-radius: 5px;
   display: flex;
   flex-direction: column;
   align-items: center;
   background: white;
+  position: relative;
 
   h2 {
     margin-bottom: 1rem;
     text-align: center;
+  }
+
+  :before {
+    content: "";
+    position: absolute;
+    height: 1px;
+    top: 0;
+    background: black;
+    width: 75vw;
   }
 `
 
@@ -333,6 +366,7 @@ const PaymentCard = styled.div`
   flex-direction: column;
   padding: 2rem;
   text-align: center;
-  border: 2px solid lightgray;
+  /* border: 2px solid lightgray; */
   border-radius: 5px;
+  box-shadow: 2px 2px 10px lightgray;
 `

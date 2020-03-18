@@ -2,8 +2,8 @@ import React from "react"
 import { Link, graphql, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import styled from "styled-components"
-import background from "../images/mobile_bg.png"
-import { breakpoint } from "../utils/breakpoints"
+import background from "../../images/mobile_bg.png"
+import { breakpoint } from "../../utils/breakpoints"
 
 const MobileNavMenu = ({ menuOpen, setMenuOpen }) => {
   const data = useStaticQuery(graphql`
