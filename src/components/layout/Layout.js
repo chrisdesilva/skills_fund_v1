@@ -3,9 +3,9 @@ import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import Header from "./Header"
 import Footer from "./Footer"
-import { theme } from "../utils/theme"
-import { breakpoint } from "../utils/breakpoints"
-import { GlobalStyle } from "../utils/globals"
+import { theme } from "../../utils/theme"
+import { breakpoint } from "../../utils/breakpoints"
+import { GlobalStyle } from "../../utils/globals"
 
 const PageContainer = styled.div`
   display: flex;

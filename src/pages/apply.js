@@ -1,57 +1,29 @@
-import React, { useEffect, useState } from "react"
-import { graphql, useStaticQuery } from "gatsby"
+import React from "react"
 import styled from "styled-components"
-import Layout from "../components/Layout"
-import SEO from "../components/SEO"
+import { FaGraduationCap, FaCode, FaEnvelope } from "react-icons/fa"
+import Layout from "../components/layout/Layout"
+import SEO from "../components/layout/SEO"
 import ApplicationCalculator from "../components/apply/ApplicationCalculator"
-import { useSchoolData } from "../hooks/useSchoolData"
+import { useApplication } from "../hooks/useApplication"
 
 const Apply = () => {
-  const { edges } = useSchoolData()
-  const schoolList = edges
-  const [school, setSchool] = useState("")
-  const [schoolName, setSchoolName] = useState("")
-  const [showProgram, setShowProgram] = useState(false)
-  const [showCalculator, setShowCalculator] = useState(false)
-  const [showCalculatorText, setShowCalculatorText] = useState(false)
-  const [showForm, setShowForm] = useState(false)
-  const [loanUrl, setLoanUrl] = useState(false)
-  const [email, setEmail] = useState("")
-  const [submitReady, setSubmitReady] = useState(false)
-  const [showThankYou, setShowThankYou] = useState(false)
-
-  const selectSchool = e => {
-    setShowProgram(true)
-    setShowCalculatorText(true)
-    const selectedSchool = schoolList.filter(
-      school => school.node.slug === e.target.value
-    )
-    setSchool(selectedSchool[0]["node"])
-  }
-
-  const selectProgram = e => {
-    setShowForm(true)
-    setLoanUrl(e.target.value)
-  }
-
-  const handleEmail = e => {
-    setEmail(e.target.value)
-    setSubmitReady(true)
-  }
-
-  const handleSubmit = e => {
-    e.preventDefault()
-    setEmail("")
-    setShowThankYou(true)
-    window.open(loanUrl)
-  }
-
-  useEffect(() => {
-    if (school["loanInfo"]) {
-      setLoanUrl(school["loanInfo"][0]["segment"])
-      setSchoolName(school["basicInfo"]["schoolname"])
-    }
-  }, [school])
+  const [
+    schoolName,
+    setSchoolName,
+    showCalculator,
+    setShowCalculator,
+    showCalculatorText,
+    email,
+    submitReady,
+    showThankYou,
+    selectSchool,
+    selectProgram,
+    handleEmail,
+    handleSubmit,
+    schoolList,
+    school,
+    loanUrl,
+  ] = useApplication()
 
   return (
     <Layout>
@@ -59,60 +31,71 @@ const Apply = () => {
       <ApplyContainer>
         <ApplyCard showCalculatorText={showCalculatorText}>
           <h1>Apply For Funding</h1>
-          <label htmlFor="school">Select your school</label>
-          <select
-            id="school"
-            defaultValue={"default"}
-            onChange={selectSchool}
-            onBlur={selectSchool}
-          >
-            <option disabled value="default">
-              ---
-            </option>
-            {schoolList.map(school => (
-              <option
-                key={school["node"]["basicInfo"]["schoolname"]}
-                value={school["node"]["slug"]}
+          <SelectContainer>
+            <div className="input">
+              <FaGraduationCap />
+              <label htmlFor="school">Select your school</label>
+              <select
+                id="school"
+                defaultValue={"default"}
+                onChange={selectSchool}
+                onBlur={selectSchool}
               >
-                {school["node"]["basicInfo"]["schoolname"]}
-              </option>
-            ))}
-          </select>
-          <SelectContainer showProgram={showProgram}>
-            <label htmlFor="program">Select your program</label>
-            <select
-              id="program"
-              defaultValue={"default"}
-              onChange={selectProgram}
-              onBlur={selectProgram}
-            >
-              <option disabled value="default">
-                ---
-              </option>
-              {school["loanInfo"] &&
-                school["loanInfo"].map(program => (
-                  <option key={program.segment} value={program.segment}>
-                    {program.name}
+                <option disabled value="default">
+                  ---
+                </option>
+                {schoolList.map(school => (
+                  <option
+                    key={school["node"]["basicInfo"]["schoolname"]}
+                    value={school["node"]["slug"]}
+                  >
+                    {school["node"]["basicInfo"]["schoolname"]}
                   </option>
                 ))}
-            </select>
+              </select>
+            </div>
+            <div className="input">
+              <FaCode />
+              <label htmlFor="program">Select your program</label>
+              <select
+                id="program"
+                defaultValue={"default"}
+                onChange={selectProgram}
+                onBlur={selectProgram}
+              >
+                <option disabled value="default">
+                  ---
+                </option>
+                {school["loanInfo"] &&
+                  school["loanInfo"].map(program => (
+                    <option key={program.segment} value={program.segment}>
+                      {program.name}
+                    </option>
+                  ))}
+              </select>
+            </div>
+            <form onSubmit={handleSubmit} className="input">
+              <FaEnvelope />
+              <label htmlFor="email">Enter your email address</label>
+              <div>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                  onChange={handleEmail}
+                />
+                <input
+                  type="submit"
+                  value="Next &rarr;"
+                  className={
+                    email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+                  }
+                  disabled={email && loanUrl ? false : true}
+                />
+              </div>
+            </form>
           </SelectContainer>
-          <Form ready={submitReady} showForm={showForm} onSubmit={handleSubmit}>
-            <input
-              type="email"
-              placeholder="Enter your email address"
-              required
-              onChange={handleEmail}
-            />
-            <input
-              type="submit"
-              value="Next &rarr;"
-              className={
-                email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
-              }
-              disabled={email && loanUrl ? false : true}
-            />
-          </Form>
           <ThankYou thankYou={showThankYou}>
             Thanks for applying! Your application has opened in a new window.
           </ThankYou>
@@ -122,14 +105,14 @@ const Apply = () => {
           <p className="calculator" onClick={() => setShowCalculator(true)}>
             Easily calculate your payments.
           </p>
+          <ApplicationCalculator
+            school={school}
+            setSchoolName={setSchoolName}
+            showCalculator={showCalculator}
+            schoolName={schoolName}
+          />
         </ApplyCard>
       </ApplyContainer>
-      <ApplicationCalculator
-        school={school}
-        setSchoolName={setSchoolName}
-        showCalculator={showCalculator}
-        schoolName={schoolName}
-      />
     </Layout>
   )
 }
@@ -141,8 +124,7 @@ const ApplyContainer = styled.section`
   justify-content: center;
   align-items: center;
   background: #f7f7f7;
-  padding: 2rem 0;
-  height: 50vh;
+  padding: 4rem 0 6rem 0;
 `
 
 const ApplyCard = styled.div`
@@ -152,6 +134,9 @@ const ApplyCard = styled.div`
   display: flex;
   flex-direction: column;
   background: white;
+  box-shadow: 2px 2px 10px lightgray;
+  width: 100%;
+  margin: 0 5rem;
 
   h1 {
     margin-bottom: 1rem;
@@ -174,7 +159,7 @@ const ApplyCard = styled.div`
         left: 0;
         right: 0;
         margin: auto;
-        width: 60%;
+        width: 12%;
         content: ".";
         color: transparent;
         background: black;
@@ -182,26 +167,36 @@ const ApplyCard = styled.div`
         transition: width 300ms;
       }
       :hover:after {
-        width: 65%;
+        width: 13%;
       }
     }
   }
 `
 
 const SelectContainer = styled.div`
-  opacity: 0;
-  transition: opacity 300ms;
-  opacity: ${({ showProgram }) => (showProgram ? "1" : "0")};
-`
-
-const Form = styled.form`
   display: flex;
-  margin-top: 1rem;
-  transition: opacity 300ms;
-  opacity: ${({ showForm }) => (showForm ? "1" : "0")};
+  flex-direction: column;
+  align-items: center;
+  .input {
+    width: 20rem;
+    display: flex;
+    flex-direction: column;
 
-  input[type="submit"] {
-    width: 33%;
+    select {
+      margin: 0;
+    }
+
+    svg {
+      font-size: 2rem;
+      align-self: center;
+      margin-top: 1rem;
+    }
+  }
+  form {
+    div {
+      display: flex;
+      flex-direction: row;
+    }
   }
 `
 

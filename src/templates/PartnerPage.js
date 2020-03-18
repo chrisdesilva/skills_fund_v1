@@ -1,7 +1,7 @@
 import React from "react"
 import { graphql } from "gatsby"
 import Image from "gatsby-image"
-import Layout from "../components/Layout"
+import Layout from "../components/layout/Layout"
 
 export const query = graphql`
   query($slug: String!) {

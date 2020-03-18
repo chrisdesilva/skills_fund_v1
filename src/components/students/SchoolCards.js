@@ -20,7 +20,6 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
               return (
                 <Card
                   layoutTransition={spring}
-                  // transition={{ duration: 0.3, type: "tween" }}
                   initial={{ scale: 0 }}
                   animate={{ scale: 1 }}
                   exit={{ scale: 0 }}
