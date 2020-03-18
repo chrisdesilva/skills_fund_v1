@@ -227,6 +227,7 @@ const CardContainer = styled(motion.div)`
   grid-gap: 1rem;
   justify-content: center;
   padding: 2rem;
+  background: white;
 `
 
 const CardSide = css`
@@ -259,6 +260,7 @@ const CardFront = styled.div`
   z-index: 0;
   transition: border 800ms;
   border: 2px solid lightgray;
+  background: white;
 
   :hover:not(.noMatches) {
     border: ${props => `2px solid ${props.theme.secondary}`};

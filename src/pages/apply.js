@@ -5,6 +5,7 @@ import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
 import ApplicationCalculator from "../components/apply/ApplicationCalculator"
 import { useApplication } from "../hooks/useApplication"
+import { breakpoint } from "../utils/breakpoints"
 
 const Apply = () => {
   const [
@@ -122,9 +123,9 @@ export default Apply
 const ApplyContainer = styled.section`
   display: flex;
   justify-content: center;
-  align-items: center;
   background: #f7f7f7;
-  padding: 4rem 0 6rem 0;
+  padding: 2rem 0 4rem 0;
+  min-height: 30vh;
 `
 
 const ApplyCard = styled.div`
@@ -177,6 +178,11 @@ const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+
+  @media ${breakpoint.xl} {
+    flex-direction: row;
+    justify-content: space-around;
+  }
   .input {
     width: 20rem;
     display: flex;
@@ -196,6 +202,9 @@ const SelectContainer = styled.div`
     div {
       display: flex;
       flex-direction: row;
+      .btn {
+        width: 33%;
+      }
     }
   }
 `

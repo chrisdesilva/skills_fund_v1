@@ -11,6 +11,7 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
+  background: #f7f7f7;
 `
 
 const ChildContainer = styled.div`
@@ -18,7 +19,7 @@ const ChildContainer = styled.div`
   margin-top: 48px;
 
   @media ${breakpoint.lg} {
-    margin-top: 60px;
+    margin-top: 57px;
   }
 `
 

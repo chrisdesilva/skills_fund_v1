@@ -225,61 +225,69 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
             )}
             <Payments showSliders={showSliders}>
               <PaymentCard>
-                <h3>{loanType}</h3>
-                <h4>36 Month Option</h4>
-                {program[0] && (
-                  <p className="text-xs">
-                    {program[0]["aprAndType"][0]["info"]["apr36"]}% APR
-                  </p>
-                )}
-                {loanType === "Interest Only" && (
-                  <>
-                    <p className="mb-0 mt-4">
-                      {formatterCents.format(interestPayments.payment36)}
-                    </p>
-                    <p className="mb-0 mt-1">Monthly Payments in School</p>
-                  </>
-                )}
-                <p className="mb-0 mt-4">
-                  {formatterCents.format(monthlyPayments.payment36)}
-                </p>
-                <p className="mb-0 mt-1">
-                  Monthly Payments
-                  {loanType === "Interest Only" && " After Graduation"}
-                </p>
-                <p className="mb-0 mt-4">
-                  {formatterCents.format(totalPayments.payment36)}
-                </p>
-                <p className="mb-0 mt-1">Total cost of loan</p>
-              </PaymentCard>
-              {school["features"]["multiLoanLengths"] && (
-                <PaymentCard>
+                <div className="card--info">
                   <h3>{loanType}</h3>
-                  <h4>60 Month Option</h4>
+                  <h4>36 Month Option</h4>
                   {program[0] && (
                     <p className="text-xs">
-                      {program[0]["aprAndType"][0]["info"]["apr60"]}% APR
+                      {program[0]["aprAndType"][0]["info"]["apr36"]}% APR
                     </p>
                   )}
+                </div>
+                <div className="card--payments">
                   {loanType === "Interest Only" && (
                     <>
                       <p className="mb-0 mt-4">
-                        {formatterCents.format(interestPayments.payment60)}
+                        {formatterCents.format(interestPayments.payment36)}
                       </p>
                       <p className="mb-0 mt-1">Monthly Payments in School</p>
                     </>
                   )}
                   <p className="mb-0 mt-4">
-                    {formatterCents.format(monthlyPayments.payment60)}
+                    {formatterCents.format(monthlyPayments.payment36)}
                   </p>
                   <p className="mb-0 mt-1">
                     Monthly Payments
                     {loanType === "Interest Only" && " After Graduation"}
                   </p>
                   <p className="mb-0 mt-4">
-                    {formatterCents.format(totalPayments.payment60)}
+                    {formatterCents.format(totalPayments.payment36)}
                   </p>
                   <p className="mb-0 mt-1">Total cost of loan</p>
+                </div>
+              </PaymentCard>
+              {school["features"]["multiLoanLengths"] && (
+                <PaymentCard>
+                  <div className="card--info">
+                    <h3>{loanType}</h3>
+                    <h4>60 Month Option</h4>
+                    {program[0] && (
+                      <p className="text-xs">
+                        {program[0]["aprAndType"][0]["info"]["apr60"]}% APR
+                      </p>
+                    )}
+                  </div>
+                  <div className="card--payments">
+                    {loanType === "Interest Only" && (
+                      <>
+                        <p className="mb-0 mt-4">
+                          {formatterCents.format(interestPayments.payment60)}
+                        </p>
+                        <p className="mb-0 mt-1">Monthly Payments in School</p>
+                      </>
+                    )}
+                    <p className="mb-0 mt-4">
+                      {formatterCents.format(monthlyPayments.payment60)}
+                    </p>
+                    <p className="mb-0 mt-1">
+                      Monthly Payments
+                      {loanType === "Interest Only" && " After Graduation"}
+                    </p>
+                    <p className="mb-0 mt-4">
+                      {formatterCents.format(totalPayments.payment60)}
+                    </p>
+                    <p className="mb-0 mt-1">Total cost of loan</p>
+                  </div>
                 </PaymentCard>
               )}
             </Payments>
@@ -364,9 +372,22 @@ const Payments = styled.div`
 const PaymentCard = styled.div`
   display: flex;
   flex-direction: column;
-  padding: 2rem;
   text-align: center;
-  /* border: 2px solid lightgray; */
   border-radius: 5px;
   box-shadow: 2px 2px 10px lightgray;
+  color: #070707;
+
+  .card--info {
+    background: #fd6d5d;
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+    padding: 0.5rem 1rem;
+    p {
+      margin: 0;
+    }
+  }
+
+  .card--payments {
+    padding: 0.5rem 2rem 1rem 2rem;
+  }
 `

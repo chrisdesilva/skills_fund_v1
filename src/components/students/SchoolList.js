@@ -134,16 +134,18 @@ export default SchoolList
 const ListContainer = styled(motion.div)`
   display: flex;
   flex-direction: column;
-  width: calc(100% - 4rem - 4px);
+  width: 100%;
   padding: 2rem 0;
+  background: white;
 `
 
 const ListItem = styled.div`
-  width: 100%;
-  padding: 1rem 2rem;
+  padding: 1rem 0;
   border-top: 1px solid lightgray;
   box-shadow: 2px 2px 5px lightgray;
   display: flex;
+  background: white;
+  margin: 0.25rem 1rem;
 
   :last-of-type {
     border-bottom: 1px solid lightgray;

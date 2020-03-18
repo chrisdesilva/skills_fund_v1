@@ -73,6 +73,7 @@ const Header = styled.header`
   height: 60vh;
   margin-top: -60px;
   padding: 2rem;
+  background: white;
 
   h1,
   h2 {
