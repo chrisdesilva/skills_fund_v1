@@ -41,7 +41,7 @@ input {
 }
 
 .btn--submit {
-  background: #9d1996;
+  background: #e96965;
   color: white;
   font-weight: bold;
   text-align: center;
@@ -57,7 +57,7 @@ input {
 }
 
 .btn--nav {
-  background-color: #9d1996;
+  background-color: #e96965;
   color: white;
   z-index: 5;
   width: 6rem;
@@ -80,7 +80,7 @@ input {
 }
 
 .hoverLink:hover {
-  color: #9d1996;
+  color: #e96965;
 }
 
 .hoverUnderline {

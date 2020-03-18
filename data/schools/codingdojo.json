@@ -153,6 +153,7 @@
         }
       ],
       "multiMetros": true,
+      "loanLengths": ["36", "60"],
       "nonPaymentPeriod": 5
     },
     {
@@ -173,6 +174,7 @@
         }
       ],
       "multiMetros": false,
+      "loanLengths": ["36", "60"],
       "nonPaymentPeriod": 5
     },
     {
@@ -193,6 +195,7 @@
         }
       ],
       "multiMetros": false,
+      "loanLengths": ["36", "60"],
       "nonPaymentPeriod": 6
     },
     {
@@ -213,6 +216,7 @@
         }
       ],
       "multiMetros": false,
+      "loanLengths": ["36", "60"],
       "nonPaymentPeriod": 5
     }
   ]

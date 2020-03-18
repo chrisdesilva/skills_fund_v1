@@ -63,6 +63,7 @@ export const useSchoolData = () => {
                 max
               }
               multiMetros
+              loanLengths
               name
               nonPaymentPeriod
               segment
