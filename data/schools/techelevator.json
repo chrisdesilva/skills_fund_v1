@@ -63,6 +63,7 @@
         }
       ],
       "multiMetros": false,
+      "loanLengths": ["36", "60"],
       "nonPaymentPeriod": 5,
       "defaultAmount": 10000
     }

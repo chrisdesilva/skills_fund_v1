@@ -132,7 +132,7 @@ export const DropDownContent = styled.div`
   z-index: 20;
   background: white;
   padding: 1rem 0.25rem;
-  border-top: 2px solid purple;
+  border-top: 2px solid #e96965;
   box-shadow: 2px 2px 5px lightgray;
   border-radius: 2px;
   width: 12rem;
@@ -151,7 +151,7 @@ export const DropDownContent = styled.div`
       transition: color 300ms;
 
       &:hover {
-        color: purple;
+        color: #e96965;
       }
     }
   }
@@ -167,7 +167,7 @@ export const DropdownLink = styled(props => <Link {...props} />)`
   color: black;
   transition: color 300ms;
   :hover {
-    color: purple;
+    color: #e96965;
   }
   :hover + ${DropDownContent} {
     display: block;

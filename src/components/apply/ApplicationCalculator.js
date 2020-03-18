@@ -224,39 +224,41 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
               </LoanCalculatorSlider>
             )}
             <Payments showSliders={showSliders}>
-              <PaymentCard>
-                <div className="card--info">
-                  <h3>{loanType}</h3>
-                  <h4>36 Month Option</h4>
-                  {program[0] && (
-                    <p className="text-xs">
-                      {program[0]["aprAndType"][0]["info"]["apr36"]}% APR
-                    </p>
-                  )}
-                </div>
-                <div className="card--payments">
-                  {loanType === "Interest Only" && (
-                    <>
-                      <p className="mb-0 mt-4">
-                        {formatterCents.format(interestPayments.payment36)}
+              {program[0] && program[0]["loanLengths"].includes("36") && (
+                <PaymentCard>
+                  <div className="card--info">
+                    <h3>{loanType}</h3>
+                    <h4>36 Month Option</h4>
+                    {program[0] && (
+                      <p className="text-xs">
+                        {program[0]["aprAndType"][0]["info"]["apr36"]}% APR
                       </p>
-                      <p className="mb-0 mt-1">Monthly Payments in School</p>
-                    </>
-                  )}
-                  <p className="mb-0 mt-4">
-                    {formatterCents.format(monthlyPayments.payment36)}
-                  </p>
-                  <p className="mb-0 mt-1">
-                    Monthly Payments
-                    {loanType === "Interest Only" && " After Graduation"}
-                  </p>
-                  <p className="mb-0 mt-4">
-                    {formatterCents.format(totalPayments.payment36)}
-                  </p>
-                  <p className="mb-0 mt-1">Total cost of loan</p>
-                </div>
-              </PaymentCard>
-              {school["features"]["multiLoanLengths"] && (
+                    )}
+                  </div>
+                  <div className="card--payments">
+                    {loanType === "Interest Only" && (
+                      <>
+                        <p className="mb-0 mt-4">
+                          {formatterCents.format(interestPayments.payment36)}
+                        </p>
+                        <p className="mb-0 mt-1">Monthly Payments in School</p>
+                      </>
+                    )}
+                    <p className="mb-0 mt-4">
+                      {formatterCents.format(monthlyPayments.payment36)}
+                    </p>
+                    <p className="mb-0 mt-1">
+                      Monthly Payments
+                      {loanType === "Interest Only" && " After Graduation"}
+                    </p>
+                    <p className="mb-0 mt-4">
+                      {formatterCents.format(totalPayments.payment36)}
+                    </p>
+                    <p className="mb-0 mt-1">Total cost of loan</p>
+                  </div>
+                </PaymentCard>
+              )}
+              {program[0] && program[0]["loanLengths"].includes("60") && (
                 <PaymentCard>
                   <div className="card--info">
                     <h3>{loanType}</h3>
