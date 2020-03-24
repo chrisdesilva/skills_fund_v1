@@ -7,8 +7,14 @@ import {
   calculateTotalPayment,
 } from "../../utils/calculator"
 
-const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
-  const [program, setProgram] = useState("")
+const ApplicationCalculator = ({
+  school,
+  showCalculator,
+  schoolName,
+  program,
+  showSliders,
+  toggleSliders,
+}) => {
   const [tuitionValue, setTuitionValue] = useState("")
   const [colValue, setCOLValue] = useState("")
   const loanValue = tuitionValue + colValue
@@ -20,7 +26,6 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
   const [totalPayments, setTotalPayments] = useState("")
   const [loanType, setLoanType] = useState("")
   const [nonPaymentPeriod, setNonPaymentPeriod] = useState("")
-  const [showSliders, toggleSliders] = useState(false)
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -42,14 +47,6 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
     setCOLValue(Number(e.target.value))
   }
 
-  const selectProgramLoan = e => {
-    const selectedProgram = school.loanInfo.filter(
-      program => program.name === e.target.value
-    )
-    setProgram(selectedProgram)
-    toggleSliders(true)
-  }
-
   const selectLoanType = e => {
     setLoanType(e.target.value)
   }
@@ -61,14 +58,15 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
   }
 
   useEffect(() => {
-    if (program[0]) {
-      setTuitionValue(program[0]["defaultAmount"])
-      setMetros(program[0]["metros"])
-      setMaxTuition(program[0]["aprAndType"][0]["info"]["maxTuition"])
+    console.log(program)
+    if (program) {
+      setTuitionValue(program["defaultAmount"])
+      setMetros(program["metros"])
+      setMaxTuition(program["aprAndType"][0]["info"]["maxTuition"])
       setCOLValue(0)
-      setMaxCOL(program[0]["aprAndType"][0]["info"]["maxCOL"])
-      setLoanType(program[0]["aprAndType"][0]["info"]["type"])
-      setNonPaymentPeriod(program[0]["nonPaymentPeriod"])
+      setMaxCOL(program["aprAndType"][0]["info"]["maxCOL"])
+      setLoanType(program["aprAndType"][0]["info"]["type"])
+      setNonPaymentPeriod(program["nonPaymentPeriod"])
     }
   }, [program, metros])
 
@@ -77,9 +75,8 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
     setCOLValue(0)
     setMaxTuition("")
     setMaxCOL("")
-    setProgram("")
     toggleSliders(false)
-    program[0] && setLoanType(program[0]["aprAndType"][0]["info"]["type"])
+    program && setLoanType(program["aprAndType"][0]["info"]["type"])
   }, [school])
 
   useEffect(() => {
@@ -89,7 +86,7 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
   }, [maxTuition])
 
   useEffect(() => {
-    if (program[0]) {
+    if (program) {
       calculateInterestPayment(loanValue, setInterestPayments)
       calculateMonthlyPayment(loanValue, 10000, setMonthlyPayments)
       calculateTotalPayment(
@@ -113,28 +110,15 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
         >
           <CalculatorCard>
             <h2>
-              Loan Calculator{showCalculator && <span> for {schoolName}</span>}
+              Loan Calculator
+              {showCalculator && (
+                <span>
+                  {" "}
+                  for {schoolName} - {program.name}
+                </span>
+              )}
             </h2>
-            <div>
-              <label htmlFor="program">Select your program</label>
-              <select
-                id="program"
-                defaultValue={"default"}
-                onChange={selectProgramLoan}
-                onBlur={selectProgramLoan}
-              >
-                <option disabled value="default">
-                  ---
-                </option>
-                {school["loanInfo"] &&
-                  school["loanInfo"].map(program => (
-                    <option key={program.segment} value={program.name}>
-                      {program.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-            {program[0] && program[0]["aprAndType"].length > 1 && (
+            {program && program["aprAndType"].length > 1 && (
               <div>
                 <label htmlFor="loanType">Select your loan type</label>
                 <select
@@ -152,7 +136,7 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
                 </select>
               </div>
             )}
-            {program[0] && program[0]["metros"].length > 0 && (
+            {program && program["metros"].length > 0 && (
               <div>
                 <label htmlFor="program">Select your location</label>
                 <select
@@ -223,15 +207,21 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
                 )}
               </LoanCalculatorSlider>
             )}
+
             <Payments showSliders={showSliders}>
-              {program[0] && program[0]["loanLengths"].includes("36") && (
-                <PaymentCard>
+              {program && program["loanLengths"].includes("36") && (
+                <PaymentCard
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  transition={{ delay: 0.3 }}
+                  exit={{ opacity: 0 }}
+                >
                   <div className="card--info">
                     <h3>{loanType}</h3>
                     <h4>36 Month Option</h4>
-                    {program[0] && (
+                    {program && (
                       <p className="text-xs">
-                        {program[0]["aprAndType"][0]["info"]["apr36"]}% APR
+                        {program["aprAndType"][0]["info"]["apr36"]}% APR
                       </p>
                     )}
                   </div>
@@ -258,14 +248,14 @@ const ApplicationCalculator = ({ school, showCalculator, schoolName }) => {
                   </div>
                 </PaymentCard>
               )}
-              {program[0] && program[0]["loanLengths"].includes("60") && (
+              {program && program["loanLengths"].includes("60") && (
                 <PaymentCard>
                   <div className="card--info">
                     <h3>{loanType}</h3>
                     <h4>60 Month Option</h4>
-                    {program[0] && (
+                    {program && (
                       <p className="text-xs">
-                        {program[0]["aprAndType"][0]["info"]["apr60"]}% APR
+                        {program["aprAndType"][0]["info"]["apr60"]}% APR
                       </p>
                     )}
                   </div>
@@ -306,8 +296,9 @@ const CalculatorContainer = styled(motion.section)`
   display: flex;
   justify-content: center;
   align-items: center;
+  background: ${props => props.theme.primary};
+  color: white;
   overflow: hidden;
-  margin-top: 4rem;
   select {
     width: 20rem;
   }
@@ -319,21 +310,11 @@ const CalculatorCard = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  background: white;
   position: relative;
 
   h2 {
     margin-bottom: 1rem;
     text-align: center;
-  }
-
-  :before {
-    content: "";
-    position: absolute;
-    height: 1px;
-    top: 0;
-    background: black;
-    width: 75vw;
   }
 `
 
@@ -341,7 +322,7 @@ const LoanCalculatorSlider = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
+  width: 50%;
   transition: opacity 300ms;
   opacity: ${({ showSliders }) => (showSliders ? "1" : "0")};
 
@@ -364,25 +345,23 @@ const LoanCalculatorSlider = styled.div`
 `
 
 const Payments = styled.div`
-  display: flex;
   justify-content: space-evenly;
   width: 100%;
-  transition: opacity 300ms;
-  opacity: ${({ showSliders }) => (showSliders ? "1" : "0")};
+  display: ${({ showSliders }) => (showSliders ? "flex" : "none")};
 `
 
 const PaymentCard = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  border-radius: 5px;
-  box-shadow: 2px 2px 10px lightgray;
-  color: #070707;
-
+  box-shadow: 2px 2px 1px lightgray;
+  color: white;
+  background: white;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4,
+    5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
+  transform: translateX(-8px) translateY(-8px);
   .card--info {
-    background: #fd6d5d;
-    border-top-left-radius: 5px;
-    border-top-right-radius: 5px;
+    background: ${({ theme }) => theme.primaryLight};
     padding: 0.5rem 1rem;
     p {
       margin: 0;
@@ -391,5 +370,6 @@ const PaymentCard = styled.div`
 
   .card--payments {
     padding: 0.5rem 2rem 1rem 2rem;
+    color: black;
   }
 `
