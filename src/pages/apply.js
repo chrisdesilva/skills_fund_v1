@@ -1,6 +1,12 @@
 import React from "react"
 import styled from "styled-components"
-import { FaGraduationCap, FaCode, FaEnvelope } from "react-icons/fa"
+import {
+  FaGraduationCap,
+  FaCode,
+  FaEnvelope,
+  FaCaretDown,
+  FaCheckCircle,
+} from "react-icons/fa"
 import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
 import ApplicationCalculator from "../components/apply/ApplicationCalculator"
@@ -24,7 +30,16 @@ const Apply = () => {
     schoolList,
     school,
     loanUrl,
+    program,
+    showSliders,
+    toggleSliders,
   ] = useApplication()
+
+  const formatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+    minimumFractionDigits: 0,
+  })
 
   return (
     <Layout>
@@ -69,48 +84,69 @@ const Apply = () => {
                 </option>
                 {school["loanInfo"] &&
                   school["loanInfo"].map(program => (
-                    <option key={program.segment} value={program.segment}>
+                    <option
+                      key={program.segment}
+                      value={JSON.stringify(program)}
+                    >
                       {program.name}
                     </option>
                   ))}
               </select>
             </div>
-            <form onSubmit={handleSubmit} className="input">
+            <form className="input">
               <FaEnvelope />
               <label htmlFor="email">Enter your email address</label>
-              <div>
-                <input
-                  id="email"
-                  type="email"
-                  placeholder="Enter your email address"
-                  required
-                  onChange={handleEmail}
-                />
-                <input
-                  type="submit"
-                  value="Next &rarr;"
-                  className={
-                    email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
-                  }
-                  disabled={email && loanUrl ? false : true}
-                />
-              </div>
+
+              <input
+                id="email"
+                type="email"
+                placeholder="Enter your email address"
+                required
+                onChange={handleEmail}
+              />
             </form>
           </SelectContainer>
-          <ThankYou thankYou={showThankYou}>
-            Thanks for applying! Your application has opened in a new window.
-          </ThankYou>
+          <ApplySubmit thankYou={showThankYou}>
+            <input
+              type="submit"
+              value="Next &rarr;"
+              onClick={handleSubmit}
+              className={
+                email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+              }
+              disabled={email && loanUrl ? false : true}
+            />
+            <p>Your application has opened in a new window.</p>
+          </ApplySubmit>
+          <p className="financingAvailable">
+            Great! You can borrow up to&nbsp;
+            {program &&
+              formatter.format(program["aprAndType"][0]["info"]["maxTuition"])}
+            &nbsp;for tuition&nbsp;
+            {program && program["aprAndType"][0]["info"]["maxCOL"] > 0 && (
+              <span>
+                and up to&nbsp;
+                {program &&
+                  formatter.format(program["aprAndType"][0]["info"]["maxCOL"])}
+                &nbsp;for living expenses
+              </span>
+            )}
+            <FaCheckCircle />
+          </p>
           <p className="calculator uppercase text-xs">
             Curious what you'll pay?
           </p>
           <p className="calculator" onClick={() => setShowCalculator(true)}>
-            Easily calculate your payments.
+            Easily calculate your payments <FaCaretDown />
           </p>
           <ApplicationCalculator
             school={school}
             setSchoolName={setSchoolName}
             showCalculator={showCalculator}
             schoolName={schoolName}
+            program={program}
+            showSliders={showSliders}
+            toggleSliders={toggleSliders}
           />
         </ApplyCard>
       </ApplyContainer>
@@ -124,14 +160,15 @@ const ApplyContainer = styled.section`
   display: flex;
   justify-content: center;
   background: #f7f7f7;
-  padding: 2rem 0 4rem 0;
   min-height: 30vh;
+  margin: 2rem 0 4rem 0;
 `
 
 const ApplyCard = styled.div`
-  padding: 2rem;
   border: 1px solid lightgray;
   border-radius: 5px;
+  padding-top: 2rem;
+  margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
   background: white;
@@ -144,11 +181,34 @@ const ApplyCard = styled.div`
     text-align: center;
   }
 
+  .financingAvailable {
+    transition: opacity 300ms;
+    opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    svg {
+      transition: opacity 300ms, transform 500ms;
+      transition-delay: 1000ms;
+      opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
+      transform: ${({ showCalculatorText }) =>
+        showCalculatorText ? "scale(1.25)" : "scale(0)"};
+      color: green;
+      margin-left: 0.5rem;
+    }
+  }
+
   .calculator {
     transition: opacity 300ms;
+    transition-delay: 2000ms;
     opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
     text-align: center;
     margin: 0.25rem 0;
+
+    :last-of-type {
+      margin-bottom: 2rem;
+    }
 
     :not(.uppercase) {
       position: relative;
@@ -202,14 +262,22 @@ const SelectContainer = styled.div`
     div {
       display: flex;
       flex-direction: row;
-      .btn {
-        width: 33%;
-      }
     }
   }
 `
 
-const ThankYou = styled.p`
-  transition: opacity 300ms;
-  opacity: ${({ thankYou }) => (thankYou ? "1" : "0")};
+const ApplySubmit = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    margin: 3rem 0 2rem 0;
+  }
+
+  p {
+    transition: opacity 300ms;
+    opacity: ${({ thankYou }) => (thankYou ? "1" : "0")};
+  }
 `

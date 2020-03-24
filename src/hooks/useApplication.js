@@ -6,6 +6,8 @@ export const useApplication = () => {
   const schoolList = edges
   const [school, setSchool] = useState("")
   const [schoolName, setSchoolName] = useState("")
+  const [program, setProgram] = useState("")
+  const [showSliders, toggleSliders] = useState(false)
   const [showCalculator, setShowCalculator] = useState(false)
   const [showCalculatorText, setShowCalculatorText] = useState(false)
   const [loanUrl, setLoanUrl] = useState(false)
@@ -14,7 +16,6 @@ export const useApplication = () => {
   const [showThankYou, setShowThankYou] = useState(false)
 
   const selectSchool = e => {
-    setShowCalculatorText(true)
     const selectedSchool = schoolList.filter(
       school => school.node.slug === e.target.value
     )
@@ -22,7 +23,14 @@ export const useApplication = () => {
   }
 
   const selectProgram = e => {
-    setLoanUrl(e.target.value)
+    const parsedObj = JSON.parse(e.target.value)
+    setLoanUrl(parsedObj["segment"])
+    const selectedProgram = school.loanInfo.filter(
+      program => program.name === parsedObj["name"]
+    )
+    setProgram(selectedProgram[0])
+    toggleSliders(true)
+    setShowCalculatorText(true)
   }
 
   const handleEmail = e => {
@@ -61,5 +69,8 @@ export const useApplication = () => {
     schoolList,
     school,
     loanUrl,
+    program,
+    showSliders,
+    toggleSliders,
   ]
 }
