@@ -37,7 +37,6 @@ const SchoolList = ({ filteredSchools }) => {
               </div>
             </ListColumn>
             <ListColumn>
-              <h3>Locations</h3>
               <h4>{school.basicInfo.schoolname}</h4>
               {school.basicInfo.locations
                 .sort()
