@@ -34,11 +34,14 @@ input {
 }
 
 .btn:hover {
-  box-shadow: 1px 3px 2px rgb(170, 170, 170);
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4,
+      4px 4px #c4c4c4;
+      transform: translateX(-4px) translateY(-4px);
 }
 
 .btn:active {
-  box-shadow: 1px 1px 2px rgb(170, 170, 170);
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
+  transform: translateX(-2px) translateY(-2px);
 }
 
 .btn--submit {
@@ -46,6 +49,9 @@ input {
   color: white;
   font-weight: bold;
   text-align: center;
+  width: 11rem;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
+  transform: translateX(-2px) translateY(-2px);
 }
 
 .btn--disabled {
@@ -55,6 +61,7 @@ input {
 }
 .btn--disabled:hover {
   box-shadow: none;
+  transform: translate(0);
 }
 
 .btn--nav {

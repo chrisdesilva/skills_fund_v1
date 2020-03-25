@@ -404,6 +404,15 @@ const CalculatorCard = styled.div`
       display: flex;
     }
   }
+
+  .btn--submit {
+    box-shadow: none;
+    transform: translate(0);
+    :hover {
+      transform: translate(0);
+      box-shadow: none;
+    }
+  }
 `
 
 const LoanCalculatorSlider = styled.div`

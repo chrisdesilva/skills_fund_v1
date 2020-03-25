@@ -356,6 +356,8 @@ const Card = styled(motion.div)`
       color: black;
       background: white;
       border: 2px solid black;
+      transform: translate(0);
+      box-shadow: none;
     }
   }
 

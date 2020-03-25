@@ -74,11 +74,9 @@ const DesktopNavMenu = () => {
               </li>
             </DropDownContent>
           </Dropdown>
-          <li>
-            <Link className="btn btn--submit" to="/apply">
-              Apply Now
-            </Link>
-          </li>
+          <Link id="btn--submit" className="btn btn--submit" to="/apply">
+            Apply Now
+          </Link>
         </ul>
       </nav>
     </StyledHeader>
@@ -110,14 +108,19 @@ export const StyledHeader = styled.header`
       margin-left: 1rem;
     }
 
+    .btn--submit {
+      width: 8rem;
+
+      :hover {
+        transform: translateX(-2px) translateY(-2px);
+        box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
+      }
+    }
+
     #logo {
       width: 8rem;
       margin-left: -2rem;
       margin-right: 2rem;
-    }
-
-    a {
-      text-decoration: none;
     }
   }
 `
@@ -193,7 +196,7 @@ export const DropDownMain = styled.a`
     transition: color 300ms;
 
     :hover {
-      color: purple;
+      color: #e96965;
     }
   }
 `
