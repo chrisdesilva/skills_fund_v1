@@ -118,27 +118,33 @@ const Apply = () => {
             />
             <p>Your application has opened in a new window.</p>
           </ApplySubmit>
-          <p className="financingAvailable">
-            Great! You can borrow up to&nbsp;
-            {program &&
-              formatter.format(program["aprAndType"][0]["info"]["maxTuition"])}
-            &nbsp;for tuition&nbsp;
-            {program && program["aprAndType"][0]["info"]["maxCOL"] > 0 && (
-              <span>
-                and up to&nbsp;
-                {program &&
-                  formatter.format(program["aprAndType"][0]["info"]["maxCOL"])}
-                &nbsp;for living expenses
-              </span>
-            )}
-            <FaCheckCircle />
-          </p>
-          <p className="calculator uppercase text-xs">
-            Curious what you'll pay?
-          </p>
-          <p className="calculator" onClick={() => setShowCalculator(true)}>
-            Easily calculate your payments <FaCaretDown />
-          </p>
+          <ApplyPayments>
+            <p className="financingAvailable">
+              Great! You can borrow up to&nbsp;
+              {program &&
+                formatter.format(
+                  program["aprAndType"][0]["info"]["maxTuition"]
+                )}
+              &nbsp;for tuition
+              {program && program["aprAndType"][0]["info"]["maxCOL"] > 0 && (
+                <>
+                  &nbsp;and up to&nbsp;
+                  {program &&
+                    formatter.format(
+                      program["aprAndType"][0]["info"]["maxCOL"]
+                    )}
+                  &nbsp;for living expenses
+                </>
+              )}
+              <FaCheckCircle />
+            </p>
+            <p className="calculator uppercase text-xs">
+              Curious what you'll pay?
+            </p>
+            <p className="calculator" onClick={() => setShowCalculator(true)}>
+              Easily calculate your payments <FaCaretDown />
+            </p>
+          </ApplyPayments>
           <ApplicationCalculator
             school={school}
             setSchoolName={setSchoolName}
@@ -171,7 +177,6 @@ const ApplyContainer = styled.section`
 
 const ApplyCard = styled.div`
   border: 1px solid lightgray;
-  padding-top: 2rem;
   margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
@@ -190,8 +195,15 @@ const ApplyCard = styled.div`
     transition: opacity 300ms;
     opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
+    padding: 0 0.25rem;
+    text-align: center;
+
+    @media ${breakpoint.lg} {
+      flex-direction: row;
+    }
 
     svg {
       transition: opacity 300ms, transform 500ms;
@@ -200,7 +212,12 @@ const ApplyCard = styled.div`
       transform: ${({ showCalculatorText }) =>
         showCalculatorText ? "scale(1.25)" : "scale(0)"};
       color: green;
-      margin-left: 0.5rem;
+      margin-top: 0.5rem;
+
+      @media ${breakpoint.lg} {
+        margin-left: 0.5rem;
+        margin-top: 0;
+      }
     }
   }
 
@@ -225,7 +242,7 @@ const ApplyCard = styled.div`
         left: 0;
         right: 0;
         margin: auto;
-        width: 12%;
+        width: 90%;
         content: ".";
         color: transparent;
         background: black;
@@ -233,7 +250,7 @@ const ApplyCard = styled.div`
         transition: width 300ms;
       }
       :hover:after {
-        width: 13%;
+        width: 95%;
       }
     }
   }
@@ -243,6 +260,7 @@ const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  padding: 1rem;
 
   @media ${breakpoint.xl} {
     flex-direction: row;
@@ -276,13 +294,22 @@ const ApplySubmit = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  padding: 0.25rem;
 
   input {
-    margin: 3rem 0 0 0;
+    @media ${breakpoint.lg} {
+      margin: 3rem 0 0 0;
+    }
   }
 
   p {
-    transition: opacity 300ms;
-    opacity: ${({ thankYou }) => (thankYou ? "1" : "0")};
+    display: ${({ thankYou }) => (thankYou ? "block" : "none")};
   }
+`
+
+const ApplyPayments = styled.div`
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 `
