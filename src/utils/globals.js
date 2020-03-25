@@ -246,9 +246,16 @@ label {
   position: absolute;
   width: 15rem;
   background: #f7f7f7;
-  top: 1.25rem;
+  top: 1.5rem;
   z-index: 5;
   padding: .25rem .5rem;
+  color: black;
+  font-size: .8rem;
+  text-align: left;
+
+  span {
+    font-weight: bold;
+  }
 }
 
 #tooltip--parent {

@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { motion, AnimatePresence } from "framer-motion"
+import { FaQuestionCircle } from "react-icons/fa"
 import {
   calculateInterestPayment,
   calculateMonthlyPayment,
@@ -15,6 +16,11 @@ const ApplicationCalculator = ({
   program,
   showSliders,
   toggleSliders,
+  handleEmail,
+  email,
+  handleSubmit,
+  loanUrl,
+  showThankYou,
 }) => {
   const [tuitionValue, setTuitionValue] = useState("")
   const [colValue, setCOLValue] = useState("")
@@ -216,7 +222,28 @@ const ApplicationCalculator = ({
                   exit={{ opacity: 0 }}
                 >
                   <div className="card--info">
-                    <h3>{loanType}</h3>
+                    <div id="tooltip--parent">
+                      <h3>
+                        {loanType} <FaQuestionCircle className="text-xs" />
+                      </h3>
+                      <div id="tooltip--tip">
+                        <p>
+                          {loanType === "Interest Only" ? (
+                            <>
+                              <span>Interest Only</span> - Make interest-only
+                              payments while in the program. Two months after
+                              completion, begin full payments.
+                            </>
+                          ) : (
+                            <>
+                              <span>Immediate Repayment</span> - Start making
+                              full payments (interest + principal) about one
+                              month after disbursement.
+                            </>
+                          )}
+                        </p>
+                      </div>
+                    </div>
                     <h4>36 Month Option</h4>
                     {program && (
                       <p className="text-xs">
@@ -250,7 +277,29 @@ const ApplicationCalculator = ({
               {program && program["loanLengths"].includes("60") && (
                 <PaymentCard>
                   <div className="card--info">
-                    <h3>{loanType}</h3>
+                    {" "}
+                    <div id="tooltip--parent">
+                      <h3>
+                        {loanType} <FaQuestionCircle className="text-xs" />
+                      </h3>
+                      <div id="tooltip--tip">
+                        <p>
+                          {loanType === "Interest Only" ? (
+                            <>
+                              <span>Interest Only</span> - Make interest-only
+                              payments while in the program. Two months after
+                              completion, begin full payments.
+                            </>
+                          ) : (
+                            <>
+                              <span>Immediate Repayment</span> - Start making
+                              full payments (interest + principal) about one
+                              month after disbursement.
+                            </>
+                          )}
+                        </p>
+                      </div>
+                    </div>
                     <h4>60 Month Option</h4>
                     {program && (
                       <p className="text-xs">
@@ -282,6 +331,35 @@ const ApplicationCalculator = ({
                 </PaymentCard>
               )}
             </Payments>
+            {showThankYou ? (
+              <p className="text-center mt-12">
+                Your application has opened in a new window.
+              </p>
+            ) : (
+              <form className="input">
+                <label htmlFor="email">
+                  Enter your email to apply for financing
+                </label>
+                <div>
+                  <input
+                    id="email"
+                    type="email"
+                    placeholder="Enter your email address"
+                    required
+                    onChange={handleEmail}
+                  />
+                  <input
+                    type="submit"
+                    value="Next &rarr;"
+                    onClick={handleSubmit}
+                    className={
+                      email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+                    }
+                    disabled={email && loanUrl ? false : true}
+                  />
+                </div>
+              </form>
+            )}
           </CalculatorCard>
         </CalculatorContainer>
       )}
@@ -315,6 +393,16 @@ const CalculatorCard = styled.div`
   h2 {
     margin-bottom: 1rem;
     text-align: center;
+  }
+
+  form {
+    width: 20rem;
+    margin-top: 3rem;
+    text-align: center;
+
+    div {
+      display: flex;
+    }
   }
 `
 

@@ -147,6 +147,11 @@ const Apply = () => {
             program={program}
             showSliders={showSliders}
             toggleSliders={toggleSliders}
+            email={email}
+            handleEmail={handleEmail}
+            handleSubmit={handleSubmit}
+            loanUrl={loanUrl}
+            showThankYou={showThankYou}
           />
         </ApplyCard>
       </ApplyContainer>
