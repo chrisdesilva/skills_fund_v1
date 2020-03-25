@@ -273,7 +273,7 @@ const ApplySubmit = styled.div`
   align-items: center;
 
   input {
-    margin: 3rem 0 2rem 0;
+    margin: 3rem 0 0 0;
   }
 
   p {

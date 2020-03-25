@@ -1,4 +1,4 @@
-import { createGlobalStyle } from "styled-components"
+import { createGlobalStyle, ThemeProvider } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
 body {
@@ -114,6 +114,111 @@ input {
   box-sizing: border-box;
   outline: none;
 }
+
+input[type=range] {
+  -webkit-appearance: none;
+  width: 100%;
+  border: none;
+}
+
+input[type=range]::-webkit-slider-runnable-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: ${({ theme }) => theme.primaryLight};
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-webkit-slider-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 9999px;
+  background: #ffffff;
+  cursor: pointer;
+  -webkit-appearance: none;
+  margin-top: -5px;
+}
+
+.slider__label--container {
+  position: relative;
+  width: 100%;
+  background: none;
+}
+
+.slider__label--label {
+  position: absolute;
+  top: 0;
+  width: 100%;
+}
+
+input[type=range]:focus::-webkit-slider-runnable-track {
+  background: ${({ theme }) => theme.primaryLight};
+}
+input[type=range]::-moz-range-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  background: ${({ theme }) => theme.primaryLight};
+  border-radius: 1.3px;
+  border: 0.2px solid #010101;
+}
+input[type=range]::-moz-range-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 9999px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]::-ms-track {
+  width: 100%;
+  height: 8.4px;
+  cursor: pointer;
+  animate: 0.2s;
+  background: transparent;
+  border-color: transparent;
+  border-width: 16px 0;
+  color: transparent;
+}
+input[type=range]::-ms-fill-lower {
+  background: #2a6495;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-fill-upper {
+  background: #3071a9;
+  border: 0.2px solid #010101;
+  border-radius: 2.6px;
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+}
+input[type=range]::-ms-thumb {
+  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: 1px solid #000000;
+  height: 20px;
+  width: 20px;
+  border-radius: 9999px;
+  background: #ffffff;
+  cursor: pointer;
+}
+input[type=range]:focus::-ms-fill-lower {
+  background: #3071a9;
+}
+input[type=range]:focus::-ms-fill-upper {
+  background: #367ebd;
+}
+
+.loanCalculator--input {
+  background: none;
+}
+
 select {
   display: block;
   line-height: 1.3;
