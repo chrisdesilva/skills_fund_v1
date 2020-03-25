@@ -6,6 +6,7 @@ import {
   calculateMonthlyPayment,
   calculateTotalPayment,
 } from "../../utils/calculator"
+import { breakpoint } from "../../utils/breakpoints"
 
 const ApplicationCalculator = ({
   school,
@@ -158,53 +159,51 @@ const ApplicationCalculator = ({
               </div>
             )}
             <LoanCalculatorSlider showSliders={showSliders}>
-              <div>
+              <div className="loanCalculator--total">
                 <p id="total">{formatter.format(loanValue)}</p>
                 <p>Total Loan Amount</p>
               </div>
-              <input
-                onChange={handleTuitionSlider}
-                onBlur={handleTuitionSlider}
-                type="range"
-                min="2000"
-                step="5"
-                max={maxTuition}
-                value={tuitionValue}
-              />
-              {loanValue && (
+              <div className="slider__label--container">
+                <span className="slider__label--label">
+                  Tuition financed: {formatter.format(tuitionValue)}
+                </span>
+                <input
+                  onChange={handleTuitionSlider}
+                  onBlur={handleTuitionSlider}
+                  type="range"
+                  min="2000"
+                  step="5"
+                  max={maxTuition}
+                  value={tuitionValue}
+                  className="loanCalculator--input"
+                />
+              </div>
+              {/* {loanValue && (
                 <div className="labels">
                   <p>$2,000</p>
-                  <div>
-                    <p>{formatter.format(tuitionValue)}</p>
-                    <p>Tuition Amount</p>
-                  </div>
                   <p>{formatter.format(maxTuition)}</p>
                 </div>
-              )}
+              )} */}
             </LoanCalculatorSlider>
             {maxCOL > 0 && (
               <LoanCalculatorSlider showSliders={showSliders}>
-                <input
-                  onChange={handleCOLSlider}
-                  onBlur={handleCOLSlider}
-                  // onTouchEnd={calculateMonthlyPayment}
-                  // onMouseUp={calculateMonthlyPayment}
-                  type="range"
-                  min="0"
-                  step="5"
-                  max={maxCOL}
-                  value={colValue}
-                />
-                {loanValue && (
-                  <div className="labels">
-                    <p>$0</p>
-                    <div>
-                      <p>{formatter.format(colValue)}</p>
-                      <p>Cost of Living Amount</p>
-                    </div>
-                    <p>{formatter.format(maxCOL)}</p>
-                  </div>
-                )}
+                <div className="slider__label--container">
+                  <span className="slider__label--label">
+                    Living expenses financed: {formatter.format(colValue)}
+                  </span>
+                  <input
+                    onChange={handleCOLSlider}
+                    onBlur={handleCOLSlider}
+                    // onTouchEnd={calculateMonthlyPayment}
+                    // onMouseUp={calculateMonthlyPayment}
+                    type="range"
+                    min="0"
+                    step="5"
+                    max={maxCOL}
+                    value={colValue}
+                    className="loanCalculator--input"
+                  />
+                </div>
               </LoanCalculatorSlider>
             )}
 
@@ -322,14 +321,28 @@ const LoanCalculatorSlider = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 50%;
+  width: 100%;
   transition: opacity 300ms;
+  margin: 2rem 0;
   opacity: ${({ showSliders }) => (showSliders ? "1" : "0")};
+
+  @media ${breakpoint.lg} {
+    width: 50%;
+  }
+
+  .loanCalculator--total {
+    margin: 1rem 0;
+  }
 
   .labels {
     display: flex;
     justify-content: space-between;
     width: 100%;
+  }
+
+  span {
+    text-align: center;
+    margin-top: 2rem;
   }
 
   p {
@@ -340,14 +353,22 @@ const LoanCalculatorSlider = styled.div`
   #total {
     font-weight: bold;
     font-size: 2rem;
-    margin: 1rem 0;
+    margin-top: 1rem;
+    margin-bottom: 0;
   }
 `
 
 const Payments = styled.div`
   justify-content: space-evenly;
   width: 100%;
-  display: ${({ showSliders }) => (showSliders ? "flex" : "none")};
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 3rem;
+
+  @media ${breakpoint.lg} {
+    flex-direction: row;
+  }
 `
 
 const PaymentCard = styled.div`
@@ -357,9 +378,15 @@ const PaymentCard = styled.div`
   box-shadow: 2px 2px 1px lightgray;
   color: white;
   background: white;
+  margin: 1rem 0;
   box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4,
     5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
   transform: translateX(-8px) translateY(-8px);
+
+  @media ${breakpoint.lg} {
+    margin: 0;
+  }
+
   .card--info {
     background: ${({ theme }) => theme.primaryLight};
     padding: 0.5rem 1rem;
