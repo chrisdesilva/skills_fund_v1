@@ -166,15 +166,15 @@ const ApplyContainer = styled.section`
 
 const ApplyCard = styled.div`
   border: 1px solid lightgray;
-  border-radius: 5px;
   padding-top: 2rem;
   margin-bottom: 4rem;
   display: flex;
   flex-direction: column;
   background: white;
-  box-shadow: 2px 2px 10px lightgray;
   width: 100%;
   margin: 0 5rem;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4,
+    5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
 
   h1 {
     margin-bottom: 1rem;

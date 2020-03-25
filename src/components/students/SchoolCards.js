@@ -242,8 +242,7 @@ const CardSide = css`
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
   border: 2px solid gray;
-  border-radius: 5px;
-  box-shadow: 2px 2px 10px lightgray;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
 
   .click {
     display: flex;
@@ -287,6 +286,7 @@ const CardBack = styled.div`
   p {
     font-size: 0.65rem;
     margin: 0 0 0.25rem 0;
+    line-height: 1.1;
   }
 
   h4 {
@@ -394,6 +394,7 @@ const CardInfo = styled.div`
   p {
     margin: 0 0 0.25rem 0;
     font-size: 0.8rem;
+    line-height: 1.1;
   }
 
   .click {

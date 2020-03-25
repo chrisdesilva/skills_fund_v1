@@ -227,20 +227,20 @@ const ApplicationCalculator = ({
                   <div className="card--payments">
                     {loanType === "Interest Only" && (
                       <>
-                        <p className="mb-0 mt-4">
+                        <p className="mb-0 mt-4 text-2xl font-bold">
                           {formatterCents.format(interestPayments.payment36)}
                         </p>
                         <p className="mb-0 mt-1">Monthly Payments in School</p>
                       </>
                     )}
-                    <p className="mb-0 mt-4">
+                    <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(monthlyPayments.payment36)}
                     </p>
                     <p className="mb-0 mt-1">
                       Monthly Payments
                       {loanType === "Interest Only" && " After Graduation"}
                     </p>
-                    <p className="mb-0 mt-4">
+                    <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(totalPayments.payment36)}
                     </p>
                     <p className="mb-0 mt-1">Total cost of loan</p>
@@ -261,20 +261,20 @@ const ApplicationCalculator = ({
                   <div className="card--payments">
                     {loanType === "Interest Only" && (
                       <>
-                        <p className="mb-0 mt-4">
+                        <p className="mb-0 mt-4 text-2xl font-bold">
                           {formatterCents.format(interestPayments.payment60)}
                         </p>
                         <p className="mb-0 mt-1">Monthly Payments in School</p>
                       </>
                     )}
-                    <p className="mb-0 mt-4">
+                    <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(monthlyPayments.payment60)}
                     </p>
                     <p className="mb-0 mt-1">
                       Monthly Payments
                       {loanType === "Interest Only" && " After Graduation"}
                     </p>
-                    <p className="mb-0 mt-4">
+                    <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(totalPayments.payment60)}
                     </p>
                     <p className="mb-0 mt-1">Total cost of loan</p>
@@ -295,9 +295,10 @@ const CalculatorContainer = styled(motion.section)`
   display: flex;
   justify-content: center;
   align-items: center;
-  background: ${props => props.theme.primary};
-  color: white;
+  background: ${({ theme }) => theme.primaryLight};
+  color: ${({ theme }) => theme.primaryDark};
   overflow: hidden;
+  border-top: ${({ theme }) => `5px solid ${theme.primaryDark}`};
   select {
     width: 20rem;
   }
@@ -332,6 +333,12 @@ const LoanCalculatorSlider = styled.div`
 
   .loanCalculator--total {
     margin: 1rem 0;
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4,
+      4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4,
+      8px 8px #c4c4c4;
+    transform: translateX(-8px) translateY(-8px);
+    background: white;
+    padding: 0 1rem;
   }
 
   .labels {
@@ -343,6 +350,7 @@ const LoanCalculatorSlider = styled.div`
   span {
     text-align: center;
     margin-top: 2rem;
+    font-size: 0.8rem;
   }
 
   p {
@@ -375,20 +383,20 @@ const PaymentCard = styled.div`
   display: flex;
   flex-direction: column;
   text-align: center;
-  box-shadow: 2px 2px 1px lightgray;
   color: white;
   background: white;
   margin: 1rem 0;
   box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4,
     5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
   transform: translateX(-8px) translateY(-8px);
+  width: 20rem;
 
   @media ${breakpoint.lg} {
     margin: 0;
   }
 
   .card--info {
-    background: ${({ theme }) => theme.primaryLight};
+    background: ${({ theme }) => theme.primaryDark};
     padding: 0.5rem 1rem;
     p {
       margin: 0;
@@ -396,7 +404,11 @@ const PaymentCard = styled.div`
   }
 
   .card--payments {
-    padding: 0.5rem 2rem 1rem 2rem;
+    padding: 2rem;
     color: black;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
 `

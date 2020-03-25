@@ -1,10 +1,11 @@
-import { createGlobalStyle, ThemeProvider } from "styled-components"
+import { createGlobalStyle } from "styled-components"
 
 export const GlobalStyle = createGlobalStyle`
+
 body {
-  font-family: "forma-djr-micro", sans-serif;
   margin: 0;
   overflow-x: hidden;
+  font-family: 'Poppins', sans-serif; 
 }
 
 h1,
@@ -126,18 +127,16 @@ input[type=range]::-webkit-slider-runnable-track {
   height: 8.4px;
   cursor: pointer;
   animate: 0.2s;
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: ${({ theme }) => theme.primaryLight};
+  background: #f7f7f7;
   border-radius: 1.3px;
   border: 0.2px solid #010101;
 }
 input[type=range]::-webkit-slider-thumb {
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  border: 1px solid #000000;
+  border: ${({ theme }) => `2px solid ${theme.primaryDark}`};
   height: 20px;
   width: 20px;
   border-radius: 9999px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.primaryLight};
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -5px;
@@ -156,7 +155,7 @@ input[type=range]::-webkit-slider-thumb {
 }
 
 input[type=range]:focus::-webkit-slider-runnable-track {
-  background: ${({ theme }) => theme.primaryLight};
+  background: #f7f7f7;
 }
 input[type=range]::-moz-range-track {
   width: 100%;
@@ -164,17 +163,17 @@ input[type=range]::-moz-range-track {
   cursor: pointer;
   animate: 0.2s;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  background: ${({ theme }) => theme.primaryLight};
+  background: #f7f7f7;
   border-radius: 1.3px;
   border: 0.2px solid #010101;
 }
 input[type=range]::-moz-range-thumb {
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
+  border: ${({ theme }) => `2px solid ${theme.primaryDark}`};
   border: 1px solid #000000;
   height: 20px;
   width: 20px;
   border-radius: 9999px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.primaryLight};
   cursor: pointer;
 }
 input[type=range]::-ms-track {
@@ -200,12 +199,12 @@ input[type=range]::-ms-fill-upper {
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
 }
 input[type=range]::-ms-thumb {
-  box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
-  border: 1px solid #000000;
+
+  border: ${({ theme }) => `2px solid ${theme.primaryDark}`};
   height: 20px;
   width: 20px;
   border-radius: 9999px;
-  background: #ffffff;
+  background: ${({ theme }) => theme.primaryLight};
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {

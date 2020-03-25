@@ -6,6 +6,7 @@ import Footer from "./Footer"
 import { theme } from "../../utils/theme"
 import { breakpoint } from "../../utils/breakpoints"
 import { GlobalStyle } from "../../utils/globals"
+import "../../utils/globals"
 
 const PageContainer = styled.div`
   display: flex;

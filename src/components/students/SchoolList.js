@@ -141,7 +141,7 @@ const ListContainer = styled(motion.div)`
 const ListItem = styled.div`
   padding: 1rem 0;
   border-top: 1px solid lightgray;
-  box-shadow: 2px 2px 5px lightgray;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
   display: flex;
   background: white;
   margin: 0.25rem 1rem;

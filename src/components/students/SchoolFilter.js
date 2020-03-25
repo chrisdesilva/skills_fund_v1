@@ -339,11 +339,10 @@ const FilterContainer = styled.section`
 
 const FilterCard = styled.div`
   border: 1px solid lightgray;
-  border-radius: 5px;
   width: 75%;
   background: white;
   padding: 1rem 1rem 1rem 1rem;
-  box-shadow: 2px 2px 5px gray;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
 
   h3 {
     font-size: 1.25rem;
