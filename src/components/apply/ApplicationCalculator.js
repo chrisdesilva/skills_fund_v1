@@ -24,6 +24,7 @@ const ApplicationCalculator = ({
 }) => {
   const [tuitionValue, setTuitionValue] = useState("")
   const [colValue, setCOLValue] = useState("")
+  const [boxes, setBoxes] = useState(false)
   const loanValue = tuitionValue + colValue
   const [maxTuition, setMaxTuition] = useState("")
   const [maxCOL, setMaxCOL] = useState("")
@@ -48,10 +49,12 @@ const ApplicationCalculator = ({
 
   const handleTuitionSlider = e => {
     setTuitionValue(Number(e.target.value))
+    setBoxes(true)
   }
 
   const handleCOLSlider = e => {
     setCOLValue(Number(e.target.value))
+    setBoxes(true)
   }
 
   const selectLoanType = e => {
@@ -74,6 +77,7 @@ const ApplicationCalculator = ({
       setMaxCOL(program["aprAndType"][0]["info"]["maxCOL"])
       setLoanType(program["aprAndType"][0]["info"]["type"])
       setNonPaymentPeriod(program["nonPaymentPeriod"])
+      setBoxes(false)
     }
   }, [program, metros])
 
@@ -83,6 +87,7 @@ const ApplicationCalculator = ({
     setMaxTuition("")
     setMaxCOL("")
     toggleSliders(false)
+    setBoxes(false)
     program && setLoanType(program["aprAndType"][0]["info"]["type"])
   }, [school])
 
@@ -168,6 +173,7 @@ const ApplicationCalculator = ({
               maxTuition={maxTuition}
               tuitionValue={tuitionValue}
               showSliders={showSliders}
+              boxes={boxes}
             >
               <div className="loanCalculator--total">
                 <p id="total">{formatter.format(loanValue)}</p>
@@ -219,12 +225,7 @@ const ApplicationCalculator = ({
 
             <Payments showSliders={showSliders}>
               {program && program["loanLengths"].includes("36") && (
-                <PaymentCard
-                  initial={{ opacity: 0 }}
-                  animate={{ opacity: 1 }}
-                  transition={{ delay: 0.3 }}
-                  exit={{ opacity: 0 }}
-                >
+                <PaymentCard boxes={boxes}>
                   <div className="card--info">
                     <div id="tooltip--parent">
                       <h3>
@@ -279,7 +280,7 @@ const ApplicationCalculator = ({
                 </PaymentCard>
               )}
               {program && program["loanLengths"].includes("60") && (
-                <PaymentCard>
+                <PaymentCard boxes={boxes}>
                   <div className="card--info">
                     {" "}
                     <div id="tooltip--parent">
@@ -403,6 +404,9 @@ const CalculatorCard = styled.div`
     width: 20rem;
     margin-top: 3rem;
     text-align: center;
+    background: white;
+    padding: 0 1rem 1rem 1rem;
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4;
 
     div {
       display: flex;
@@ -434,10 +438,14 @@ const LoanCalculatorSlider = styled.div`
 
   .loanCalculator--total {
     margin: 1rem 0;
-    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4,
-      4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4,
-      8px 8px #c4c4c4;
-    transform: translateX(-8px) translateY(-8px);
+    transition: box-shadow 500ms, transform 500ms;
+    transition-delay: 1000ms;
+    box-shadow: ${({ boxes }) =>
+      boxes
+        ? "1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4"
+        : "none"};
+    transform: ${({ boxes }) =>
+      boxes ? "translateX(-8px) translateY(-8px)" : null};
     background: white;
     padding: 0 1rem;
   }
@@ -487,9 +495,14 @@ const PaymentCard = styled.div`
   color: white;
   background: white;
   margin: 1rem 0;
-  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4,
-    5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
-  transform: translateX(-8px) translateY(-8px);
+  transition: box-shadow 500ms, transform 500ms;
+  transition-delay: 1000ms;
+  box-shadow: ${({ boxes }) =>
+    boxes
+      ? "1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4"
+      : "none"};
+  transform: ${({ boxes }) =>
+    boxes ? "translateX(-8px) translateY(-8px)" : null};
   width: 20rem;
 
   @media ${breakpoint.lg} {

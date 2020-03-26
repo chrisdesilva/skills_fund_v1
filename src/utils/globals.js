@@ -17,11 +17,6 @@ h6 {
   margin: 0;
 }
 
-input {
-  width: 11rem;
-  padding: 0.5rem 1rem;
-}
-
 .btn {
   width: 11rem;
   max-width: 11rem;
@@ -118,7 +113,8 @@ input {
 input {
   width: 100%;
   padding: 0.5rem;
-  border: 2px solid lightgray;
+  border: none;
+  border-bottom: 2px solid lightgray;
   box-sizing: border-box;
   outline: none;
 }
@@ -233,7 +229,8 @@ select {
   max-width: 100%;
   box-sizing: border-box;
   margin-bottom: 1rem;
-  border: 2px solid lightgray;
+  border: none;
+  border-bottom: 2px solid lightgray;
   border-radius: 0;
   -moz-appearance: none;
   -webkit-appearance: none;
