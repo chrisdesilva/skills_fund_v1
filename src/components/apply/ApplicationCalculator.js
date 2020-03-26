@@ -164,7 +164,11 @@ const ApplicationCalculator = ({
                 </select>
               </div>
             )}
-            <LoanCalculatorSlider showSliders={showSliders}>
+            <LoanCalculatorSlider
+              maxTuition={maxTuition}
+              tuitionValue={tuitionValue}
+              showSliders={showSliders}
+            >
               <div className="loanCalculator--total">
                 <p id="total">{formatter.format(loanValue)}</p>
                 <p>Total Loan Amount</p>
