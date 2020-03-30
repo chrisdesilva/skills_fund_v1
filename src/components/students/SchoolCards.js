@@ -4,9 +4,22 @@ import { motion, AnimatePresence } from "framer-motion"
 import { Link } from "gatsby"
 import Image from "gatsby-image"
 import { FaQuestionCircle } from "react-icons/fa"
+import { useApplication } from "../../hooks/useApplication"
 
 const SchoolCards = ({ filteredSchools, skfLogo }) => {
+  const [
+    email,
+    handleEmail
+  ] = useApplication()
   const [cardIndex, setCardIndex] = useState([])
+  const [applyForm, setApplyForm] = useState([])
+  const [loanUrl, setLoanUrl] = useState("")
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    window.open(loanUrl)
+  }
+
   return (
     <AnimatePresence exitBeforeEnter initial={false}>
       <CardContainer
@@ -28,7 +41,7 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                   key={school.basicInfo.schoolurl}
                 >
                   <CardInner className={cardIndex.includes(i) ? "flipped" : ""}>
-                    <CardFront>
+                    <CardFront email={email}>
                       <CardLogo>
                         <a
                           href={school.basicInfo.schoolurl}
@@ -138,14 +151,40 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                           </CardColumn>
                         </div>
                         <div className="click">
-                          <a
+                          {!applyForm.includes(i) && <btn
                             className="btn"
-                            href={school.basicInfo.schoolcode}
-                            target="_blank"
-                            rel="noreferrer noopener"
+                            onClick={() => {
+                              setApplyForm([i])
+                              setLoanUrl(school.basicInfo.schoolcode)
+                            }}
                           >
                             Apply For Funding
-                          </a>
+                          </btn>}
+                          {applyForm.includes(i) &&
+                            <form className="input">
+                              {/* <label htmlFor="email">
+                                Enter your email to apply for financing
+                              </label> */}
+                              <div>
+                                <input
+                                  id="email"
+                                  type="email"
+                                  placeholder="Enter your email address"
+                                  required
+                                  onChange={handleEmail}
+                                />
+                                <input
+                                  type="submit"
+                                  value="Next &rarr;"
+                                  onClick={handleSubmit}
+                                  className={
+                                    email ? "btn btn--submit" : "btn btn--disabled"
+                                  }
+                                  disabled={email ? false : true}
+                                />
+                              </div>
+                            </form>
+                          }
                           <Link
                             className="hoverUnderline"
                             to={`students/${school.slug}`}
@@ -263,6 +302,27 @@ const CardFront = styled.div`
 
   :hover:not(.noMatches) {
     border: ${props => `2px solid ${props.theme.secondary}`};
+  }
+
+  form {
+    margin-bottom: 1rem;
+    text-align: center;
+    background: white;
+
+    label {
+      font-weight: normal;
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      width: 8rem;
+      margin: 0;
+    }
   }
 
   .noMatches {

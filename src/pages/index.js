@@ -71,7 +71,6 @@ const Header = styled.header`
   justify-content: center;
   align-items: center;
   height: 60vh;
-  margin-top: -60px;
   padding: 2rem;
   background: white;
 

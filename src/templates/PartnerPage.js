@@ -125,6 +125,15 @@ const PartnerPage = ({ data }) => {
       <ApplyContainer>
         <ApplyCard showCalculatorText={showCalculatorText}>
           <h1>Apply For Funding - {school.basicInfo.schoolname}</h1>
+          <ApplySplit>
+            <ContentContainer>
+              <div className="content--logo">
+                <Image fluid={school.logo.childImageSharp.fluid} src={`${school.basicInfo.schoolname} logo`} />
+              </div>
+              <div className="content--content">
+  {school.basicInfo.schoolname} partners with Skills Fund to offer tuition and cost of living financing so more students like you can access their program.
+              </div>
+            </ContentContainer>
           <SelectContainer>
             <div className="input">
               <FaCode />
@@ -161,7 +170,6 @@ const PartnerPage = ({ data }) => {
                 onChange={handleEmail}
               />
             </form>
-          </SelectContainer>
           <ApplySubmit thankYou={showThankYou}>
             <input
               type="submit"
@@ -174,6 +182,8 @@ const PartnerPage = ({ data }) => {
             />
             <p>Your application has opened in a new window.</p>
           </ApplySubmit>
+          </SelectContainer>
+          </ApplySplit>
           <ApplyPayments>
             <p className="financingAvailable">
               Great! You can borrow up to&nbsp;
@@ -191,18 +201,17 @@ const PartnerPage = ({ data }) => {
                     )}
                   &nbsp;for living expenses
                 </>
-              )}
-              <FaCheckCircle />
+              )}!
             </p>
-            <p className="calculator uppercase text-xs">
+            {/* <p className="calculator uppercase text-xs">
               Curious what you'll pay?
-            </p>
-            <p className="calculator" onClick={() => setShowCalculator(true)}>
-              Easily calculate your payments <FaCaretDown />
+            </p> */}
+            <p className="calculator text-xs" onClick={() => setShowCalculator(true)}>
+            Curious what you'll pay? Easily calculate your payments <FaCaretDown />
             </p>
           </ApplyPayments>
           <ApplicationCalculator
-            // school={school}
+            school={school}
             // setSchoolName={setSchoolName}
             showCalculator={showCalculator}
             schoolName={school.basicInfo.schoolname}
@@ -238,9 +247,12 @@ const ApplyCard = styled.div`
   flex-direction: column;
   background: white;
   width: 100%;
-  margin: 0 5rem;
   padding-top: 2rem;
   box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
+
+  @media ${breakpoint.lg} {
+    margin: 0 5rem;
+  }
 
   h1 {
     margin-bottom: 1rem;
@@ -312,16 +324,49 @@ const ApplyCard = styled.div`
   }
 `
 
+const ApplySplit = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  padding: 3rem 0;
+
+  @media ${breakpoint.lg} {
+    flex-direction: row;
+  }
+`
+
+const ContentContainer = styled.div`
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 0 1rem;
+
+  @media ${breakpoint.lg} {
+    width: 50%;
+    padding: 0 2rem;
+  }
+
+  .content--logo {
+    width: 33%;
+    margin: 0 auto;
+  }
+
+  .content--content {
+    margin: 0 auto;
+  }
+`
+
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
-  padding: 1rem;
+  width: 100%;
 
-  @media ${breakpoint.xl} {
-    flex-direction: row;
-    justify-content: space-around;
+  @media ${breakpoint.lg} {
+    width: 50%;
   }
+
   .input {
     width: 20rem;
     display: flex;
@@ -332,9 +377,9 @@ const SelectContainer = styled.div`
     }
 
     svg {
-      font-size: 2rem;
+      font-size: 1.5rem;
       align-self: center;
-      margin-top: 1rem;
+      margin: 1rem 0;
     }
   }
   form {
@@ -351,12 +396,7 @@ const ApplySubmit = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0.25rem;
-
-  input {
-    @media ${breakpoint.lg} {
-      margin: 3rem 0 0 0;
-    }
-  }
+  margin: 2rem 0 ;
 
   p {
     display: ${({ thankYou }) => (thankYou ? "block" : "none")};

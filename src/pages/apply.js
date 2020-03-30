@@ -135,14 +135,13 @@ const Apply = () => {
                     )}
                   &nbsp;for living expenses
                 </>
-              )}
-              <FaCheckCircle />
+              )}!
             </p>
-            <p className="calculator uppercase text-xs">
+            {/* <p className="calculator uppercase text-xs">
               Curious what you'll pay?
-            </p>
-            <p className="calculator" onClick={() => setShowCalculator(true)}>
-              Easily calculate your payments <FaCaretDown />
+            </p> */}
+            <p className="calculator text-xs" onClick={() => setShowCalculator(true)}>
+            Curious what you'll pay? Easily calculate your payments <FaCaretDown />
             </p>
           </ApplyPayments>
           <ApplicationCalculator

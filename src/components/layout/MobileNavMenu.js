@@ -27,7 +27,7 @@ const MobileNavMenu = ({ menuOpen, setMenuOpen }) => {
 
   return (
     <MenuBar>
-      <MenuLogo onClick={() => setMenuOpen(!menuOpen)}>
+      <MenuLogo to="/" onClick={() => setMenuOpen(false)}>
         <Img
           alt="Skills Fund logo"
           fluid={
@@ -178,7 +178,7 @@ const MenuIconContainer = styled.div`
   align-items: center;
 `
 
-const MenuLogo = styled.div`
+const MenuLogo = styled(props => <Link {...props} />)`
   width: 6rem;
   z-index: 11;
   margin-left: 1rem;

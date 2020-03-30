@@ -135,11 +135,11 @@ input[type=range]::-webkit-slider-runnable-track {
   border: 0.2px solid #010101;
 }
 input[type=range]::-webkit-slider-thumb {
-  border: ${({ theme }) => `2px solid ${theme.primaryDark}`};
+  border: ${({ theme }) => `2px solid ${theme.secondaryDark}`};
   height: 20px;
   width: 20px;
   border-radius: 9999px;
-  background: ${({ theme }) => theme.primaryLight};
+  background: ${({ theme }) => theme.secondary};
   cursor: pointer;
   -webkit-appearance: none;
   margin-top: -5px;
@@ -171,12 +171,12 @@ input[type=range]::-moz-range-track {
   border: 0.2px solid #010101;
 }
 input[type=range]::-moz-range-thumb {
-  border: ${({ theme }) => `2px solid ${theme.primaryDark}`};
+  border: ${({ theme }) => `2px solid ${theme.secondaryDark}`};
   border: 1px solid #000000;
   height: 20px;
   width: 20px;
   border-radius: 9999px;
-  background: ${({ theme }) => theme.primaryLight};
+  background: ${({ theme }) => theme.secondary};
   cursor: pointer;
 }
 input[type=range]::-ms-track {
@@ -203,11 +203,11 @@ input[type=range]::-ms-fill-upper {
 }
 input[type=range]::-ms-thumb {
 
-  border: ${({ theme }) => `2px solid ${theme.primaryDark}`};
+  border: ${({ theme }) => `2px solid ${theme.secondaryDark}`};
   height: 20px;
   width: 20px;
   border-radius: 9999px;
-  background: ${({ theme }) => theme.primaryLight};
+  background: ${({ theme }) => theme.secondary};
   cursor: pointer;
 }
 input[type=range]:focus::-ms-fill-lower {
@@ -254,7 +254,7 @@ label {
   z-index: 5;
   padding: .25rem .5rem;
   color: black;
-  font-size: .8rem;
+  font-size: .65rem;
   text-align: left;
 
   span {

@@ -5,4 +5,5 @@ export const theme = {
   secondary: "#e96965", // coral
   secondaryDark: "#872a27",
   secondaryLight: "#ffa4a1",
+  black: "#2e2e2e"
 }

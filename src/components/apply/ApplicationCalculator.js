@@ -120,7 +120,7 @@ const ApplicationCalculator = ({
           exit={{ x: -300, opacity: 0 }}
           transition={{ duration: 0.5 }}
         >
-          <CalculatorCard>
+          <CalculatorCard email={email}>
             <h2>
               Loan Calculator
               {showCalculator && (
@@ -229,7 +229,7 @@ const ApplicationCalculator = ({
                   <div className="card--info">
                     <div id="tooltip--parent">
                       <h3>
-                        {loanType} <FaQuestionCircle className="text-xs" />
+                        {loanType} Loan <FaQuestionCircle className="text-xs" />
                       </h3>
                       <div id="tooltip--tip">
                         <p>
@@ -249,10 +249,10 @@ const ApplicationCalculator = ({
                         </p>
                       </div>
                     </div>
-                    <h4>36 Month Option</h4>
+                    <h4>36 Month Payment Term</h4>
                     {program && (
                       <p className="text-xs">
-                        {program["aprAndType"][0]["info"]["apr36"]}% APR
+                        {school["basicInfo"]["interestRate36"]}% Interest Rate, {program["aprAndType"][0]["info"]["apr36"]}% APR
                       </p>
                     )}
                   </div>
@@ -262,20 +262,20 @@ const ApplicationCalculator = ({
                         <p className="mb-0 mt-4 text-2xl font-bold">
                           {formatterCents.format(interestPayments.payment36)}
                         </p>
-                        <p className="mb-0 mt-1">Monthly Payments in School</p>
+                        <p className="mb-0 mt-1 text-xs">Monthly Payments in School</p>
                       </>
                     )}
                     <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(monthlyPayments.payment36)}
                     </p>
-                    <p className="mb-0 mt-1">
+                    <p className="mb-0 mt-1 text-xs">
                       Monthly Payments
                       {loanType === "Interest Only" && " After Graduation"}
                     </p>
                     <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(totalPayments.payment36)}
                     </p>
-                    <p className="mb-0 mt-1">Total cost of loan</p>
+                    <p className="mb-0 mt-1 text-xs">Total Lifetime Cost of Loan</p>
                   </div>
                 </PaymentCard>
               )}
@@ -285,7 +285,7 @@ const ApplicationCalculator = ({
                     {" "}
                     <div id="tooltip--parent">
                       <h3>
-                        {loanType} <FaQuestionCircle className="text-xs" />
+                        {loanType} Loan <FaQuestionCircle className="text-xs" />
                       </h3>
                       <div id="tooltip--tip">
                         <p>
@@ -305,10 +305,10 @@ const ApplicationCalculator = ({
                         </p>
                       </div>
                     </div>
-                    <h4>60 Month Option</h4>
+                    <h4>60 Month Payment Term</h4>
                     {program && (
                       <p className="text-xs">
-                        {program["aprAndType"][0]["info"]["apr60"]}% APR
+                        {school["basicInfo"]["interestRate60"]}% Interest Rate, {program["aprAndType"][0]["info"]["apr60"]}% APR
                       </p>
                     )}
                   </div>
@@ -318,41 +318,36 @@ const ApplicationCalculator = ({
                         <p className="mb-0 mt-4 text-2xl font-bold">
                           {formatterCents.format(interestPayments.payment60)}
                         </p>
-                        <p className="mb-0 mt-1">Monthly Payments in School</p>
+                        <p className="mb-0 mt-1 text-xs">Monthly Payments in School</p>
                       </>
                     )}
                     <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(monthlyPayments.payment60)}
                     </p>
-                    <p className="mb-0 mt-1">
+                    <p className="mb-0 mt-1 text-xs">
                       Monthly Payments
                       {loanType === "Interest Only" && " After Graduation"}
                     </p>
                     <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(totalPayments.payment60)}
                     </p>
-                    <p className="mb-0 mt-1">Total cost of loan</p>
+                    <p className="mb-0 mt-1 text-xs">Total Lifetime Cost of Loan</p>
                   </div>
                 </PaymentCard>
               )}
             </Payments>
-            {showThankYou ? (
-              <p className="text-center mt-12">
-                Your application has opened in a new window.
-              </p>
-            ) : (
               <form className="input">
-                <label htmlFor="email">
+                {!email && <label htmlFor="email">
                   Enter your email to apply for financing
-                </label>
+                </label>}
                 <div>
-                  <input
+                  {!email && <input
                     id="email"
                     type="email"
                     placeholder="Enter your email address"
                     required
                     onChange={handleEmail}
-                  />
+                  />}
                   <input
                     type="submit"
                     value="Next &rarr;"
@@ -364,7 +359,6 @@ const ApplicationCalculator = ({
                   />
                 </div>
               </form>
-            )}
           </CalculatorCard>
         </CalculatorContainer>
       )}
@@ -379,9 +373,9 @@ const CalculatorContainer = styled(motion.section)`
   justify-content: center;
   align-items: center;
   background: ${({ theme }) => theme.primaryLight};
-  color: ${({ theme }) => theme.primaryDark};
+  color: ${({ theme }) => theme.black};
   overflow: hidden;
-  border-top: ${({ theme }) => `5px solid ${theme.primaryDark}`};
+  border-top: ${({ theme }) => `5px solid ${theme.black}`};
   select {
     width: 20rem;
   }
@@ -401,15 +395,17 @@ const CalculatorCard = styled.div`
   }
 
   form {
-    width: 20rem;
+    width: ${({email}) => email ? "13rem" : "20rem"};
     margin-top: 3rem;
     text-align: center;
     background: white;
-    padding: 0 1rem 1rem 1rem;
+    padding: ${({email}) => email ? "1rem" : "0 1rem 1rem 1rem"};
     box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4;
 
     div {
       display: flex;
+      justify-content: center;
+      align-items: center;
     }
   }
 
@@ -429,7 +425,7 @@ const LoanCalculatorSlider = styled.div`
   align-items: center;
   width: 100%;
   transition: opacity 300ms;
-  margin: 2rem 0;
+  margin: 1rem 0;
   opacity: ${({ showSliders }) => (showSliders ? "1" : "0")};
 
   @media ${breakpoint.lg} {
@@ -437,15 +433,10 @@ const LoanCalculatorSlider = styled.div`
   }
 
   .loanCalculator--total {
-    margin: 1rem 0;
+    margin: 1rem 0 2rem 0;
     transition: box-shadow 500ms, transform 500ms;
     transition-delay: 1000ms;
-    box-shadow: ${({ boxes }) =>
-      boxes
-        ? "1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4"
-        : "none"};
-    transform: ${({ boxes }) =>
-      boxes ? "translateX(-8px) translateY(-8px)" : null};
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
     background: white;
     padding: 0 1rem;
   }
@@ -491,19 +482,19 @@ const Payments = styled.div`
 const PaymentCard = styled.div`
   display: flex;
   flex-direction: column;
-  text-align: center;
   color: white;
   background: white;
   margin: 1rem 0;
-  transition: box-shadow 500ms, transform 500ms;
-  transition-delay: 1000ms;
-  box-shadow: ${({ boxes }) =>
-    boxes
-      ? "1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4"
-      : "none"};
-  transform: ${({ boxes }) =>
-    boxes ? "translateX(-8px) translateY(-8px)" : null};
-  width: 20rem;
+  transition: border 500ms, transform 500ms;
+  border: 2px solid lightgray;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
+  /* transform: translateX(-8px) translateY(-8px); */
+  width: 22rem;
+
+  :hover {
+    border: ${props => `2px solid ${props.theme.secondary}`};
+    transform: translateY(-5px)
+  }
 
   @media ${breakpoint.lg} {
     margin: 0;
@@ -512,17 +503,17 @@ const PaymentCard = styled.div`
   .card--info {
     background: ${({ theme }) => theme.primaryDark};
     padding: 0.5rem 1rem;
+      text-align: center;
     p {
       margin: 0;
     }
   }
 
   .card--payments {
-    padding: 2rem;
+    padding: 1rem 2rem 2rem 2rem;
     color: black;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    align-items: center;
   }
 `
