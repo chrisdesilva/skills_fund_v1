@@ -4,9 +4,21 @@ import { AnimatePresence, motion } from "framer-motion"
 import Image from "gatsby-image"
 import styled from "styled-components"
 import { FaQuestionCircle } from "react-icons/fa"
+import { useApplication } from "../../hooks/useApplication"
 
 const SchoolList = ({ filteredSchools }) => {
+  const [
+    email,
+    handleEmail
+  ] = useApplication()
   const [listIndex, setListIndex] = useState("")
+  const [applyForm, setApplyForm] = useState([])
+  const [loanUrl, setLoanUrl] = useState("")
+
+  const handleSubmit = e => {
+    e.preventDefault()
+    window.open(loanUrl)
+  }
   return (
     <AnimatePresence exitBeforeEnter initial={false}>
       <ListContainer
@@ -112,14 +124,40 @@ const SchoolList = ({ filteredSchools }) => {
               )}
             </ListColumn>
             <ListColumn>
-              <a
-                className="btn"
-                href={school.basicInfo.schoolcode}
-                target="_blank"
-                rel="noreferrer noopener"
-              >
-                Apply For Funding
-              </a>
+            {!applyForm.includes(i) && <btn
+                            className="btn"
+                            onClick={() => {
+                              setApplyForm([i])
+                              setLoanUrl(school.basicInfo.schoolcode)
+                            }}
+                          >
+                            Apply For Funding
+                          </btn>}
+                          {applyForm.includes(i) &&
+                            <form className="input">
+                              {/* <label htmlFor="email">
+                                Enter your email to apply for financing
+                              </label> */}
+                              <div>
+                                <input
+                                  id="email"
+                                  type="email"
+                                  placeholder="Enter your email address"
+                                  required
+                                  onChange={handleEmail}
+                                />
+                                <input
+                                  type="submit"
+                                  value="Next &rarr;"
+                                  onClick={handleSubmit}
+                                  className={
+                                    email ? "btn btn--submit" : "btn btn--disabled"
+                                  }
+                                  disabled={email ? false : true}
+                                />
+                              </div>
+                            </form>
+                          }
             </ListColumn>
           </ListItem>
         ))}
@@ -207,6 +245,28 @@ const ListColumn = styled.div`
 
   :last-of-type {
     justify-content: center;
+  }
+
+  form {
+    margin-bottom: 1rem;
+    text-align: center;
+    background: white;
+    padding-right: 1rem;
+
+    label {
+      font-weight: normal;
+    }
+
+    div {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .btn {
+      width: 6rem;
+      margin: 0;
+    }
   }
 
   .logo {
