@@ -251,9 +251,32 @@ const ApplicationCalculator = ({
                     </div>
                     <h4>36 Month Payment Term</h4>
                     {program && (
-                      <p className="text-xs">
-                        {school["basicInfo"]["interestRate36"]}% Interest Rate, {program["aprAndType"][0]["info"]["apr36"]}% APR
-                      </p>
+                      <div id="tooltip--parent">
+                        <p className="text-xs">
+                          {school["basicInfo"]["interestRate36"]}% Interest
+                          Rate, {program["aprAndType"][0]["info"]["apr36"]}% APR{" "}
+                          <FaQuestionCircle className="text-xs" />
+                        </p>
+                        <div id="tooltip--tip">
+                          <p>
+                            The Annual Percentage Rate (APR) shown is estimated
+                            based on the loan type, origination fee, and
+                            approximate program length. The actual APR may be
+                            slightly different than the example provided based
+                            on loan type and program length. To learn how an
+                            Annual Percentage Rate (APR) is calculated, visit
+                            our{" "}
+                            <a
+                              href="https://skills.fund/resources/how-is-an-apr-calculated"
+                              target="_blank"
+                              rel="noreferrer noopener"
+                            >
+                              blog
+                            </a>
+                            .
+                          </p>
+                        </div>
+                      </div>
                     )}
                   </div>
                   <div className="card--payments">
@@ -262,7 +285,9 @@ const ApplicationCalculator = ({
                         <p className="mb-0 mt-4 text-2xl font-bold">
                           {formatterCents.format(interestPayments.payment36)}
                         </p>
-                        <p className="mb-0 mt-1 text-xs">Monthly Payments in School</p>
+                        <p className="mb-0 mt-1 text-xs">
+                          Monthly Payments in School
+                        </p>
                       </>
                     )}
                     <p className="mb-0 mt-4 text-2xl font-bold">
@@ -275,7 +300,9 @@ const ApplicationCalculator = ({
                     <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(totalPayments.payment36)}
                     </p>
-                    <p className="mb-0 mt-1 text-xs">Total Lifetime Cost of Loan</p>
+                    <p className="mb-0 mt-1 text-xs">
+                      Total Lifetime Cost of Loan
+                    </p>
                   </div>
                 </PaymentCard>
               )}
@@ -307,9 +334,32 @@ const ApplicationCalculator = ({
                     </div>
                     <h4>60 Month Payment Term</h4>
                     {program && (
-                      <p className="text-xs">
-                        {school["basicInfo"]["interestRate60"]}% Interest Rate, {program["aprAndType"][0]["info"]["apr60"]}% APR
-                      </p>
+                      <div id="tooltip--parent">
+                        <p className="text-xs">
+                          {school["basicInfo"]["interestRate60"]}% Interest
+                          Rate, {program["aprAndType"][0]["info"]["apr60"]}% APR{" "}
+                          <FaQuestionCircle className="text-xs" />
+                        </p>
+                        <div id="tooltip--tip">
+                          <p>
+                            The Annual Percentage Rate (APR) shown is estimated
+                            based on the loan type, origination fee, and
+                            approximate program length. The actual APR may be
+                            slightly different than the example provided based
+                            on loan type and program length. To learn how an
+                            Annual Percentage Rate (APR) is calculated, visit
+                            our{" "}
+                            <a
+                              href="https://skills.fund/resources/how-is-an-apr-calculated"
+                              target="_blank"
+                              rel="noreferrer noopener"
+                            >
+                              blog
+                            </a>
+                            .
+                          </p>
+                        </div>
+                      </div>
                     )}
                   </div>
                   <div className="card--payments">
@@ -318,7 +368,9 @@ const ApplicationCalculator = ({
                         <p className="mb-0 mt-4 text-2xl font-bold">
                           {formatterCents.format(interestPayments.payment60)}
                         </p>
-                        <p className="mb-0 mt-1 text-xs">Monthly Payments in School</p>
+                        <p className="mb-0 mt-1 text-xs">
+                          Monthly Payments in School
+                        </p>
                       </>
                     )}
                     <p className="mb-0 mt-4 text-2xl font-bold">
@@ -331,34 +383,40 @@ const ApplicationCalculator = ({
                     <p className="mb-0 mt-4 text-2xl font-bold">
                       {formatterCents.format(totalPayments.payment60)}
                     </p>
-                    <p className="mb-0 mt-1 text-xs">Total Lifetime Cost of Loan</p>
+                    <p className="mb-0 mt-1 text-xs">
+                      Total Lifetime Cost of Loan
+                    </p>
                   </div>
                 </PaymentCard>
               )}
             </Payments>
-              <form className="input">
-                {!email && <label htmlFor="email">
+            <form className="input">
+              {!email && (
+                <label htmlFor="email">
                   Enter your email to apply for financing
-                </label>}
-                <div>
-                  {!email && <input
+                </label>
+              )}
+              <div>
+                {!email && (
+                  <input
                     id="email"
                     type="email"
                     placeholder="Enter your email address"
                     required
                     onChange={handleEmail}
-                  />}
-                  <input
-                    type="submit"
-                    value="Next &rarr;"
-                    onClick={handleSubmit}
-                    className={
-                      email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
-                    }
-                    disabled={email && loanUrl ? false : true}
                   />
-                </div>
-              </form>
+                )}
+                <input
+                  type="submit"
+                  value="Next &rarr;"
+                  onClick={handleSubmit}
+                  className={
+                    email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+                  }
+                  disabled={email && loanUrl ? false : true}
+                />
+              </div>
+            </form>
           </CalculatorCard>
         </CalculatorContainer>
       )}
@@ -395,11 +453,11 @@ const CalculatorCard = styled.div`
   }
 
   form {
-    width: ${({email}) => email ? "13rem" : "20rem"};
+    width: ${({ email }) => (email ? "13rem" : "20rem")};
     margin-top: 3rem;
     text-align: center;
     background: white;
-    padding: ${({email}) => email ? "1rem" : "0 1rem 1rem 1rem"};
+    padding: ${({ email }) => (email ? "1rem" : "0 1rem 1rem 1rem")};
     box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4;
 
     div {
@@ -436,7 +494,9 @@ const LoanCalculatorSlider = styled.div`
     margin: 1rem 0 2rem 0;
     transition: box-shadow 500ms, transform 500ms;
     transition-delay: 1000ms;
-    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4,
+      4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4,
+      8px 8px #c4c4c4;
     background: white;
     padding: 0 1rem;
   }
@@ -487,13 +547,14 @@ const PaymentCard = styled.div`
   margin: 1rem 0;
   transition: border 500ms, transform 500ms;
   border: 2px solid lightgray;
-  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4, 5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4,
+    5px 5px #c4c4c4, 6px 6px #c4c4c4, 7px 7px #c4c4c4, 8px 8px #c4c4c4;
   /* transform: translateX(-8px) translateY(-8px); */
   width: 22rem;
 
   :hover {
     border: ${props => `2px solid ${props.theme.secondary}`};
-    transform: translateY(-5px)
+    transform: translateY(-5px);
   }
 
   @media ${breakpoint.lg} {
@@ -503,7 +564,7 @@ const PaymentCard = styled.div`
   .card--info {
     background: ${({ theme }) => theme.primaryDark};
     padding: 0.5rem 1rem;
-      text-align: center;
+    text-align: center;
     p {
       margin: 0;
     }
