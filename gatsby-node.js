@@ -11,6 +11,7 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
 }
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
+  // page generator for partner school landing pages
   const results = await graphql(
     `
       {
@@ -36,6 +37,36 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: slash(partnerPageTemplate),
       context: {
         slug: edge.node.slug,
+      },
+    })
+  })
+}
+
+exports.createPages = async ({ actions, graphql, reporter }) => {
+  const result = await graphql(`
+    query {
+      allMdx {
+        nodes {
+          frontmatter {
+            slug
+          }
+        }
+      }
+    }
+  `)
+
+  if (result.errors) {
+    reporter.panic("failed on post creation", result.errors)
+  }
+
+  const posts = result.data.allMdx.nodes
+
+  posts.forEach(post => {
+    actions.createPage({
+      path: `/resources/${post.frontmatter.slug}`,
+      component: require.resolve("./src/templates/BlogPost.js"),
+      context: {
+        slug: post.frontmatter.slug,
       },
     })
   })
