@@ -40,7 +40,22 @@ module.exports = {
         path: `${__dirname}/src/pages/resources`,
       },
     },
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/components/layout/Layout"),
+        },
+        gatsbyRemarkPlugins: [
+          {
+            resolve: `gatsby-remark-images`,
+            options: {
+              maxWidth: 1000,
+            },
+          },
+        ],
+      },
+    },
     {
       resolve: `gatsby-plugin-postcss`,
       options: {},
@@ -67,5 +82,6 @@ module.exports = {
     `gatsby-transformer-json`,
     `gatsby-plugin-sharp`,
     `gatsby-plugin-sitemap`,
+    `gatsby-transformer-remark`,
   ],
 }
