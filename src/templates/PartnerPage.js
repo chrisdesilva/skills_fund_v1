@@ -128,61 +128,66 @@ const PartnerPage = ({ data }) => {
           <ApplySplit>
             <ContentContainer>
               <div className="content--logo">
-                <Image fluid={school.logo.childImageSharp.fluid} src={`${school.basicInfo.schoolname} logo`} />
+                <Image
+                  fluid={school.logo.childImageSharp.fluid}
+                  src={`${school.basicInfo.schoolname} logo`}
+                />
               </div>
               <div className="content--content">
-  {school.basicInfo.schoolname} partners with Skills Fund to offer tuition and cost of living financing so more students like you can access their program.
+                {school.basicInfo.schoolname} partners with Skills Fund to offer
+                tuition and cost of living financing so more students like you
+                can access their program.
               </div>
             </ContentContainer>
-          <SelectContainer>
-            <div className="input">
-              <FaCode />
-              <label htmlFor="program">Select your program</label>
-              <select
-                id="program"
-                defaultValue={"default"}
-                onChange={selectProgram}
-                onBlur={selectProgram}
-              >
-                <option disabled value="default">
-                  ---
-                </option>
-                {school["loanInfo"] &&
-                  school["loanInfo"].map(program => (
-                    <option
-                      key={program.segment}
-                      value={JSON.stringify(program)}
-                    >
-                      {program.name}
-                    </option>
-                  ))}
-              </select>
-            </div>
-            <form className="input">
-              <FaEnvelope />
-              <label htmlFor="email">Enter your email address</label>
+            <SelectContainer>
+              <div className="input">
+                <FaCode />
+                <label htmlFor="program">Select your program</label>
+                <select
+                  id="program"
+                  defaultValue={"default"}
+                  onChange={selectProgram}
+                  onBlur={selectProgram}
+                >
+                  <option disabled value="default">
+                    ---
+                  </option>
+                  {school["loanInfo"] &&
+                    school["loanInfo"].map(program => (
+                      <option
+                        key={program.segment}
+                        value={JSON.stringify(program)}
+                      >
+                        {program.name}
+                      </option>
+                    ))}
+                </select>
+              </div>
+              <form className="input">
+                <FaEnvelope />
+                <label htmlFor="email">Enter your email address</label>
 
-              <input
-                id="email"
-                type="email"
-                placeholder="Enter your email address"
-                required
-                onChange={handleEmail}
-              />
-            </form>
-          <ApplySubmit thankYou={showThankYou}>
-            <input
-              type="submit"
-              value="Next &rarr;"
-              onClick={handleSubmit}
-              className={
-                email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
-              }
-              disabled={email && loanUrl ? false : true}
-            />
-            <p>Your application has opened in a new window.</p>
-          </ApplySubmit>
-          </SelectContainer>
+                <input
+                  id="email"
+                  type="email"
+                  placeholder="Enter your email address"
+                  required
+                  onChange={handleEmail}
+                />
+              </form>
+              <ApplySubmit thankYou={showThankYou}>
+                <input
+                  type="submit"
+                  value="Next &rarr;"
+                  onClick={handleSubmit}
+                  className={
+                    email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+                  }
+                  disabled={email && loanUrl ? false : true}
+                />
+                <p>Your application has opened in a new window.</p>
+              </ApplySubmit>
+            </SelectContainer>
           </ApplySplit>
           <ApplyPayments>
             <p className="financingAvailable">
@@ -201,13 +206,18 @@ const PartnerPage = ({ data }) => {
                     )}
                   &nbsp;for living expenses
                 </>
-              )}!
+              )}
+              !
             </p>
             {/* <p className="calculator uppercase text-xs">
               Curious what you'll pay?
             </p> */}
-            <p className="calculator text-xs" onClick={() => setShowCalculator(true)}>
-            Curious what you'll pay? Easily calculate your payments <FaCaretDown />
+            <p
+              className="calculator text-xs"
+              onClick={() => setShowCalculator(true)}
+            >
+              Curious what you'll pay? Easily calculate your payments{" "}
+              <FaCaretDown />
             </p>
           </ApplyPayments>
           <ApplicationCalculator
@@ -396,7 +406,7 @@ const ApplySubmit = styled.div`
   justify-content: center;
   align-items: center;
   padding: 0.25rem;
-  margin: 2rem 0 ;
+  margin: 2rem 0;
 
   p {
     display: ${({ thankYou }) => (thankYou ? "block" : "none")};

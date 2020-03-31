@@ -11,13 +11,18 @@ exports.onCreateWebpackConfig = ({ actions, getConfig }) => {
 }
 
 exports.createPages = async ({ graphql, actions: { createPage } }) => {
-  // page generator for partner school landing pages
   const results = await graphql(
+    // query for school landing page slug and blog post slugs
     `
       {
         allSchoolsJson {
-          edges {
-            node {
+          nodes {
+            slug
+          }
+        }
+        allMdx {
+          nodes {
+            frontmatter {
               slug
             }
           }
@@ -29,40 +34,21 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     console.log("Error retrieving data", results.errors)
     return
   }
-  const partnerPageTemplate = path.resolve("./src/templates/PartnerPage.js")
-  // Then for each result we create a page.
-  results.data.allSchoolsJson.edges.forEach(edge => {
+
+  results.data.allSchoolsJson.nodes.forEach(node => {
+    // create school landing pages
     createPage({
-      path: `/students/${edge.node.slug}/`,
-      component: slash(partnerPageTemplate),
+      path: `/students/${node.slug}/`,
+      component: require.resolve("./src/templates/PartnerPage.js"),
       context: {
-        slug: edge.node.slug,
+        slug: node.slug,
       },
     })
   })
-}
 
-exports.createPages = async ({ actions, graphql, reporter }) => {
-  const result = await graphql(`
-    query {
-      allMdx {
-        nodes {
-          frontmatter {
-            slug
-          }
-        }
-      }
-    }
-  `)
-
-  if (result.errors) {
-    reporter.panic("failed on post creation", result.errors)
-  }
-
-  const posts = result.data.allMdx.nodes
-
-  posts.forEach(post => {
-    actions.createPage({
+  results.data.allMdx.nodes.forEach(post => {
+    // create blog post pages
+    createPage({
       path: `/resources/${post.frontmatter.slug}`,
       component: require.resolve("./src/templates/BlogPost.js"),
       context: {
