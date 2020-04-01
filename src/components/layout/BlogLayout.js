@@ -1,12 +1,33 @@
 import React from "react"
 import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
+import { MDXProvider } from "@mdx-js/react"
+import Button from "../blog/Button"
 import Header from "./Header"
 import Footer from "./Footer"
 import { theme } from "../../utils/theme"
 import { breakpoint } from "../../utils/breakpoints"
 import { GlobalStyle } from "../../utils/globals"
 import "../../utils/globals"
+
+const shortcodes = { Button }
+
+const BlogLayout = ({ children }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <PageContainer>
+        <GlobalStyle />
+        <Header />
+        <MDXProvider components={shortcodes}>
+          <ChildContainer>{children}</ChildContainer>
+        </MDXProvider>
+        <Footer />
+      </PageContainer>
+    </ThemeProvider>
+  )
+}
+
+export default BlogLayout
 
 const PageContainer = styled.div`
   display: flex;
@@ -38,6 +59,11 @@ const ChildContainer = styled.div`
     margin: 2rem 0;
   }
 
+  img {
+    max-width: 90vw;
+    width: 1200px;
+  }
+
   .btn {
     background: ${({ theme }) => theme.primary};
     color: white;
@@ -46,18 +72,3 @@ const ChildContainer = styled.div`
     text-align: center;
   }
 `
-
-const BlogLayout = ({ children }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <PageContainer>
-        <GlobalStyle />
-        <Header />
-        <ChildContainer>{children}</ChildContainer>
-        <Footer />
-      </PageContainer>
-    </ThemeProvider>
-  )
-}
-
-export default BlogLayout

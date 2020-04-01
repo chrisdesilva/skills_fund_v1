@@ -5,13 +5,19 @@ import BlogLayout from "../components/layout/BlogLayout"
 
 export const data = graphql`
   query($slug: String!) {
-    mdx(frontmatter: { slug: { eq: $slug } }) {
-      frontmatter {
-        title
-        author
-        date
+    post: contentfulBlog(slug: { eq: $slug }) {
+      slug
+      title
+      post {
+        childMdx {
+          body
+          frontmatter {
+            author
+            date
+            title
+          }
+        }
       }
-      body
     }
   }
 `
@@ -19,7 +25,12 @@ export const data = graphql`
 const BlogPost = ({ data }) => {
   return (
     <BlogLayout>
-      <MDXRenderer>{data.mdx.body}</MDXRenderer>
+      <h1>{data.post.post.childMdx.frontmatter.title}</h1>
+      <p>
+        {data.post.post.childMdx.frontmatter.date} -{" "}
+        {data.post.post.childMdx.frontmatter.author}
+      </p>
+      <MDXRenderer>{data.post.post.childMdx.body}</MDXRenderer>
     </BlogLayout>
   )
 }

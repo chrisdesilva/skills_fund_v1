@@ -20,9 +20,9 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             slug
           }
         }
-        allMdx {
-          nodes {
-            frontmatter {
+        allContentfulBlog {
+          edges {
+            node {
               slug
             }
           }
@@ -46,13 +46,13 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     })
   })
 
-  results.data.allMdx.nodes.forEach(post => {
+  results.data.allContentfulBlog.edges.forEach(post => {
     // create blog post pages
     createPage({
-      path: `/resources/${post.frontmatter.slug}`,
+      path: `/resources/${post.node.slug}`,
       component: require.resolve("./src/templates/BlogPost.js"),
       context: {
-        slug: post.frontmatter.slug,
+        slug: post.node.slug,
       },
     })
   })
