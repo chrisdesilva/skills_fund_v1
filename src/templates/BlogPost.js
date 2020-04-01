@@ -25,7 +25,7 @@ export const data = graphql`
 const BlogPost = ({ data }) => {
   return (
     <BlogLayout>
-      <h1>{data.post.post.childMdx.frontmatter.title}</h1>
+      <h1>{data.post.title}</h1>
       <p>
         {data.post.post.childMdx.frontmatter.date} -{" "}
         {data.post.post.childMdx.frontmatter.author}

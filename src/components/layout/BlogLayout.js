@@ -40,6 +40,7 @@ const ChildContainer = styled.div`
   flex-grow: 1;
   max-width: 90vw;
   margin: 48px auto;
+  overflow: hidden;
 
   @media ${breakpoint.lg} {
     margin-top: 57px;
@@ -60,8 +61,8 @@ const ChildContainer = styled.div`
   }
 
   img {
-    max-width: 90vw;
-    width: 1200px;
+    margin: 0 auto;
+    display: block;
   }
 
   .btn {
