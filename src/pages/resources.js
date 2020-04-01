@@ -7,21 +7,20 @@ import { breakpoint } from "../utils/breakpoints"
 
 const BlogPost = () => {
   const data = useStaticQuery(graphql`
-    query {
-      allMdx {
+    query MyQuery {
+      blog: allContentfulBlog {
         nodes {
-          frontmatter {
-            slug
-            title
-            author
-            featuredImage {
-              childImageSharp {
-                fluid {
-                  ...GatsbyImageSharpFluid_withWebp
-                }
-              }
+          post {
+            childMdx {
+              excerpt
             }
-            date
+          }
+          title
+          slug
+          leadImage {
+            fluid {
+              ...GatsbyContentfulFluid_withWebp
+            }
           }
         }
       }
@@ -38,25 +37,16 @@ const BlogPost = () => {
         </p>
         <PostsContainer>
           <ul>
-            {data.allMdx.nodes.map(post => {
+            {data.blog.nodes.map(post => {
               return (
                 <BlogPostCard>
-                  <Link to={`resources/${post.frontmatter.slug}`}>
-                    <Img
-                      fluid={
-                        post.frontmatter.featuredImage.childImageSharp.fluid
-                      }
-                      alt={post.frontmatter.title}
-                    />
+                  <Link to={`resources/${post.slug}`}>
+                    <Img fluid={post.leadImage.fluid} alt={post.title} />
                   </Link>
-                  <Link
-                    className="textLink"
-                    to={`resources/${post.frontmatter.slug}`}
-                  >
-                    {post.frontmatter.title}
-                    <br />
-                    <span className="text-xs">{post.frontmatter.date}</span>
+                  <Link className="textLink" to={`resources/${post.slug}`}>
+                    {post.title}
                   </Link>
+                  <p>{post.post.childMdx.excerpt}</p>
                 </BlogPostCard>
               )
             })}
