@@ -99,7 +99,7 @@ const PartnerPage = ({ data }) => {
   const selectProgram = e => {
     const parsedObj = JSON.parse(e.target.value)
     setLoanUrl(parsedObj["segment"])
-    const selectedProgram = school.loanInfo.filter(
+    const selectedProgram = school.schoolInfo.loanInfo.filter(
       program => program.name === parsedObj["name"]
     )
     setProgram(selectedProgram[0])
@@ -152,8 +152,8 @@ const PartnerPage = ({ data }) => {
                   <option disabled value="default">
                     ---
                   </option>
-                  {school["loanInfo"] &&
-                    school["loanInfo"].map(program => (
+                  {school["schoolInfo"]["loanInfo"] &&
+                    school["schoolInfo"]["loanInfo"].map(program => (
                       <option
                         key={program.segment}
                         value={JSON.stringify(program)}

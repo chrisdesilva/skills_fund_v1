@@ -253,8 +253,9 @@ const ApplicationCalculator = ({
                     {program && (
                       <div id="tooltip--parent">
                         <p className="text-xs">
-                          {school["basicInfo"]["interestRate36"]}% Interest
-                          Rate, {program["aprAndType"][0]["info"]["apr36"]}% APR{" "}
+                          {school["schoolInfo"]["basicInfo"]["interestRate36"]}%
+                          Interest Rate,{" "}
+                          {program["aprAndType"][0]["info"]["apr36"]}% APR{" "}
                           <FaQuestionCircle className="text-xs" />
                         </p>
                         <div id="tooltip--tip">
@@ -336,8 +337,9 @@ const ApplicationCalculator = ({
                     {program && (
                       <div id="tooltip--parent">
                         <p className="text-xs">
-                          {school["basicInfo"]["interestRate60"]}% Interest
-                          Rate, {program["aprAndType"][0]["info"]["apr60"]}% APR{" "}
+                          {school["schoolInfo"]["basicInfo"]["interestRate60"]}%
+                          Interest Rate,{" "}
+                          {program["aprAndType"][0]["info"]["apr60"]}% APR{" "}
                           <FaQuestionCircle className="text-xs" />
                         </p>
                         <div id="tooltip--tip">

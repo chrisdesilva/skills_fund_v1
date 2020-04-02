@@ -25,7 +25,7 @@ export const useApplication = () => {
   const selectProgram = e => {
     const parsedObj = JSON.parse(e.target.value)
     setLoanUrl(parsedObj["segment"])
-    const selectedProgram = school.loanInfo.filter(
+    const selectedProgram = school.schoolInfo.loanInfo.filter(
       program => program.name === parsedObj["name"]
     )
     setProgram(selectedProgram[0])
@@ -46,9 +46,9 @@ export const useApplication = () => {
   }
 
   useEffect(() => {
-    if (school["loanInfo"]) {
-      setLoanUrl(school["loanInfo"][0]["segment"])
-      setSchoolName(school["basicInfo"]["schoolname"])
+    if (school) {
+      setLoanUrl(school["schoolInfo"]["loanInfo"][0]["segment"])
+      setSchoolName(school["schoolInfo"]["basicInfo"]["schoolname"])
       setShowCalculator(false)
     }
   }, [school])

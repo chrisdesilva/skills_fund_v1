@@ -5,7 +5,6 @@ import {
   FaCode,
   FaEnvelope,
   FaCaretDown,
-  FaCheckCircle,
 } from "react-icons/fa"
 import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
@@ -60,16 +59,18 @@ const Apply = () => {
                 <option disabled value="default">
                   ---
                 </option>
-                {schoolList.map(school => (
-                  <option
-                    key={
-                      school["node"]["schoolInfo"]["basicInfo"]["schoolname"]
-                    }
-                    value={school["node"]["slug"]}
-                  >
-                    {school["node"]["schoolInfo"]["basicInfo"]["schoolname"]}
-                  </option>
-                ))}
+                {console.log(schoolList)}
+                {schoolList &&
+                  schoolList.map(school => (
+                    <option
+                      key={
+                        school["node"]["schoolInfo"]["basicInfo"]["schoolname"]
+                      }
+                      value={school["node"]["slug"]}
+                    >
+                      {school["node"]["schoolInfo"]["basicInfo"]["schoolname"]}
+                    </option>
+                  ))}
               </select>
             </div>
             <div className="input">
@@ -84,8 +85,8 @@ const Apply = () => {
                 <option disabled value="default">
                   ---
                 </option>
-                {school["loanInfo"] &&
-                  school["loanInfo"].map(program => (
+                {school &&
+                  school["schoolInfo"]["loanInfo"].map(program => (
                     <option
                       key={program.segment}
                       value={JSON.stringify(program)}
