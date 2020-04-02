@@ -20,11 +20,13 @@ const Apply = () => {
     setShowCalculator,
     showCalculatorText,
     email,
+    email2,
     submitReady,
     showThankYou,
     selectSchool,
     selectProgram,
     handleEmail,
+    handleEmail2,
     handleSubmit,
     schoolList,
     school,
@@ -59,7 +61,6 @@ const Apply = () => {
                 <option disabled value="default">
                   ---
                 </option>
-                {console.log(schoolList)}
                 {schoolList &&
                   schoolList.map(school => (
                     <option
@@ -115,9 +116,11 @@ const Apply = () => {
               value="Next &rarr;"
               onClick={handleSubmit}
               className={
-                email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+                (email || email2) && loanUrl
+                  ? "btn btn--submit"
+                  : "btn btn--disabled"
               }
-              disabled={email && loanUrl ? false : true}
+              disabled={(email || email2) && loanUrl ? false : true}
             />
             <p>Your application has opened in a new window.</p>
           </ApplySubmit>
@@ -161,7 +164,9 @@ const Apply = () => {
             showSliders={showSliders}
             toggleSliders={toggleSliders}
             email={email}
+            email2={email2}
             handleEmail={handleEmail}
+            handleEmail2={handleEmail2}
             handleSubmit={handleSubmit}
             loanUrl={loanUrl}
             showThankYou={showThankYou}

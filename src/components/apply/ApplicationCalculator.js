@@ -16,8 +16,9 @@ const ApplicationCalculator = ({
   program,
   showSliders,
   toggleSliders,
-  handleEmail,
+  handleEmail2,
   email,
+  email2,
   handleSubmit,
   loanUrl,
   showThankYou,
@@ -395,7 +396,7 @@ const ApplicationCalculator = ({
             <form className="input">
               {!email && (
                 <label htmlFor="email">
-                  Enter your email to apply for financing
+                  Enter your email to apply for funding
                 </label>
               )}
               <div>
@@ -405,7 +406,7 @@ const ApplicationCalculator = ({
                     type="email"
                     placeholder="Enter your email address"
                     required
-                    onChange={handleEmail}
+                    onChange={handleEmail2}
                   />
                 )}
                 <input
@@ -413,9 +414,11 @@ const ApplicationCalculator = ({
                   value="Next &rarr;"
                   onClick={handleSubmit}
                   className={
-                    email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+                    (email || email2) && loanUrl
+                      ? "btn btn--submit"
+                      : "btn btn--disabled"
                   }
-                  disabled={email && loanUrl ? false : true}
+                  disabled={(email || email2) && loanUrl ? false : true}
                 />
               </div>
             </form>
