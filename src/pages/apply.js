@@ -62,10 +62,12 @@ const Apply = () => {
                 </option>
                 {schoolList.map(school => (
                   <option
-                    key={school["node"]["basicInfo"]["schoolname"]}
+                    key={
+                      school["node"]["schoolInfo"]["basicInfo"]["schoolname"]
+                    }
                     value={school["node"]["slug"]}
                   >
-                    {school["node"]["basicInfo"]["schoolname"]}
+                    {school["node"]["schoolInfo"]["basicInfo"]["schoolname"]}
                   </option>
                 ))}
               </select>
@@ -135,13 +137,18 @@ const Apply = () => {
                     )}
                   &nbsp;for living expenses
                 </>
-              )}!
+              )}
+              !
             </p>
             {/* <p className="calculator uppercase text-xs">
               Curious what you'll pay?
             </p> */}
-            <p className="calculator text-xs" onClick={() => setShowCalculator(true)}>
-            Curious what you'll pay? Easily calculate your payments <FaCaretDown />
+            <p
+              className="calculator text-xs"
+              onClick={() => setShowCalculator(true)}
+            >
+              Curious what you'll pay? Easily calculate your payments{" "}
+              <FaCaretDown />
             </p>
           </ApplyPayments>
           <ApplicationCalculator
