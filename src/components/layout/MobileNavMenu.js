@@ -60,7 +60,7 @@ const MobileNavMenu = ({ menuOpen, setMenuOpen }) => {
           </ListItem>
 
           <ListItem>
-            <Link to="/resources">Student Journey</Link>
+            <Link to="/resources">Blog</Link>
           </ListItem>
 
           <ListItem>

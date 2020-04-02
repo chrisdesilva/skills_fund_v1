@@ -41,13 +41,6 @@ module.exports = {
       },
     },
     {
-      resolve: `gatsby-source-filesystem`,
-      options: {
-        name: `resources`,
-        path: `${__dirname}/src/blog`,
-      },
-    },
-    {
       resolve: `gatsby-plugin-mdx`,
       options: {
         defaultLayouts: {

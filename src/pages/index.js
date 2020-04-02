@@ -4,6 +4,8 @@ import styled from "styled-components"
 import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
 import { breakpoint } from "../utils/breakpoints"
+import Embed from "../components/blog/Embed"
+import Twitter from "../components/blog/Twitter"
 
 export default () => {
   return (

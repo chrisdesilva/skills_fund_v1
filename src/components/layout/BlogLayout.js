@@ -3,6 +3,8 @@ import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import { MDXProvider } from "@mdx-js/react"
 import Button from "../blog/Button"
+import Embed from "../blog/Embed"
+import Twitter from "../blog/Twitter"
 import Header from "./Header"
 import Footer from "./Footer"
 import { theme } from "../../utils/theme"
@@ -10,7 +12,7 @@ import { breakpoint } from "../../utils/breakpoints"
 import { GlobalStyle } from "../../utils/globals"
 import "../../utils/globals"
 
-const shortcodes = { Button }
+const shortcodes = { Button, Embed, Twitter }
 
 const BlogLayout = ({ children }) => {
   return (
@@ -63,6 +65,18 @@ const ChildContainer = styled.div`
   img {
     margin: 0 auto;
     display: block;
+  }
+
+  a:not(.btn) {
+    background: none;
+    transition: background 300ms;
+    text-decoration: none;
+    color: black;
+    font-weight: bold;
+
+    :hover {
+      background: ${({ theme }) => theme.secondaryLight};
+    }
   }
 
   .btn {
