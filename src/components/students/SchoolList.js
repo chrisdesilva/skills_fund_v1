@@ -7,10 +7,7 @@ import { FaQuestionCircle } from "react-icons/fa"
 import { useApplication } from "../../hooks/useApplication"
 
 const SchoolList = ({ filteredSchools }) => {
-  const [
-    email,
-    handleEmail
-  ] = useApplication()
+  const [email, handleEmail] = useApplication()
   const [listIndex, setListIndex] = useState("")
   const [applyForm, setApplyForm] = useState([])
   const [loanUrl, setLoanUrl] = useState("")
@@ -31,14 +28,14 @@ const SchoolList = ({ filteredSchools }) => {
             <ListColumn>
               <div className="logo">
                 <a
-                  href={school.basicInfo.schoolurl}
+                  href={school.schoolInfo.basicInfo.schoolurl}
                   target="_blank"
                   rel="noreferrer noopener"
                 >
                   <Image
-                    key={school.logo.childImageSharp.fluid}
-                    fluid={school.logo.childImageSharp.fluid}
-                    alt={school.basicInfo.schoolname}
+                    key={school.logo.fluid}
+                    fluid={school.logo.fluid}
+                    alt={school.schoolInfo.basicInfo.schoolname}
                   />
                 </a>
               </div>
@@ -49,17 +46,19 @@ const SchoolList = ({ filteredSchools }) => {
               </div>
             </ListColumn>
             <ListColumn>
-              <h4>{school.basicInfo.schoolname}</h4>
-              {school.basicInfo.locations
+              <h4>{school.schoolInfo.basicInfo.schoolname}</h4>
+              {school.schoolInfo.basicInfo.locations
                 .sort()
                 .slice(
                   0,
-                  listIndex === i ? school.basicInfo.locations.length : 2
+                  listIndex === i
+                    ? school.schoolInfo.basicInfo.locations.length
+                    : 2
                 )
                 .map(location => (
                   <p>{location} </p>
                 ))}
-              {school.basicInfo.locations.length > 2 && (
+              {school.schoolInfo.basicInfo.locations.length > 2 && (
                 <p
                   className="cursor-pointer font-bold"
                   onClick={() =>
@@ -83,7 +82,7 @@ const SchoolList = ({ filteredSchools }) => {
                   </p>
                 </div>
               </div>
-              <p>{school.basicInfo.tuitionRange}</p>
+              <p>{school.schoolInfo.basicInfo.tuitionRange}</p>
             </ListColumn>
             <ListColumn>
               <div id="tooltip--parent">
@@ -98,21 +97,25 @@ const SchoolList = ({ filteredSchools }) => {
                 </div>
               </div>
               <p>
-                {school.features.costOfLiving ? "Available" : "Not Available"}
+                {school.schoolInfo.features.costOfLiving
+                  ? "Available"
+                  : "Not Available"}
               </p>
             </ListColumn>
             <ListColumn>
               <h3>Programs</h3>
-              {school.loanInfo
+              {school.schoolInfo.loanInfo
                 .sort()
                 .slice(
                   0,
-                  listIndex === i ? school.basicInfo.locations.length : 2
+                  listIndex === i
+                    ? school.schoolInfo.basicInfo.locations.length
+                    : 2
                 )
                 .map(program => (
                   <p>{program.name} </p>
                 ))}
-              {school.loanInfo.length > 2 && (
+              {school.schoolInfo.loanInfo.length > 2 && (
                 <p
                   className="cursor-pointer font-bold"
                   onClick={() =>
@@ -124,40 +127,42 @@ const SchoolList = ({ filteredSchools }) => {
               )}
             </ListColumn>
             <ListColumn>
-            {!applyForm.includes(i) && <btn
-                            className="btn"
-                            onClick={() => {
-                              setApplyForm([i])
-                              setLoanUrl(school.basicInfo.schoolcode)
-                            }}
-                          >
-                            Apply For Funding
-                          </btn>}
-                          {applyForm.includes(i) &&
-                            <form className="input">
-                              {/* <label htmlFor="email">
+              {!applyForm.includes(i) && (
+                <btn
+                  className="btn"
+                  onClick={() => {
+                    setApplyForm([i])
+                    setLoanUrl(school.schoolInfo.basicInfo.schoolcode)
+                  }}
+                >
+                  Apply For Funding
+                </btn>
+              )}
+              {applyForm.includes(i) && (
+                <form className="input">
+                  {/* <label htmlFor="email">
                                 Enter your email to apply for financing
                               </label> */}
-                              <div>
-                                <input
-                                  id="email"
-                                  type="email"
-                                  placeholder="Enter your email address"
-                                  required
-                                  onChange={handleEmail}
-                                />
-                                <input
-                                  type="submit"
-                                  value="Next &rarr;"
-                                  onClick={handleSubmit}
-                                  className={
-                                    email ? "btn btn--submit" : "btn btn--disabled"
-                                  }
-                                  disabled={email ? false : true}
-                                />
-                              </div>
-                            </form>
-                          }
+                  <div>
+                    <input
+                      id="email"
+                      type="email"
+                      placeholder="Enter your email address"
+                      required
+                      onChange={handleEmail}
+                    />
+                    <input
+                      type="submit"
+                      value="Next &rarr;"
+                      onClick={handleSubmit}
+                      className={
+                        email ? "btn btn--submit" : "btn btn--disabled"
+                      }
+                      disabled={email ? false : true}
+                    />
+                  </div>
+                </form>
+              )}
             </ListColumn>
           </ListItem>
         ))}
@@ -245,6 +250,10 @@ const ListColumn = styled.div`
 
   :last-of-type {
     justify-content: center;
+  }
+
+  img {
+    filter: grayscale(100%);
   }
 
   form {
