@@ -15,7 +15,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     // query for school landing page slug and blog post slugs
     `
       {
-        allSchoolsJson {
+        allContentfulSchool {
           nodes {
             slug
           }
@@ -35,7 +35,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     return
   }
 
-  results.data.allSchoolsJson.nodes.forEach(node => {
+  results.data.allContentfulSchool.nodes.forEach(node => {
     // create school landing pages
     createPage({
       path: `/students/${node.slug}/`,

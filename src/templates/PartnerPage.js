@@ -10,69 +10,69 @@ import ApplicationCalculator from "../components/apply/ApplicationCalculator"
 
 export const query = graphql`
   query($slug: String!) {
-    school: schoolsJson(slug: { eq: $slug }) {
-      basicInfo {
-        schoolname
-        locations
-        schoolurl
-        schoolcode
-        APRRange36
-        APRRange60
-        tuitionRange
-        programTypes
-        hubspotFormID
-        interestRate36
-        interestRate60
-        selectAProgram
-        applicationsLive
-        nextCohortStartDate
-        disabledLoanAppFormID
+    school: contentfulSchool(slug: { eq: $slug }) {
+      logo {
+        fluid {
+          ...GatsbyContentfulFluid_withWebp
+        }
       }
       slug
-      paymentTable {
-        data {
-          col
-          max
-          program
-          tuition
+      schoolInfo {
+        basicInfo {
+          schoolname
+          locations
+          schoolurl
+          schoolcode
+          APRRange36
+          APRRange60
+          tuitionRange
+          programTypes
+          hubspotFormID
+          interestRate36
+          interestRate60
+          selectAProgram
+          applicationsLive
+          nextCohortStartDate
+          disabledLoanAppFormID
         }
-        show
-        headers
-      }
-      features {
-        products
-        costOfLiving
-        multiPrograms
-        multiLoanLengths
-      }
-      loanInfo {
-        name
-        hubspotValue
-        defaultAmount
-        metros {
-          location
-          max
-        }
-        segment
-        aprAndType {
-          info {
-            type
-            apr36
-            apr60
-            maxTuition
-            maxCOL
+        paymentTable {
+          data {
+            col
+            max
+            program
+            tuition
           }
+          show
+          headers
         }
-        multiMetros
-        loanLengths
-        nonPaymentPeriod
-        queryParams
-      }
-      logo {
-        childImageSharp {
-          fluid {
-            ...GatsbyImageSharpFluid_noBase64
+        features {
+          products
+          costOfLiving
+          multiPrograms
+          multiLoanLengths
+        }
+        loanInfo {
+          name
+          hubspotValue
+          defaultAmount
+          metros {
+            location
+            max
           }
+          segment
+          aprAndType {
+            info {
+              type
+              apr36
+              apr60
+              maxTuition
+              maxCOL
+            }
+          }
+          multiMetros
+          loanLengths
+          nonPaymentPeriod
+          queryParams
         }
       }
     }
@@ -121,22 +121,22 @@ const PartnerPage = ({ data }) => {
 
   return (
     <Layout>
-      <SEO title={school.basicInfo.schoolname} />
+      <SEO title={school.schoolInfo.basicInfo.schoolname} />
       <ApplyContainer>
         <ApplyCard showCalculatorText={showCalculatorText}>
-          <h1>Apply For Funding - {school.basicInfo.schoolname}</h1>
+          <h1>Apply For Funding - {school.schoolInfo.basicInfo.schoolname}</h1>
           <ApplySplit>
             <ContentContainer>
               <div className="content--logo">
                 <Image
-                  fluid={school.logo.childImageSharp.fluid}
-                  src={`${school.basicInfo.schoolname} logo`}
+                  fluid={school.logo.fluid}
+                  src={`${school.schoolInfo.basicInfo.schoolname} logo`}
                 />
               </div>
               <div className="content--content">
-                {school.basicInfo.schoolname} partners with Skills Fund to offer
-                tuition and cost of living financing so more students like you
-                can access their program.
+                {school.schoolInfo.basicInfo.schoolname} partners with Skills
+                Fund to offer tuition and cost of living financing so more
+                students like you can access their program.
               </div>
             </ContentContainer>
             <SelectContainer>
@@ -224,7 +224,7 @@ const PartnerPage = ({ data }) => {
             school={school}
             // setSchoolName={setSchoolName}
             showCalculator={showCalculator}
-            schoolName={school.basicInfo.schoolname}
+            schoolName={school.schoolInfo.basicInfo.schoolname}
             program={program}
             showSliders={showSliders}
             toggleSliders={toggleSliders}

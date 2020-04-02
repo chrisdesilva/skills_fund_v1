@@ -7,10 +7,7 @@ import { FaQuestionCircle } from "react-icons/fa"
 import { useApplication } from "../../hooks/useApplication"
 
 const SchoolCards = ({ filteredSchools, skfLogo }) => {
-  const [
-    email,
-    handleEmail
-  ] = useApplication()
+  const [email, handleEmail] = useApplication()
   const [cardIndex, setCardIndex] = useState([])
   const [applyForm, setApplyForm] = useState([])
   const [loanUrl, setLoanUrl] = useState("")
@@ -38,20 +35,20 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                   exit={{ scale: 0 }}
                   whileHover={{ y: -5 }}
                   className={cardIndex.includes(i) ? "flipped" : ""}
-                  key={school.basicInfo.schoolurl}
+                  key={school.schoolInfo.basicInfo.schoolurl}
                 >
                   <CardInner className={cardIndex.includes(i) ? "flipped" : ""}>
                     <CardFront email={email}>
                       <CardLogo>
                         <a
-                          href={school.basicInfo.schoolurl}
+                          href={school.schoolInfo.basicInfo.schoolurl}
                           target="_blank"
                           rel="noreferrer noopener"
                         >
                           <Image
-                            key={school.logo.childImageSharp.fluid}
-                            fluid={school.logo.childImageSharp.fluid}
-                            alt={school.basicInfo.schoolname}
+                            key={school.logo.fluid}
+                            fluid={school.logo.fluid}
+                            alt={school.schoolInfo.basicInfo.schoolname}
                           />
                         </a>
                       </CardLogo>
@@ -61,7 +58,7 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                             <p>School</p>
                           </CardColumn>
                           <CardColumn>
-                            <p>{school.basicInfo.schoolname}</p>
+                            <p>{school.schoolInfo.basicInfo.schoolname}</p>
                           </CardColumn>
                         </div>
                         <div>
@@ -81,7 +78,7 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                             </div>
                           </CardColumn>
                           <CardColumn>
-                            <p>{school.basicInfo.tuitionRange}</p>
+                            <p>{school.schoolInfo.basicInfo.tuitionRange}</p>
                           </CardColumn>
                         </div>
                         <div>
@@ -102,7 +99,7 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                           </CardColumn>
                           <CardColumn>
                             <p>
-                              {school.features.costOfLiving
+                              {school.schoolInfo.features.costOfLiving
                                 ? "Available"
                                 : "Not Available"}
                             </p>
@@ -113,13 +110,14 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                             <p>Locations</p>
                           </CardColumn>
                           <CardColumn>
-                            {school.basicInfo.locations
+                            {school.schoolInfo.basicInfo.locations
                               .sort()
                               .slice(0, 2)
                               .map(location => (
                                 <p>{location} </p>
                               ))}
-                            {school.basicInfo.locations.length > 2 && (
+                            {school.schoolInfo.basicInfo.locations.length >
+                              2 && (
                               <p
                                 className="cursor-pointer hoverUnderline"
                                 onClick={() => setCardIndex([...cardIndex, i])}
@@ -134,13 +132,13 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                             <p>Programs</p>
                           </CardColumn>
                           <CardColumn>
-                            {school.loanInfo
+                            {school.schoolInfo.loanInfo
                               .sort()
                               .slice(0, 2)
                               .map(program => (
                                 <p>{program.name} </p>
                               ))}
-                            {school.loanInfo.length > 2 && (
+                            {school.schoolInfo.loanInfo.length > 2 && (
                               <p
                                 className="cursor-pointer hoverUnderline"
                                 onClick={() => setCardIndex([...cardIndex, i])}
@@ -151,16 +149,20 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                           </CardColumn>
                         </div>
                         <div className="click">
-                          {!applyForm.includes(i) && <btn
-                            className="btn"
-                            onClick={() => {
-                              setApplyForm([i])
-                              setLoanUrl(school.basicInfo.schoolcode)
-                            }}
-                          >
-                            Apply For Funding
-                          </btn>}
-                          {applyForm.includes(i) &&
+                          {!applyForm.includes(i) && (
+                            <btn
+                              className="btn"
+                              onClick={() => {
+                                setApplyForm([i])
+                                setLoanUrl(
+                                  school.schoolInfo.basicInfo.schoolcode
+                                )
+                              }}
+                            >
+                              Apply For Funding
+                            </btn>
+                          )}
+                          {applyForm.includes(i) && (
                             <form className="input">
                               {/* <label htmlFor="email">
                                 Enter your email to apply for financing
@@ -178,13 +180,15 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                                   value="Next &rarr;"
                                   onClick={handleSubmit}
                                   className={
-                                    email ? "btn btn--submit" : "btn btn--disabled"
+                                    email
+                                      ? "btn btn--submit"
+                                      : "btn btn--disabled"
                                   }
                                   disabled={email ? false : true}
                                 />
                               </div>
                             </form>
-                          }
+                          )}
                           <Link
                             className="hoverUnderline"
                             to={`students/${school.slug}`}
@@ -202,19 +206,21 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                       <div className="card-back--info">
                         <CardColumn className="card-back--list ">
                           <h4>Locations</h4>{" "}
-                          {school.basicInfo.locations.sort().map(location => (
-                            <p>{location} </p>
-                          ))}
+                          {school.schoolInfo.basicInfo.locations
+                            .sort()
+                            .map(location => (
+                              <p>{location} </p>
+                            ))}
                         </CardColumn>
                         <CardColumn className="card-back--list ">
                           <h4>Programs</h4>{" "}
-                          {school.loanInfo.sort().map(program => (
+                          {school.schoolInfo.loanInfo.sort().map(program => (
                             <p>{program.name} </p>
                           ))}
                         </CardColumn>
                       </div>
                       <div className="card-back--image">
-                        <Image fluid={school.logo.childImageSharp.fluid} />
+                        <Image fluid={school.logo.fluid} />
                       </div>
                     </CardBack>
                   </CardInner>
@@ -437,6 +443,10 @@ const CardLogo = styled.div`
 
   :hover:not(.noMatches) {
     border-bottom: ${props => `2px solid ${props.theme.secondary}`};
+  }
+
+  img {
+    filter: grayscale(100%);
   }
 `
 

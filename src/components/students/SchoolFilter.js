@@ -34,7 +34,7 @@ const SchoolFilter = ({
   setActiveView,
 }) => {
   let allLocations = allSchools // takes all locations from all schools, flattens into single array, then removes duplicates, then sorts alphabetically
-    .flatMap(school => school.basicInfo.locations)
+    .flatMap(school => school.schoolInfo.basicInfo.locations)
     .reduce((acc, currVal) => {
       if (acc.indexOf(currVal) === -1) {
         acc.push(currVal)
@@ -102,7 +102,7 @@ const SchoolFilter = ({
 
     if (textFilter) {
       filteredList = filteredList.filter(school =>
-        school.basicInfo.schoolname
+        school.schoolInfo.basicInfo.schoolname
           .toLowerCase()
           .trim()
           .includes(textFilter.toLowerCase().trim())
@@ -110,12 +110,12 @@ const SchoolFilter = ({
     }
     if (categoryFilter) {
       filteredList = filteredList.filter(school =>
-        school.basicInfo.programTypes.includes(categoryFilter)
+        school.schoolInfo.basicInfo.programTypes.includes(categoryFilter)
       )
     }
     if (locationFilter) {
       filteredList = filteredList.filter(school =>
-        school.basicInfo.locations.includes(locationFilter)
+        school.schoolInfo.basicInfo.locations.includes(locationFilter)
       )
     }
     setFilteredSchools(filteredList)
@@ -134,9 +134,9 @@ const SchoolFilter = ({
     const matches = allSchools
       .filter(school => {
         const regex = new RegExp(program, "gi")
-        return school.basicInfo.schoolname.match(regex)
+        return school.schoolInfo.basicInfo.schoolname.match(regex)
       })
-      .map(program => program.basicInfo.schoolname)
+      .map(program => program.schoolInfo.basicInfo.schoolname)
     setMatchingPrograms(matches)
   }
 
