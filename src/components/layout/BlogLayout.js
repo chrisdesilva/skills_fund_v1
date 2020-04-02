@@ -65,6 +65,7 @@ const ChildContainer = styled.div`
   img {
     margin: 0 auto;
     display: block;
+    max-width: 90vw;
   }
 
   a:not(.btn) {
