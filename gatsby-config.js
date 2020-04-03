@@ -24,11 +24,7 @@ module.exports = {
       options: {
         spaceId: process.env.GATSBY_CONTENTFUL_SPACE_ID,
         accessToken: process.env.GATSBY_CONTENTFUL_ACCESS_TOKEN,
-        host: `${
-          process.env === "development"
-            ? "preview.contentful.com"
-            : "cdn.contentful.com"
-        }`,
+        host: "preview.contentful.com",
       },
     },
     {
