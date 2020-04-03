@@ -238,7 +238,7 @@ const SchoolFilter = ({
               </p>
             </div>
             <div className="filter--dropdown">
-              <label htmlFor="location">LOCATION</label>
+              <label htmlFor="location">CAMPUS/ONLINE</label>
               <select
                 onChange={e => setLocationFilter(e.target.value)}
                 id="location"
@@ -266,7 +266,7 @@ const SchoolFilter = ({
               </p>
             </div>
             <div className="filter--dropdown">
-              <label htmlFor="length">LENGTH </label>
+              <label htmlFor="length">LENGTH OF PROGRAM </label>
               <select
                 id="length"
                 onChange={e => setLengthFilter(e.target.value)}
@@ -286,7 +286,7 @@ const SchoolFilter = ({
               </p>
             </div>
             <div className="filter--dropdown">
-              <label htmlFor="schedule">SCHEDULE </label>
+              <label htmlFor="schedule">WEEKLY TIME COMMITMENT </label>
               <select
                 id="schedule"
                 onChange={e => setScheduleFilter(e.target.value)}

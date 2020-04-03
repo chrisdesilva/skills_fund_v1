@@ -111,10 +111,10 @@ export const StyledHeader = styled.header`
     .btn--submit {
       width: 8rem;
 
-      :hover {
+      /* :hover {
         transform: translateX(-2px) translateY(-2px);
         box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
-      }
+      } */
     }
 
     #logo {
