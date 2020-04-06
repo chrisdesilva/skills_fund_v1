@@ -39,7 +39,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     // create school landing pages
     createPage({
       path: `/students/${node.slug}/`,
-      component: require.resolve("./src/templates/PartnerPage.js"),
+      component: require.resolve("./src/templates/partnerPage/PartnerPage.js"),
       context: {
         slug: node.slug,
       },
@@ -50,7 +50,7 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
     // create blog post pages
     createPage({
       path: `/resources/${post.node.slug}`,
-      component: require.resolve("./src/templates/BlogPost.js"),
+      component: require.resolve("./src/templates/blog/BlogPost.js"),
       context: {
         slug: post.node.slug,
       },

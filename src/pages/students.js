@@ -1,14 +1,13 @@
 import React, { useState } from "react"
 import { graphql, useStaticQuery } from "gatsby"
 import Image from "gatsby-image"
-import styled from "styled-components"
 import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
 import SchoolCards from "../components/students/SchoolCards"
 import SchoolFilter from "../components/students/SchoolFilter"
-import { breakpoint } from "../utils/breakpoints"
 import SchoolList from "../components/students/SchoolList"
 import { useSchoolData } from "../hooks/useSchoolData"
+import { Banner } from "../components/students/Students.styles"
 
 const Students = () => {
   const data = useStaticQuery(graphql`
@@ -74,71 +73,3 @@ const Students = () => {
 }
 
 export default Students
-
-const Banner = styled.section`
-  display: none;
-  padding: 0 7.5rem;
-  background: white;
-
-  @media ${breakpoint.lg} {
-    height: 30vh;
-    display: flex;
-  }
-
-  div {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    :first-of-type {
-      width: 45%;
-    }
-
-    :last-of-type {
-      z-index: -5;
-      height: 100%;
-      width: 55%;
-      align-items: flex-end;
-
-      .gatsby-image-wrapper {
-        width: 100%;
-      }
-    }
-
-    @media ${breakpoint.xl} {
-      margin: 0 2rem;
-      :first-of-type {
-        width: 50%;
-      }
-
-      :last-of-type {
-        z-index: -5;
-        height: 100%;
-        width: 50%;
-      }
-    }
-  }
-
-  h1 {
-    font-size: 1.25rem;
-    margin-bottom: 1rem;
-    @media ${breakpoint.md} {
-      font-size: 1.5rem;
-    }
-    @media ${breakpoint.lg} {
-      font-size: 1.75rem;
-    }
-    @media ${breakpoint.xl} {
-      font-size: 2rem;
-    }
-  }
-
-  h2 {
-    font-size: 1rem;
-    font-weight: normal;
-
-    @media ${breakpoint.xl} {
-      font-size: 1.25rem;
-    }
-  }
-`
