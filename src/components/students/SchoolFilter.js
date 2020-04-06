@@ -4,6 +4,7 @@ import { FaThLarge, FaThList } from "react-icons/fa"
 import { breakpoint } from "../../utils/breakpoints"
 import { useKeyPress } from "../../hooks/useKeyPress"
 import TextInput from "../common/TextInput"
+import SelectInput from "../common/SelectInput"
 
 const ListItem = ({
   item,
@@ -169,6 +170,44 @@ const SchoolFilter = ({
     }
   }, [hovered])
 
+  let programOptions = programCategories.map(program => (
+    <option key={program.value} value={program.value}>
+      {program.name}
+    </option>
+  ))
+
+  let locationOptions = (
+    <>
+      <option key="online" value="Online">
+        Online
+      </option>
+      {allLocations.map(
+        location =>
+          location !== "Online" && (
+            <option key={location} value={location}>
+              {location}
+            </option>
+          )
+      )}
+    </>
+  )
+
+  let lengthOptions = (
+    <>
+      <option>4-7 weeks</option>
+      <option>8-12 weeks</option>
+      <option>13+ weeks</option>
+    </>
+  )
+
+  let weeklyOptions = (
+    <>
+      <option>Full-time (40+ hours/week)</option>
+      <option>Part-time (20-39 hours/week)</option>
+      <option>Self-paced</option>
+    </>
+  )
+
   return (
     <FilterContainer>
       <FilterCard>
@@ -218,18 +257,13 @@ const SchoolFilter = ({
           >
             <div className="filter--dropdown">
               <label htmlFor="program">PROGRAM </label>
-              <select
+              <SelectInput
                 onChange={e => setCategoryFilter(e.target.value)}
                 value={categoryFilter}
                 id="program"
-              >
-                <option>Select program</option>
-                {programCategories.map(program => (
-                  <option key={program.value} value={program.value}>
-                    {program.name}
-                  </option>
-                ))}
-              </select>
+                defaultValue={"default"}
+                options={programOptions}
+              />
               <p
                 className="hoverUnderline clearFilter"
                 id="categoryFilter"
@@ -240,24 +274,13 @@ const SchoolFilter = ({
             </div>
             <div className="filter--dropdown">
               <label htmlFor="location">CAMPUS/ONLINE</label>
-              <select
+              <SelectInput
                 onChange={e => setLocationFilter(e.target.value)}
                 id="location"
                 value={locationFilter}
-              >
-                <option>Select location</option>
-                <option key="online" value="Online">
-                  Online
-                </option>
-                {allLocations.map(
-                  location =>
-                    location !== "Online" && (
-                      <option key={location} value={location}>
-                        {location}
-                      </option>
-                    )
-                )}
-              </select>
+                defaultValue={"default"}
+                options={locationOptions}
+              />
               <p
                 className="hoverUnderline clearFilter"
                 id="locationFilter"
@@ -268,16 +291,13 @@ const SchoolFilter = ({
             </div>
             <div className="filter--dropdown">
               <label htmlFor="length">LENGTH OF PROGRAM </label>
-              <select
+              <SelectInput
                 id="length"
                 onChange={e => setLengthFilter(e.target.value)}
                 value={lengthFilter}
-              >
-                <option>Select length</option>
-                <option>4-7 weeks</option>
-                <option>8-12 weeks</option>
-                <option>13+ weeks</option>
-              </select>
+                defaultValue={"default"}
+                options={lengthOptions}
+              />
               <p
                 className="hoverUnderline clearFilter"
                 id="lengthFilter"
@@ -288,16 +308,13 @@ const SchoolFilter = ({
             </div>
             <div className="filter--dropdown">
               <label htmlFor="schedule">WEEKLY TIME COMMITMENT </label>
-              <select
+              <SelectInput
                 id="schedule"
                 onChange={e => setScheduleFilter(e.target.value)}
                 value={scheduleFilter}
-              >
-                <option>Select schedule</option>
-                <option>Full-time (40+ hours/week)</option>
-                <option>Part-time (20-39 hours/week)</option>
-                <option>Self-paced</option>
-              </select>
+                defaultValue={"default"}
+                options={weeklyOptions}
+              />
               <p
                 className="hoverUnderline clearFilter"
                 id="scheduleFilter"

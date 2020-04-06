@@ -30,6 +30,7 @@ export const useApplication = () => {
     setProgram(selectedProgram[0])
     toggleSliders(true)
     setShowCalculatorText(true)
+    console.log(program)
   }
 
   const handleSubmit = e => {

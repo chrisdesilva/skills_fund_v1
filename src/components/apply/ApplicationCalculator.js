@@ -9,6 +9,7 @@ import {
 } from "../../utils/calculator"
 import { breakpoint } from "../../utils/breakpoints"
 import TextInput from "../common/TextInput"
+import SelectInput from "../common/SelectInput"
 
 const ApplicationCalculator = ({
   school,
@@ -17,13 +18,11 @@ const ApplicationCalculator = ({
   program,
   showSliders,
   toggleSliders,
-  handleEmail2,
   email,
   email2,
   handleSubmit,
   loanUrl,
   showThankYou,
-  formState,
   handleChange,
 }) => {
   const [tuitionValue, setTuitionValue] = useState("")
@@ -115,6 +114,23 @@ const ApplicationCalculator = ({
     }
   }, [school, program, loanValue, loanType])
 
+  let loanOptions =
+    program &&
+    program["aprAndType"].length > 1 &&
+    program["aprAndType"].map(loanType => (
+      <option key={loanType.info.type} value={loanType.info.type}>
+        {loanType.info.type}
+      </option>
+    ))
+
+  let metroOptions =
+    metros &&
+    metros.map((metro, i) => (
+      <option key={i} value={JSON.stringify(metro)}>
+        {metro.location}
+      </option>
+    ))
+
   return (
     <AnimatePresence initial={false}>
       {showCalculator && (
@@ -137,40 +153,25 @@ const ApplicationCalculator = ({
             {program && program["aprAndType"].length > 1 && (
               <div>
                 <label htmlFor="loanType">Select your loan type</label>
-                <select
+                <SelectInput
                   id="loanType"
                   value={loanType}
                   onChange={selectLoanType}
                   onBlur={selectLoanType}
-                >
-                  <option disabled>---</option>
-                  {school["features"]["products"].map(loanType => (
-                    <option key={loanType} value={loanType}>
-                      {loanType}
-                    </option>
-                  ))}
-                </select>
+                  options={loanOptions}
+                />
               </div>
             )}
             {program && program["metros"].length > 0 && (
               <div>
                 <label htmlFor="program">Select your location</label>
-                <select
+                <SelectInput
                   id="program"
-                  defaultValue={"default"}
+                  defaultValue="default"
                   onChange={selectMetro}
                   onBlur={selectMetro}
-                >
-                  <option disabled value="default">
-                    ---
-                  </option>
-                  {metros &&
-                    metros.map((metro, i) => (
-                      <option key={i} value={JSON.stringify(metro)}>
-                        {metro.location}
-                      </option>
-                    ))}
-                </select>
+                  options={metroOptions}
+                />
               </div>
             )}
             <LoanCalculatorSlider
@@ -198,12 +199,6 @@ const ApplicationCalculator = ({
                   className="loanCalculator--input"
                 />
               </div>
-              {/* {loanValue && (
-                <div className="labels">
-                  <p>$2,000</p>
-                  <p>{formatter.format(maxTuition)}</p>
-                </div>
-              )} */}
             </LoanCalculatorSlider>
             {maxCOL > 0 && (
               <LoanCalculatorSlider showSliders={showSliders}>
@@ -214,8 +209,6 @@ const ApplicationCalculator = ({
                   <input
                     onChange={handleCOLSlider}
                     onBlur={handleCOLSlider}
-                    // onTouchEnd={calculateMonthlyPayment}
-                    // onMouseUp={calculateMonthlyPayment}
                     type="range"
                     min="0"
                     step="5"
@@ -397,35 +390,31 @@ const ApplicationCalculator = ({
               )}
             </Payments>
             <form className="input" onSubmit={handleSubmit}>
-              {!formState.email && (
+              {!email && (
                 <label htmlFor="email">
                   Enter your email to apply for funding
                 </label>
               )}
               <div>
-                {!formState.email && (
+                {!email && (
                   <TextInput
                     id="email2"
                     type="email"
                     name="email2"
                     onChange={handleChange}
                     placeholder="Enter your email address"
-                    value={formState.email2}
+                    value={email2}
                   />
                 )}
                 <TextInput
                   type="submit"
                   value="Next &rarr;"
                   className={
-                    (formState.email || formState.email2) && loanUrl
+                    (email || email2) && loanUrl
                       ? "btn btn--submit"
                       : "btn btn--disabled"
                   }
-                  disabled={
-                    (formState.email || formState.email2) && loanUrl
-                      ? false
-                      : true
-                  }
+                  disabled={(email || email2) && loanUrl ? false : true}
                 />
               </div>
             </form>

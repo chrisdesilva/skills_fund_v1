@@ -8,6 +8,7 @@ import { FaCode, FaEnvelope, FaCaretDown, FaCheckCircle } from "react-icons/fa"
 import { breakpoint } from "../utils/breakpoints"
 import ApplicationCalculator from "../components/apply/ApplicationCalculator"
 import TextInput from "../components/common/TextInput"
+import SelectInput from "../components/common/SelectInput"
 
 export const query = graphql`
   query($slug: String!) {
@@ -84,12 +85,20 @@ const PartnerPage = ({ data }) => {
   const school = data.school
   const [program, setProgram] = useState("")
   const [loanUrl, setLoanUrl] = useState("")
-  const [email, setEmail] = useState("")
   const [submitReady, setSubmitReady] = useState(false)
   const [showCalculator, setShowCalculator] = useState(false)
   const [showCalculatorText, setShowCalculatorText] = useState(false)
   const [showThankYou, setShowThankYou] = useState(false)
   const [showSliders, toggleSliders] = useState(false)
+  const [formState, setFormState] = useState({
+    email: "",
+    email2: "",
+  })
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setFormState({ ...formState, [name]: value })
+  }
 
   const formatter = new Intl.NumberFormat("en-US", {
     style: "currency",
@@ -108,17 +117,20 @@ const PartnerPage = ({ data }) => {
     setShowCalculatorText(true)
   }
 
-  const handleEmail = e => {
-    setEmail(e.target.value)
-    setSubmitReady(true)
-  }
-
   const handleSubmit = e => {
     e.preventDefault()
-    setEmail("")
+    setFormState({})
     setShowThankYou(true)
     window.open(loanUrl)
   }
+
+  let programOptions =
+    school["schoolInfo"]["loanInfo"] &&
+    school["schoolInfo"]["loanInfo"].map(program => (
+      <option key={program.segment} value={JSON.stringify(program)}>
+        {program.name}
+      </option>
+    ))
 
   return (
     <Layout>
@@ -144,25 +156,13 @@ const PartnerPage = ({ data }) => {
               <div className="input">
                 <FaCode />
                 <label htmlFor="program">Select your program</label>
-                <select
+                <SelectInput
                   id="program"
                   defaultValue={"default"}
                   onChange={selectProgram}
                   onBlur={selectProgram}
-                >
-                  <option disabled value="default">
-                    ---
-                  </option>
-                  {school["schoolInfo"]["loanInfo"] &&
-                    school["schoolInfo"]["loanInfo"].map(program => (
-                      <option
-                        key={program.segment}
-                        value={JSON.stringify(program)}
-                      >
-                        {program.name}
-                      </option>
-                    ))}
-                </select>
+                  options={programOptions}
+                />
               </div>
               <form className="input">
                 <FaEnvelope />
@@ -171,9 +171,10 @@ const PartnerPage = ({ data }) => {
                   id="email"
                   type="email"
                   placeholder="Enter your email address"
+                  name="email"
                   required="required"
-                  value={email}
-                  onChange={handleEmail}
+                  value={formState.email}
+                  onChange={handleChange}
                 />
               </form>
               <ApplySubmit thankYou={showThankYou}>
@@ -182,9 +183,15 @@ const PartnerPage = ({ data }) => {
                   value="Next &rarr;"
                   onClick={handleSubmit}
                   className={
-                    email && loanUrl ? "btn btn--submit" : "btn btn--disabled"
+                    (formState.email || formState.email2) && loanUrl
+                      ? "btn btn--submit"
+                      : "btn btn--disabled"
                   }
-                  disabled={email && loanUrl ? false : true}
+                  disabled={
+                    (formState.email || formState.email2) && loanUrl
+                      ? false
+                      : true
+                  }
                 />
                 <p>Your application has opened in a new window.</p>
               </ApplySubmit>
@@ -226,8 +233,9 @@ const PartnerPage = ({ data }) => {
             program={program}
             showSliders={showSliders}
             toggleSliders={toggleSliders}
-            email={email}
-            handleEmail={handleEmail}
+            email={formState.email}
+            email2={formState.email2}
+            handleChange={handleChange}
             handleSubmit={handleSubmit}
             loanUrl={loanUrl}
             showThankYou={showThankYou}

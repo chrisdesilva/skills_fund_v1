@@ -12,6 +12,7 @@ import ApplicationCalculator from "../components/apply/ApplicationCalculator"
 import { useApplication } from "../hooks/useApplication"
 import { breakpoint } from "../utils/breakpoints"
 import TextInput from "../components/common/TextInput"
+import SelectInput from "../components/common/SelectInput"
 
 const Apply = () => {
   const [
@@ -49,6 +50,23 @@ const Apply = () => {
     setFormState({ ...formState, [name]: value })
   }
 
+  let schoolOptions = schoolList.map(school => (
+    <option
+      key={school["node"]["schoolInfo"]["basicInfo"]["schoolname"]}
+      value={school["node"]["slug"]}
+    >
+      {school["node"]["schoolInfo"]["basicInfo"]["schoolname"]}
+    </option>
+  ))
+
+  let programOptions = school
+    ? school["schoolInfo"]["loanInfo"].map(program => (
+        <option key={program.segment} value={JSON.stringify(program)}>
+          {program.name}
+        </option>
+      ))
+    : null
+
   return (
     <Layout>
       <SEO title="Apply" />
@@ -59,50 +77,24 @@ const Apply = () => {
             <div className="input">
               <FaGraduationCap />
               <label htmlFor="school">Select your school</label>
-              <select
+              <SelectInput
                 id="school"
                 defaultValue={"default"}
                 onChange={selectSchool}
                 onBlur={selectSchool}
-              >
-                <option disabled value="default">
-                  ---
-                </option>
-                {schoolList &&
-                  schoolList.map(school => (
-                    <option
-                      key={
-                        school["node"]["schoolInfo"]["basicInfo"]["schoolname"]
-                      }
-                      value={school["node"]["slug"]}
-                    >
-                      {school["node"]["schoolInfo"]["basicInfo"]["schoolname"]}
-                    </option>
-                  ))}
-              </select>
+                options={schoolOptions}
+              />
             </div>
             <div className="input">
               <FaCode />
               <label htmlFor="program">Select your program</label>
-              <select
+              <SelectInput
                 id="program"
                 defaultValue={"default"}
                 onChange={selectProgram}
                 onBlur={selectProgram}
-              >
-                <option disabled value="default">
-                  ---
-                </option>
-                {school &&
-                  school["schoolInfo"]["loanInfo"].map(program => (
-                    <option
-                      key={program.segment}
-                      value={JSON.stringify(program)}
-                    >
-                      {program.name}
-                    </option>
-                  ))}
-              </select>
+                options={programOptions}
+              />
             </div>
             <form className="input">
               <FaEnvelope />
@@ -155,9 +147,6 @@ const Apply = () => {
               )}
               !
             </p>
-            {/* <p className="calculator uppercase text-xs">
-              Curious what you'll pay?
-            </p> */}
             <p
               className="calculator text-xs"
               onClick={() => setShowCalculator(true)}
@@ -179,7 +168,6 @@ const Apply = () => {
             handleSubmit={handleSubmit}
             loanUrl={loanUrl}
             showThankYou={showThankYou}
-            formState={formState}
             handleChange={handleChange}
           />
         </ApplyCard>
