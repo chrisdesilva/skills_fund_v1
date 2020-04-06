@@ -44,6 +44,7 @@ const SchoolFilter = ({
       return acc
     }, [])
     .sort()
+  const [locations, setLocations] = useState(allLocations)
   const [textFilter, setTextFilter] = useState("")
   const [matchingPrograms, setMatchingPrograms] = useState([])
   const downPress = useKeyPress("ArrowDown")
@@ -114,12 +115,35 @@ const SchoolFilter = ({
       filteredList = filteredList.filter(school =>
         school.schoolInfo.basicInfo.programTypes.includes(categoryFilter)
       )
+      allLocations = filteredList // takes all locations from all schools, flattens into single array, then removes duplicates, then sorts alphabetically
+        .flatMap(school => school.schoolInfo.basicInfo.locations)
+        .reduce((acc, currVal) => {
+          if (acc.indexOf(currVal) === -1) {
+            acc.push(currVal)
+          }
+          return acc
+        }, [])
+        .sort()
+      setLocations(allLocations)
     }
     if (locationFilter) {
       filteredList = filteredList.filter(school =>
         school.schoolInfo.basicInfo.locations.includes(locationFilter)
       )
     }
+
+    if (lengthFilter) {
+      filteredList = filteredList.filter(school =>
+        school.schoolInfo.basicInfo.programLengths.includes(lengthFilter)
+      )
+    }
+
+    if (scheduleFilter) {
+      filteredList = filteredList.filter(school =>
+        school.schoolInfo.basicInfo.weeklySchedules.includes(scheduleFilter)
+      )
+    }
+    setLocations(allLocations)
     setFilteredSchools(filteredList)
   }
 
@@ -129,6 +153,7 @@ const SchoolFilter = ({
     setLocationFilter("")
     setLengthFilter("")
     setScheduleFilter("")
+    setLocations(allLocations)
     setFilteredSchools(allSchools)
   }
 
@@ -170,18 +195,24 @@ const SchoolFilter = ({
     }
   }, [hovered])
 
-  let programOptions = programCategories.map(program => (
-    <option key={program.value} value={program.value}>
-      {program.name}
-    </option>
-  ))
+  let programOptions = (
+    <>
+      <option value="default">---</option>
+      {programCategories.map(program => (
+        <option key={program.value} value={program.value}>
+          {program.name}
+        </option>
+      ))}
+    </>
+  )
 
   let locationOptions = (
     <>
+      <option value="default">---</option>
       <option key="online" value="Online">
         Online
       </option>
-      {allLocations.map(
+      {locations.map(
         location =>
           location !== "Online" && (
             <option key={location} value={location}>
@@ -194,17 +225,20 @@ const SchoolFilter = ({
 
   let lengthOptions = (
     <>
-      <option>4-7 weeks</option>
-      <option>8-12 weeks</option>
-      <option>13+ weeks</option>
+      <option value="default">---</option>
+      <option value="4-7">4-7 weeks</option>
+      <option value="8-11">8-11 weeks</option>
+      <option value="12-15">12-15 weeks</option>
+      <option value="16+">16+ weeks</option>
     </>
   )
 
   let weeklyOptions = (
     <>
-      <option>Full-time (40+ hours/week)</option>
-      <option>Part-time (20-39 hours/week)</option>
-      <option>Self-paced</option>
+      <option value="default">---</option>
+      <option value="full-time">Full-time (40+ hours/week)</option>
+      <option value="part-time">Part-time (20-39 hours/week)</option>
+      <option value="self-paced">Self-paced</option>
     </>
   )
 
@@ -284,7 +318,10 @@ const SchoolFilter = ({
               <p
                 className="hoverUnderline clearFilter"
                 id="locationFilter"
-                onClick={() => setLocationFilter("")}
+                onClick={() => {
+                  setLocationFilter("")
+                  setLocations(allLocations)
+                }}
               >
                 Clear
               </p>

@@ -29,6 +29,8 @@ export const useSchoolData = () => {
                 schoolurl
                 selectAProgram
                 tuitionRange
+                programLengths
+                weeklySchedules
               }
               paymentTable {
                 data {

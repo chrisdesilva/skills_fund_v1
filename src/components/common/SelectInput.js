@@ -1,18 +1,15 @@
 import React from "react"
 
-const SelectInput = ({ id, defaultValue, onChange, onBlur, options }) => {
+const SelectInput = ({
+  id,
+  defaultValue,
+  onChange,
+  onBlur,
+  options,
+  value,
+}) => {
   return (
-    <select
-      id={id}
-      defaultValue={defaultValue}
-      onChange={onChange}
-      onBlur={onBlur}
-    >
-      {defaultValue ? (
-        <option disabled value="default">
-          ---
-        </option>
-      ) : null}
+    <select id={id} value={value} onChange={onChange} onBlur={onBlur}>
       {options}
     </select>
   )

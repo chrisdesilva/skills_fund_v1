@@ -150,7 +150,7 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                         </div>
                         <div className="click">
                           {!applyForm.includes(i) && (
-                            <btn
+                            <button
                               className="btn"
                               onClick={() => {
                                 setApplyForm([i])
@@ -160,7 +160,7 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                               }}
                             >
                               Apply For Funding
-                            </btn>
+                            </button>
                           )}
                           {applyForm.includes(i) && (
                             <form className="input">
