@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import styled from "styled-components"
 import {
   FaGraduationCap,
@@ -11,6 +11,7 @@ import SEO from "../components/layout/SEO"
 import ApplicationCalculator from "../components/apply/ApplicationCalculator"
 import { useApplication } from "../hooks/useApplication"
 import { breakpoint } from "../utils/breakpoints"
+import TextInput from "../components/common/TextInput"
 
 const Apply = () => {
   const [
@@ -19,14 +20,10 @@ const Apply = () => {
     showCalculator,
     setShowCalculator,
     showCalculatorText,
-    email,
-    email2,
     submitReady,
     showThankYou,
     selectSchool,
     selectProgram,
-    handleEmail,
-    handleEmail2,
     handleSubmit,
     schoolList,
     school,
@@ -41,6 +38,16 @@ const Apply = () => {
     currency: "USD",
     minimumFractionDigits: 0,
   })
+
+  const [formState, setFormState] = useState({
+    email: "",
+    email2: "",
+  })
+
+  const handleChange = e => {
+    const { name, value } = e.target
+    setFormState({ ...formState, [name]: value })
+  }
 
   return (
     <Layout>
@@ -100,28 +107,32 @@ const Apply = () => {
             <form className="input">
               <FaEnvelope />
               <label htmlFor="email">Enter your email address</label>
-
-              <input
+              <TextInput
                 id="email"
                 type="email"
+                name="email"
                 placeholder="Enter your email address"
-                required
-                onChange={handleEmail}
+                onChange={handleChange}
+                value={formState.email}
+              />
+              <TextInput
+                type="submit"
+                value="Next &rarr;"
+                onClick={handleSubmit}
+                className={
+                  (formState.email || formState.email2) && loanUrl
+                    ? "btn btn--submit"
+                    : "btn btn--disabled"
+                }
+                disabled={
+                  (formState.email || formState.email2) && loanUrl
+                    ? false
+                    : true
+                }
               />
             </form>
           </SelectContainer>
           <ApplySubmit thankYou={showThankYou}>
-            <input
-              type="submit"
-              value="Next &rarr;"
-              onClick={handleSubmit}
-              className={
-                (email || email2) && loanUrl
-                  ? "btn btn--submit"
-                  : "btn btn--disabled"
-              }
-              disabled={(email || email2) && loanUrl ? false : true}
-            />
             <p>Your application has opened in a new window.</p>
           </ApplySubmit>
           <ApplyPayments>
@@ -163,13 +174,13 @@ const Apply = () => {
             program={program}
             showSliders={showSliders}
             toggleSliders={toggleSliders}
-            email={email}
-            email2={email2}
-            handleEmail={handleEmail}
-            handleEmail2={handleEmail2}
+            email={formState.email}
+            email2={formState.email2}
             handleSubmit={handleSubmit}
             loanUrl={loanUrl}
             showThankYou={showThankYou}
+            formState={formState}
+            handleChange={handleChange}
           />
         </ApplyCard>
       </ApplyContainer>
@@ -271,12 +282,20 @@ const ApplyCard = styled.div`
 const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
-  align-items: center;
   padding: 1rem;
 
   @media ${breakpoint.xl} {
     flex-direction: row;
     justify-content: space-around;
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+
+    input[type="submit"] {
+      margin: 1rem auto;
+    }
   }
   .input {
     width: 20rem;
@@ -291,12 +310,6 @@ const SelectContainer = styled.div`
       font-size: 2rem;
       align-self: center;
       margin-top: 1rem;
-    }
-  }
-  form {
-    div {
-      display: flex;
-      flex-direction: row;
     }
   }
 `

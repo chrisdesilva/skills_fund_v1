@@ -8,6 +8,7 @@ import {
   calculateTotalPayment,
 } from "../../utils/calculator"
 import { breakpoint } from "../../utils/breakpoints"
+import TextInput from "../common/TextInput"
 
 const ApplicationCalculator = ({
   school,
@@ -22,6 +23,8 @@ const ApplicationCalculator = ({
   handleSubmit,
   loanUrl,
   showThankYou,
+  formState,
+  handleChange,
 }) => {
   const [tuitionValue, setTuitionValue] = useState("")
   const [colValue, setCOLValue] = useState("")
@@ -393,32 +396,36 @@ const ApplicationCalculator = ({
                 </PaymentCard>
               )}
             </Payments>
-            <form className="input">
-              {!email && (
+            <form className="input" onSubmit={handleSubmit}>
+              {!formState.email && (
                 <label htmlFor="email">
                   Enter your email to apply for funding
                 </label>
               )}
               <div>
-                {!email && (
-                  <input
-                    id="email"
+                {!formState.email && (
+                  <TextInput
+                    id="email2"
                     type="email"
+                    name="email2"
+                    onChange={handleChange}
                     placeholder="Enter your email address"
-                    required
-                    onChange={handleEmail2}
+                    value={formState.email2}
                   />
                 )}
-                <input
+                <TextInput
                   type="submit"
                   value="Next &rarr;"
-                  onClick={handleSubmit}
                   className={
-                    (email || email2) && loanUrl
+                    (formState.email || formState.email2) && loanUrl
                       ? "btn btn--submit"
                       : "btn btn--disabled"
                   }
-                  disabled={(email || email2) && loanUrl ? false : true}
+                  disabled={
+                    (formState.email || formState.email2) && loanUrl
+                      ? false
+                      : true
+                  }
                 />
               </div>
             </form>

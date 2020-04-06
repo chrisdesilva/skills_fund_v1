@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { FaThLarge, FaThList } from "react-icons/fa"
 import { breakpoint } from "../../utils/breakpoints"
 import { useKeyPress } from "../../hooks/useKeyPress"
+import TextInput from "../common/TextInput"
 
 const ListItem = ({
   item,
@@ -174,7 +175,7 @@ const SchoolFilter = ({
         <h3>Find your perfect school</h3>
         <div className="filter--search">
           <label htmlFor="search">Search by school name</label>
-          <input
+          <TextInput
             id="search"
             placeholder="Enter school name"
             type="text"

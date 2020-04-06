@@ -11,8 +11,6 @@ export const useApplication = () => {
   const [showCalculator, setShowCalculator] = useState(false)
   const [showCalculatorText, setShowCalculatorText] = useState(false)
   const [loanUrl, setLoanUrl] = useState(false)
-  const [email, setEmail] = useState("")
-  const [email2, setEmail2] = useState("")
   const [submitReady, setSubmitReady] = useState(false)
   const [showThankYou, setShowThankYou] = useState(false)
 
@@ -34,20 +32,8 @@ export const useApplication = () => {
     setShowCalculatorText(true)
   }
 
-  const handleEmail = e => {
-    setEmail(e.target.value)
-    setSubmitReady(true)
-  }
-
-  const handleEmail2 = e => {
-    setEmail2(e.target.value)
-    setSubmitReady(true)
-  }
-
   const handleSubmit = e => {
     e.preventDefault()
-    setEmail("")
-    setEmail2("")
     setShowThankYou(true)
     window.open(loanUrl)
   }
@@ -66,14 +52,10 @@ export const useApplication = () => {
     showCalculator,
     setShowCalculator,
     showCalculatorText,
-    email,
-    email2,
     submitReady,
     showThankYou,
     selectSchool,
     selectProgram,
-    handleEmail,
-    handleEmail2,
     handleSubmit,
     schoolList,
     school,

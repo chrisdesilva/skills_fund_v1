@@ -7,6 +7,7 @@ import Layout from "../components/layout/Layout"
 import { FaCode, FaEnvelope, FaCaretDown, FaCheckCircle } from "react-icons/fa"
 import { breakpoint } from "../utils/breakpoints"
 import ApplicationCalculator from "../components/apply/ApplicationCalculator"
+import TextInput from "../components/common/TextInput"
 
 export const query = graphql`
   query($slug: String!) {
@@ -166,17 +167,17 @@ const PartnerPage = ({ data }) => {
               <form className="input">
                 <FaEnvelope />
                 <label htmlFor="email">Enter your email address</label>
-
-                <input
+                <TextInput
                   id="email"
                   type="email"
                   placeholder="Enter your email address"
-                  required
+                  required="required"
+                  value={email}
                   onChange={handleEmail}
                 />
               </form>
               <ApplySubmit thankYou={showThankYou}>
-                <input
+                <TextInput
                   type="submit"
                   value="Next &rarr;"
                   onClick={handleSubmit}
@@ -209,9 +210,6 @@ const PartnerPage = ({ data }) => {
               )}
               !
             </p>
-            {/* <p className="calculator uppercase text-xs">
-              Curious what you'll pay?
-            </p> */}
             <p
               className="calculator text-xs"
               onClick={() => setShowCalculator(true)}
