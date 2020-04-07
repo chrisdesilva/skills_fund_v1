@@ -3,7 +3,10 @@ import { Link } from "gatsby"
 import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
 import FAQ from "../components/faq/FAQ"
-import { Container, FAQSection } from "./FAQ.styled"
+import {
+  Container,
+  FAQSection,
+} from "../components//faq/frequently-asked-questions.styled"
 
 const FAQs = () => {
   return (

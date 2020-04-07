@@ -11,7 +11,7 @@ import {
   SelectContainer,
   ApplySubmit,
   ApplyPayments,
-} from "./apply.styled"
+} from "../components/apply/apply.styled.js"
 import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
 import ApplicationCalculator from "../components/apply/ApplicationCalculator"

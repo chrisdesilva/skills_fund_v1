@@ -7,7 +7,7 @@ import SchoolCards from "../components/students/SchoolCards"
 import SchoolFilter from "../components/students/SchoolFilter"
 import SchoolList from "../components/students/SchoolList"
 import { useSchoolData } from "../hooks/useSchoolData"
-import { Banner } from "./students.styled"
+import { Banner } from "../components/students/students.styled"
 
 const Students = () => {
   const data = useStaticQuery(graphql`
