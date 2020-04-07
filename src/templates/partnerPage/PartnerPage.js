@@ -12,7 +12,7 @@ import {
   SelectContainer,
   ApplySubmit,
   ApplyPayments,
-} from "./PartnerPage.styles"
+} from "./PartnerPage.styled"
 import ApplicationCalculator from "../../components/apply/ApplicationCalculator"
 import TextInput from "../../components/common/TextInput"
 import SelectInput from "../../components/common/SelectInput"
@@ -237,7 +237,6 @@ const PartnerPage = ({ data }) => {
           </ApplyPayments>
           <ApplicationCalculator
             school={school}
-            // setSchoolName={setSchoolName}
             showCalculator={showCalculator}
             schoolName={school.schoolInfo.basicInfo.schoolname}
             program={program}

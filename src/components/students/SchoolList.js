@@ -4,7 +4,7 @@ import { AnimatePresence } from "framer-motion"
 import Image from "gatsby-image"
 import { FaQuestionCircle } from "react-icons/fa"
 import { useApplication } from "../../hooks/useApplication"
-import { ListContainer, ListColumn, ListItem } from "./SchoolList.styles"
+import { ListContainer, ListColumn, ListItem } from "./SchoolList.styled"
 
 const SchoolList = ({ filteredSchools }) => {
   const [email, handleEmail] = useApplication()

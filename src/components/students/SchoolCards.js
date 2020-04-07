@@ -14,7 +14,7 @@ import {
   CardColumn,
   CardLogo,
   CardInfo,
-} from "./SchoolCards.styles"
+} from "./SchoolCards.styled"
 
 const SchoolCards = ({ filteredSchools, skfLogo }) => {
   const [email, handleEmail] = useApplication()

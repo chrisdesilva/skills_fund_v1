@@ -6,7 +6,7 @@ import {
   LoanCalculatorSlider,
   CalculatorCard,
   CalculatorContainer,
-} from "./ApplicationCalculator.styles"
+} from "./ApplicationCalculator.styled"
 import { FaQuestionCircle } from "react-icons/fa"
 import {
   calculateInterestPayment,

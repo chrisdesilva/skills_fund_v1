@@ -69,14 +69,26 @@ const ChildContainer = styled.div`
   }
 
   a:not(.btn) {
-    background: none;
-    transition: background 300ms;
     text-decoration: none;
     color: black;
-    font-weight: bold;
+    transition: background-position 120ms;
+    background-image: linear-gradient(
+      transparent 0%,
+      transparent calc(50% - 9px),
+      rgba(255, 164, 161, 0.5) calc(50% - 9px),
+      rgba(255, 164, 161, 0.5) 100%
+    );
+    background-size: 100% 225%;
+    background-position: 0px 0px;
 
     :hover {
-      background: ${({ theme }) => theme.secondaryLight};
+      background-image: linear-gradient(
+        transparent 0%,
+        transparent calc(50% - 9px),
+        rgba(233, 105, 101, 1) calc(50% - 9px),
+        rgba(233, 105, 101, 1) 100%
+      );
+      background-position: center center;
     }
   }
 

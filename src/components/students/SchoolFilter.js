@@ -8,7 +8,7 @@ import {
   FilterContainer,
   FilterRow,
   Filters,
-} from "./SchoolFilter.styles"
+} from "./SchoolFilter.styled"
 
 const ListItem = ({
   item,

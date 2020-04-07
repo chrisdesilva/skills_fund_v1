@@ -8,6 +8,21 @@ import { breakpoint } from "../../utils/breakpoints"
 import { GlobalStyle } from "../../utils/globals"
 import "../../utils/globals"
 
+const Layout = ({ children }) => {
+  return (
+    <ThemeProvider theme={theme}>
+      <PageContainer>
+        <GlobalStyle />
+        <Header />
+        <ChildContainer>{children}</ChildContainer>
+        <Footer />
+      </PageContainer>
+    </ThemeProvider>
+  )
+}
+
+export default Layout
+
 const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
@@ -23,18 +38,3 @@ const ChildContainer = styled.div`
     margin-top: 57px;
   }
 `
-
-const Layout = ({ children }) => {
-  return (
-    <ThemeProvider theme={theme}>
-      <PageContainer>
-        <GlobalStyle />
-        <Header />
-        <ChildContainer>{children}</ChildContainer>
-        <Footer />
-      </PageContainer>
-    </ThemeProvider>
-  )
-}
-
-export default Layout
