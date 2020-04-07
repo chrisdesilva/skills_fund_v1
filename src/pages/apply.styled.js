@@ -1,5 +1,5 @@
 import styled from "styled-components"
-import { breakpoint } from "../../utils/breakpoints"
+import { breakpoint } from "../utils/breakpoints"
 
 export const ApplyContainer = styled.section`
   display: flex;
