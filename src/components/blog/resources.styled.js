@@ -1,4 +1,4 @@
-import { breakpoint } from "../utils/breakpoints"
+import { breakpoint } from "../../utils/breakpoints"
 import styled from "styled-components"
 
 export const BlogContainer = styled.div`
