@@ -146,14 +146,14 @@ const Footer = () => {
           </p>
         </FooterSection>
         <FooterNotice>
-          <p>
+          <p className="text-xs">
             Skills Fund, LLC products are made available through Richland State
             Bank, member FDIC. All loans are subject to individual approval and
             adherence to underwriting guidelines. Program restrictions, other
             terms, and conditions apply. Variable interest rates may increase
             after consummation.
           </p>
-          <p>
+          <p className="text-xs">
             WE RESERVE THE RIGHT TO MODIFY OR DISCONTINUE (IN WHOLE OR IN PART)
             THIS LOAN PROGRAM AND ITS ASSOCIATED SERVICES AND BENEFITS AT ANY
             TIME WITHOUT NOTICE. CHECK WWW.SKILLS.FUND FOR THE MOST UP-TO-DATE
