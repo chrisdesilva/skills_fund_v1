@@ -14,8 +14,27 @@ const Partner = () => {
     setFormState({ ...formState, [name]: value })
   }
 
+  const encode = data => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&")
+  }
+
   const handleSubmit = e => {
     e.preventDefault()
+    const form = e.target
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...this.state,
+      }),
+    })
+      .then(() => {
+        setFormState({})
+      })
+      .catch(error => alert(error))
   }
 
   let idOptions = (
@@ -57,7 +76,14 @@ const Partner = () => {
           complete the <Link to="/contact">General Inquiry Form</Link> or{" "}
           <Link to="/resources">check out our blog</Link>. Thank you!.
         </p>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          name="partner-contact"
+          method="post"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="partner-contact" />
           <label htmlFor="name">Name</label>
           <TextInput
             type="text"
