@@ -7,9 +7,16 @@ const SelectInput = ({
   onBlur,
   options,
   value,
+  name,
 }) => {
   return (
-    <select id={id} value={value} onChange={onChange} onBlur={onBlur}>
+    <select
+      id={id}
+      name={name}
+      value={value}
+      onChange={onChange}
+      onBlur={onBlur}
+    >
       {options}
     </select>
   )
