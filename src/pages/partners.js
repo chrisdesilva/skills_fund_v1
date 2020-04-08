@@ -28,7 +28,7 @@ const Partner = () => {
       headers: { "Content-Type": "application/x-www-form-urlencoded" },
       body: encode({
         "form-name": form.getAttribute("name"),
-        ...this.state,
+        ...formState,
       }),
     })
       .then(() => {
@@ -96,7 +96,7 @@ const Partner = () => {
           />
           <label htmlFor="email">Email address</label>
           <TextInput
-            type="text"
+            type="email"
             name="email"
             id="email"
             value={formState.email}
@@ -106,7 +106,7 @@ const Partner = () => {
           />
           <label htmlFor="school">School or Institutional Name</label>
           <TextInput
-            type="email"
+            type="text"
             name="school"
             id="school"
             value={formState.school}
