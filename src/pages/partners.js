@@ -34,7 +34,7 @@ const Partner = () => {
       .then(() => {
         setFormState({})
       })
-      .catch(error => alert(error))
+      .catch(error => console.log(error))
   }
 
   let idOptions = (
@@ -159,6 +159,7 @@ export default Partner
 const PartnerContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+  padding: 1rem;
 
   h1 {
     margin: 3rem 0;

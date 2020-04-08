@@ -14,8 +14,27 @@ const Contact = () => {
     setFormState({ ...formState, [name]: value })
   }
 
+  const encode = data => {
+    return Object.keys(data)
+      .map(key => encodeURIComponent(key) + "=" + encodeURIComponent(data[key]))
+      .join("&")
+  }
+
   const handleSubmit = e => {
     e.preventDefault()
+    const form = e.target
+    fetch("/", {
+      method: "POST",
+      headers: { "Content-Type": "application/x-www-form-urlencoded" },
+      body: encode({
+        "form-name": form.getAttribute("name"),
+        ...formState,
+      }),
+    })
+      .then(() => {
+        setFormState({})
+      })
+      .catch(error => console.log(error))
   }
 
   let idOptions = (
@@ -60,7 +79,14 @@ const Contact = () => {
           <strong>School Representatives:</strong> For any School Partnership
           inquiries, please <Link to="/partners">click here</Link>.
         </p>
-        <form onSubmit={handleSubmit}>
+        <form
+          onSubmit={handleSubmit}
+          name="general-contact"
+          method="post"
+          data-netlify="true"
+          data-netlify-honeypot="bot-field"
+        >
+          <input type="hidden" name="form-name" value="general-contact" />
           <label htmlFor="name">Name</label>
           <TextInput
             type="text"
@@ -126,6 +152,7 @@ export default Contact
 const ContactContainer = styled.div`
   max-width: 1200px;
   margin: 0 auto;
+  padding: 1rem;
 
   h1 {
     margin: 3rem 0;

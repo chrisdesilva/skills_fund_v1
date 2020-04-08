@@ -138,7 +138,7 @@ const Footer = () => {
               </a>
             </li>
           </ul>
-          <Link to="/partner" className="btn btn--secondary mb-2 text-center">
+          <Link to="/partners" className="btn btn--secondary mb-2 text-center">
             Become a Partner School
           </Link>
           <p className="text-center">
