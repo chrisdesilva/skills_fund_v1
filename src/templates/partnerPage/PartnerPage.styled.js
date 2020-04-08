@@ -4,7 +4,6 @@ import { breakpoint } from "../../utils/breakpoints"
 export const ApplyContainer = styled.section`
   display: flex;
   justify-content: center;
-  background: #f7f7f7;
   min-height: 30vh;
   margin: 2rem 0 4rem 0;
 `

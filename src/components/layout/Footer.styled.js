@@ -1,10 +1,16 @@
 import { breakpoint } from "../../utils/breakpoints"
 import styled from "styled-components"
 
-export const FooterContainer = styled.footer`
+export const FooterWrapper = styled.footer`
+  background: #f7f7f7;
+`
+
+export const FooterContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
+  max-width: 1200px;
+  margin: 0 auto;
   @media ${breakpoint.lg} {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -56,4 +62,10 @@ export const Form = styled.form`
   input[type="email"] {
     width: 16rem;
   }
+`
+
+export const FooterNotice = styled.div`
+  display: flex;
+  flex-direction: column;
+  grid-column: span 3;
 `

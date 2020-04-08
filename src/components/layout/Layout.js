@@ -27,14 +27,15 @@ const PageContainer = styled.div`
   display: flex;
   flex-direction: column;
   min-height: 100vh;
-  background: #f7f7f7;
 `
 
 const ChildContainer = styled.div`
   flex-grow: 1;
   margin-top: 48px;
+  padding: 1rem;
 
   @media ${breakpoint.lg} {
-    margin-top: 57px;
+    margin-top: 53px;
+    padding: 0;
   }
 `

@@ -5,6 +5,7 @@ export const Banner = styled.section`
   display: none;
   padding: 0 7.5rem;
   background: white;
+  margin: 0 auto;
 
   @media ${breakpoint.lg} {
     height: 30vh;
@@ -15,32 +16,29 @@ export const Banner = styled.section`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 0 auto;
 
-    :first-of-type {
-      width: 45%;
-    }
-
-    :last-of-type {
-      z-index: -5;
-      height: 100%;
-      width: 55%;
-      align-items: flex-end;
-
-      .gatsby-image-wrapper {
+    @media ${breakpoint.lg} {
+      :first-of-type {
         width: 100%;
+      }
+
+      :last-of-type {
+        z-index: 1;
+        width: 100%;
+
+        .gatsby-image-wrapper {
+          max-width: 100%;
+        }
       }
     }
 
     @media ${breakpoint.xl} {
-      margin: 0 2rem;
-      :first-of-type {
-        width: 50%;
-      }
-
       :last-of-type {
-        z-index: -5;
-        height: 100%;
-        width: 50%;
+        .gatsby-image-wrapper {
+          max-width: 75%;
+          margin: 0 auto;
+        }
       }
     }
   }
