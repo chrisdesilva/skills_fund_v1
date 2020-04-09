@@ -1,12 +1,17 @@
 import React from "react"
+import { Link } from "gatsby"
 import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
+import { MDXProvider } from "@mdx-js/react"
 import Header from "./Header"
 import Footer from "./Footer"
+import FAQ from "../faq/FAQ"
 import { theme } from "../../utils/theme"
 import { breakpoint } from "../../utils/breakpoints"
 import { GlobalStyle } from "../../utils/globals"
 import "../../utils/globals"
+
+const shortcodes = { FAQ, Link }
 
 const Layout = ({ children }) => {
   return (
@@ -14,7 +19,9 @@ const Layout = ({ children }) => {
       <PageContainer>
         <GlobalStyle />
         <Header />
-        <ChildContainer>{children}</ChildContainer>
+        <MDXProvider components={shortcodes}>
+          <ChildContainer>{children}</ChildContainer>
+        </MDXProvider>
         <Footer />
       </PageContainer>
     </ThemeProvider>
