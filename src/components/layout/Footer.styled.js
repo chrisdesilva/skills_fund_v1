@@ -15,16 +15,15 @@ export const FooterContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(3, 1fr);
   }
-  padding: 2rem;
+  padding: 0 2rem;
   background: #f7f7f7;
 `
 
 export const FooterSection = styled.section`
   display: flex;
   flex-direction: column;
-  justify-content: center;
   ul {
-    margin: 0;
+    margin: 1rem auto;
     padding: 0;
     li,
     a {
@@ -33,7 +32,12 @@ export const FooterSection = styled.section`
       margin-bottom: 0.5rem;
     }
   }
-  &:nth-child(2) {
+
+  :first-child {
+    align-items: flex-start;
+  }
+
+  :nth-child(2) {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-gap: 2rem;
@@ -43,13 +47,19 @@ export const FooterSection = styled.section`
     }
   }
 
-  &:nth-child(3) {
+  :nth-child(3) {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: flex-end;
 
     a {
       width: 13rem;
+    }
+
+    @media ${breakpoint.lg} {
+      ul {
+        margin-right: calc((13rem / 2) - 40px);
+      }
     }
   }
 `

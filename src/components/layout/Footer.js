@@ -103,6 +103,11 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
+                <Link className="hoverLink" to="/contact">
+                  Contact Us
+                </Link>
+              </li>
+              <li>
                 <Link className="hoverLink" to="/privacy-notice">
                   Privacy Notice
                 </Link>

@@ -32,7 +32,6 @@ const PageContainer = styled.div`
 const ChildContainer = styled.div`
   flex-grow: 1;
   margin-top: 48px;
-  padding: 1rem;
 
   @media ${breakpoint.lg} {
     margin-top: 53px;
