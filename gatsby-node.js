@@ -27,6 +27,11 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
             }
           }
         }
+        allContentfulLegal {
+          nodes {
+            slug
+          }
+        }
       }
     `
   )
@@ -53,6 +58,17 @@ exports.createPages = async ({ graphql, actions: { createPage } }) => {
       component: require.resolve("./src/templates/blog/BlogPost.js"),
       context: {
         slug: post.node.slug,
+      },
+    })
+  })
+
+  results.data.allContentfulLegal.nodes.forEach(node => {
+    // create legal pages
+    createPage({
+      path: `/${node.slug}`,
+      component: require.resolve("./src/templates/legal/LegalDoc.js"),
+      context: {
+        slug: node.slug,
       },
     })
   })
