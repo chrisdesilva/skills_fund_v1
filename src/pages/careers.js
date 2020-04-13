@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { useStaticQuery, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/layout/Layout"
+import SEO from "../components/layout/SEO"
 
 const Careers = () => {
   const data = useStaticQuery(graphql`
@@ -22,6 +23,7 @@ const Careers = () => {
 
   return (
     <Layout>
+      <SEO title="Careers" />
       <Container>
         <h1>Join The Skills Fund Team</h1>
         <p>

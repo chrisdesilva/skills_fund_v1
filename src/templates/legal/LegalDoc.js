@@ -3,11 +3,13 @@ import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import styled from "styled-components"
 import Layout from "../../components/layout/Layout"
+import SEO from "../../components/layout/SEO"
 
 export const data = graphql`
   query($slug: String!) {
     contentfulLegal(slug: { eq: $slug }) {
       slug
+      title
       content {
         childMdx {
           body
@@ -20,6 +22,7 @@ export const data = graphql`
 const LegalDoc = ({ data }) => {
   return (
     <Layout>
+      <SEO title={data.contentfulLegal.title} />
       <Container>
         <MDXRenderer>{data.contentfulLegal.content.childMdx.body}</MDXRenderer>
       </Container>

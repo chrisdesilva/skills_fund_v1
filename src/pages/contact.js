@@ -5,6 +5,7 @@ import Layout from "../components/layout/Layout"
 import TextInput from "../components/common/TextInput"
 import SelectInput from "../components/common/SelectInput"
 import { breakpoint } from "../utils/breakpoints"
+import SEO from "../components/layout/SEO"
 
 const Contact = () => {
   const [formState, setFormState] = useState({})
@@ -65,6 +66,7 @@ const Contact = () => {
 
   return (
     <Layout>
+      <SEO title="General Inquiry" />
       <ContactContainer>
         <h1>Contact Us</h1>
         <h2>General Inquiry</h2>

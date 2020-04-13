@@ -11,7 +11,7 @@ export const Container = styled.div`
   }
 
   h2 {
-    margin-top: 1rem;
+    margin-top: 2rem;
   }
 
   a:not(.btn) {
@@ -35,24 +35,6 @@ export const Container = styled.div`
         rgba(233, 105, 101, 1) 100%
       );
       background-position: center center;
-    }
-  }
-`
-
-export const FAQSection = styled.section`
-  margin-top: 3rem;
-  position: relative;
-
-  :not(:last-of-type) {
-    :after {
-      content: "";
-      bottom: -1.5rem;
-      left: 1rem;
-      position: absolute;
-      height: 10px;
-      width: 200px;
-      clip-path: polygon(0 0, 95% 0, 100% 100%, 5% 100%);
-      background-color: ${({ theme }) => theme.primary};
     }
   }
 `

@@ -1,7 +1,7 @@
 import styled from "styled-components"
 
 export const FAQContainer = styled.div`
-  margin-top: 1rem;
+  margin-top: 1.5rem;
   a:not(.btn) {
     text-decoration: none;
     color: black;

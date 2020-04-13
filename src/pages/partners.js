@@ -5,6 +5,7 @@ import Layout from "../components/layout/Layout"
 import TextInput from "../components/common/TextInput"
 import SelectInput from "../components/common/SelectInput"
 import { breakpoint } from "../utils/breakpoints"
+import SEO from "../components/layout/SEO"
 
 const Partner = () => {
   const [formState, setFormState] = useState({})
@@ -64,6 +65,7 @@ const Partner = () => {
 
   return (
     <Layout>
+      <SEO title="School Partnership Inquiry" />
       <PartnerContainer>
         <h1>Contact Us</h1>
         <h2>School Partnership Inquiry</h2>

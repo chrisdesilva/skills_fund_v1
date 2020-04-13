@@ -8,6 +8,7 @@ import {
   FeaturedPost,
   BlogPostCard,
 } from "../components/blog/resources.styled"
+import SEO from "../components/layout/SEO"
 
 const BlogPost = () => {
   const data = useStaticQuery(graphql`
@@ -37,6 +38,7 @@ const BlogPost = () => {
   `)
   return (
     <Layout>
+      <SEO title="Blog" />
       <BlogContainer>
         <h1>Sharing Knowledge Is How We All Grow</h1>
         <p>

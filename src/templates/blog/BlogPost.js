@@ -2,6 +2,7 @@ import React from "react"
 import { graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import BlogLayout from "../../components/layout/BlogLayout"
+import SEO from "../../components/layout/SEO"
 
 export const data = graphql`
   query($slug: String!) {
@@ -25,11 +26,8 @@ export const data = graphql`
 const BlogPost = ({ data }) => {
   return (
     <BlogLayout>
+      <SEO title={data.post.title} />
       <h1>{data.post.title}</h1>
-      <p>
-        {data.post.post.childMdx.frontmatter.date} -{" "}
-        {data.post.post.childMdx.frontmatter.author}
-      </p>
       <MDXRenderer>{data.post.post.childMdx.body}</MDXRenderer>
     </BlogLayout>
   )

@@ -54,6 +54,7 @@ export const FeaturedPost = styled.div`
   .card--link {
     text-decoration: none;
     color: ${({ theme }) => theme.primary};
+    font-weight: bold;
   }
 
   .card--image {
@@ -96,6 +97,7 @@ export const BlogPostCard = styled.div`
   .card--link {
     text-decoration: none;
     color: ${({ theme }) => theme.primary};
+    font-weight: bold;
   }
 
   .card--image {
