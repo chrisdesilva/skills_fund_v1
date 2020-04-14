@@ -93,11 +93,13 @@ export const ApplyCard = styled.div`
 export const SelectContainer = styled.div`
   display: flex;
   flex-direction: column;
+  align-items: center;
   padding: 1rem;
 
   @media ${breakpoint.xl} {
     flex-direction: row;
     justify-content: space-around;
+    align-items: flex-start;
   }
 
   form {

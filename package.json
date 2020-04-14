@@ -21,6 +21,7 @@
 		"@mdx-js/react": "^1.5.8",
 		"babel-plugin-styled-components": "^1.10.7",
 		"dotenv": "^8.2.0",
+		"financejs": "^4.1.0",
 		"framer-motion": "^1.8.4",
 		"gatsby": "^2.19.7",
 		"gatsby-background-image": "^0.10.2",
