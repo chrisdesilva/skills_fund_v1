@@ -15,6 +15,7 @@ import {
 } from "../../utils/calculator"
 import TextInput from "../common/TextInput"
 import SelectInput from "../common/SelectInput"
+import EditableInput from "../common/EditableInput"
 
 const ApplicationCalculator = ({
   school,
@@ -37,6 +38,10 @@ const ApplicationCalculator = ({
   const [maxTuition, setMaxTuition] = useState("")
   const [maxCOL, setMaxCOL] = useState("")
   const [metros, setMetros] = useState("")
+  const [interestRate, setInterestRate] = useState({
+    rate36: 8.99,
+    rate60: 10.99,
+  })
   const [interestPayments, setInterestPayments] = useState("")
   const [monthlyPayments, setMonthlyPayments] = useState("")
   const [totalPayments, setTotalPayments] = useState("")
@@ -107,8 +112,13 @@ const ApplicationCalculator = ({
 
   useEffect(() => {
     if (program) {
-      calculateInterestPayment(loanValue, setInterestPayments)
-      calculateMonthlyPayment(loanValue, 10000, setMonthlyPayments)
+      calculateInterestPayment(loanValue, setInterestPayments, interestRate)
+      calculateMonthlyPayment(
+        loanValue,
+        10000,
+        setMonthlyPayments,
+        interestRate
+      )
       calculateTotalPayment(
         loanType,
         nonPaymentPeriod,
@@ -118,6 +128,25 @@ const ApplicationCalculator = ({
       )
     }
   }, [school, program, loanValue, loanType])
+
+  useEffect(() => {
+    if (program) {
+      calculateInterestPayment(loanValue, setInterestPayments, interestRate)
+      calculateMonthlyPayment(
+        loanValue,
+        10000,
+        setMonthlyPayments,
+        interestRate
+      )
+      calculateTotalPayment(
+        loanType,
+        nonPaymentPeriod,
+        interestPayments,
+        monthlyPayments,
+        setTotalPayments
+      )
+    }
+  }, [interestRate])
 
   let loanOptions =
     program &&
@@ -255,8 +284,25 @@ const ApplicationCalculator = ({
                     {program && (
                       <div id="tooltip--parent">
                         <p className="text-xs">
-                          {school["schoolInfo"]["basicInfo"]["interestRate36"]}%
-                          Interest Rate,{" "}
+                          {program["aprAndType"][0]["info"]["type"] ===
+                          "Adjustable" ? (
+                            <EditableInput
+                              onChange={e =>
+                                setInterestRate({
+                                  ...interestRate,
+                                  rate36: Number(e.target.value),
+                                })
+                              }
+                              type="number"
+                              value={interestRate.rate36}
+                              color="white"
+                              maxWidth="15%"
+                              step=".01"
+                            />
+                          ) : (
+                            interestRate.rate36
+                          )}
+                          % Interest Rate,{" "}
                           {program["aprAndType"][0]["info"]["apr36"]}% APR{" "}
                           <FaQuestionCircle className="text-xs" />
                         </p>
@@ -286,7 +332,9 @@ const ApplicationCalculator = ({
                     {loanType === "Interest Only" && (
                       <>
                         <p className="mb-0 mt-4 text-2xl font-bold">
-                          {formatterCents.format(interestPayments.payment36)}
+                          {interestRate.rate36 < 4
+                            ? "---"
+                            : formatterCents.format(interestPayments.payment36)}
                         </p>
                         <p className="mb-0 mt-1 text-xs">
                           Monthly Payments in School
@@ -294,14 +342,18 @@ const ApplicationCalculator = ({
                       </>
                     )}
                     <p className="mb-0 mt-4 text-2xl font-bold">
-                      {formatterCents.format(monthlyPayments.payment36)}
+                      {interestRate.rate36 < 4
+                        ? "---"
+                        : formatterCents.format(monthlyPayments.payment36)}
                     </p>
                     <p className="mb-0 mt-1 text-xs">
                       Monthly Payments
                       {loanType === "Interest Only" && " After Graduation"}
                     </p>
                     <p className="mb-0 mt-4 text-2xl font-bold">
-                      {formatterCents.format(totalPayments.payment36)}
+                      {interestRate.rate36 < 4
+                        ? "---"
+                        : formatterCents.format(totalPayments.payment36)}
                     </p>
                     <p className="mb-0 mt-1 text-xs">
                       Total Lifetime Cost of Loan
@@ -339,8 +391,25 @@ const ApplicationCalculator = ({
                     {program && (
                       <div id="tooltip--parent">
                         <p className="text-xs">
-                          {school["schoolInfo"]["basicInfo"]["interestRate60"]}%
-                          Interest Rate,{" "}
+                          {program["aprAndType"][0]["info"]["type"] ===
+                          "Adjustable" ? (
+                            <EditableInput
+                              onChange={e =>
+                                setInterestRate({
+                                  ...interestRate,
+                                  rate60: Number(e.target.value),
+                                })
+                              }
+                              type="number"
+                              value={interestRate.rate60}
+                              color="white"
+                              maxWidth="15%"
+                              step="0.1"
+                            />
+                          ) : (
+                            interestRate.rate60
+                          )}
+                          % Interest Rate,{" "}
                           {program["aprAndType"][0]["info"]["apr60"]}% APR{" "}
                           <FaQuestionCircle className="text-xs" />
                         </p>
@@ -370,7 +439,9 @@ const ApplicationCalculator = ({
                     {loanType === "Interest Only" && (
                       <>
                         <p className="mb-0 mt-4 text-2xl font-bold">
-                          {formatterCents.format(interestPayments.payment60)}
+                          {interestRate.rate60 == 0
+                            ? "---"
+                            : formatterCents.format(interestPayments.payment60)}
                         </p>
                         <p className="mb-0 mt-1 text-xs">
                           Monthly Payments in School

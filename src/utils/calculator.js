@@ -1,6 +1,12 @@
-export const calculateInterestPayment = (loanValue, setInterestPayments) => {
-  let interest36 = Number(loanValue) * ((1.04 / 12) * 0.0899) // based on 4% orig fee and 8.99% interest rate
-  let interest60 = Number(loanValue) * ((1.04 / 12) * 0.1099) // based on 4% orig fee and 10.99 interest rate
+export const calculateInterestPayment = (
+  loanValue,
+  setInterestPayments,
+  interestRate
+) => {
+  let interest36 =
+    Number(loanValue) * ((1.04 / 12) * (interestRate.rate36 / 100)) // based on 4% orig fee and 8.99% interest rate
+  let interest60 =
+    Number(loanValue) * ((1.04 / 12) * (interestRate.rate60 / 100)) // based on 4% orig fee and 10.99 interest rate
   setInterestPayments({
     payment36: Number(interest36.toFixed(2)),
     payment60: Number(interest60.toFixed(2)),
@@ -41,12 +47,11 @@ export const calculateTotalPayment = (
 export const calculateMonthlyPayment = (
   loanValue,
   defaultLoanAmount,
-  setMonthlyPayments
-  //   calcInterestFunc = calculateInterest,
-  //   calcTotalFunc = calculateTotalPayment
+  setMonthlyPayments,
+  interestRate
 ) => {
-  const monthlyRate36 = 0.0899 / 12 // 8.99 interest rate for 36 months
-  const monthlyRate60 = 0.1099 / 12 // 10.99 interest rate for 60 months
+  const monthlyRate36 = interestRate.rate36 / 100 / 12 // 8.99 interest rate for 36 months
+  const monthlyRate60 = interestRate.rate60 / 100 / 12 // 10.99 interest rate for 60 months
   const borrowedAmount = Number(loanValue) || Number(defaultLoanAmount)
   const totalLoan = Number(borrowedAmount) * 1.04 // based on 4% orignation fee
   let payment36 =
@@ -59,6 +64,4 @@ export const calculateMonthlyPayment = (
     payment36: Number(payment36.toFixed(2)),
     payment60: Number(payment60.toFixed(2)),
   })
-  //   calcInterestFunc()
-  //   calcTotalFunc()
 }
