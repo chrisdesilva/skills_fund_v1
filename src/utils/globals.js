@@ -111,13 +111,16 @@ h6 {
     }
   }
 
+  button:focus, input:focus, a:focus, select:focus {
+    outline: thin dotted;
+  }
+
 input {
   width: 100%;
   padding: 0.5rem;
   border: none;
   border-bottom: 2px solid lightgray;
   box-sizing: border-box;
-  outline: none;
 }
 
 input::-webkit-outer-spin-button,

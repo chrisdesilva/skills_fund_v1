@@ -115,7 +115,7 @@ export const Payments = styled.div`
   }
 `
 
-export const PaymentCard = styled.div`
+export const PaymentCardContainer = styled.div`
   display: flex;
   flex-direction: column;
   color: white;

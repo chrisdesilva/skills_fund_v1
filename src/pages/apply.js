@@ -164,13 +164,13 @@ const Apply = () => {
               )}
               !
             </p>
-            <p
+            <button
               className="calculator text-xs"
               onClick={() => setShowCalculator(true)}
             >
               Curious what you'll pay? Easily calculate your payments{" "}
               <FaCaretDown />
-            </p>
+            </button>
           </ApplyPayments>
           <ApplicationCalculator
             school={school}

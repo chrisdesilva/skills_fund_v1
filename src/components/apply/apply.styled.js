@@ -61,6 +61,7 @@ export const ApplyCard = styled.div`
     opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
     text-align: center;
     margin: 0.25rem 0;
+    border: none;
 
     :last-of-type {
       margin-bottom: 2rem;

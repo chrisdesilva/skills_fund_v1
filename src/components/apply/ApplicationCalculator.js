@@ -1,13 +1,11 @@
 import React, { useEffect, useState } from "react"
 import { AnimatePresence } from "framer-motion"
 import {
-  PaymentCard,
   Payments,
   LoanCalculatorSlider,
   CalculatorCard,
   CalculatorContainer,
 } from "./ApplicationCalculator.styled"
-import { FaQuestionCircle } from "react-icons/fa"
 import {
   calculateInterestPayment,
   calculateMonthlyPayment,
@@ -15,7 +13,7 @@ import {
 } from "../../utils/calculator"
 import TextInput from "../common/TextInput"
 import SelectInput from "../common/SelectInput"
-import EditableInput from "../common/EditableInput"
+import PaymentCard from "./PaymentCard"
 
 const ApplicationCalculator = ({
   school,
@@ -52,12 +50,6 @@ const ApplicationCalculator = ({
     style: "currency",
     currency: "USD",
     minimumFractionDigits: 0,
-  })
-
-  const formatterCents = new Intl.NumberFormat("en-US", {
-    style: "currency",
-    currency: "USD",
-    minimumFractionDigits: 2,
   })
 
   const handleTuitionSlider = e => {
@@ -256,203 +248,138 @@ const ApplicationCalculator = ({
 
             <Payments showSliders={showSliders}>
               {program && program["loanLengths"].includes("36") && (
-                <PaymentCard boxes={boxes}>
-                  <div className="card--info">
-                    <div id="tooltip--parent">
-                      <h3>
-                        {loanType} Loan <FaQuestionCircle className="text-xs" />
-                      </h3>
-                      <div id="tooltip--tip">
-                        <p>
-                          {loanType === "Interest Only" ? (
-                            <>
-                              <span>Interest Only</span> - Make interest-only
-                              payments while in the program. Two months after
-                              completion, begin full payments.
-                            </>
-                          ) : (
-                            <>
-                              <span>Immediate Repayment</span> - Start making
-                              full payments (interest + principal) about one
-                              month after disbursement.
-                            </>
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                    <h4>36 Month Payment Term</h4>
-                    {program && (
-                      <div id="tooltip--parent">
-                        <p className="text-xs">
-                          <EditableInput
-                            onChange={e =>
-                              setInterestRate({
-                                ...interestRate,
-                                rate36: Number(e.target.value),
-                              })
-                            }
-                            type="number"
-                            value={interestRate.rate36}
-                            color="white"
-                            maxWidth="15%"
-                            step=".01"
-                          />
-                          % Interest Rate,{" "}
-                          {program["aprAndType"][0]["info"]["apr36"]}% APR{" "}
-                          <FaQuestionCircle className="text-xs" />
-                        </p>
-                        <div id="tooltip--tip">
-                          <p>
-                            The Annual Percentage Rate (APR) shown is estimated
-                            based on the loan type, origination fee, and
-                            approximate program length. The actual APR may be
-                            slightly different than the example provided based
-                            on loan type and program length. To learn how an
-                            Annual Percentage Rate (APR) is calculated, visit
-                            our{" "}
-                            <a
-                              href="https://skills.fund/resources/how-is-an-apr-calculated"
-                              target="_blank"
-                              rel="noreferrer noopener"
-                            >
-                              blog
-                            </a>
-                            .
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="card--payments">
-                    {loanType === "Interest Only" && (
-                      <>
-                        <p className="mb-0 mt-4 text-2xl font-bold">
-                          {interestRate.rate36 < 4
-                            ? "---"
-                            : formatterCents.format(interestPayments.payment36)}
-                        </p>
-                        <p className="mb-0 mt-1 text-xs">
-                          Monthly Payments in School
-                        </p>
-                      </>
-                    )}
-                    <p className="mb-0 mt-4 text-2xl font-bold">
-                      {interestRate.rate36 < 4
-                        ? "---"
-                        : formatterCents.format(monthlyPayments.payment36)}
-                    </p>
-                    <p className="mb-0 mt-1 text-xs">
-                      Monthly Payments
-                      {loanType === "Interest Only" && " After Graduation"}
-                    </p>
-                    <p className="mb-0 mt-4 text-2xl font-bold">
-                      {interestRate.rate36 < 4
-                        ? "---"
-                        : formatterCents.format(totalPayments.payment36)}
-                    </p>
-                    <p className="mb-0 mt-1 text-xs">
-                      Total Lifetime Cost of Loan
-                    </p>
-                  </div>
-                </PaymentCard>
+                <PaymentCard
+                  boxes={boxes}
+                  loanType={loanType}
+                  program={program}
+                  onChange={e =>
+                    setInterestRate({
+                      ...interestRate,
+                      rate36: Number(e.target.value),
+                    })
+                  }
+                  interestRate={interestRate.rate36}
+                  paymentTerm="36 Month"
+                  interestPayments={interestPayments.payment36}
+                  monthlyPayments={monthlyPayments.payment36}
+                  totalPayments={totalPayments.payment36}
+                  APR={program["aprAndType"][0]["info"]["apr36"]}
+                />
               )}
               {program && program["loanLengths"].includes("60") && (
-                <PaymentCard boxes={boxes}>
-                  <div className="card--info">
-                    {" "}
-                    <div id="tooltip--parent">
-                      <h3>
-                        {loanType} Loan <FaQuestionCircle className="text-xs" />
-                      </h3>
-                      <div id="tooltip--tip">
-                        <p>
-                          {loanType === "Interest Only" ? (
-                            <>
-                              <span>Interest Only</span> - Make interest-only
-                              payments while in the program. Two months after
-                              completion, begin full payments.
-                            </>
-                          ) : (
-                            <>
-                              <span>Immediate Repayment</span> - Start making
-                              full payments (interest + principal) about one
-                              month after disbursement.
-                            </>
-                          )}
-                        </p>
-                      </div>
-                    </div>
-                    <h4>60 Month Payment Term</h4>
-                    {program && (
-                      <div id="tooltip--parent">
-                        <p className="text-xs">
-                          <EditableInput
-                            onChange={e =>
-                              setInterestRate({
-                                ...interestRate,
-                                rate60: Number(e.target.value),
-                              })
-                            }
-                            type="number"
-                            value={interestRate.rate60}
-                            color="white"
-                            maxWidth="15%"
-                            step="0.1"
-                          />
-                          % Interest Rate,{" "}
-                          {program["aprAndType"][0]["info"]["apr60"]}% APR{" "}
-                          <FaQuestionCircle className="text-xs" />
-                        </p>
-                        <div id="tooltip--tip">
-                          <p>
-                            The Annual Percentage Rate (APR) shown is estimated
-                            based on the loan type, origination fee, and
-                            approximate program length. The actual APR may be
-                            slightly different than the example provided based
-                            on loan type and program length. To learn how an
-                            Annual Percentage Rate (APR) is calculated, visit
-                            our{" "}
-                            <a
-                              href="https://skills.fund/resources/how-is-an-apr-calculated"
-                              target="_blank"
-                              rel="noreferrer noopener"
-                            >
-                              blog
-                            </a>
-                            .
-                          </p>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                  <div className="card--payments">
-                    {loanType === "Interest Only" && (
-                      <>
-                        <p className="mb-0 mt-4 text-2xl font-bold">
-                          {interestRate.rate60 == 0
-                            ? "---"
-                            : formatterCents.format(interestPayments.payment60)}
-                        </p>
-                        <p className="mb-0 mt-1 text-xs">
-                          Monthly Payments in School
-                        </p>
-                      </>
-                    )}
-                    <p className="mb-0 mt-4 text-2xl font-bold">
-                      {formatterCents.format(monthlyPayments.payment60)}
-                    </p>
-                    <p className="mb-0 mt-1 text-xs">
-                      Monthly Payments
-                      {loanType === "Interest Only" && " After Graduation"}
-                    </p>
-                    <p className="mb-0 mt-4 text-2xl font-bold">
-                      {formatterCents.format(totalPayments.payment60)}
-                    </p>
-                    <p className="mb-0 mt-1 text-xs">
-                      Total Lifetime Cost of Loan
-                    </p>
-                  </div>
-                </PaymentCard>
+                <PaymentCard
+                  boxes={boxes}
+                  loanType={loanType}
+                  program={program}
+                  onChange={e =>
+                    setInterestRate({
+                      ...interestRate,
+                      rate60: Number(e.target.value),
+                    })
+                  }
+                  interestRate={interestRate.rate60}
+                  paymentTerm="60 Month"
+                  interestPayments={interestPayments.payment60}
+                  monthlyPayments={monthlyPayments.payment60}
+                  totalPayments={totalPayments.payment60}
+                  APR={program["aprAndType"][0]["info"]["apr60"]}
+                />
+                // <PaymentCard boxes={boxes}>
+                //   <div className="card--info">
+                //     {" "}
+                //     <div id="tooltip--parent">
+                //       <h3>
+                //         {loanType} Loan <FaQuestionCircle className="text-xs" />
+                //       </h3>
+                //       <div id="tooltip--tip">
+                //         <p>
+                //           {loanType === "Interest Only" ? (
+                //             <>
+                //               <span>Interest Only</span> - Make interest-only
+                //               payments while in the program. Two months after
+                //               completion, begin full payments.
+                //             </>
+                //           ) : (
+                //             <>
+                //               <span>Immediate Repayment</span> - Start making
+                //               full payments (interest + principal) about one
+                //               month after disbursement.
+                //             </>
+                //           )}
+                //         </p>
+                //       </div>
+                //     </div>
+                //     <h4>60 Month Payment Term</h4>
+                //     {program && (
+                //       <div id="tooltip--parent">
+                //         <p className="text-xs">
+                //           <EditableInput
+                //             onChange={e =>
+                //               setInterestRate({
+                //                 ...interestRate,
+                //                 rate60: Number(e.target.value),
+                //               })
+                //             }
+                //             type="number"
+                //             value={interestRate.rate60}
+                //             color="white"
+                //             maxWidth="15%"
+                //             step="0.1"
+                //           />
+                //           % Interest Rate,{" "}
+                //           {program["aprAndType"][0]["info"]["apr60"]}% APR{" "}
+                //           <FaQuestionCircle className="text-xs" />
+                //         </p>
+                //         <div id="tooltip--tip">
+                //           <p>
+                //             The Annual Percentage Rate (APR) shown is estimated
+                //             based on the loan type, origination fee, and
+                //             approximate program length. The actual APR may be
+                //             slightly different than the example provided based
+                //             on loan type and program length. To learn how an
+                //             Annual Percentage Rate (APR) is calculated, visit
+                //             our{" "}
+                //             <a
+                //               href="https://skills.fund/resources/how-is-an-apr-calculated"
+                //               target="_blank"
+                //               rel="noreferrer noopener"
+                //             >
+                //               blog
+                //             </a>
+                //             .
+                //           </p>
+                //         </div>
+                //       </div>
+                //     )}
+                //   </div>
+                //   <div className="card--payments">
+                //     {loanType === "Interest Only" && (
+                //       <>
+                //         <p className="mb-0 mt-4 text-2xl font-bold">
+                //           {interestRate.rate60 == 0
+                //             ? "---"
+                //             : formatterCents.format(interestPayments.payment60)}
+                //         </p>
+                //         <p className="mb-0 mt-1 text-xs">
+                //           Monthly Payments in School
+                //         </p>
+                //       </>
+                //     )}
+                //     <p className="mb-0 mt-4 text-2xl font-bold">
+                //       {formatterCents.format(monthlyPayments.payment60)}
+                //     </p>
+                //     <p className="mb-0 mt-1 text-xs">
+                //       Monthly Payments
+                //       {loanType === "Interest Only" && " After Graduation"}
+                //     </p>
+                //     <p className="mb-0 mt-4 text-2xl font-bold">
+                //       {formatterCents.format(totalPayments.payment60)}
+                //     </p>
+                //     <p className="mb-0 mt-1 text-xs">
+                //       Total Lifetime Cost of Loan
+                //     </p>
+                //   </div>
+                // </PaymentCard>
               )}
             </Payments>
             <form className="input" onSubmit={handleSubmit}>
