@@ -13,7 +13,7 @@ export const CardContainer = styled(motion.div)`
   grid-auto-rows: 1fr;
   grid-gap: 1rem;
   justify-content: center;
-  padding: 2rem;
+  padding: 2rem 0;
   background: white;
 `
 

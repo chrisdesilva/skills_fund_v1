@@ -4,9 +4,9 @@ import { breakpoint } from "../../utils/breakpoints"
 export const ApplyContainer = styled.section`
   display: flex;
   justify-content: center;
-  background: #f7f7f7;
   min-height: 30vh;
   margin: 2rem 0 4rem 0;
+  width: 100%;
 `
 
 export const ApplyCard = styled.div`
@@ -16,7 +16,6 @@ export const ApplyCard = styled.div`
   flex-direction: column;
   background: white;
   width: 100%;
-  margin: 0 5rem;
   padding-top: 2rem;
   box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
 
@@ -62,6 +61,7 @@ export const ApplyCard = styled.div`
     text-align: center;
     margin: 0.25rem 0;
     border: none;
+    background: transparent;
 
     :last-of-type {
       margin-bottom: 2rem;

@@ -3,7 +3,6 @@ import { breakpoint } from "../../utils/breakpoints"
 
 export const Banner = styled.section`
   display: none;
-  padding: 0 7.5rem;
   background: white;
   margin: 0 auto;
 

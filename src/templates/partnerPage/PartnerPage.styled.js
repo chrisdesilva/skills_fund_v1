@@ -6,6 +6,11 @@ export const ApplyContainer = styled.section`
   justify-content: center;
   min-height: 30vh;
   margin: 2rem 0 4rem 0;
+  padding: 2rem 1rem 0 1rem;
+
+  @media ${breakpoint.lg} {
+    padding: 0;
+  }
 `
 
 export const ApplyCard = styled.div`
@@ -15,15 +20,10 @@ export const ApplyCard = styled.div`
   flex-direction: column;
   background: white;
   width: 100%;
-  padding-top: 2rem;
   box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
 
-  @media ${breakpoint.lg} {
-    margin: 0 5rem;
-  }
-
   h1 {
-    margin-bottom: 1rem;
+    margin: 1rem 0;
     text-align: center;
   }
 
@@ -130,9 +130,11 @@ export const SelectContainer = styled.div`
   flex-direction: column;
   align-items: center;
   width: 100%;
+  padding: 0 1rem;
 
   @media ${breakpoint.lg} {
     width: 50%;
+    padding: 0 2rem;
   }
 
   .input {

@@ -2,24 +2,25 @@ import styled from "styled-components"
 import { breakpoint } from "../../utils/breakpoints"
 
 export const FilterContainer = styled.section`
-  background: linear-gradient(white 55%, #fd6d5d 0);
-  width: 100%;
+  background: ${({ theme }) =>
+    `linear-gradient(white 55%, ${theme.secondaryLight} 0)`};
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
   padding: 1rem 0;
 
-  @media ${breakpoint.lg} {
+  @media ${breakpoint.xl} {
     padding: 0 0 1rem 0;
   }
 `
 
 export const FilterCard = styled.div`
   border: 1px solid lightgray;
-  width: 75%;
   background: white;
   padding: 1rem 1rem 1rem 1rem;
   box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
+  width: 90%;
 
   h3 {
     font-size: 1.25rem;

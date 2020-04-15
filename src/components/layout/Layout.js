@@ -38,10 +38,12 @@ const PageContainer = styled.div`
 
 const ChildContainer = styled.div`
   flex-grow: 1;
-  margin-top: 48px;
+  width: 100%;
+  max-width: 1200px;
+  margin: 48px auto 0 auto;
 
   @media ${breakpoint.lg} {
-    margin-top: 53px;
+    margin: 53px auto 0 auto;
     padding: 0;
   }
 `
