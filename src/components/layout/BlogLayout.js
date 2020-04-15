@@ -50,6 +50,7 @@ const ChildContainer = styled.div`
 
   @media ${breakpoint.xl} {
     margin-top: 57px;
+    width: 100%;
     max-width: 1200px;
   }
 

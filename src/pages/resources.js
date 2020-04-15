@@ -7,7 +7,10 @@ import {
   PostsContainer,
   FeaturedPost,
   BlogPostCard,
+  PostCards,
+  SideBar,
 } from "../components/blog/resources.styled"
+import { FaTwitter, FaFacebookF } from "react-icons/fa"
 import SEO from "../components/layout/SEO"
 
 const BlogPost = () => {
@@ -46,51 +49,58 @@ const BlogPost = () => {
           together. Browse by category or check out our latest featured articles
           below.
         </p>
-        <FeaturedPost>
-          <div className="card--image">
-            <Link to={`resources/${data.blog.nodes[0].slug}`}>
-              <Img
-                fluid={data.blog.nodes[0].leadImage.fluid}
-                alt={data.blog.nodes[0].title}
-              />
-              <p className="card--label">Featured Post</p>
-            </Link>
-          </div>
-          <div className="card--info">
-            <Link
-              className="card--link"
-              to={`resources/${data.blog.nodes[0].slug}`}
-            >
-              {data.blog.nodes[0].title}
-            </Link>
-            <p>
-              {data.blog.nodes[0].post.childMdx.frontmatter.date} -{" "}
-              {data.blog.nodes[0].post.childMdx.excerpt}
-            </p>
-          </div>
-        </FeaturedPost>
         <PostsContainer>
-          {data.blog.nodes.slice(1, data.blog.nodes.length).map(post => {
-            return (
-              <BlogPostCard>
-                <div className="card--image">
-                  <Link to={`resources/${post.slug}`}>
-                    <Img fluid={post.leadImage.fluid} alt={post.title} />
-                    <p className="card--label">Category</p>
-                  </Link>
-                </div>
-                <div className="card--info">
-                  <Link className="card--link" to={`resources/${post.slug}`}>
-                    {post.title}
-                  </Link>
-                  <p>
-                    {post.post.childMdx.frontmatter.date} -{" "}
-                    {post.post.childMdx.excerpt}
-                  </p>
-                </div>
-              </BlogPostCard>
-            )
-          })}
+          <FeaturedPost>
+            <div className="card--image">
+              <Link to={`resources/${data.blog.nodes[0].slug}`}>
+                <Img
+                  fluid={data.blog.nodes[0].leadImage.fluid}
+                  alt={data.blog.nodes[0].title}
+                />
+                <p className="card--label">Featured Post</p>
+              </Link>
+              <div className="card--info">
+                <Link
+                  className="card--link"
+                  to={`resources/${data.blog.nodes[0].slug}`}
+                >
+                  {data.blog.nodes[0].title}
+                </Link>
+                <p>{data.blog.nodes[0].post.childMdx.excerpt}</p>
+              </div>
+            </div>
+          </FeaturedPost>
+          <SideBar>
+            <h2>Stay Connected</h2>
+            <div className="socials">
+              <FaFacebookF />
+              <FaTwitter />
+            </div>
+            <h2>Filter By Category</h2>
+            <button className="btn btn--secondary">Financial Tips</button>
+            <button className="btn btn--secondary">Student Journey</button>
+            <button className="btn btn--secondary">Higher Ed</button>
+          </SideBar>
+          <PostCards>
+            {data.blog.nodes.slice(1, data.blog.nodes.length).map(post => {
+              return (
+                <BlogPostCard>
+                  <div className="card--image">
+                    <Link to={`resources/${post.slug}`}>
+                      <Img fluid={post.leadImage.fluid} alt={post.title} />
+                      <p className="card--label">Category</p>
+                    </Link>
+                  </div>
+                  <div className="card--info">
+                    <Link className="card--link" to={`resources/${post.slug}`}>
+                      {post.title}
+                    </Link>
+                    <p>{post.post.childMdx.excerpt}</p>
+                  </div>
+                </BlogPostCard>
+              )
+            })}
+          </PostCards>
         </PostsContainer>
       </BlogContainer>
     </Layout>
