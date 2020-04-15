@@ -284,24 +284,19 @@ const ApplicationCalculator = ({
                     {program && (
                       <div id="tooltip--parent">
                         <p className="text-xs">
-                          {program["aprAndType"][0]["info"]["type"] ===
-                          "Adjustable" ? (
-                            <EditableInput
-                              onChange={e =>
-                                setInterestRate({
-                                  ...interestRate,
-                                  rate36: Number(e.target.value),
-                                })
-                              }
-                              type="number"
-                              value={interestRate.rate36}
-                              color="white"
-                              maxWidth="15%"
-                              step=".01"
-                            />
-                          ) : (
-                            interestRate.rate36
-                          )}
+                          <EditableInput
+                            onChange={e =>
+                              setInterestRate({
+                                ...interestRate,
+                                rate36: Number(e.target.value),
+                              })
+                            }
+                            type="number"
+                            value={interestRate.rate36}
+                            color="white"
+                            maxWidth="15%"
+                            step=".01"
+                          />
                           % Interest Rate,{" "}
                           {program["aprAndType"][0]["info"]["apr36"]}% APR{" "}
                           <FaQuestionCircle className="text-xs" />
@@ -391,24 +386,19 @@ const ApplicationCalculator = ({
                     {program && (
                       <div id="tooltip--parent">
                         <p className="text-xs">
-                          {program["aprAndType"][0]["info"]["type"] ===
-                          "Adjustable" ? (
-                            <EditableInput
-                              onChange={e =>
-                                setInterestRate({
-                                  ...interestRate,
-                                  rate60: Number(e.target.value),
-                                })
-                              }
-                              type="number"
-                              value={interestRate.rate60}
-                              color="white"
-                              maxWidth="15%"
-                              step="0.1"
-                            />
-                          ) : (
-                            interestRate.rate60
-                          )}
+                          <EditableInput
+                            onChange={e =>
+                              setInterestRate({
+                                ...interestRate,
+                                rate60: Number(e.target.value),
+                              })
+                            }
+                            type="number"
+                            value={interestRate.rate60}
+                            color="white"
+                            maxWidth="15%"
+                            step="0.1"
+                          />
                           % Interest Rate,{" "}
                           {program["aprAndType"][0]["info"]["apr60"]}% APR{" "}
                           <FaQuestionCircle className="text-xs" />

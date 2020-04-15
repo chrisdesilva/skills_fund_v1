@@ -23,7 +23,7 @@ export const calculateTotalPayment = (
   let months = [36, 60]
   let interestPeriod = nonPaymentPeriod
   let payments = []
-  if (loanType === "Interest Only" || "Adjustable") {
+  if (loanType === "Interest Only") {
     payments[0] =
       interestPayment.payment36 * interestPeriod +
       monthlyPayment.payment36 * months[0]
