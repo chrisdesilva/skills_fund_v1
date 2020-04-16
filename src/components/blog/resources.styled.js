@@ -78,6 +78,7 @@ export const FeaturedPost = styled.div`
 
   .card--image {
     position: relative;
+    min-height: 300px;
   }
 
   .card--label {
