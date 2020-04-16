@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useState } from "react"
 import { graphql, Link, useStaticQuery } from "gatsby"
 import Img from "gatsby-image"
 import Layout from "../components/layout/Layout"
@@ -12,6 +12,7 @@ import {
 } from "../components/blog/resources.styled"
 import { FaTwitter, FaFacebookF } from "react-icons/fa"
 import SEO from "../components/layout/SEO"
+import TextInput from "../components/common/TextInput"
 
 const BlogPost = () => {
   const data = useStaticQuery(graphql`
@@ -28,6 +29,7 @@ const BlogPost = () => {
               }
             }
           }
+          category
           title
           slug
           leadImage {
@@ -39,6 +41,12 @@ const BlogPost = () => {
       }
     }
   `)
+
+  const [email, setEmail] = useState("")
+  const handleSubmit = e => {
+    e.preventDefault()
+  }
+
   return (
     <Layout>
       <SEO title="Blog" />
@@ -80,6 +88,27 @@ const BlogPost = () => {
             <button className="btn btn--secondary">Financial Tips</button>
             <button className="btn btn--secondary">Student Journey</button>
             <button className="btn btn--secondary">Higher Ed</button>
+            <button className="btn btn--secondary">Career Advice</button>
+            <h2>Subscribe to our newsletter</h2>
+            <form onSubmit={handleSubmit}>
+              <TextInput
+                onChange={e => {
+                  setEmail(e.target.value)
+                }}
+                name="email"
+                id="email"
+                type="email"
+                required
+                placeholder="Enter your email"
+              />
+              <TextInput
+                name="submit"
+                id="submit"
+                type="submit"
+                value="Submit"
+                className="btn btn--secondary"
+              />
+            </form>
           </SideBar>
           <PostCards>
             {data.blog.nodes.slice(1, data.blog.nodes.length).map(post => {
@@ -88,7 +117,7 @@ const BlogPost = () => {
                   <div className="card--image">
                     <Link to={`resources/${post.slug}`}>
                       <Img fluid={post.leadImage.fluid} alt={post.title} />
-                      <p className="card--label">Category</p>
+                      <p className="card--label">{post.category}</p>
                     </Link>
                   </div>
                   <div className="card--info">

@@ -97,6 +97,10 @@ export const SideBar = styled.aside`
     text-transform: uppercase;
     font-size: 1rem;
     margin-bottom: 1rem;
+
+    :not(:first-of-type) {
+      margin-top: 3rem;
+    }
   }
 
   .btn {
@@ -107,7 +111,6 @@ export const SideBar = styled.aside`
   .socials {
     display: flex;
     justify-content: center;
-    margin-bottom: 3rem;
     svg {
       margin: 0 1rem;
       transition: color 300ms;
