@@ -44,17 +44,24 @@ export const FeaturedPost = styled.div`
     flex-direction: column;
     justify-content: space-between;
     position: absolute;
-    top: 1rem;
-    right: 1rem;
+    top: 0.25rem;
+    right: 0.25rem;
     width: 75%;
     background: rgba(245, 245, 245, 0.9);
     padding: 1rem;
     p {
       margin: 0.5rem 0 0 0;
+      font-size: 0.75rem;
     }
 
     @media ${breakpoint.lg} {
       width: 33%;
+      top: 1rem;
+      right: 1rem;
+
+      p {
+        font-size: 1rem;
+      }
     }
   }
 
@@ -62,7 +69,7 @@ export const FeaturedPost = styled.div`
     text-decoration: none;
     color: ${({ theme }) => theme.primary};
     font-weight: bold;
-    font-size: 1.25rem;
+    font-size: 1rem;
 
     @media ${breakpoint.lg} {
       font-size: 1.5rem;
@@ -96,30 +103,65 @@ export const SideBar = styled.aside`
   h2 {
     text-transform: uppercase;
     font-size: 1rem;
-    margin-bottom: 1rem;
+    margin-bottom: 0.5rem;
 
     :not(:first-of-type) {
-      margin-top: 3rem;
+      margin-top: 1rem;
+
+      @media ${breakpoint.lg} {
+        margin-top: 3rem;
+      }
     }
   }
 
   .btn {
+    width: 8rem;
     display: block;
     margin: 0.5rem auto 0 auto;
   }
 
-  .socials {
-    display: flex;
-    justify-content: center;
-    svg {
-      margin: 0 1rem;
-      transition: color 300ms;
-      cursor: pointer;
-      font-size: 1.25rem;
+  .sidebar__connected {
+    display: none;
 
-      :hover {
-        color: ${({ theme }) => theme.secondary};
+    @media ${breakpoint.lg} {
+      display: block;
+      margin-bottom: 3rem;
+    }
+  }
+
+  .sidebar__filters {
+    @media ${breakpoint.lg} {
+      margin-bottom: 3rem;
+    }
+    &--buttons {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: space-around;
+    }
+  }
+
+  .sidebar__connected {
+    &--socials {
+      display: flex;
+      justify-content: center;
+      svg {
+        margin: 0 1rem;
+        transition: color 300ms;
+        cursor: pointer;
+        font-size: 1.25rem;
+
+        :hover {
+          color: ${({ theme }) => theme.secondary};
+        }
       }
+    }
+  }
+
+  .sidebar__subscribe {
+    display: none;
+
+    @media ${breakpoint.lg} {
+      display: block;
     }
   }
 `

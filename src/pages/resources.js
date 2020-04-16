@@ -79,36 +79,44 @@ const BlogPost = () => {
             </div>
           </FeaturedPost>
           <SideBar>
-            <h2>Stay Connected</h2>
-            <div className="socials">
-              <FaFacebookF />
-              <FaTwitter />
+            <div className="sidebar__connected">
+              <h2>Stay Connected</h2>
+              <div className="sidebar__connected--socials">
+                <FaFacebookF />
+                <FaTwitter />
+              </div>
             </div>
-            <h2>Filter By Category</h2>
-            <button className="btn btn--secondary">Financial Tips</button>
-            <button className="btn btn--secondary">Student Journey</button>
-            <button className="btn btn--secondary">Higher Ed</button>
-            <button className="btn btn--secondary">Career Advice</button>
-            <h2>Subscribe to our newsletter</h2>
-            <form onSubmit={handleSubmit}>
-              <TextInput
-                onChange={e => {
-                  setEmail(e.target.value)
-                }}
-                name="email"
-                id="email"
-                type="email"
-                required
-                placeholder="Enter your email"
-              />
-              <TextInput
-                name="submit"
-                id="submit"
-                type="submit"
-                value="Submit"
-                className="btn btn--secondary"
-              />
-            </form>
+            <div className="sidebar__filters">
+              <h2>Filter By Category</h2>
+              <div className="sidebar__filters--buttons">
+                <button className="btn btn--secondary">Financial Tips</button>
+                <button className="btn btn--secondary">Student Journey</button>
+                <button className="btn btn--secondary">Higher Ed</button>
+                <button className="btn btn--secondary">Career Advice</button>
+              </div>
+            </div>
+            <div className="sidebar__subscribe">
+              <h2>Subscribe to our newsletter</h2>
+              <form onSubmit={handleSubmit}>
+                <TextInput
+                  onChange={e => {
+                    setEmail(e.target.value)
+                  }}
+                  name="email"
+                  id="email"
+                  type="email"
+                  required
+                  placeholder="Enter your email"
+                />
+                <TextInput
+                  name="submit"
+                  id="submit"
+                  type="submit"
+                  value="Submit"
+                  className="btn btn--secondary"
+                />
+              </form>
+            </div>
           </SideBar>
           <PostCards>
             {data.blog.nodes.slice(1, data.blog.nodes.length).map(post => {
