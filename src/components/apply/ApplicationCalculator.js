@@ -110,13 +110,6 @@ const ApplicationCalculator = ({
         setMonthlyPayments,
         interestRate
       )
-      calculateTotalPayment(
-        loanType,
-        nonPaymentPeriod,
-        interestPayments,
-        monthlyPayments,
-        setTotalPayments
-      )
     }
   }, [school, program, loanValue, loanType])
 
@@ -129,15 +122,18 @@ const ApplicationCalculator = ({
         setMonthlyPayments,
         interestRate
       )
-      calculateTotalPayment(
-        loanType,
-        nonPaymentPeriod,
-        interestPayments,
-        monthlyPayments,
-        setTotalPayments
-      )
     }
   }, [interestRate])
+
+  useEffect(() => {
+    calculateTotalPayment(
+      loanType,
+      nonPaymentPeriod,
+      interestPayments,
+      monthlyPayments,
+      setTotalPayments
+    )
+  }, [interestPayments, monthlyPayments])
 
   let loanOptions =
     program &&
