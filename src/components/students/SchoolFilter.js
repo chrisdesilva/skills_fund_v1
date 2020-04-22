@@ -20,16 +20,19 @@ const ListItem = ({
 }) => (
   <li
     className={`item ${active ? "active" : ""}`}
-    onClick={() => {
-      setTextFilter(item)
-      setMatchingPrograms([])
-      setHovered(undefined)
-      setCursor(0)
-    }}
     onMouseEnter={() => setHovered(item)}
     onMouseLeave={() => setHovered(undefined)}
   >
-    {item}
+    <button
+      onClick={() => {
+        setTextFilter(item)
+        setMatchingPrograms([])
+        setHovered(undefined)
+        setCursor(0)
+      }}
+    >
+      {item}
+    </button>
   </li>
 )
 
@@ -290,7 +293,6 @@ const SchoolFilter = ({
             categoryFilter={categoryFilter}
             locationFilter={locationFilter}
             lengthFilter={lengthFilter}
-            lengthFilter={lengthFilter}
             scheduleFilter={scheduleFilter}
           >
             <div className="filter--dropdown">
@@ -302,13 +304,13 @@ const SchoolFilter = ({
                 defaultValue={"default"}
                 options={programOptions}
               />
-              <p
-                className="hoverUnderline clearFilter"
+              <button
+                className="hoverUnderline clearFilter textButton"
                 id="categoryFilter"
                 onClick={() => setCategoryFilter("")}
               >
                 Clear
-              </p>
+              </button>
             </div>
             <div className="filter--dropdown">
               <label htmlFor="location">CAMPUS/ONLINE</label>
@@ -319,8 +321,8 @@ const SchoolFilter = ({
                 defaultValue={"default"}
                 options={locationOptions}
               />
-              <p
-                className="hoverUnderline clearFilter"
+              <button
+                className="hoverUnderline clearFilter textButton"
                 id="locationFilter"
                 onClick={() => {
                   setLocationFilter("")
@@ -328,7 +330,7 @@ const SchoolFilter = ({
                 }}
               >
                 Clear
-              </p>
+              </button>
             </div>
             <div className="filter--dropdown">
               <label htmlFor="length">LENGTH OF PROGRAM </label>
@@ -339,13 +341,13 @@ const SchoolFilter = ({
                 defaultValue={"default"}
                 options={lengthOptions}
               />
-              <p
-                className="hoverUnderline clearFilter"
+              <button
+                className="hoverUnderline clearFilter textButton"
                 id="lengthFilter"
                 onClick={() => setLengthFilter("")}
               >
                 Clear
-              </p>
+              </button>
             </div>
             <div className="filter--dropdown">
               <label htmlFor="schedule">WEEKLY TIME COMMITMENT </label>
@@ -356,19 +358,22 @@ const SchoolFilter = ({
                 defaultValue={"default"}
                 options={weeklyOptions}
               />
-              <p
-                className="hoverUnderline clearFilter"
+              <button
+                className="hoverUnderline clearFilter textButton"
                 id="scheduleFilter"
                 onClick={() => setScheduleFilter("")}
               >
                 Clear
-              </p>
+              </button>
             </div>
           </FilterRow>
           <FilterRow activeView={activeView}>
-            <p onClick={resetFilters} className="hoverUnderline">
+            <button
+              onClick={resetFilters}
+              className="textButton h-4 hoverUnderline"
+            >
               Clear All Filters
-            </p>
+            </button>
             <div>
               <p>View:</p>
               <FaThLarge id="cards" onClick={() => setActiveView("cards")} />

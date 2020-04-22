@@ -105,6 +105,7 @@ const BlogPost = () => {
                   name="email"
                   id="email"
                   type="email"
+                  value={email}
                   required
                   placeholder="Enter your email"
                 />

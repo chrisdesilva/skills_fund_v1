@@ -4,20 +4,21 @@ import { breakpoint } from "../../utils/breakpoints"
 export const ApplyContainer = styled.section`
   display: flex;
   justify-content: center;
+  flex-direction: column;
   min-height: 30vh;
   margin: 2rem 0 4rem 0;
   width: 100%;
+  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
 `
 
 export const ApplyCard = styled.div`
-  border: 1px solid lightgray;
-  margin-bottom: 4rem;
+  border-top: 1px solid lightgray;
+  border-left: 1px solid lightgray;
   display: flex;
   flex-direction: column;
   background: white;
   width: 100%;
   padding-top: 2rem;
-  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
 
   h1 {
     margin-bottom: 1rem;
@@ -40,7 +41,6 @@ export const ApplyCard = styled.div`
 
     svg {
       transition: opacity 300ms, transform 500ms;
-      transition-delay: 1000ms;
       opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
       transform: ${({ showCalculatorText }) =>
         showCalculatorText ? "scale(1.25)" : "scale(0)"};
@@ -56,7 +56,6 @@ export const ApplyCard = styled.div`
 
   .calculator {
     transition: opacity 300ms;
-    transition-delay: 2000ms;
     opacity: ${({ showCalculatorText }) => (showCalculatorText ? "1" : "0")};
     text-align: center;
     margin: 0.25rem 0;

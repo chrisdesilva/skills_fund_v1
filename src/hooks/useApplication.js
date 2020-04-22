@@ -11,7 +11,6 @@ export const useApplication = () => {
   const [showCalculator, setShowCalculator] = useState(false)
   const [showCalculatorText, setShowCalculatorText] = useState(false)
   const [loanUrl, setLoanUrl] = useState(false)
-  const [submitReady, setSubmitReady] = useState(false)
   const [showThankYou, setShowThankYou] = useState(false)
 
   const selectSchool = e => {
@@ -19,6 +18,7 @@ export const useApplication = () => {
       school => school.node.slug === e.target.value
     )
     setSchool(selectedSchool[0]["node"])
+    setShowCalculatorText(false)
   }
 
   const selectProgram = e => {
@@ -30,7 +30,6 @@ export const useApplication = () => {
     setProgram(selectedProgram[0])
     toggleSliders(true)
     setShowCalculatorText(true)
-    console.log(program)
   }
 
   const handleSubmit = e => {
@@ -53,7 +52,6 @@ export const useApplication = () => {
     showCalculator,
     setShowCalculator,
     showCalculatorText,
-    submitReady,
     showThankYou,
     selectSchool,
     selectProgram,

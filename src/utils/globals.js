@@ -18,6 +18,11 @@ h6 {
   margin: 0;
 }
 
+.textButton {
+  border: none;
+  background: transparent;
+}
+
 .btn {
   width: 11rem;
   max-width: 11rem;
@@ -139,12 +144,23 @@ input[type=range] {
   border: none;
 }
 
+
+.gradient input[type=range]::-webkit-slider-runnable-track,
+.gradient input[type=range]:focus::-webkit-slider-runnable-track { 
+    background: #1E9600;  /* fallback for old browsers */
+    background: -webkit-linear-gradient(to right, #FF0000, #FFF200, #1E9600);  /* Chrome 10-25, Safari 5.1-6 */
+    background: linear-gradient(to right, #FF0000, #FFF200, #1E9600); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+  }
+
+.gradient input[type=range]::-webkit-slider-thumb {
+  background: #f7f7f7;
+}
+
 input[type=range]::-webkit-slider-runnable-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
-  animate: 0.2s;
-  background: #f7f7f7;
+  background: #f7f7f7; 
   border-radius: 1.3px;
   border: 0.2px solid #010101;
 }
@@ -178,7 +194,6 @@ input[type=range]::-moz-range-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
-  animate: 0.2s;
   box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d;
   background: #f7f7f7;
   border-radius: 1.3px;
@@ -197,7 +212,6 @@ input[type=range]::-ms-track {
   width: 100%;
   height: 8.4px;
   cursor: pointer;
-  animate: 0.2s;
   background: transparent;
   border-color: transparent;
   border-width: 16px 0;

@@ -3,7 +3,6 @@ import { useStaticQuery, graphql } from "gatsby"
 import { MDXRenderer } from "gatsby-plugin-mdx"
 import Layout from "../components/layout/Layout"
 import SEO from "../components/layout/SEO"
-import FAQ from "../components/faq/FAQ"
 import { Container } from "../components/faq/frequently-asked-questions.styled"
 
 const FAQs = () => {

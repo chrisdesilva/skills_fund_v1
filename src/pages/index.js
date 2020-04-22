@@ -27,10 +27,13 @@ export default () => {
           We have helped over 10,000 students get access to career-transforming
           education.
         </p>
-        <img src="https://via.placeholder.com/300x200.png?text=Student+story+video" />
+        <img
+          alt=""
+          src="https://via.placeholder.com/300x200.png?text=Student+story+video"
+        />
       </LeadContent>
       <Process>
-        <img src="https://via.placeholder.com/100x75.png" />
+        <img alt="" src="https://via.placeholder.com/100x75.png" />
         <div>
           <h3>Know exactly what you'll pay</h3>
           <p>
@@ -40,7 +43,7 @@ export default () => {
         </div>
       </Process>
       <Process>
-        <img src="https://via.placeholder.com/100x75.png" />
+        <img alt="" src="https://via.placeholder.com/100x75.png" />
         <div>
           <h3>You've got options</h3>
           <p>
@@ -50,7 +53,7 @@ export default () => {
         </div>
       </Process>
       <Process>
-        <img src="https://via.placeholder.com/100x75.png" />
+        <img alt="" src="https://via.placeholder.com/100x75.png" />
         <div>
           <h3>Return on education</h3>
           <p>We take care of you so you can take care of your future.</p>
@@ -59,7 +62,10 @@ export default () => {
       <Reviews>
         <h2>We keep it simple, and our students agree.</h2>
         <p>Real Students. Real Reviews.</p>
-        <img src="https://via.placeholder.com/300x200.png?text=Reviews+carousel" />
+        <img
+          alt=""
+          src="https://via.placeholder.com/300x200.png?text=Reviews+carousel"
+        />
       </Reviews>
     </Layout>
   )

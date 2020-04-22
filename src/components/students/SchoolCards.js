@@ -128,12 +128,12 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                               ))}
                             {school.schoolInfo.basicInfo.locations.length >
                               2 && (
-                              <p
-                                className="cursor-pointer hoverUnderline"
+                              <button
+                                className="cursor-pointer hoverUnderline p-0 border-none"
                                 onClick={() => setCardIndex([...cardIndex, i])}
                               >
                                 More
-                              </p>
+                              </button>
                             )}
                           </CardColumn>
                         </div>
@@ -149,12 +149,12 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                                 <p>{program.name} </p>
                               ))}
                             {school.schoolInfo.loanInfo.length > 2 && (
-                              <p
-                                className="cursor-pointer hoverUnderline"
+                              <button
+                                className="cursor-pointer hoverUnderline p-0 border-none"
                                 onClick={() => setCardIndex([...cardIndex, i])}
                               >
                                 More
-                              </p>
+                              </button>
                             )}
                           </CardColumn>
                         </div>
@@ -213,6 +213,12 @@ const SchoolCards = ({ filteredSchools, skfLogo }) => {
                         setCardIndex(cardIndex.filter(index => index !== i))
                       }
                     >
+                      <button
+                        className="absolute w-full border-none bg-transparent"
+                        onClick={() =>
+                          setCardIndex(cardIndex.filter(index => index !== i))
+                        }
+                      ></button>
                       <div className="card-back--info">
                         <CardColumn className="card-back--list ">
                           <h4>Locations</h4>{" "}
