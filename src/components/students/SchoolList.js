@@ -59,14 +59,14 @@ const SchoolList = ({ filteredSchools }) => {
                   <p>{location} </p>
                 ))}
               {school.schoolInfo.basicInfo.locations.length > 2 && (
-                <p
-                  className="cursor-pointer font-bold"
+                <button
+                  className="cursor-pointer font-bold textButton p-0 text-left"
                   onClick={() =>
                     listIndex === i ? setListIndex("") : setListIndex(i)
                   }
                 >
                   {listIndex === i ? "Show Less" : "Show More"}
-                </p>
+                </button>
               )}
             </ListColumn>
             <ListColumn>
@@ -116,14 +116,14 @@ const SchoolList = ({ filteredSchools }) => {
                   <p>{program.name} </p>
                 ))}
               {school.schoolInfo.loanInfo.length > 2 && (
-                <p
-                  className="cursor-pointer font-bold"
+                <button
+                  className="cursor-pointer font-bold textButton p-0 text-left"
                   onClick={() =>
                     listIndex === i ? setListIndex("") : setListIndex(i)
                   }
                 >
                   {listIndex === i ? "Show Less" : "Show More"}
-                </p>
+                </button>
               )}
             </ListColumn>
             <ListColumn>

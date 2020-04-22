@@ -35,6 +35,8 @@ const ApplicationCalculator = ({
   const [maxTuition, setMaxTuition] = useState("")
   const [maxCOL, setMaxCOL] = useState("")
   const [metros, setMetros] = useState("")
+  const [creditScore, setCreditScore] = useState("3")
+  const [creditScoreLabel, setCreditScoreLabel] = useState("Good")
   const [interestRate, setInterestRate] = useState({
     rate36: 8.99,
     rate60: 10.99,
@@ -50,6 +52,42 @@ const ApplicationCalculator = ({
     currency: "USD",
     minimumFractionDigits: 0,
   })
+
+  const handleInterestRate = e => {
+    setCreditScore(e.target.value)
+    console.log(creditScore)
+  }
+
+  useEffect(() => {
+    if (creditScore == 1) {
+      setCreditScoreLabel("Poor")
+      setInterestRate({
+        rate36: 14.99,
+        rate60: 16.99,
+      })
+    }
+    if (creditScore == 2) {
+      setCreditScoreLabel("Fair")
+      setInterestRate({
+        rate36: 11.99,
+        rate60: 13.99,
+      })
+    }
+    if (creditScore == 3) {
+      setCreditScoreLabel("Good")
+      setInterestRate({
+        rate36: 8.99,
+        rate60: 10.99,
+      })
+    }
+    if (creditScore == 4) {
+      setCreditScoreLabel("Excellent")
+      setInterestRate({
+        rate36: 5.99,
+        rate60: 7.99,
+      })
+    }
+  }, [creditScore])
 
   const handleTuitionSlider = e => {
     setTuitionValue(Number(e.target.value))
@@ -72,7 +110,6 @@ const ApplicationCalculator = ({
   }
 
   useEffect(() => {
-    console.log(program)
     if (program) {
       setTuitionValue(program["defaultAmount"])
       setMetros(program["metros"])
@@ -164,12 +201,12 @@ const ApplicationCalculator = ({
           <CalculatorCard email={email}>
             <h2>
               Loan Calculator
-              {showCalculator && (
+              {
                 <span>
                   {" "}
                   for {schoolName} - {program.name}
                 </span>
-              )}
+              }
             </h2>
             {program && program["aprAndType"].length > 1 && (
               <div>
@@ -198,7 +235,7 @@ const ApplicationCalculator = ({
             <LoanCalculatorSlider
               maxTuition={maxTuition}
               tuitionValue={tuitionValue}
-              showSliders={showSliders}
+              showSliders={true}
               boxes={boxes}
             >
               <div className="loanCalculator--total">
@@ -222,7 +259,7 @@ const ApplicationCalculator = ({
               </div>
             </LoanCalculatorSlider>
             {maxCOL > 0 && (
-              <LoanCalculatorSlider showSliders={showSliders}>
+              <LoanCalculatorSlider showSliders={true}>
                 <div className="slider__label--container">
                   <span className="slider__label--label">
                     Living expenses financed: {formatter.format(colValue)}
@@ -240,6 +277,28 @@ const ApplicationCalculator = ({
                 </div>
               </LoanCalculatorSlider>
             )}
+            <LoanCalculatorSlider
+              maxTuition={maxTuition}
+              tuitionValue={tuitionValue}
+              showSliders={true}
+              boxes={boxes}
+            >
+              <div className="slider__label--container gradient">
+                <span className="slider__label--label">
+                  Credit Score: {creditScoreLabel}
+                </span>
+                <input
+                  type="range"
+                  min="1"
+                  max="4"
+                  step="1"
+                  onChange={handleInterestRate}
+                  onBlur={handleInterestRate}
+                  className="loanCalculator--input"
+                  value={creditScore}
+                />
+              </div>
+            </LoanCalculatorSlider>
             <Payments showSliders={showSliders}>
               {program && program["loanLengths"].includes("36") && (
                 <PaymentCard

@@ -1,13 +1,11 @@
 import React from "react"
 import { PaymentCardContainer } from "./ApplicationCalculator.styled"
 import { FaQuestionCircle } from "react-icons/fa"
-import EditableInput from "../common/EditableInput"
 
 const PaymentCard = ({
   boxes,
   loanType,
   program,
-  onChange,
   interestRate,
   paymentTerm,
   interestPayments,
@@ -48,15 +46,7 @@ const PaymentCard = ({
         {program && (
           <div id="tooltip--parent">
             <p className="text-xs">
-              <EditableInput
-                onChange={onChange}
-                type="number"
-                value={interestRate}
-                color="white"
-                maxWidth="15%"
-                step=".01"
-              />
-              % Interest Rate, {APR}% APR{" "}
+              {interestRate}% Interest Rate, {APR}% APR{" "}
               <FaQuestionCircle className="text-xs" />
             </p>
             <div id="tooltip--tip">

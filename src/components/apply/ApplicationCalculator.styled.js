@@ -124,7 +124,6 @@ export const PaymentCardContainer = styled.div`
   transition: border 500ms, transform 500ms;
   border: 2px solid lightgray;
   box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4, 4px 4px #c4c4c4;
-  /* transform: translateX(-8px) translateY(-8px); */
   width: 22rem;
 
   :hover {

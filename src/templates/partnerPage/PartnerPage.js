@@ -227,13 +227,13 @@ const PartnerPage = ({ data }) => {
               )}
               !
             </p>
-            <p
-              className="calculator text-xs"
+            <button
+              className="calculator text-xs textButton"
               onClick={() => setShowCalculator(true)}
             >
               Curious what you'll pay? Easily calculate your payments{" "}
               <FaCaretDown />
-            </p>
+            </button>
           </ApplyPayments>
           <ApplicationCalculator
             school={school}

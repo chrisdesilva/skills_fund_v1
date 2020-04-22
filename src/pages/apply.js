@@ -18,6 +18,7 @@ import ApplicationCalculator from "../components/apply/ApplicationCalculator"
 import { useApplication } from "../hooks/useApplication"
 import TextInput from "../components/common/TextInput"
 import SelectInput from "../components/common/SelectInput"
+import ProductEducation from "../components/apply/ProductEducation"
 
 const Apply = () => {
   const [
@@ -26,7 +27,6 @@ const Apply = () => {
     showCalculator,
     setShowCalculator,
     showCalculatorText,
-    submitReady,
     showThankYou,
     selectSchool,
     selectProgram,
@@ -172,22 +172,27 @@ const Apply = () => {
               <FaCaretDown />
             </button>
           </ApplyPayments>
-          <ApplicationCalculator
-            school={school}
-            setSchoolName={setSchoolName}
-            showCalculator={showCalculator}
-            schoolName={schoolName}
-            program={program}
-            showSliders={showSliders}
-            toggleSliders={toggleSliders}
-            email={formState.email}
-            email2={formState.email2}
-            handleSubmit={handleSubmit}
-            loanUrl={loanUrl}
-            showThankYou={showThankYou}
-            handleChange={handleChange}
-          />
         </ApplyCard>
+
+        <ProductEducation
+          schoolName={schoolName}
+          showCalculator={showCalculator}
+        />
+        <ApplicationCalculator
+          school={school}
+          setSchoolName={setSchoolName}
+          showCalculator={showCalculator}
+          schoolName={schoolName}
+          program={program}
+          showSliders={showSliders}
+          toggleSliders={toggleSliders}
+          email={formState.email}
+          email2={formState.email2}
+          handleSubmit={handleSubmit}
+          loanUrl={loanUrl}
+          showThankYou={showThankYou}
+          handleChange={handleChange}
+        />
       </ApplyContainer>
     </Layout>
   )
