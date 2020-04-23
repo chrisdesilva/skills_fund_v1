@@ -37,8 +37,6 @@ export const query = graphql`
           tuitionRange
           programTypes
           hubspotFormID
-          interestRate36
-          interestRate60
           selectAProgram
           applicationsLive
           nextCohortStartDate
@@ -72,8 +70,18 @@ export const query = graphql`
           aprAndType {
             info {
               type
-              apr36
-              apr60
+              apr36 {
+                Poor
+                Fair
+                Good
+                Excellent
+              }
+              apr60 {
+                Poor
+                Fair
+                Good
+                Excellent
+              }
               maxTuition
               maxCOL
             }

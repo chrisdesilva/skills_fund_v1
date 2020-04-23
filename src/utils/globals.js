@@ -147,12 +147,34 @@ input[type=range] {
 
 .gradient input[type=range]::-webkit-slider-runnable-track,
 .gradient input[type=range]:focus::-webkit-slider-runnable-track { 
-    background: #1E9600;  /* fallback for old browsers */
-    background: -webkit-linear-gradient(to right, #FF0000, #FFF200, #1E9600);  /* Chrome 10-25, Safari 5.1-6 */
-    background: linear-gradient(to right, #FF0000, #FFF200, #1E9600); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+    background: #3b5d94;  
+    background: -webkit-linear-gradient(to right, #3b5d94, #f7f7f7, #e96965);  
+    background: linear-gradient(to right, #3b5d94, #f7f7f7, #e96965); 
   }
 
 .gradient input[type=range]::-webkit-slider-thumb {
+  background: #f7f7f7;
+}
+
+.gradient input[type=range]::-moz-range-track,
+.gradient input[type=range]:focus::-moz-range-track { 
+  background: #3b5d94;  
+    background: -webkit-linear-gradient(to right, #3b5d94, #f7f7f7, #e96965);  
+    background: linear-gradient(to right, #3b5d94, #f7f7f7, #e96965); 
+  }
+
+.gradient input[type=range]::-moz-range-thumb {
+  background: #f7f7f7;
+}
+
+.gradient input[type=range]::-ms-track ,
+.gradient input[type=range]:focus::-ms-track  { 
+  background: #3b5d94;  
+    background: -webkit-linear-gradient(to right, #3b5d94, #f7f7f7, #e96965);  
+    background: linear-gradient(to right, #3b5d94, #f7f7f7, #e96965); 
+  }
+
+.gradient input[type=range]::-ms-thumb {
   background: #f7f7f7;
 }
 
