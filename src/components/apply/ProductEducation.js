@@ -4,10 +4,17 @@ import { AnimatePresence, motion } from "framer-motion"
 import { breakpoint } from "../../utils/breakpoints"
 
 const ProductEducation = ({
-  loanTypeAvailable,
   schoolName,
   showCalculator,
+  school,
+  loanTypeAvailable,
+  program,
 }) => {
+  const {
+    schoolInfo: { features, loanInfo },
+  } = school
+  const { loanLengths } = program
+  console.log(school, program)
   return (
     <AnimatePresence initial={false}>
       {showCalculator && (
@@ -19,56 +26,68 @@ const ProductEducation = ({
         >
           <h2>Find A Payment Option That Fits Your Budget</h2>
           <ProductContainer>
-            <Product loanTypeAvailable={loanTypeAvailable}>
+            <Product
+              loanTypeAvailable={
+                school && features.products.includes("Interest Only")
+              }
+            >
               <h3>Interest Only</h3>
               <p>
                 Make interest-only payments while in the program. Three months
                 after completion, begin full payments.
               </p>
               <p className="text-xs">
-                {loanTypeAvailable
+                {school && features.products.includes("Interest Only")
                   ? `Available at ${schoolName}`
                   : `Not available at ${schoolName}`}
               </p>
             </Product>
-            <Product loanTypeAvailable={loanTypeAvailable}>
+            <Product
+              loanTypeAvailable={
+                school && features.products.includes("Immediate Repayment")
+              }
+            >
               <h3>Immediate Repayment</h3>
               <p>
                 Start making full payments (interest + principal) about one
                 month after disbursement.
               </p>
               <p className="text-xs">
-                {loanTypeAvailable
+                {school && features.products.includes("Immediate Repayment")
                   ? `Available at ${schoolName}`
                   : `Not available at ${schoolName}`}
               </p>
             </Product>
-            <Product loanTypeAvailable={loanTypeAvailable}>
+            <Product
+              loanTypeAvailable={
+                school && features.products.includes("Deferred Tuition")
+              }
+            >
               <h3>Deferred Tuition</h3>
               <p>
                 Make no payments while in the program. Three months after
                 completion, begin full payments.
               </p>
               <p className="text-xs">
-                {loanTypeAvailable
+                {school && features.products.includes("Deferred Tuition")
                   ? `Available at ${schoolName}`
                   : `Not available at ${schoolName}`}
               </p>
             </Product>
-            <Product loanTypeAvailable={loanTypeAvailable}>
+            <Product loanTypeAvailable={school && loanLengths.includes("36")}>
               <h3>36 Months</h3>
               <p>Make 36 full monthly payments</p>
               <p className="text-xs">
-                {loanTypeAvailable
+                {school && loanLengths.includes("36")
                   ? `Available at ${schoolName}`
                   : `Not available at ${schoolName}`}
               </p>
             </Product>
-            <Product loanTypeAvailable={loanTypeAvailable}>
+            <Product loanTypeAvailable={school && loanLengths.includes("60")}>
               <h3>60 Months</h3>
               <p>Make 60 full monthly payments</p>
               <p className="text-xs">
-                {loanTypeAvailable
+                {school && loanLengths.includes("60")
                   ? `Available at ${schoolName}`
                   : `Not available at ${schoolName}`}
               </p>

@@ -316,7 +316,9 @@ const ApplicationCalculator = ({
                   interestPayments={interestPayments.payment36}
                   monthlyPayments={monthlyPayments.payment36}
                   totalPayments={totalPayments.payment36}
-                  APR={program["aprAndType"][0]["info"]["apr36"]}
+                  APR={
+                    program["aprAndType"][0]["info"]["apr36"][creditScoreLabel]
+                  }
                 />
               )}
               {program && program["loanLengths"].includes("60") && (
@@ -335,7 +337,9 @@ const ApplicationCalculator = ({
                   interestPayments={interestPayments.payment60}
                   monthlyPayments={monthlyPayments.payment60}
                   totalPayments={totalPayments.payment60}
-                  APR={program["aprAndType"][0]["info"]["apr60"]}
+                  APR={
+                    program["aprAndType"][0]["info"]["apr60"][creditScoreLabel]
+                  }
                 />
               )}
             </Payments>

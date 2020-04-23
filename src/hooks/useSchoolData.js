@@ -19,8 +19,6 @@ export const useSchoolData = () => {
                 applicationsLive
                 disabledLoanAppFormID
                 hubspotFormID
-                interestRate36
-                interestRate60
                 locations
                 nextCohortStartDate
                 programTypes
@@ -51,8 +49,18 @@ export const useSchoolData = () => {
               loanInfo {
                 aprAndType {
                   info {
-                    apr36
-                    apr60
+                    apr36 {
+                      Poor
+                      Fair
+                      Good
+                      Excellent
+                    }
+                    apr60 {
+                      Poor
+                      Fair
+                      Good
+                      Excellent
+                    }
                     maxCOL
                     maxTuition
                     type
