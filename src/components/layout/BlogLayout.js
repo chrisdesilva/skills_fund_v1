@@ -3,6 +3,7 @@ import styled from "styled-components"
 import { ThemeProvider } from "styled-components"
 import { MDXProvider } from "@mdx-js/react"
 import Button from "../blog/Button"
+import Banner from "../blog/Banner"
 import Embed from "../blog/Embed"
 import Twitter from "../blog/Twitter"
 import Header from "./Header"
@@ -12,7 +13,7 @@ import { breakpoint } from "../../utils/breakpoints"
 import { GlobalStyle } from "../../utils/globals"
 import "../../utils/globals"
 
-const shortcodes = { Button, Embed, Twitter }
+const shortcodes = { Button, Embed, Twitter, Banner }
 
 const BlogLayout = ({ children }) => {
   return (
@@ -36,37 +37,46 @@ const PageContainer = styled.div`
   flex-direction: column;
   min-height: 100vh;
   background: #f7f7f7;
+  position: relative;
 `
 
 const ChildContainer = styled.div`
   flex-grow: 1;
-  max-width: 90vw;
   margin: 48px auto;
   overflow: hidden;
+
+  img:first-of-type {
+    margin-bottom: 5rem;
+  }
+
+  p {
+    width: 100%;
+    max-width: 1200px;
+    margin: .5rem auto;
+  }
 
   @media ${breakpoint.lg} {
     margin-top: 57px;
   }
 
-  @media ${breakpoint.xl} {
+  /* @media ${breakpoint.xl} {
     margin-top: 57px;
     width: 100%;
     max-width: 1200px;
-  }
+  } */
 
   h1,
   h2 {
     text-align: center;
-  }
-
-  h1 {
     margin: 2rem 0;
   }
+
 
   img {
     margin: 0 auto;
     display: block;
-    max-width: 90vw;
+    max-width: none;
+    width: 100%;
   }
 
   a:not(.btn) {
@@ -93,11 +103,19 @@ const ChildContainer = styled.div`
     }
   }
 
+  .banner.gatsby-image-wrapper {
+    position: absolute;
+    width: 100vw;
+    margin: 4rem 0;
+  }
+
   .btn {
     background: ${({ theme }) => theme.primary};
     color: white;
-    margin: 0 auto;
+    margin: 2rem auto;
     display: block;
     text-align: center;
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
+  transform: translateX(-2px) translateY(-2px);
   }
 `

@@ -17,7 +17,11 @@ const Banner = () => {
 
   return (
     <div>
-      <Img fluid={data.banner.childImageSharp.fluid} alt="Banner" />
+      <Img
+        className="banner"
+        fluid={data.banner.childImageSharp.fluid}
+        alt="Banner"
+      />
     </div>
   )
 }

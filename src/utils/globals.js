@@ -9,6 +9,10 @@ body {
   scroll-behavior: smooth;
 }
 
+input {
+  font-family: 'Poppins', sans-serif; 
+}
+
 h1,
 h2,
 h3,
@@ -16,6 +20,10 @@ h4,
 h5,
 h6 {
   margin: 0;
+}
+
+img[alt="bluebanner"] {
+  width: 100vw;
 }
 
 .textButton {
@@ -32,54 +40,54 @@ h6 {
   transition: all 300ms;
   text-decoration: none;
   font-weight: bold;
-}
 
-.btn:hover {
-  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4,
-      4px 4px #c4c4c4;
-      transform: translateX(-4px) translateY(-4px);
-}
+  :hover {
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4, 3px 3px #c4c4c4,
+        4px 4px #c4c4c4;
+        transform: translateX(-4px) translateY(-4px);
+  }
 
-.btn:active {
-  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
-  transform: translateX(-2px) translateY(-2px);
-}
+  :active {
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
+    transform: translateX(-2px) translateY(-2px);
+  }
 
-.btn--submit {
-  background: #e96965;
-  color: white;
-  font-weight: bold;
-  text-align: center;
-  width: 11rem;
-  box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
-  transform: translateX(-2px) translateY(-2px);
-}
+  &--secondary {
+    background-color: white;
+    color: black;
+    border: 2px solid black;
+  }
 
-.btn--disabled {
-  background-color: lightgray;
-  color: black;
-  opacity: 0.5;
-}
-.btn--disabled:hover {
-  box-shadow: none;
-  transform: translate(0);
-}
+  &--submit {
+    background: #e96965;
+    color: white;
+    font-weight: bold;
+    text-align: center;
+    width: 11rem;
+    box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
+    transform: translateX(-2px) translateY(-2px);
+  }
 
-.btn--nav {
-  background-color: #e96965;
-  color: white;
-  z-index: 5;
-  width: 6rem;
-  font-size: 0.75rem;
-  padding: 0.5rem;
-  margin-right: 2rem;
-  margin-top: 4px;
-}
+  &--disabled {
+    background-color: lightgray;
+    color: black;
+    opacity: 0.5;
+      :hover {
+      box-shadow: none;
+      transform: translate(0);
+    }
+  } 
 
-.btn--secondary {
-  background-color: white;
-  color: black;
-  border: 2px solid black;
+  &--nav {
+    background-color: #e96965;
+    color: white;
+    z-index: 5;
+    width: 6rem;
+    font-size: 0.75rem;
+    padding: 0.5rem;
+    margin-right: 2rem;
+    margin-top: 4px;
+  }
 }
 
 .hoverLink {
