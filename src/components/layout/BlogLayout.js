@@ -49,7 +49,7 @@ const ChildContainer = styled.div`
     margin-bottom: 5rem;
   }
 
-  p {
+  p, li {
     width: 100%;
     max-width: 1200px;
     margin: .5rem auto;
@@ -68,7 +68,7 @@ const ChildContainer = styled.div`
   h1,
   h2 {
     text-align: center;
-    margin: 2rem 0;
+    margin: 2rem auto;
   }
 
 
