@@ -17,7 +17,8 @@ export const useApplication = () => {
     const selectedSchool = schoolList.filter(
       school => school.node.slug === e.target.value
     )
-    setSchool(selectedSchool[0]["node"])
+    if (e.target.value !== "default") setSchool(selectedSchool[0]["node"])
+    if (e.target.value === "default") setSchool("")
     setShowCalculatorText(false)
   }
 

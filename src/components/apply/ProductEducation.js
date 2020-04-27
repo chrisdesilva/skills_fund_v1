@@ -1,4 +1,4 @@
-import React from "react"
+import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { AnimatePresence, motion } from "framer-motion"
 import { breakpoint } from "../../utils/breakpoints"
@@ -10,92 +10,306 @@ const ProductEducation = ({
   loanTypeAvailable,
   program,
 }) => {
-  const {
-    schoolInfo: { features, loanInfo },
-  } = school
   const { loanLengths } = program
-  console.log(school, program)
-  return (
-    <AnimatePresence initial={false}>
-      {showCalculator && (
-        <EducationContainer
-          initial={{ x: 300, opacity: 0 }}
-          animate={{ x: 0, opacity: 1 }}
-          exit={{ x: -300, opacity: 0 }}
-          transition={{ duration: 0.5 }}
-        >
-          <h2>Find A Payment Option That Fits Your Budget</h2>
-          <ProductContainer>
-            <Product
-              loanTypeAvailable={
-                school && features.products.includes("Interest Only")
-              }
-            >
-              <h3>Interest Only</h3>
-              <p>
-                Make interest-only payments while in the program. Three months
-                after completion, begin full payments.
-              </p>
-              <p className="text-xs">
-                {school && features.products.includes("Interest Only")
-                  ? `Available at ${schoolName}`
-                  : `Not available at ${schoolName}`}
-              </p>
-            </Product>
-            <Product
-              loanTypeAvailable={
-                school && features.products.includes("Immediate Repayment")
-              }
-            >
-              <h3>Immediate Repayment</h3>
-              <p>
-                Start making full payments (interest + principal) about one
-                month after disbursement.
-              </p>
-              <p className="text-xs">
-                {school && features.products.includes("Immediate Repayment")
-                  ? `Available at ${schoolName}`
-                  : `Not available at ${schoolName}`}
-              </p>
-            </Product>
-            <Product
-              loanTypeAvailable={
-                school && features.products.includes("Deferred Tuition")
-              }
-            >
-              <h3>Deferred Tuition</h3>
-              <p>
-                Make no payments while in the program. Three months after
-                completion, begin full payments.
-              </p>
-              <p className="text-xs">
-                {school && features.products.includes("Deferred Tuition")
-                  ? `Available at ${schoolName}`
-                  : `Not available at ${schoolName}`}
-              </p>
-            </Product>
-            <Product loanTypeAvailable={school && loanLengths.includes("36")}>
-              <h3>36 Months</h3>
-              <p>Make 36 full monthly payments</p>
-              <p className="text-xs">
-                {school && loanLengths.includes("36")
-                  ? `Available at ${schoolName}`
-                  : `Not available at ${schoolName}`}
-              </p>
-            </Product>
-            <Product loanTypeAvailable={school && loanLengths.includes("60")}>
-              <h3>60 Months</h3>
-              <p>Make 60 full monthly payments</p>
-              <p className="text-xs">
-                {school && loanLengths.includes("60")
-                  ? `Available at ${schoolName}`
-                  : `Not available at ${schoolName}`}
-              </p>
-            </Product>
-          </ProductContainer>
-        </EducationContainer>
+
+  const [loanTermLength, setLoanTermLength] = useState("")
+  const [loanTermType, setLoanTermType] = useState("")
+
+  const handleBack = () => {
+    if (loanTermType) {
+      setLoanTermType("")
+    } else {
+      setLoanTermLength("")
+    }
+  }
+
+  useEffect(() => {
+    if (school && !school.schoolInfo.features.multiLoanLengths) {
+      setLoanTermLength("36")
+    }
+    if (school && school.schoolInfo.features.products.length === 1) {
+      setLoanTermType(school.schoolInfo.features.products[0])
+    }
+  }, [school])
+
+  let educationMarkup = school ? (
+    <ProductContainer>
+      {!loanTermLength && school.schoolInfo.features.multiLoanLengths && (
+        <AnimatePresence exitBeforeEnter initial={false}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+          >
+            <h3>
+              Would you rather pay off your loan faster or have lower monthly
+              payments?
+            </h3>
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionContainer"
+              >
+                <button
+                  className="questionCard btn"
+                  onClick={() => setLoanTermLength("36")}
+                >
+                  <p>Pay off loan faster</p>
+                </button>
+                <button
+                  className="questionCard btn"
+                  onClick={() => setLoanTermLength("60")}
+                >
+                  <p>Have lower monthly payments</p>
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
       )}
-    </AnimatePresence>
+      {(loanTermLength || !school.schoolInfo.features.multiLoanLengths) &&
+        !loanTermType &&
+        school.schoolInfo.features.products.length > 1 && (
+          <AnimatePresence exitBeforeEnter initial={false}>
+            <motion.div
+              initial={{ opacity: 0, scale: 0 }}
+              animate={{ opacity: 1, scale: 1 }}
+              exit={{ opacity: 0, scale: 0 }}
+            >
+              <h3>How would you like to start making payment each month?</h3>
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0, scale: 0 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  exit={{ opacity: 0, scale: 0 }}
+                  className="questionContainer"
+                >
+                  {school.schoolInfo.features.products.includes(
+                    "Immediate Repayment"
+                  ) && (
+                    <button
+                      className="questionCard btn"
+                      onClick={() => setLoanTermType("Immediate Repayment")}
+                    >
+                      <p>Make full monthly payments</p>
+                    </button>
+                  )}
+                  {school.schoolInfo.features.products.includes(
+                    "Interest Only"
+                  ) && (
+                    <button
+                      className="questionCard btn"
+                      onClick={() => setLoanTermType("Interest Only")}
+                    >
+                      <p>
+                        Just pay interest while I'm taking classes and for three
+                        months after graduating
+                      </p>
+                    </button>
+                  )}
+                  {school.schoolInfo.features.products.includes("Deferred") && (
+                    <button
+                      className="questionCard btn"
+                      onClick={() => setLoanTermType("Deferred")}
+                    >
+                      <p>
+                        Make no payments while I'm taking classes and for three
+                        months after graduating
+                      </p>
+                    </button>
+                  )}
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        )}
+    </ProductContainer>
+  ) : (
+    <ProductContainer>
+      {!loanTermLength && (
+        <AnimatePresence exitBeforeEnter initial={false}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+          >
+            <h3>
+              Would you rather pay off your loan faster or have lower monthly
+              payments?
+            </h3>
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionContainer"
+              >
+                <button
+                  className="questionCard btn"
+                  onClick={() => setLoanTermLength("36")}
+                >
+                  <p>Pay off loan faster</p>
+                </button>
+                <button
+                  className="questionCard btn"
+                  onClick={() => setLoanTermLength("60")}
+                >
+                  <p>Have lower monthly payments</p>
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+      )}
+      {loanTermLength && !loanTermType && (
+        <AnimatePresence exitBeforeEnter initial={false}>
+          <motion.div
+            initial={{ opacity: 0, scale: 0 }}
+            animate={{ opacity: 1, scale: 1 }}
+            exit={{ opacity: 0, scale: 0 }}
+          >
+            <h3>How would you like to start making payment each month?</h3>
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionContainer"
+              >
+                <button
+                  className="questionCard btn"
+                  onClick={() => setLoanTermType("Immediate Repayment")}
+                >
+                  <p>Make full monthly payments</p>
+                </button>
+                <button
+                  className="questionCard btn"
+                  onClick={() => setLoanTermType("Interest Only")}
+                >
+                  <p>
+                    Just pay interest while I'm taking classes and for three
+                    months after graduating
+                  </p>
+                </button>
+                <button
+                  className="questionCard btn"
+                  onClick={() => setLoanTermType("Deferred")}
+                >
+                  <p>
+                    Make no payments while I'm taking classes and for three
+                    months after graduating
+                  </p>
+                </button>
+              </motion.div>
+            </AnimatePresence>
+          </motion.div>
+        </AnimatePresence>
+      )}
+    </ProductContainer>
+  )
+
+  return (
+    <EducationContainer>
+      {educationMarkup}
+      <AnimatePresence>
+        <motion.div
+          initial={{ opacity: 0, scale: 0 }}
+          animate={{ opacity: 1, scale: 1 }}
+          exit={{ opacity: 0, scale: 0 }}
+          className="questionContainer"
+        >
+          {loanTermLength === "36" && loanTermType === "Immediate Repayment" && (
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionCard"
+              >
+                <h3>36 Month Immediate Repayment</h3>
+                <p>Monthly Payments: $333.10</p>
+              </motion.div>
+            </AnimatePresence>
+          )}
+          {loanTermLength === "36" && loanTermType === "Interest Only" && (
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionCard"
+              >
+                <h3>36 Month Interest Only</h3>
+                <p>Monthly Payments in School: $77.87</p>
+                <p>Monthly Payments After Grace Period: $333.10</p>
+              </motion.div>
+            </AnimatePresence>
+          )}
+          {loanTermLength === "36" && loanTermType === "Deferred" && (
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionCard"
+              >
+                <h3>36 Month Deferred Repayment</h3>
+                <p>Monthly Payments in School: $0</p>
+                <p>Monthly Payments After Grace Period: $363.10</p>
+              </motion.div>
+            </AnimatePresence>
+          )}
+          {loanTermLength === "60" && loanTermType === "Immediate Repayment" && (
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionCard"
+              >
+                <h3>60 Month Immediate Repayment</h3>
+                <p>Monthly Payments: $283.10</p>
+              </motion.div>
+            </AnimatePresence>
+          )}
+          {loanTermLength === "60" && loanTermType === "Interest Only" && (
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionCard"
+              >
+                <h3>60 Month Interest Only</h3>
+                <p>Monthly Payments in School: $97.17</p>
+                <p>Monthly Payments After Grace Period: $283.10</p>
+              </motion.div>
+            </AnimatePresence>
+          )}
+          {loanTermLength === "60" && loanTermType === "Deferred" && (
+            <AnimatePresence>
+              <motion.div
+                initial={{ opacity: 0, scale: 0 }}
+                animate={{ opacity: 1, scale: 1 }}
+                exit={{ opacity: 0, scale: 0 }}
+                className="questionCard"
+              >
+                <h3>60 Month Deferred Repayment</h3>
+                <p>Monthly Payments in School: $0</p>
+                <p>Monthly Payments After Grace Period: $333.10</p>
+              </motion.div>
+            </AnimatePresence>
+          )}
+        </motion.div>
+      </AnimatePresence>
+      {(loanTermLength || loanTermType) && (
+        <button className="btn back" onClick={handleBack}>
+          &larr; Back
+        </button>
+      )}
+    </EducationContainer>
   )
 }
 
@@ -110,22 +324,46 @@ const EducationContainer = styled(motion.section)`
   color: ${({ theme }) => theme.black};
   overflow: hidden;
   border-top: ${({ theme }) => `5px solid ${theme.black}`};
+  background: #f7f7f7;
+
+  h2 {
+    padding: 2rem 0;
+  }
 
   select {
     width: 20rem;
   }
+
+  .back {
+    margin: 1rem auto;
+    border: ${({ theme }) => `2px solid ${theme.black}`};
+  }
+
+  .questionCard {
+    padding: 5rem 1rem;
+    width: 20rem;
+    border: 2px solid black;
+    text-align: center;
+    cursor: pointer;
+    font-size: 1rem;
+    background: white;
+  }
 `
 
 const ProductContainer = styled.div`
-  display: grid;
-  grid-template-columns: 1fr;
-  padding-top: 2rem;
-  grid-gap: 1rem;
-  @media ${breakpoint.md} {
-    grid-template-columns: repeat(3, 1fr);
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  padding: 1rem;
+
+  h3 {
+    text-align: center;
   }
-  @media ${breakpoint.lg} {
-    grid-template-columns: repeat(5, 1fr);
+
+  .questionContainer {
+    display: flex;
+    justify-content: space-around;
+    padding: 2rem 0;
   }
 `
 

@@ -174,14 +174,12 @@ const Apply = () => {
           </ApplyPayments>
         </ApplyCard>
 
-        {school && (
-          <ProductEducation
-            schoolName={schoolName}
-            showCalculator={showCalculator}
-            school={school}
-            program={program}
-          />
-        )}
+        <ProductEducation
+          schoolName={schoolName}
+          showCalculator={showCalculator}
+          school={school}
+          program={program}
+        />
         <ApplicationCalculator
           school={school}
           setSchoolName={setSchoolName}
