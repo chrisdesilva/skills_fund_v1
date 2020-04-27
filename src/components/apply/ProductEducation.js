@@ -37,9 +37,9 @@ const ProductEducation = ({
       {!loanTermLength && school.schoolInfo.features.multiLoanLengths && (
         <AnimatePresence exitBeforeEnter initial={false}>
           <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
             <h3>
               Would you rather pay off your loan faster or have lower monthly
@@ -47,9 +47,9 @@ const ProductEducation = ({
             </h3>
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionContainer"
               >
                 <button
@@ -74,16 +74,16 @@ const ProductEducation = ({
         school.schoolInfo.features.products.length > 1 && (
           <AnimatePresence exitBeforeEnter initial={false}>
             <motion.div
-              initial={{ opacity: 0, scale: 0 }}
-              animate={{ opacity: 1, scale: 1 }}
-              exit={{ opacity: 0, scale: 0 }}
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
             >
               <h3>How would you like to start making payment each month?</h3>
               <AnimatePresence>
                 <motion.div
-                  initial={{ opacity: 0, scale: 0 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  exit={{ opacity: 0, scale: 0 }}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
                   className="questionContainer"
                 >
                   {school.schoolInfo.features.products.includes(
@@ -131,9 +131,9 @@ const ProductEducation = ({
       {!loanTermLength && (
         <AnimatePresence exitBeforeEnter initial={false}>
           <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
             <h3>
               Would you rather pay off your loan faster or have lower monthly
@@ -141,9 +141,9 @@ const ProductEducation = ({
             </h3>
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionContainer"
               >
                 <button
@@ -166,16 +166,16 @@ const ProductEducation = ({
       {loanTermLength && !loanTermType && (
         <AnimatePresence exitBeforeEnter initial={false}>
           <motion.div
-            initial={{ opacity: 0, scale: 0 }}
-            animate={{ opacity: 1, scale: 1 }}
-            exit={{ opacity: 0, scale: 0 }}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
           >
             <h3>How would you like to start making payment each month?</h3>
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionContainer"
               >
                 <button
@@ -215,17 +215,17 @@ const ProductEducation = ({
       {educationMarkup}
       <AnimatePresence>
         <motion.div
-          initial={{ opacity: 0, scale: 0 }}
-          animate={{ opacity: 1, scale: 1 }}
-          exit={{ opacity: 0, scale: 0 }}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
           className="questionContainer"
         >
           {loanTermLength === "36" && loanTermType === "Immediate Repayment" && (
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionCard"
               >
                 <h3>36 Month Immediate Repayment</h3>
@@ -236,9 +236,9 @@ const ProductEducation = ({
           {loanTermLength === "36" && loanTermType === "Interest Only" && (
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionCard"
               >
                 <h3>36 Month Interest Only</h3>
@@ -250,9 +250,9 @@ const ProductEducation = ({
           {loanTermLength === "36" && loanTermType === "Deferred" && (
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionCard"
               >
                 <h3>36 Month Deferred Repayment</h3>
@@ -264,9 +264,9 @@ const ProductEducation = ({
           {loanTermLength === "60" && loanTermType === "Immediate Repayment" && (
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionCard"
               >
                 <h3>60 Month Immediate Repayment</h3>
@@ -277,9 +277,9 @@ const ProductEducation = ({
           {loanTermLength === "60" && loanTermType === "Interest Only" && (
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionCard"
               >
                 <h3>60 Month Interest Only</h3>
@@ -291,9 +291,9 @@ const ProductEducation = ({
           {loanTermLength === "60" && loanTermType === "Deferred" && (
             <AnimatePresence>
               <motion.div
-                initial={{ opacity: 0, scale: 0 }}
-                animate={{ opacity: 1, scale: 1 }}
-                exit={{ opacity: 0, scale: 0 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
                 className="questionCard"
               >
                 <h3>60 Month Deferred Repayment</h3>
