@@ -33,7 +33,6 @@ img[alt="bluebanner"] {
 
 .btn {
   width: 11rem;
-  max-width: 11rem;
   padding: 0.5rem;
   cursor: pointer;
   border: 2px solid transparent;

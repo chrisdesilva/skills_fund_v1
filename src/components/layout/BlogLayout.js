@@ -49,28 +49,31 @@ const ChildContainer = styled.div`
     margin-bottom: 5rem;
   }
 
-  p, li {
-    width: 100%;
-    max-width: 1200px;
-    margin: .5rem auto;
+  p,
+  li,
+  h1,
+  h2 {
+    max-width: 90vw;
+    margin: 0.5rem auto;
   }
 
   @media ${breakpoint.lg} {
     margin-top: 57px;
   }
 
-  /* @media ${breakpoint.xl} {
-    margin-top: 57px;
-    width: 100%;
-    max-width: 1200px;
-  } */
+  @media ${breakpoint.xl} {
+    p,
+    li {
+      width: 100%;
+      max-width: 1200px;
+    }
+  }
 
   h1,
   h2 {
     text-align: center;
     margin: 2rem auto;
   }
-
 
   img {
     margin: 0 auto;
@@ -116,6 +119,7 @@ const ChildContainer = styled.div`
     display: block;
     text-align: center;
     box-shadow: 1px 1px #c4c4c4, 2px 2px #c4c4c4;
-  transform: translateX(-2px) translateY(-2px);
+    transform: translateX(-2px) translateY(-2px);
+    max-width: 20rem;
   }
 `
