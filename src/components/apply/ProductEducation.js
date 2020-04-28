@@ -12,65 +12,87 @@ const ProductEducation = ({
 }) => {
   const { loanLengths } = program
 
+  const [getStarted, setGetStarted] = useState(false)
   const [loanTermLength, setLoanTermLength] = useState("")
   const [loanTermType, setLoanTermType] = useState("")
 
   const handleBack = () => {
     if (loanTermType) {
-      setLoanTermType("")
+      if (school && school.schoolInfo.features.products.length === 1) {
+        setLoanTermType(school.schoolInfo.features.products[0])
+      } else {
+        setLoanTermType("")
+      }
+    }
+    if (loanTermLength) {
+      if (school && !school.schoolInfo.features.multiLoanLengths) {
+        setLoanTermLength("36")
+      } else {
+        setLoanTermLength("")
+      }
     } else {
-      setLoanTermLength("")
+      setGetStarted(false)
     }
   }
 
-  useEffect(() => {
+  const handleGetStarted = () => {
+    setGetStarted(true)
     if (school && !school.schoolInfo.features.multiLoanLengths) {
       setLoanTermLength("36")
     }
     if (school && school.schoolInfo.features.products.length === 1) {
       setLoanTermType(school.schoolInfo.features.products[0])
     }
+  }
+
+  useEffect(() => {
+    setLoanTermType("")
+    setLoanTermLength("")
+    setGetStarted(false)
   }, [school])
 
   let educationMarkup = school ? (
     <ProductContainer>
-      {!loanTermLength && school.schoolInfo.features.multiLoanLengths && (
-        <AnimatePresence exitBeforeEnter initial={false}>
-          <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
-            <h3>
-              Would you rather pay off your loan faster or have lower monthly
-              payments?
-            </h3>
-            <AnimatePresence>
-              <motion.div
-                initial={{ opacity: 0 }}
-                animate={{ opacity: 1 }}
-                exit={{ opacity: 0 }}
-                className="questionContainer"
-              >
-                <button
-                  className="questionCard btn"
-                  onClick={() => setLoanTermLength("36")}
+      {!loanTermLength &&
+        getStarted &&
+        school.schoolInfo.features.multiLoanLengths && (
+          <AnimatePresence exitBeforeEnter initial={false}>
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+            >
+              <h3>
+                Would you rather pay off your loan faster or have lower monthly
+                payments?
+              </h3>
+              <AnimatePresence>
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  className="questionContainer"
                 >
-                  <p>Pay off loan faster</p>
-                </button>
-                <button
-                  className="questionCard btn"
-                  onClick={() => setLoanTermLength("60")}
-                >
-                  <p>Have lower monthly payments</p>
-                </button>
-              </motion.div>
-            </AnimatePresence>
-          </motion.div>
-        </AnimatePresence>
-      )}
+                  <button
+                    className="questionCard btn"
+                    onClick={() => setLoanTermLength("36")}
+                  >
+                    <p>Pay off loan faster</p>
+                  </button>
+                  <button
+                    className="questionCard btn"
+                    onClick={() => setLoanTermLength("60")}
+                  >
+                    <p>Have lower monthly payments</p>
+                  </button>
+                </motion.div>
+              </AnimatePresence>
+            </motion.div>
+          </AnimatePresence>
+        )}
       {(loanTermLength || !school.schoolInfo.features.multiLoanLengths) &&
         !loanTermType &&
+        getStarted &&
         school.schoolInfo.features.products.length > 1 && (
           <AnimatePresence exitBeforeEnter initial={false}>
             <motion.div
@@ -128,7 +150,7 @@ const ProductEducation = ({
     </ProductContainer>
   ) : (
     <ProductContainer>
-      {!loanTermLength && (
+      {getStarted && !loanTermLength && (
         <AnimatePresence exitBeforeEnter initial={false}>
           <motion.div
             initial={{ opacity: 0 }}
@@ -163,7 +185,7 @@ const ProductEducation = ({
           </motion.div>
         </AnimatePresence>
       )}
-      {loanTermLength && !loanTermType && (
+      {loanTermLength && !loanTermType && getStarted && (
         <AnimatePresence exitBeforeEnter initial={false}>
           <motion.div
             initial={{ opacity: 0 }}
@@ -212,6 +234,7 @@ const ProductEducation = ({
 
   return (
     <EducationContainer>
+      <h3>Find a financing option that works for you</h3>
       {educationMarkup}
       <AnimatePresence>
         <motion.div
@@ -220,6 +243,19 @@ const ProductEducation = ({
           exit={{ opacity: 0 }}
           className="questionContainer"
         >
+          {!getStarted && (
+            <AnimatePresence>
+              <motion.button
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                className="questionCard"
+                onClick={handleGetStarted}
+              >
+                <p>Click here to get started</p>
+              </motion.button>
+            </AnimatePresence>
+          )}
           {loanTermLength === "36" && loanTermType === "Immediate Repayment" && (
             <AnimatePresence>
               <motion.div
@@ -304,7 +340,7 @@ const ProductEducation = ({
           )}
         </motion.div>
       </AnimatePresence>
-      {(loanTermLength || loanTermType) && (
+      {getStarted && (
         <button className="btn back" onClick={handleBack}>
           &larr; Back
         </button>
