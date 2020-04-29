@@ -2,6 +2,11 @@ import React, { useEffect, useState } from "react"
 import styled from "styled-components"
 import { AnimatePresence, motion } from "framer-motion"
 import { breakpoint } from "../../utils/breakpoints"
+import {
+  calculateInterestPayment,
+  calculateMonthlyPayment,
+  calculateTotalPayment,
+} from "../../utils/calculator"
 
 const ProductEducation = ({
   schoolName,
@@ -15,6 +20,25 @@ const ProductEducation = ({
   const [getStarted, setGetStarted] = useState(false)
   const [loanTermLength, setLoanTermLength] = useState("")
   const [loanTermType, setLoanTermType] = useState("")
+
+  // loan calculator
+  const [interestRate, setInterestRate] = useState({
+    rate36: 8.99,
+    rate60: 10.99,
+  })
+  const [interestPayments, setInterestPayments] = useState({
+    payment36: "",
+    payment60: "",
+  })
+  const [monthlyPayments, setMonthlyPayments] = useState({
+    payment36: "",
+    payment60: "",
+  })
+  const [totalPayments, setTotalPayments] = useState({
+    payment36: "",
+    payment60: "",
+  })
+  const [nonPaymentPeriod, setNonPaymentPeriod] = useState("")
 
   const handleBack = () => {
     if (loanTermType) {
@@ -44,6 +68,31 @@ const ProductEducation = ({
       setLoanTermType(school.schoolInfo.features.products[0])
     }
   }
+
+  useEffect(() => {
+    if (
+      school &&
+      school.schoolInfo.features.products.includes("Interest Only")
+    ) {
+      calculateInterestPayment(
+        school["schoolInfo"]["loanInfo"][0]["aprAndType"][0]["info"][
+          "maxTuition"
+        ],
+        setInterestPayments,
+        interestRate
+      )
+    }
+    if (school) {
+      calculateMonthlyPayment(
+        school["schoolInfo"]["loanInfo"][0]["aprAndType"][0]["info"][
+          "maxTuition"
+        ],
+        10000,
+        setMonthlyPayments,
+        interestRate
+      )
+    }
+  }, [loanTermType, school])
 
   useEffect(() => {
     setLoanTermType("")
@@ -235,6 +284,17 @@ const ProductEducation = ({
   return (
     <EducationContainer>
       <h3>Find a financing option that works for you</h3>
+      {school && loanTermType && loanTermLength && (
+        <p>
+          Example for a $
+          {
+            school["schoolInfo"]["loanInfo"][0]["aprAndType"][0]["info"][
+              "maxTuition"
+            ]
+          }{" "}
+          loan at {schoolName}
+        </p>
+      )}
       {educationMarkup}
       <AnimatePresence>
         <motion.div
@@ -265,7 +325,10 @@ const ProductEducation = ({
                 className="questionCard"
               >
                 <h3>36 Month Immediate Repayment</h3>
-                <p>Monthly Payments: $333.10</p>
+                <p>
+                  Monthly Payments: $
+                  {school ? monthlyPayments.payment36 : "333.10"}
+                </p>
               </motion.div>
             </AnimatePresence>
           )}
@@ -278,8 +341,14 @@ const ProductEducation = ({
                 className="questionCard"
               >
                 <h3>36 Month Interest Only</h3>
-                <p>Monthly Payments in School: $77.87</p>
-                <p>Monthly Payments After Grace Period: $333.10</p>
+                <p>
+                  Monthly Payments in School: $
+                  {school ? interestPayments.payment36 : "77.87"}
+                </p>
+                <p>
+                  Monthly Payments After Grace Period: $
+                  {school ? monthlyPayments.payment36 : "333.10"}
+                </p>
               </motion.div>
             </AnimatePresence>
           )}
@@ -306,7 +375,10 @@ const ProductEducation = ({
                 className="questionCard"
               >
                 <h3>60 Month Immediate Repayment</h3>
-                <p>Monthly Payments: $283.10</p>
+                <p>
+                  Monthly Payments:{" "}
+                  {school ? monthlyPayments.payment60 : "$283.10"}
+                </p>
               </motion.div>
             </AnimatePresence>
           )}
@@ -319,8 +391,14 @@ const ProductEducation = ({
                 className="questionCard"
               >
                 <h3>60 Month Interest Only</h3>
-                <p>Monthly Payments in School: $97.17</p>
-                <p>Monthly Payments After Grace Period: $283.10</p>
+                <p>
+                  Monthly Payments in School: $
+                  {school ? interestPayments.payment60 : "97.17"}
+                </p>
+                <p>
+                  Monthly Payments After Grace Period: $
+                  {school ? monthlyPayments.payment60 : "283.10"}
+                </p>
               </motion.div>
             </AnimatePresence>
           )}
