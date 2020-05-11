@@ -56,7 +56,7 @@ const Footer = () => {
             href="mailto:customertrust@skills.fund"
           >
             CustomerTrust@skills.fund
-          </a> - Test
+          </a>
         </FooterSection>
         <FooterSection>
           <section>
