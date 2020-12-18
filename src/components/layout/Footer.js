@@ -167,6 +167,7 @@ const Footer = () => {
         </FooterNotice>
       </FooterContainer>
     </FooterWrapper>
+    <!-- AMK TEST -->
   )
 }
 
